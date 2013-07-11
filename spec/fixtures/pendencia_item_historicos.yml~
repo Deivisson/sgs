@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  usuario_id: 1
+  pendencia_item_id: 1
+  detalhe: MyText
+
+two:
+  usuario_id: 1
+  pendencia_item_id: 1
+  detalhe: MyText

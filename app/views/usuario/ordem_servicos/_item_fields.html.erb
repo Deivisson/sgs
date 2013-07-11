@@ -1,0 +1,44 @@
+<tr class ="fixed-itens-row">
+  <td class="modulos">
+		<%= grouped_collection_select(:itens,
+        :solucao_modulo_id,
+        @solucoes,
+        :solucao_modulos,
+        :descricao, :id, :descricao,
+        {:prompt => " "} ,
+        {:id      => "solucao-modulos-select-id",
+         :style   => "width: 150px;min-width: 150px;",
+         :type    => "select" }) %>
+  </td>
+  <td class="sub-modulos">
+		<%= collection_select(:itens,
+        :solucao_sub_modulo_id,
+        @sub_modulos || [],
+        :id,
+        :descricao,
+        {:prompt => " "},
+        {:id 		 => "solucao-sub-modulos-select-id", 
+         :style  => "width: 200px;min-width: 200px;",
+         :type   => "select"}) %>
+	</td>
+  <td class="free-texts">
+  		<%= text_field_tag :setor %>
+	</td>
+  <td class="free-texts">
+  		<%= text_field_tag :usuarios  %>
+	</td>
+  <td class="default">
+    <%= select_tag :tipo_avaliacao_id, 
+      options_from_collection_for_select(@tipo_avaliacoes, "id", "descricao"),
+      :type => "select" %>
+	</td>	
+	<td class="default">
+			<%= select_tag :situacao_id,
+          options_from_collection_for_select(@situacoes, "id", "descricao"),
+          :type => "select"  %>
+	</td>	
+    <td>
+      <%= link_to image_tag(image_link[:add24]),
+                   "#", :id => "add-item-link" %>
+    </td> 
+</tr>

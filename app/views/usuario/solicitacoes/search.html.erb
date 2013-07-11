@@ -1,0 +1,3 @@
+<% title "A pesquisa retornou #{@solicitacoes.size} solicitações" %>
+<%= render :partial => "search_form", :locals => {:remote_form => true} %>
+<div id ="search_result"><%= render "search_result" %></div>

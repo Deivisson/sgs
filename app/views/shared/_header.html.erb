@@ -1,0 +1,16 @@
+<%= content_tag :div, :class => "head" do %>
+  <%= content_tag :div, :class => "user-container" do %>
+    <div class="user-photo" > </div>
+    <div class ="login-info">
+      <% if usuario_signed_in? %>
+    	  <%= link_to "Sair",destroy_usuario_session_path, :class => "logoff" %> |
+        <%= link_to "Perfil","#" %> |
+        <%= link_to "Versões",usuario_versao_sistemas_path %>
+	      <%= content_tag(:p, current_usuario.nome, :class => "description") %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= content_tag :div, :class => "search-field-container" do %>
+    <%= yield :search_field_container %>
+  <% end %>
+<% end %>

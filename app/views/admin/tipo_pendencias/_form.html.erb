@@ -1,0 +1,16 @@
+<%= semantic_form_for [:admin, @tipo_pendencia] do |form| %>
+
+  <%= form.inputs do %>
+    <%= section_tag :label => "Informações do Tipo de Pendência" do %>
+      <%= form.input :descricao ,
+                     :label      => "Descrição",
+                     :input_html => {:autofocus => true} %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_tipo_pendencias_path %>
+  <% end %>
+
+<% end %>

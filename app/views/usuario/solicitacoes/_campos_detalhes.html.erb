@@ -1,0 +1,11 @@
+<div id="fragment-2">
+	<%= form.inputs do %> 
+	 	<%= section_tag do %>
+		  <%= form.input :titulo, 
+		  							 :label => "Título",
+		  							 :input_html => {:id => "solicitacao-titulo"}  %>
+		  							 
+		  <%= form.input :detalhe, :input_html => {:rows => 20} %>
+		<% end %>
+	<% end %>
+</div>

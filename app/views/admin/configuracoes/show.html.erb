@@ -1,0 +1,13 @@
+<% title "Configurações" %>
+<% title "Empresa" %>
+<div id="div_show">
+  <p>
+    <strong>Mensagem Ordem Serviço</strong>
+    <%=h @configuracao.mensagem_os %>
+  </p>
+</div>
+<p>
+  <%= link_to "Editar",edit_admin_configuracao_path(@configuracao),:class => 'edit' %>
+</p>
+
+

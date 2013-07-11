@@ -1,0 +1,33 @@
+<% show_tiny_mce %>
+<%= semantic_form_for [:usuario, @atendimento] do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag(:legend => "Informações do Atendimento") do %>
+      <%= form.input :cliente,
+                     :collection    => @clientes ,
+                     :member_label  => :nome,
+                     :input_html    => {:disabled   => @desabilita_cliente,
+                                        :autofocus  => true},
+                     :hint          => @hint,
+                     :required      => true  %>
+
+      <%= form.input :usuario_solicitante,
+                     :collection    => @usuarios,
+                     :label         => "Atendente",
+                     :member_label  => :nome,
+                     :required      => true %>
+
+      <%= form.input :usuario_cadastrante_id,:as => :hidden  %>
+      <%= form.input :descricao, :label => "Descrição" %>
+      <%= form.input :observacao,
+                     :label       => "Observação",
+                     :required    => false,
+                     :input_html  => {:rows => 15} %>
+   <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel usuario_atendimentos_path %>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,28 @@
+<%= semantic_form_for [:admin, @solucao] do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag :legend => "Informações do Solucao" do %>
+
+      <%= form.input :descricao,
+                     :label => "Descrição",
+                     :input_html => {:autofocus => true} %>
+
+      <%= form.input :detalhe, :required => false %>
+      <%= form.input :data_criacao, :as =>:date,:label => "Data Criação",:order => [:day,:month,:year] %>
+
+      <%= form.input :data_ultima_atualizacao,:as => :date ,
+                     :label => "Última Atualização" ,
+                     :required => false,
+                     :order => [:day,:month,:year] %>
+
+      <%= form.input :versao_atual,:label => 'Versão Atual',
+                     :input_html => {:style => "width:100px",:disabled => true},
+                     :required => false  %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_solucoes_path %>
+  <% end %>
+
+<% end %>

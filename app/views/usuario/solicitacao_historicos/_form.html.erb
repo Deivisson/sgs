@@ -1,0 +1,15 @@
+<%= semantic_form_for @solicitacao_historico do |form| %>
+
+  <% form.inputs do %>
+    <%= section_tag(:legend => "Informações do Histórico") do %>
+      <%= form.input :detalhe, :input_html => {:rows => 12} %>
+      <%= form.input :usuario_id, :as => :hidden %>
+      <%= form.input :solicitacao_id, :as => :hidden %>
+    <% end %>
+  <% end %>
+
+  <% form.inputs :class => "buttons-container" do %>
+    <%= submit_buttton form %>
+  <% end %>
+
+ <% end %>

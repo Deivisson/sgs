@@ -1,0 +1,25 @@
+<%= semantic_form_for [:admin,@solucao_modulo] do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag :legend => "Informações do Módulo" do %>
+      <% if @solucao_modulo.solucao %>
+        <%= form.input :solucao_id,:as => :hidden %>
+      <% else %>
+        <%= form.input :solucao,
+                       :collection    => @solucoes ,
+                       :label         => 'Solucao',
+                       :member_label  => 'descricao' %>
+      <% end %>
+      <%= form.input :descricao,
+                     :label      => "Descrição",
+                     :input_html => {:autofocus => true} %>
+
+      <%= form.input :detalhe, :required => false  %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_solucao_path(@solucao_modulo.solucao) %>
+  <% end %>
+
+<% end %>

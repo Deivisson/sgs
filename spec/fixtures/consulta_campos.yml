@@ -1,0 +1,9 @@
+cliente:
+  consulta_id: 1
+  descricao: Cliente
+  tabela: clientes
+  campo: $nome
+  alias: cliente_nome
+  tipo:
+  selecionado:1
+ 

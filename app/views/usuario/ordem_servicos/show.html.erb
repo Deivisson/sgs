@@ -1,0 +1,68 @@
+<% title "Ordem de Serviço nº: #{@ordem_servico.id.to_s.rjust(6,'0')}" %>
+<%= content_tag :div, :id => "div_show"  do %>
+  <dl>
+    <dt>Cliente</dt>
+    <dd><%= @ordem_servico.cliente.nome %></dd>
+    <dt>Solicitante</dt>
+    <dd><%= @ordem_servico.solicitante.nome %></dd>
+    <dt>Técnico Responsavel</dt>
+    <dd><%= @ordem_servico.responsavel.nome %></dd>
+    <dt>Local Execução</dt>
+    <dd><%= @ordem_servico.local_execucao %></dd>
+    <dt>Tipo O.S.</dt>
+    <dd><%= @ordem_servico.tipo_os_descricao %></dd>
+    <dt>Data O.S</dt>
+    <dd><%= formata_data(@ordem_servico.data_execucao) %></dd>
+    <dt>Descrição</dt></dd>
+    <dd><%= @ordem_servico.descricao.html_safe %></dd>
+    <dt>Observações</dt>
+    <dd><%= @ordem_servico.observacoes.html_safe %></dt>
+    <dt>Usuários Participantes</dt>
+    <dd><%= @ordem_servico.usuarios_participantes %></dt>
+    <dt>Hora Início</dt>
+    <dd><%= formata_hora(@ordem_servico.hora_inicio) %></dd>
+    <dt>Hora Fim</dt>
+    <dd><%= formata_hora(@ordem_servico.hora_fim) %></dd>
+    <dt>Intervalo</dt>
+    <dd><%= formata_hora(@ordem_servico.tempo_intervalo) %></dd>
+    <dt>Horas Trabalhadas</dt>
+    <dd><%= @ordem_servico.horas_trabalhadas %></dd>    
+    <dt>Horas Bônus Utilizados</dt>
+    <dd><%= @ordem_servico.horas_bonus_utilizado %></dd>            
+    <dt>Horas Faturadas</dt>
+    <dd><%= @ordem_servico.horas_faturadas %></dd>        
+    <dt>Valor Serviço</dt>
+    <dd><%= number_to_currency(@ordem_servico.valor_servico) %></dt>          
+    <dt>Deslocamento</dt>
+    <dd><%= number_to_currency(@ordem_servico.valor_deslocamento) %></dt>      
+    <dt>Total O.S</dt>
+    <dd><%= number_to_currency(@ordem_servico.valor_total) %></dt>
+
+  </dl>
+<% end %>  
+
+<% if @ordem_servico.itens.any? %>
+  <br>
+  <table>
+      <caption>Módulos Treinados </caption>
+      <thead>
+        <tr>
+          <th>Módulo</th>
+          <th>Sub Módulo</th>    
+          <th>Setor</th>
+          <th>Usuários</th>
+          <th>Avaliação</th>
+          <th>Situação</th>
+        </tr>
+      </thead>  
+      <tbody>
+        <%= render @ordem_servico.itens %>
+      </tbody>
+  </table>
+<% end %>
+
+<div class="buttons-link-container">
+  <%= link_to_list usuario_ordem_servicos_path  %>
+  <%= link_to_edit edit_usuario_ordem_servico_path(@ordem_servico)  %>
+  <%= link_to "Gerar PDF", usuario_ordem_servico_path(@ordem_servico, :format => :pdf)  %> 
+</div>

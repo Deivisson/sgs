@@ -1,0 +1,20 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require common/reset
+ *= require common/base
+ *= require common/buttons
+ *= require common/containers
+ *= require common/formtastic
+ *= require common/fields  
+ *= require common/login
+ *= require common/scaffold
+ *= require common/style
+ *= require common/table   
+ *= require common/menu_tab
+ *= require jquery-ui-1.10.0.custom
+ *= require common/modal_form
+ *= require ordem_servico
+*/

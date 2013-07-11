@@ -1,0 +1,22 @@
+<% title "Lista de Usuários" %>
+<div id="div_show">
+  <p>
+    <strong>Cargo:</strong>
+    <%=h @usuario.usuario_cargo.descricao %>
+  </p>
+  <p>
+    <strong>Nome:</strong>
+    <%=h @usuario.nome %>
+  </p>
+  <p>
+    <strong>Email:</strong>
+    <%=h @usuario.email %>
+  </p>
+  <p>
+    <strong>Celular:</strong>
+    <%=h @usuario.celular %>
+  </p>
+</div>
+<p>
+  <li class ="links"><%= link_to 'Voltar Lista',usuarios_path,:class => 'back' %></li>
+</p>

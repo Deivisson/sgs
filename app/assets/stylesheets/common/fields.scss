@@ -1,0 +1,49 @@
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="email"],
+select,
+textarea {
+  border: 1px solid #dadada;
+  font-size:14px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  width: 567px;
+  min-width: 567px;
+  max-width: 567px;
+  &:focus {
+    border-color: #b5d8f3;
+    box-shadow:0px 0px 5px #B5D8F3;
+  }
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="tel"] {
+  height: 26px;
+  box-shadow: 0px 3px 0px 0px #fbf9f9 inset;
+}
+
+select {
+  background-color: #FFF;
+  height: 28px;
+  padding-top: 3px !important;
+}
+
+.check-label { color: #535353; font-weight: bold;}
+
+ul.fields-tips {
+  list-style: none;
+  padding-left: 20px !important;
+  width: 100%;
+  li {
+    float: left;
+    font-size: 10px;
+    width: 100%;
+  }
+}
+

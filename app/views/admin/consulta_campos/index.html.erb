@@ -1,0 +1,38 @@
+<% title "Configuração das informações a serem exibidas na Consulta: #{@consulta.descricao}" %>
+<div id="panel" style = "width:900px" >
+  <%= form_tag update_individual_admin_consulta_campos_path, :method => :put do %>
+    <div id="user_info"> 
+      <ul id="info"> <strong>Informações</strong>
+        <li id="info">Para configurar a ordem em que as informações serão exibidas na consulta, 
+           basta arrastar os campos para cima ou para baixo clicando em [drag]. Fique atento, pois a
+           as posições são gravadas ao realizar a movimentação. Demais alaterações serão gravadas apenas
+           quando clicado em Salvar.
+         </li>
+         <li id="info">Personalize as Títulos das colunas editando o campo Título.</li>  
+         <li id="info">Para exibir ou ocultar colunas, marque ou desmarque as mesmas.</li>  
+       </ul>
+    </div>
+    <fieldset id="legenda" style = "width:500px" > 
+      <ol id="campos">
+        <% for campo in @consulta_campos %>
+          <%= fields_for "consulta_campos[]",campo do |f| %>
+            <%= content_tag_for :li, campo do %>
+              <span class="handle">[drag]</span> 
+              <%=f.text_field :descricao %><%=f.check_box :selecionado %>
+              <%= link_to "Edit",edit_admin_consulta_campo_path(campo) %>
+              <%= link_to "Del",[:admin, campo],:confirm => "Confirma Exclusão ?",:method => :delete %>
+            <% end %>  
+          <% end %>
+        <% end %>
+      </ol>
+    </fieldset>
+    
+    <!-- <= #sortable_element("campos", :url => sort_admin_consulta_campos_path,:handle => "handle") > -->
+    
+    <p>
+      <li class ="links"><%= link_to "Voltar", admin_consultas_path,:class => "back" %></li>
+      <%= submit_tag "Salvar" %>
+      <%= link_to "Novo Campo (Avaçado)",new_admin_consulta_campo_path(:consulta => @consulta) %>
+    </p>  
+  <% end %>
+</div>

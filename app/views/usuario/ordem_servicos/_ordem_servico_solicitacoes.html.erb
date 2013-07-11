@@ -1,0 +1,24 @@
+<% if !@solicitacoes.nil? && @solicitacoes.any?  %>
+	<table border="0"  cellspacing="1" cellpadding="0" class="tablesorter" >
+    	<thead>
+	      <tr>
+	      	<th width ="10"><input type="checkbox" id="checkall" class="check" ></th>
+	        <th>Descrição</th>
+	        <th>Valor</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+		<% @solicitacoes.each do |solicitacao| %>
+			<tr>
+				<td><%= check_box_tag "ordem_servico[solicitacao_ids][]",
+						solicitacao.id, 
+						solicitacao.ordem_servico_id.present?,
+						:class => "ordem-servico-solicitacao-item" %></td>
+				<td><%= solicitacao.titulo %></td>
+				<td><%= number_to_currency(solicitacao.valor_cobranca) %></td>
+			</tr>
+		<% end %>    		
+      </tbody>
+  </table>
+
+<% end %>

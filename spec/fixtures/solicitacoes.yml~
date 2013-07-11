@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  pendencia_id: 1
+  status_id: 1
+  prioridade_id: 1
+  projeto_sub_modulo_id: 1
+  cliente_contato_id: 1
+  tipo_pendencia_id: 1
+  titulo: MyString
+  detalhe: MyText
+  data_previsao_liberacao: 2010-02-26
+  data_hora_real_liberacao: 2010-02-26 16:57:30
+  versao_liberacao: MyString
+  anexo: MyString
+
+two:
+  pendencia_id: 1
+  status_id: 1
+  prioridade_id: 1
+  projeto_sub_modulo_id: 1
+  cliente_contato_id: 1
+  tipo_pendencia_id: 1
+  titulo: MyString
+  detalhe: MyText
+  data_previsao_liberacao: 2010-02-26
+  data_hora_real_liberacao: 2010-02-26 16:57:30
+  versao_liberacao: MyString
+  anexo: MyString

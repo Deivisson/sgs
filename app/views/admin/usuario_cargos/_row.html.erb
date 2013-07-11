@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <%= check_box_tag "usuario_cargo[status_ids][]",status_r.id,@usuario_cargo.status.include?(status_r) %> 
+    <%= status_r.descricao %>
+  </td>
+  <% p = UsuarioCargo.carrega_status_permitidos(@usuario_cargo.id,status_r.id) %>
+  <% p = "" if p.nil? %>
+  <% for status_ in status_local %> 
+    <td align = "center" >
+      <% if (not status_r.id != status_.id) or (status_r.encerramento) %>
+        ---
+      <% else %>  
+        <%= check_box_tag "status_fluxo[#{status_r.id}][]",status_.id,p.include?(status_.id.to_s) %> 
+      <% end %>  
+    </td>
+  <% end %>  
+</tr>    

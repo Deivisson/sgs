@@ -1,0 +1,35 @@
+<% title "Solucao" %>
+<div id="div_show">
+  <p>
+    <strong>Descrição:</strong>
+    <%=h @solucao.descricao %>
+  </p>
+  <p>
+    <strong>Detalhe:</strong>
+    <%=h @solucao.detalhe %>
+  </p>
+  <p>
+    <strong>Data Criação:</strong>
+    <%=h @solucao.data_criacao.to_s_br %>
+  </p>
+  <p>
+    <strong>Última Atualização:</strong>
+    <%=h @solucao.data_ultima_atualizacao.to_s_br %>
+  </p>
+  <p>
+    <strong>Versão Atual:</strong>
+    <%=h @solucao.versao_atual %>
+  </p>
+</div>
+<%= render :partial => 'show_modulos' %>
+<p>
+  <li class ="links">
+    <%= link_to 'Voltar Lista', admin_solucoes_path,:class => 'back' %>
+  </li>
+</p>
+<p>
+  <li class ="links">
+    <%= link_to 'Novo Módulo', 
+            new_admin_solucao_modulo_path(:solucao => @solucao,:local => :solucao_show ) %>
+  </li>
+</p>

@@ -1,0 +1,15 @@
+<%= semantic_form_for [:admin,@consultas] do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag :legend => "Informações da Consulta" do %>
+      <%= form.input :descricao,
+                     :label => 'Descrição',
+                     :label_method => 'descricao' %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_consultas_path %>
+  <% end %>
+
+<% end %>

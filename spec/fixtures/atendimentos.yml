@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cliente_id: 1
+  usuario_cadastrante_id: 1
+  usuario_solicitante_id: 1
+  descricao: MyString
+  observacao: MyText
+
+two:
+  cliente_id: 1
+  usuario_cadastrante_id: 1
+  usuario_solicitante_id: 1
+  descricao: MyString
+  observacao: MyText

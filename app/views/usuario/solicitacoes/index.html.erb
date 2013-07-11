@@ -1,0 +1,6 @@
+<% title "Controle de Solicitações - #{@status_description}" %>
+<%= render :partial   => "search_form",
+           :locals    => {:remote_form => false} %>
+<div id="solicitacoes">
+  <%= render 'solicitacoes' %>
+</div>

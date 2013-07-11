@@ -1,0 +1,659 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree .
+*/
+
+html {
+  height:100%;
+  max-height:100%;
+  padding:0;
+  margin:0;
+  border:0;
+  background:#fff;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:13px;
+  /* hide overflow:hidden from IE5/Mac */
+  /* \*/
+  overflow: hidden;
+  /* */
+}
+
+/*Corpo do Html
+------------------------------------------------------------------*/
+body {
+  height:100%;
+  max-height:100%;
+  overflow:hidden;
+  padding:0; margin:0; border:0;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:15px;
+  background:#d6e2e5;
+}
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   15px;
+}
+
+#flash_notice {
+  padding: 5px 8px;
+  margin: 0px 0px 5px 0px;
+}
+
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+
+
+#flash_warning {
+  padding: 5px 8px;
+  margin: 0px 0px 5px 0px;
+
+}
+
+#flash_warning {
+  background-color: #ffc3c6 ;
+  border: solid 1px #e08a8e;
+}
+
+#toolbar {
+  position:fixed;
+  width:85.79;
+  height:24px;
+  left:195px;
+  right:0;
+  top:52px;
+  background:#eee;
+  margin:4px;
+  border:1px solid #888;
+  background:#678 url(../images/background/bar.png);
+
+}
+#toolbar_itens {
+  float:right;
+  margin:1px;
+}
+#toolbar_itens ul {
+  float:left;
+  padding:0px;
+  margin:0px;
+  list-style:none;
+}
+#toolbar_itens ul li {
+  float:right;
+  margin:4px 3px 0px 2px;
+}
+
+
+
+/*Conteúdo
+------------------------------------------------------------------*/
+#content {
+  overflow:auto;
+  position:absolute;
+  z-index:3;
+  top:77px;
+  bottom:0px;
+  left:195px;
+  right:0;
+  background:#eee;
+  margin:4px;
+  border:1px solid #888;
+  padding:7px 7px 0px 7px;
+  /*border-top:0px;*/
+}
+* html #content {
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  height:100%;
+  max-height:100%;
+  width:100%;
+  overflow:auto;
+  position:absolute;
+  z-index:3;
+  border-top:100px solid #fff;
+  border-bottom:50px solid #fff;
+  border-left:200px solid #fff;
+}
+
+/*Cabecalho
+------------------------------------------------------------------*/
+#head {
+  /*position:absolute; */
+  margin:0; top:0;
+  left:0; display:block;
+  width:100%; height:50px;
+  background:#d6e2e5;;
+  background-position:0 0;
+  background-repeat:no-repeat; font-size:4em; z-index:5; overflow:hidden; color:#000;
+}
+#head .logo {
+  position:relative;
+  background-color:blue	;
+  width:150px;
+  margin-top:2px;
+  float:left;
+  background:url(../images/foto/foto.png)
+}
+#head .user_photo {
+  position:relative;
+
+  width:140px;
+  margin:2px 2px 0px 0px;
+  float:right;
+
+}
+#head .login_info {
+  position:relative;
+  width:200px;
+  float:right;
+  margin:2px 0px 0px 0px;
+  font-size:0.22em;
+  text-align:right;
+  padding-right:5px;
+}
+#head .a {
+
+}
+
+#head ul{
+  position:absolute;
+  width:400px;
+  height:38px;
+  margin:13px 0px 0px 160px;
+  list-style:none;
+}
+
+#head ul li a{
+  float:left;
+  display:block;
+  margin:3px 3px 0px 0px;
+  width:32px;
+  height:32px;
+  }
+#head ul li a.atendimento {background-image: url(../images/icons/32/sol.png);}
+#head ul li a.solicitacao {background-image: url(../images/icons/32/bug.png);}
+
+
+
+
+
+/*Container menu lateral esquerdo
+------------------------------------------------------------------*/
+#left {
+  position:absolute;
+  left:0; top:51px;
+  bottom:0px; width:189px;
+  background:rgb(76,76,76);
+  font-size:1.2em;
+  z-index:4;
+  overflow:auto;
+  margin:4px;
+}
+* html #left {
+  height:100%;
+  top:0; bottom:0;
+  border-top:100px solid #fff;
+  border-bottom:50px solid #fff; color:#fff;
+}
+
+/*Títulos das telas
+------------------------------------------------------------------*/
+h1 {
+  font-size :12px;
+  color: #000;
+  height:27px;
+  top:0px;
+  padding-top:5px;
+  padding-left:0px;
+  margin:0px;
+  margin-left:5px;
+  width:auto;
+  margin-right:4px;
+}
+
+#title {
+  font-size :12px;
+  color: #000;
+  height:27px;
+  top:0px;
+  padding-top:5px;
+  padding-left:0px;
+  margin:0px;
+  margin-left:5px;
+  width:auto;
+  margin-right:4px;
+  float:left;
+}
+
+/*Menu Vertical ---> Lateral esquerdo
+------------------------------------------------------------------ 
+ul#slide {padding:0; margin:0; list-style:none; width:187px; height:99.8%; border:1px solid #888; position:relative; overflow:hidden;}
+
+ul li div {position:absolute; left:-9999px; background:#fff;}
+#slide li h1 {font-size:13px; color:#000; padding:0; margin:0;height:24px;background:url(../images/background/accordion0.gif)}
+
+
+#slide li.top {display:block; float:left; height:24px; line-height:24px; width:200px; color:#000; background:#e2e2e2; text-decoration:none; font-family: verdana, sans-serif; font-size:12px; border-bottom:1px solid #eee; text-indent:10px; overflow:hidden;}
+
+#slide li {color:#eee; background:#fff; cursor:pointer;}
+#slide li.clicked {color:#000; background:#fff;}
+#slide li.clicked h1.title {color:#000; background:url(../images/background/accordion1.gif);}
+#slide li div {position:static; height:321px; width:187px; padding-left:15px; line-height:1.2em; font-family: verdana, sans-serif; text-indent:0;}
+#slide li div img {display:block; margin:5px 0 8px 0;}
+#slide li div img.fLeft {clear:left; float:left; display:block; margin:8px; margin-right:0px;}
+
+#slide li div h3 {font-size:13px; color:#000; padding:0; margin:0;}
+
+#slide li div p {font-size:12px; color:#888; line-height:1.4em; padding:10px 0; margin:0;}
+
+#slide li div a {color:#00c; text-decoration:none; font-size:11px;}
+#slide li div a:hover {text-decoration:underline; background:#fff;color:#00c;}
+
+#slide li div a.big {display:block; height:30px; line-height:30px; border-top:1px solid #ddd; font-size:14px; color:#44a; text-decoration:none; text-indent:5px;}
+#slide li div a.big:hover {background:#678; color:#000; font-size:14px; text-decoration:none;}
+
+*/
+/*
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+*/
+/*Links
+----------------------------------------------------------------*/
+.links{
+	font-size:12px;
+	width:130px;
+	height:20px;
+	padding-top:0px;
+	padding-bottom:0px;
+	list-style:none;
+	float:left;
+	margin-right:5px;
+
+}
+.links:hover{
+	font-size:12px;
+	height:20px;
+	background-position:-160px 0px;
+	padding-top:0px;
+	padding-bottom:0px;
+	list-style:none;
+}
+.links a {
+	text-decoration:none;
+	list-style:none;
+	position:absolute;
+	margin-left:8px;
+	width:130px;
+	height:16px;
+	text-indent: 20px;
+}
+.links a.new {
+	background: url(../images/icons/16/new.png) no-repeat left center;
+}
+.links a.edit {
+	background: url(../images/icons/16/edit.png) no-repeat left center;
+}
+.links a.back {
+	background: url(../images/icons/16/back.png) no-repeat left center;
+}
+.links a.show {
+  background: url(../images/icons/16/back.png) no-repeat left center;
+}
+.links a.del {
+	background: url(../images/icons/16/delete.png) no-repeat left center;
+}
+.links a.contato {
+	background: url(../images/icons/16/contato.png) no-repeat left center;
+}
+
+/*Will_Paginate
+--------------------------------------------------------------*/
+#paginate {
+  background: transparent;
+  margin-top:1px;
+  height:15px;
+}
+#paginate a, #paginate span {
+  padding: .2em .5em;
+  display: block;
+  float: right;
+  margin-right: 1px; }
+#paginate span.disabled {
+  color: #999;
+  border: 1px solid #DDD;
+}
+#paginate span.current {
+  font-weight: bold;
+  background: #2E6AB1;
+  color: white;
+  border: 1px solid #2E6AB1;
+}
+#paginate a {
+  text-decoration: none;
+  color: #105CB6;
+  border: 1px solid #9AAFE5;
+}
+#paginate a:hover, #paginate a:focus {
+  color: #003;
+  border-color: #003;
+}
+#paginate .page_info {
+  background: #2E6AB1;
+  color: white;
+  padding: .4em .6em;
+  width: 22em;
+  margin-bottom: .3em;
+  text-align: center;
+}
+#paginate .page_info b {
+  color: #003;
+  background: #6aa6ed;
+  padding: .1em .25em;
+}
+#paginate:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+* html #paginate {
+  height: 0.5%;
+}
+*:first-child+html #paginate {
+  overflow: hidden;
+}
+
+/*Tabelas
+/---------------------------------------------------------------*/
+table {
+  font-family:arial;
+  background-color: #CDCDCD;
+  margin:10px 0pt 15px;
+  font-size: 8pt;
+  width:100%;
+  text-align: left;
+  margin:0px 0px 8px 0px;
+}
+
+table caption {
+  font-family:arial;
+  font-size:1.2em;
+  padding:5px;
+  background:url(../images/background/accordion1.gif);
+  border: 1px solid #d6d6d6;
+}
+
+table thead tr th, table tfoot tr th {
+ /*background:url(../images/background/sprite.png);*/
+  border: 1px solid #FFF;
+  font-size: 8pt;
+  padding: 4px;
+  cursor:pointer;
+}
+
+table thead tr .header {
+  /*background-image: url(../images/background/sprite.png);*/
+  cursor: pointer;
+}
+
+table tbody tr {
+  color: #3D3D3D;
+  padding: 2px;
+  background-color: #FFF;
+  vertical-align: top;
+  font-size:bold;
+
+}
+table tbody td {
+  color: #3D3D3D;
+  padding: 2px;
+  vertical-align: top;
+}
+
+table tbody tr td a img {border:0px;margin:0px 0px 0px 4px}
+
+table a.show {
+  width:40px;
+  display:block;
+  background:url(../images/icons/16/edit.png) no-repeat center center;
+  color:transparent;
+  border:0px;
+}
+table a.edit {
+  background:url(../images/icons/16/edit.png) no-repeat center center;
+  color:transparent;
+}
+table a.del {
+  background:url(../images/icons/16/delete.png) no-repeat center center;
+  color:transparent;
+}
+table a.contato {
+  background:url(../images/icons/16/contato.png) no-repeat center center;
+  color:transparent;
+}
+table a.note {
+  background:url(../images/icons/16/note.png) no-repeat center center;
+  color:transparent;
+}
+
+table thead tr .headerSortUp {
+ /* background-image: url(../images/background/sprite.png);*/
+}
+table thead tr .headerSortDown {
+  background-image: url(../images/background/accordion1.png) ;
+}
+table thead tr .headerSortDown, table thead tr .headerSortUp {
+  background:url(../images/background/accordion1.gif) ;
+}
+
+/* Container Show
+---------------------------------------------------------*/
+#div_show {
+  background-color:#f5f5f5;
+  width:98.3%;
+  min-width:60%;
+  padding:0px 10px 10px 10px ;
+  border: 1px solid #d6d6d6;
+  border-bottom:2px solid #d6d6d6;
+
+}
+#div_show p {margin-top:1px;margin-bottom:2px}
+#div_show p strong {
+  display:inline;
+  width:15%;
+
+  /*float:left;*/
+  text-align:left;
+}
+
+/* Container grid
+---------------------------------------------------------*/
+#div_grid {
+  background-color:#f5f5f5;
+  width:100%;
+  min-width:100%;
+  max-width:100%;
+  padding:10px 10px 10px 10px ;
+  border: 1px solid #d6d6d6;
+  border-bottom:2px solid #d6d6d6;
+}
+
+#menu {
+  background:#fff;
+  width:500px;
+  height:100%;
+  padding:0px;
+  padding-top:0.1px;
+  margin-top:5px;
+
+  /*border: 1px solid;*/
+
+}
+#menu ul {
+  background:transparent;
+  width:190px;
+  height:auto;
+  padding:0px;
+  margin-left:-10px;
+  list-style:none;
+  margin-top:5px;
+}
+#menu ul h1 {
+  width:170px;
+  background:transparent;
+  color:#000;
+  text-indent: 20px;
+}
+#menu ul h1.acesso {background:url(../images/icons/16/security.png) no-repeat;}
+#menu ul h1.cliente {background:url(../images/icons/16/cliente.png) no-repeat;}
+#menu ul h1.basico {background:url(../images/icons/16/menu.png) no-repeat;color:#0000CC;font-size:11px}
+#menu ul h1.solucao {background:url(../images/icons/16/cd.png) no-repeat;}
+#menu ul h1.pendencia {background:url(../images/icons/16/pendencia.png) no-repeat;}
+#menu ul h1.desktop {background:url(../images/icons/16/desktop.png) no-repeat;}
+#menu ul li {
+  background:transparent;
+  height:20px;
+  width:150px;
+  line-height:19px;
+  margin:0px;
+  margin-bottom:3px;
+  color:#000;
+  padding-left:21px;
+}
+#menu ul li.find { background:url(../images/icons/16/find.png) no-repeat;margin-left:23px; }
+#menu ul li.nova_sol { background:url(../images/icons/16/new.png) no-repeat;margin-left:23px; }
+#menu ul li:hover {
+  background-color:gray;
+}
+
+#menu ul li a {
+  height:20px;
+  width:180px;
+  line-height:19px;
+  margin:0px;
+  margin-bottom:3px;
+  color:#000;
+  padding-left:2px;
+  display:block;
+}
+#menu ul li a.negrito {font-weight: bold;}
+#menu ul li a:hover {
+  text-decoration: none;
+  background-color:transparent;
+
+}
+
+
+/*Menu Vertical ---> Lateral esquerdo
+------------------------------------------------------------------ */
+.msg_list {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+.msg_head {
+  padding: 5px 10px;
+  cursor: pointer;
+  position: relative;
+  background-color:#d6e2e5;
+  margin:1px;
+  border:1px solid #91c2ce;
+
+}
+.msg_body {
+  padding: 5px 10px 0px;
+  background-color:#F4F4F8;
+  border:1px solid #b6c0c3;
+  margin:1px;
+}
+.msg_foot {
+  position: relative;
+  margin:2px;
+  text-align:right;
+}
+
+#legenda {
+  border:1px solid #d6d6d6;
+  width:43%;
+  padding:6px;
+}
+
+#legenda legend {
+  padding:0.2em 0.5em;
+  font-weight:bold;
+  color:blue;
+  font-size:90%;
+  text-align:right;
+}
+#legenda label {
+  margin-left:10px;
+  width:120px;
+  display:inline-block;
+  text-align:left;
+}
+
+#legenda select {
+  margin-left:10px;
+  width:300px;
+}
+
+#campos {
+  /*list-style:none;*/
+}
+
+li .handle {
+  font-size:12px;
+  cursor:move;
+  color:#777;
+  width:auto;
+  line-height:10px;
+}
+
+#user_info {
+  padding: 5px 4px;
+  margin: 1px;
+  background-color:#feffc7;
+  border: solid 1px #babc30;
+  width:auto;
+}
+
+#panel {
+  background-color:#f5f5f5;
+  padding:10px 10px 10px 10px ;
+  border: 1px solid #d6d6d6;
+  border-bottom:2px solid #d6d6d6;
+  margin: 5px 0px 0px 5px;
+}
+#info  {
+  margin-left:13px;
+}
+
+.div_combo {
+ padding-bottom:4px;
+}
+.div_combo label {
+  display:block; width:19%; float:left; padding-top:.2em;
+}
+.div_combo select {
+  min-width:300px;
+}
+
+.check {
+  margin:0px 0px 0px 1px;
+  padding:0px 0px 0px 0px;
+}

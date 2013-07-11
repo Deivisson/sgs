@@ -1,0 +1,28 @@
+<%= semantic_form_for [:admin,@usuario],:html => {:multipart => true} do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag(:legend => "Informações do Usuário") do %>
+      <%= form.input :usuario_cargo,:label => "Cargo Usuário",
+                     :member_label => :descricao,
+                     :input_html => {:autofocus => true} %>
+
+      <%= form.input :nome %>
+      <%= form.input :email %>
+      <%= form.input :celular,
+                     :required   => false,
+                     :input_html => {:style => "width:200px"}  %>
+
+      <%= form.input :password,
+                     :as    => :password,
+                     :label => "Senha",
+                     :input_html => {:style => "width:200px"}  %>
+
+      <%=form.input :photo, :as => :file, :required => false %>
+    <% end -%>
+    <%= render "projects" %>
+  <% end -%>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_usuarios_path %>
+  <% end -%>
+<% end %>

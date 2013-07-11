@@ -1,0 +1,23 @@
+<tr>
+	<td width="60"><%= ordem_servico.id.to_s.rjust(6,'0') %></td>
+	<td width="100"><%= ordem_servico.data_execucao_formatada %></td>
+    <td><%= ordem_servico.cliente.nome %></td>
+    <td><%= ordem_servico.solicitante.nome %></td>
+    <td><%= ordem_servico.responsavel.nome %></td>
+    <td><%= ordem_servico.tipo_os_descricao %></td>
+    <td><%= number_to_currency(ordem_servico.valor_total) %></td>
+    <td>	
+		<%= link_to image_tag(image_link[:show]), 
+			[:usuario, ordem_servico] %>
+		</td>
+    <td>
+			<%= link_to image_tag(image_link[:edit]), 
+				edit_usuario_ordem_servico_path(ordem_servico) %>
+		</td>
+	  <td>
+			<%= link_to image_tag(image_link[:del]), 
+						[:usuario,ordem_servico], 
+						method: :delete, 
+						data: { confirm: 'Confirma Exclusão' } %>	
+		</td>
+</tr>

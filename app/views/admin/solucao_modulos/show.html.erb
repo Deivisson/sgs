@@ -1,0 +1,39 @@
+<% title "Módulo" %>
+<div id="div_show" >
+  <% @solucao = @solucao_modulo.solucao %> 	
+  <p>
+    <strong>Solucao:</strong>
+    <%=h @solucao_modulo.solucao.descricao %>
+  </p>
+  <p>
+    <strong>Descrição:</strong>
+    <%=h @solucao_modulo.descricao %>
+  </p>
+  <p>
+    <strong>Detalhe:</strong>
+    <%=h @solucao_modulo.detalhe %>
+  </p>
+</div>
+<%= render :partial => 'show_sub_modulos' %>
+<p>
+  <% if @local == 'solucao_show' %>
+    <li class ="links">
+      <%= link_to 'Voltar Solucao',[:admin,@solucao],:class => 'back' %>
+    </li>
+  <% else %> 
+    <li class ="links">
+      <%= link_to 'Voltar Lista',admin_solucao_modulos_path,:class => 'back' %>
+    </li>
+  <% end %>
+
+  <li class ="links">
+    <%= link_to 'Sub Módulo',new_admin_solucao_sub_modulo_path(:solucao_modulo => @solucao_modulo),:class => 'new' %>
+  </li>
+  <li class ="links">
+    <%= link_to 'Novo Módulo',new_admin_solucao_modulo_path(:solucao => @solucao) ,:class => 'new' %>
+  </li>
+  <li class ="links">    
+    <%= link_to 'Novo Solucao',new_admin_solucao_path() ,:class => 'new' %>
+  </li>
+  
+</p>

@@ -1,0 +1,10 @@
+
+<%= form.inputs do %>
+
+	<%= section_tag :id => "fragment-3" do %>
+		<%= form.input :anexo, :as => :file,   :required => false %>
+		<%= form.input :confirmacao_leitura,
+									 :label => "Solicitar Confirmação de Leitura ?",
+									 :required => false %>
+	<% end %>
+<% end %>

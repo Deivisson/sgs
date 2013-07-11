@@ -1,0 +1,20 @@
+<%= semantic_form_for [:admin,@status] do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag :legend => "Informações do Status" do %>
+      <%= form.input :descricao,
+                     :label       => 'Descrição',
+                     :input_html  => {:autofocus => true} %>
+
+      <%= form.input :encerramento,
+                     :label => 'Encerramento... ',
+                     :required => false,
+                     :hint => 'Fará com que a solicitação se dê por concluída.' %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_status_index_path %>
+  <% end %>
+
+<% end %>

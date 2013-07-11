@@ -1,0 +1,18 @@
+<h2>Login</h2>
+<%= stylesheet_link_tag "login" %>
+<div style ="width:500px;height:170px; border:1px solid">
+  <% semantic_form_for  resource_name, resource, :url => session_path(resource_name)  do |form| %>
+    <% form.inputs do %>
+      <%= form.input :email, :input_html => {:style => "width:300px"} %>
+      <%= form.input :password, :as => :password, :input_html => {:style => "width:100px"} %>
+      <% if devise_mapping.rememberable? -%>
+        <p><%= form.input :remember_me, :as => :radio %> </p>
+      <% end -%>
+    <% end -%>
+    <% form.inputs do %>
+      <%= form.commit_button "Logar" %> 
+    <% end -%>  
+  <% end %>  
+</div>  
+<%= render :partial => "shared/devise_links" %>
+

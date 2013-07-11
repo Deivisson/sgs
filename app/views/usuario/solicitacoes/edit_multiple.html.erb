@@ -1,0 +1,87 @@
+<% show_tiny_mce %>
+<% title "Registrando mudança de Status" %>
+<%= semantic_form_for @solicitacao || Solicitacao.new() ,
+                    :url => update_multiple_usuario_solicitacoes_path,
+                    :html => {:method => :put} do |form| %>
+
+  <%= form.inputs do %>
+    <%= section_tag(:legend => "Informações da Movimentação") do %>
+      <div class="div-field">
+        <label>Status*</label>
+        <%= collection_select(
+            :solicitacao, :status_id,
+            Status.all(:conditions => {:id => get_allow_status(@solicitacoes[0])},:order => :id) ,
+            :id,:descricao,
+            {:prompt => " "},
+            {:id => "solicitacao-select-status-id",:autofocus => true }
+          )
+        %>
+        <% if !@solicitacao.nil? && @solicitacao.errors[:status_id].present? %>
+          <%= content_tag :p, @solicitacao.errors[:status_id].to_sentence, :class => "inline-errors" %>
+        <% end %>
+      </div>
+
+      <div class="div-field">
+        <label>Responsável*</label>
+        <% @usuarios = [] if @usuarios.nil? %>
+        <%= collection_select(:solicitacao,:usuario_responsavel_id,
+                  @usuarios, :id, :nome,
+                  {:prompt => " "},
+                  {:id => "select-usuarios-responsaveis"}) %>
+        <% if !@solicitacao.nil? && @solicitacao.errors[:usuario_responsavel_id].present? %>
+          <%= content_tag :p, @solicitacao.errors[:usuario_responsavel_id].to_sentence, 
+                :class => "inline-errors" %>
+        <% end %>
+      </div>
+
+      <% if @status_id == Status::AG_DESENV     ||
+            @status_id == Status::DESENV_INTER  ||
+            @status_id == Status::HOMOLOG_REPROV %>
+            <%= form.input :data_previsao_liberacao,
+                       :label       => "Previsão liberação",
+                       :as          => :date,
+                       :start_date  => Date.today,
+                       :end_date    => Date.today,
+                       :order       => [:day,:month,:year] %>
+
+      <% elsif @status_id == Status::LIB_PUBLICACAO %>
+            <%= form.input :data_hora_real_liberacao,
+                           :label       => "Liberado em",
+                           :as          => :datetime,
+                           :start_date  => Date.today,
+                           :end_date    => Date.today,
+                           :order       => [:day,:month,:year] %>
+
+            <%= form.input :versao_liberacao,
+                           :label       => "Versão",
+                           :input_html  => {:style => "width:150px"} %>
+      <% end %>
+
+      <%= form.input :detalhe_ultimo_historico,
+                     :label       => "Detalhe",
+                     :input_html  => {:rows => 12},
+                     :required    => false %>
+    <% end %>
+  <% end %>
+ 
+  <%= render :partial => "informacoes_desenvolvimento", 
+             :locals  => {:form => form} if @solicitacoes[0].pendente_previsao? %>
+
+  <%= section_tag(:legend => "Solicitações a serem afetadas") do %>
+    <ul>
+      <% @solicitacoes.each do |solicitacao| %>
+        <li>
+          <%= hidden_field_tag "solicitacao_ids[]",solicitacao.id %>
+          <%= solicitacao.titulo %>
+        </li>
+      <% end %>
+    </ul>
+    <%= hidden_field_tag "status_id",@solicitacoes[0].status_id %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_back  %>
+  <% end -%>
+
+<% end %>

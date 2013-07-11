@@ -1,0 +1,12 @@
+<%= section_tag(:legend => "Acesso aos Solucoes ?") do %>
+  <% @solucoes.each do |solucao| %>
+    <%= content_tag :div,:style => "margin-bottom: 4px;" do %>
+      <%= check_box_tag "usuario[solucao_ids][]",
+                    solucao.id,
+                    @usuario.solucoes.include?(solucao),
+                    :id => "project_id_#{solucao.id}" %>
+      <%= content_tag(:label, solucao.descricao,
+                    {:for => "project_id_#{solucao.id}", :class => "check-label"}) %>
+    <% end %>
+  <% end %>
+<% end %>

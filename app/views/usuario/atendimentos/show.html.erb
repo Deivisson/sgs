@@ -1,0 +1,36 @@
+<% id = @atendimento.id %>
+<% title "Atendimento nº #{@atendimento.id.to_s.rjust(5,'0') }"  %>
+
+<div id="div_show" >
+  <p>
+  <strong>Cliente:</strong>
+    <%= @atendimento.cliente.nome %>
+  </p>
+  <p>
+    <strong>Descrição:</strong>
+    <%= @atendimento.descricao %>
+  </p>
+  <p>
+    <strong>Observação:</strong>
+    <%= @atendimento.observacao.html_safe %>
+  </p>
+  <strong>Cadastrante:</strong>
+    <%= @atendimento.usuario_cadastrante.nome %>
+  </p>
+  <p>
+    <strong>Atendente:</strong>
+    <%= @atendimento.usuario_solicitante.nome %>
+  </p>
+
+</div>
+<%= render :partial => 'show_itens' %>
+
+<p>
+  <li class ="links"><%= link_to 'Voltar Lista',
+                        usuario_atendimentos_path,
+                        :class => 'back' %></li>
+                        
+  <li class ="links"><%= link_to 'Nova Solicitação',
+                new_usuario_solicitacao_path(:atendimento => id)  %></li>
+</p>
+

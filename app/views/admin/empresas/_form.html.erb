@@ -1,0 +1,32 @@
+<%= semantic_form_for [:admin,@empresa], :html => {:multipart => true} do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag :legend => "Informações da Empresa" do %>
+      <%= form.input :razao,
+                     :label      => "Razão Social",
+                     :input_html => {:autofocus => true} %>
+
+      <%= form.input :fantasia, :label => "Nome Fantasia" %>
+      <%= form.input :cnpj, :input_html => {:style => "width:180px"  } %>
+      <%= form.input :telefone, :input_html => {:style => "width:180px"  } %>
+      <%= form.input :email_suporte, :input_html => {:style => "width:180px"  } %>
+      <%= form.input :logo,:label => 'Logomarca' ,:as => :file, :required => false  %>
+    <% end %>
+
+    <%= section_tag :legend => "Endereço" do %>
+      <%= form.input :endereco, :label => "Endereço",:required => false %>
+      <%= form.input :complemento,:required => false %>
+      <%= form.input :cidade, :required => false %>
+      <%= form.input :uf,
+                     :label => 'UF',
+                     :include_blank => false,
+                     :as => :select,
+                     :collection => carrega_ufs,
+                     :required => false %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+  <% end %>
+
+<% end %>

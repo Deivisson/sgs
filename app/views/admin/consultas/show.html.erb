@@ -1,0 +1,12 @@
+<% title "Consulta #{@consultas.descricao}" %>
+<div id ="div_show">
+  <p>
+    <strong>Descrição</strong>
+    <%=h @consultas.descricao %>
+  </p>
+</div>
+<p>
+  <li class ="links">
+    <%= link_to "Voltar Lista", admin_consultas_path,:class => "back" %>
+  </li>
+</p>

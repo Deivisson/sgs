@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cliente_id: 1
+  nome: MyString
+  departamento: MyString
+  email: MyString
+  telefone: MyString
+  celular: MyString
+
+two:
+  cliente_id: 1
+  nome: MyString
+  departamento: MyString
+  email: MyString
+  telefone: MyString
+  celular: MyString

@@ -1,0 +1,37 @@
+<%= semantic_form_for [:admin, @usuario_cargo] do |form| %>
+
+  <%= form.inputs do %>
+    <%= section_tag(:legend => "Informações do Cargo") do %>
+      <%= form.input :descricao,:label => "Descrição"  %>
+    <% end %>
+    <br>
+    <br>
+    <%= section_tag(:legend => "Status Permitidos para este Cargo ?") do %>
+      <% @status_local  = Status.all %>
+      <div>
+        <table border = "0" cellpadding = "0"  cellspacing = "1"  >
+          <thead>
+            <tr>
+              <th>___________________________ </th>
+              <% for status in @status_local %>
+                <th align = "Center" > <%= status.descricao %> </th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% for status_r in @status_local %>
+              <%= render :partial => 'row',
+                         :locals  => {:status_r     => status_r,
+                                      :status_local => @status_local,
+                                      :width => "100%" } %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_usuario_cargos_path %>
+  <% end -%>
+<% end %>

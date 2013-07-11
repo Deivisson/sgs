@@ -1,0 +1,92 @@
+/*Tabelas
+/---------------------------------------------------------------*/
+table {
+  font-family:arial;
+  background-color: #CDCDCD;
+  font-size: 8pt;
+  width:100%;
+  text-align: left;
+  margin:0px 0px 8px 0px;
+}
+
+table caption {
+  font-family:arial;
+  font-size:1.2em;
+  padding:5px;
+  border: 1px solid #d6d6d6;
+}
+
+table thead tr th, table tfoot tr th {
+  border-right: 1px solid #d6d6d6;
+  border-bottom: 1px solid #d6d6d6;
+  color: #557494;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px;
+  cursor:pointer;
+}
+
+table thead tr  {
+  background-image: url(/assets/background/bg3.png);
+  cursor: pointer;
+
+}
+
+table tbody tr {
+  color: #3D3D3D;
+  padding: 2px;
+  background-color: #FFF;
+  vertical-align: center;
+  font-size:bold;
+  &.unread {
+    td {
+      font-weight: bold;
+    }
+  }
+}
+
+
+table tbody td {
+  color: #3D3D3D;
+  height: 22px;
+  padding: 7px 0 0 2px;
+  vertical-align: center;
+  border-bottom: 1px solid #d6d6d6;
+
+}
+
+table tbody tr td a img {border:0px;margin:0px 0px 0px 4px}
+
+table a.show {
+  width:40px;
+  display:block;
+  background:url(/assets/icons/16/edit.png) no-repeat center center;
+  color:transparent;
+  border:0px;
+}
+table a.edit {
+  background:url(/assets/icons/16/edit.png) no-repeat center center;
+  color:transparent;
+}
+table a.del {
+  background:url(/assets/icons/16/delete.png) no-repeat center center;
+  color:transparent;
+}
+table a.contato {
+  background:url(/assets/icons/16/contato.png) no-repeat center center;
+  color:transparent;
+}
+table a.note {
+  background:url(/assets/icons/16/note.png) no-repeat center center;
+  color:transparent;
+}
+
+table thead tr .headerSortUp {
+/*  background-image: url(/assets/background/sprite.png); */
+}
+table thead tr .headerSortDown {
+  background-image: url(/assets/background/accordion1.png) ;
+}
+table thead tr .headerSortDown, table thead tr .headerSortUp {
+  background:url(/assets/background/accordion1.gif) ;
+}

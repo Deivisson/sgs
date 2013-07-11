@@ -1,0 +1,41 @@
+<% title 'Resultado da Pesquisa' %>
+<% content_for :bar do %>
+  <div id="toolbar_itens">
+    <ul>
+      <li>
+        <%= link_to image_tag(image_link[:pdf],:border => 0),
+                    usuario_solicitacao_pesquisas_path(:filtro => @filtro, :format => 'pdf') %></li>
+    </ul>
+  </div> 
+<% end %>
+
+  <table border="0"  cellspacing="1" cellpadding="0">
+    <thead>	
+      <tr>
+       <% for campo in @campos do %>
+          <th><%= campo[0] %></th>
+        <% end %>
+        <th width="10" >Det</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for solicitacao in @solicitacoes %>
+        <tr>
+          <% for campo in @campos do %>
+            <% if campo[2] == "D" %>
+              <% date = solicitacao.read_attribute(campo[1]).to_date %>
+              <td><%= format_date(date) %> </td>
+            <% else %>
+              <td><%=solicitacao.read_attribute(campo[1]) %> </td>
+            <% end %>
+          <% end %>
+          <td>
+            <%= link_to image_tag(image_link[:show]), 
+                  usuario_solicitacao_path(:id => solicitacao.id,:local => 'find') %>
+          </td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+  <%= "Total Solicitações #{@solicitacoes.size}" %>
+  <%= link_voltar %>

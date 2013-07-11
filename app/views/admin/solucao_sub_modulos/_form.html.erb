@@ -1,0 +1,38 @@
+<%= semantic_form_for [:admin, @solucao_sub_modulo] do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag :legend => "Informações do Sub Módulo" do %>
+      <% if @solucao_sub_modulo.solucao_modulo%>
+        <%= form.input :solucao_modulo_id,:as => :hidden %>
+      <%else%>
+        <div class="div_combo">
+          <label>Módulo*</label>
+          <%= grouped_collection_select(
+                                :solucao_sub_modulo,
+                                :solucao_modulo_id,
+                                @solucoes,
+                                :solucao_modulos,
+                                :descricao,
+                                :id,
+                                :descricao,
+                                {:prompt => " "}) %>
+        </div>
+      <%end%>
+      <%= form.input :descricao,
+                     :label      => 'Descrição',
+                     :input_html => {:autofocus => true} %>
+
+      <%= form.input :detalhe, :required => false %>
+      <%= form.input :data_criacao,
+                      :as => :date,
+                      :order => [:day,:month,:year],
+                      :required => false,
+                      :label => "Data Criação"%>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_solucao_modulo_path(@solucao_sub_modulo.solucao_modulo) %>
+  <% end -%>
+
+ <% end %>

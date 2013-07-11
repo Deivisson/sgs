@@ -1,0 +1,29 @@
+<% title "Listagem Solucoes" %>
+
+<table border ="0" cellspacing = "1" cellpadding ="0" >
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Última Atualização</th>
+      <th>Versão Atual</th>
+      <th>Det</th>
+      <th>Edit</th>
+      <th>Del</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for solucao in @solucoes %>
+      <tr>
+        <td><%=h solucao.descricao %></td>
+        <td width ="140"><%= solucao.data_ultima_atualizacao.to_s_br %></td>
+        <td width ="90"><%=h solucao.versao_atual %></td>
+        <td width ="10"><%= link_to image_tag(image_link[:show]), [:admin,solucao] %></td>
+        <td width ="10"><%= link_to image_tag(image_link[:edit]), edit_admin_solucao_path(solucao) %></td>
+        <td width ="10"><%= link_to image_tag(image_link[:del]), [:admin,solucao],
+                          :confirm => 'Confirma exclusão?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>    
+</table>
+
+<li class ="links"><%= link_to 'Novo Solucao',new_admin_solucao_path,:class => 'new' %></li>

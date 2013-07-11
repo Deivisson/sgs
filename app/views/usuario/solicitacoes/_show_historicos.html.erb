@@ -1,0 +1,24 @@
+<% @is_first = true %>
+<% for solicitacao_historico in @solicitacao_historicos %>
+  <div class="msg_list">
+    <p class="msg_head">
+      <% if solicitacao_historico.usuario.id != solicitacao_historico.usuario_responsavel.id  %>
+        <% titulo = "#{solicitacao_historico.usuario.nome} enviou para #{solicitacao_historico.usuario_responsavel.nome}"  %>
+      <% else %>
+        <% titulo = "#{solicitacao_historico.usuario.nome}" %>
+      <% end %>
+      <%= titulo += " [Status: #{solicitacao_historico.status.descricao} às #{solicitacao_historico.created_at.to_s_br}]"  %>
+    </p>
+    <div class="msg_body">
+        <%= solicitacao_historico.detalhe.html_safe unless solicitacao_historico.detalhe.nil? %>
+        <div class = "msg_foot">
+          <%= link_to "Detalhe" ,:controller => 'solicitacao_historicos',:action => 'show',:id => solicitacao_historico.id, :local => "show_solicitacao" %>
+          <% if @is_first && @solicitacao_historicos.length > 1 && solicitacao_historico.usuario_id == current_usuario.id %>
+              <%= link_to "Editar", [:edit, :usuario,solicitacao_historico] %>
+              <%= link_to "Deletar", [:usuario, solicitacao_historico], :confirm => 'Confirma exclusão ?',:class => 'del',:method => :delete %></td>
+          <% end %>
+          <% @is_first = false %>
+        </div>
+    </div>
+  </div>
+<% end %>

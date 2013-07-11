@@ -1,0 +1,14 @@
+<%= section_tag(:legend => "Solucoes utilizados pelo cliente") do %>
+  <% for solucao in @solucoes %>
+    <div>
+      <%= check_box_tag "cliente[solucao_ids][]",
+                        solucao.id,
+                        @cliente.solucoes.include?(solucao),
+                        :id => "solucao-id-#{solucao.id}" %>
+
+      <%= content_tag(:label, solucao.descricao,
+                      {:for => "solucao-id-#{solucao.id}",
+                        :class => "check-label"}) %>
+    </div>
+  <% end %>
+<% end %>

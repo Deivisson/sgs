@@ -1,0 +1,26 @@
+<%= content_tag :div, :id => "desenvolvimento-section" do %>
+	<%= form.inputs do %>
+		<%= section_tag(:legend => "Informações Sobre o Desenvolvimento") do %>
+		  <%= form.input :previsao_duracao_horas, 
+		  				 :label 		=> "Duração Prevista",
+		  				 :hint			=> "Total de horas prevista para execução da atividade",
+		  				 :required 		=> true,
+		  				 :input_html    => {:style => "min-width: 210px;max-width: 210px;"}  %>
+
+		  <%= form.input :nivel_complexidade ,
+		  				 :label			=> "Nível Complexidade",
+		  				 :required 		=> true,
+		  				 :input_html    => {:style => "min-width: 210px;max-width: 210px;"} %>
+
+		  <%= form.input :gera_cobranca,
+		  				 :label			=> "Gerar Cobrança?",
+		  				 :input_html    => {:style => "margin-left: -10px;",
+		  				 					:id    => "gera-cobranca-solicitacao" } %>
+
+		  <%= form.input :valor_cobranca,
+		  				 :label			=> "Valor Cobrança",
+		  				 :input_html    => {:style 	  => "min-width: 210px;max-width: 210px;",
+		  				 					:id 	  => "valor-cobranca-solicitacao"} %>
+		<% end %>
+	<% end %>
+<% end %>

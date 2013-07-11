@@ -1,0 +1,38 @@
+<% title "Contato" %>
+<div id="div_show">
+  <p>
+    <strong>Cliente:</strong>
+    <%=h @cliente_contato.cliente.nome %>
+  </p>
+  <p>
+    <strong>Contato:</strong>
+    <%=h @cliente_contato.nome %>
+  </p>
+  <p>
+    <strong>Departamento:</strong>
+    <%=h @cliente_contato.departamento %>
+  </p>
+  <p>
+    <strong>Email:</strong>
+    <%=h @cliente_contato.email %>
+  </p>
+  <p>
+    <strong>Telefone:</strong>
+    <%=h @cliente_contato.telefone %>
+  </p>
+  <p>
+    <strong>Celular:</strong>
+    <%=h @cliente_contato.celular %>
+  </p>
+</div>
+<p>
+   <% if @local == 'cliente_show' %> 
+      <li class ="links">
+        <%= link_to 'Voltar',[:admin, @cliente_contato.cliente],:class => 'back' %>
+      </li>
+   <% else %>
+      <li class ="links">
+        <%= link_to 'Voltar',admin_cliente_contatos_path,:class => 'back' %>
+      </li>
+   <% end %>
+</p>

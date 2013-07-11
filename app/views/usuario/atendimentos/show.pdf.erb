@@ -1,0 +1,27 @@
+<% title "Atendimento nº #{@atendimento.id}"  %>
+<div id="div_show" >
+  <p>
+  <strong>Cliente:</strong>
+    <%=h @atendimento.cliente.nome %>
+  </p>
+  <p>
+    <strong>Descrição:</strong>
+    <%=h @atendimento.descricao %>
+  </p>
+  <p>
+    <strong>Observação:</strong>
+    <%=h @atendimento.observacao %>
+  </p>
+  <strong>Cadastrante:</strong>
+    <%=h @atendimento.usuario_cadastrante.nome %>
+  </p>
+  <p>
+    <strong>Atendente:</strong>
+    <%=h @atendimento.usuario_solicitante.nome %>
+  </p>
+
+</div>
+<%= render :partial => 'show_itens' %>
+<p>
+  <li class ="links"><%= link_to 'Voltar Lista',atendimentos_path,:class => 'back' %></li>
+</p>

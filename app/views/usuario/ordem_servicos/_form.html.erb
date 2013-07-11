@@ -1,0 +1,118 @@
+<%= semantic_form_for [:usuario, @ordem_servico] do |f| %>
+  <%= f.inputs do %>
+    <br>
+    <%= section_tag do %>
+      <%= f.input :id, :as => :hidden, :input_html => {:id => "ordem-servico-id"} %>
+      <%= f.input  :cliente_id,
+                   :as           => :select,
+                   :collection   => @clientes,
+                   :label        => "Cliente",
+                   :member_label => :nome,
+                   :required     => true,
+                   :input_html   => {:id        => "cliente-select-id",
+                                      :autofocus => true } %>
+
+      <%= f.input :cliente_contato_id,
+                  :as            => :select,
+                  :collection    => @cliente_contatos,
+                  :label         => "Solicitante",
+                  :member_label  => :nome,
+                  :prompt        => " ",
+                  :required      => true,
+                  :input_html    => {:id => "cliente-contato-select-id"} %>
+
+      <%= f.input :usuario_responsavel_id,
+                  :as           => :select,
+                  :collection   => @usuarios,
+                  :label        => "Responsável",
+                  :member_label => "nome",
+                  :required     => true %>
+
+      <%= f.input :local_execucao,
+                  :as           => :select,
+                  :collection   => OrdemServico::LOCAIS_EXECUCAO,
+                  :label        => "Local Execução",
+                  :required     =>  true   %>
+
+      <%= f.input :tipo_os,
+                  :as         => :select,
+                  :label      => "Tipo Atividade",
+                  :collection => OrdemServico::TIPOS,
+                  :required   => true,
+                  :input_html => {:id => "ordem_servico_tipo_os"} %>
+      
+      <%= f.input :tipo_tarifacao,
+                  :as         => :select,
+                  :label      => "Tipo Tarifação",
+                  :collection => OrdemServico::TIPOS_TARIFACAO,
+                  :required   => true,
+                  :input_html => {:id => "ordem_servico_tipo_tarifacao"} %>
+
+      <%= content_tag :div, :class => "table-fields-container" do %> 
+        <%= f.input :data_execucao, 
+                    :as         => :string,
+                    :label      => "Data O.S.",
+                    :required   => true %>
+
+        <%= f.input :hora_inicio, 
+                    :as         => :string,
+                    :label      => "Hora Início*",
+                    :required   => true,
+                    :input_html => {:id => "hora_inicio"} %>
+
+        <%= f.input :hora_fim, 
+                    :as         => :string,
+                    :label      => "Hora Fim*",
+                    :required   => true,
+                    :input_html => {:id => "hora_fim"} %>
+
+        <%= f.input :tempo_intervalo, 
+                    :as         => :string,
+                    :label      => "Intervalo (Hrs)",
+                    :input_html => {:id => "hora_intervalo"} %>
+
+        <%= f.input :horas_desconto, 
+                    :as         => :string,
+                    :label      => "Desconto (Hrs)",
+                    :input_html => {:id => "hora_desconto"} %>
+
+      <% end %>
+      <%= render :partial => "tab", :locals => {:f => f} %>
+
+      <%= f.input :usuarios_participantes,
+                  :label        => "Usuários Participantes*",
+                  :required     => true %>
+      
+      <%= f.input :valor_servico,
+                  :as         => :string,
+                  :label      => "Valor do Serviço.***",
+                  :input_html => {:style => "max-width:120px; min-width: 120px;",
+                                  :id    => "valor-servico"} %>
+
+    <% end %>
+        
+    <%= section_tag :legend => "Módulos Treinados", :id=>"modulos-treinados-section" do %>
+      <%= render :partial => "ordem_servico_itens", :locals => {:f => f} %>
+    <% end %>
+    
+    <%= section_tag :legend => "Solicitações Atendidas",:id=>"solicitacoes-section" do %>
+      <%= link_to "Atualiza Lista","#", :remote => true, :id => "myLink" %>
+      <%= content_tag :div,"",:id=>"solicitacoes-OS" do %>
+        <%= render "ordem_servico_solicitacoes" %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+
+  <%= f.actions :class => "buttons-container" do %>
+    <%= submit_button f %>
+    <%= link_to_cancel usuario_ordem_servicos_path %>
+  <% end %>
+
+  <ul class="fields-tips">
+    <li>(*) Preenchimento Obrigatório</li>
+    <li>(**) Preenchimento Obrigatório para Tipo Tarifação igual a TABELA</li>
+    <li>(***) Preenchimento Obrigatório para Tipo Tarifação difetente de TABELA e Atividade Diferente de DESENVOLVIMENTO</li>
+  </ul>  
+
+<% end %>

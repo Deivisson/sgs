@@ -1,0 +1,11 @@
+one:
+  usuario_cargo_id: 1
+  nome: MyString
+  email: MyString
+  celular: MyString
+
+two:
+  usuario_cargo_id: 1
+  nome: MyString
+  email: MyString
+  celular: MyString

@@ -1,0 +1,93 @@
+
+.buttons-container {
+  margin: 10px 0 0 20px !important;
+  ol li {
+    display: table;
+    float: left;
+    height: 35px !important;
+  }
+}
+.buttons-link-container {
+  margin: 10px 0 0 0px !important;
+  list-style: none;
+  li {
+    display: table;
+    float: left;
+    height: 35px !important;
+    margin-right: 10px;
+  }
+}
+.modal-form-button {
+  display:table !important;
+  float: left;
+  position:absolute; 
+  margin-bottom:0px !important; 
+  margin-left: 0px !important;
+}
+
+.cancel-link {
+  color: red;
+  font-size: 14px;
+  line-height: 35px;
+  margin: 0 10px !important;
+  text-decoration: none;
+  &:hover { font-style: italic; text-decoration: underline;}
+}
+
+.submit-button, .update {
+  border:1px solid #3f511d;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  background-image: linear-gradient(bottom, #4477AA 47%, #225588 100%);
+  background-image: -o-linear-gradient(bottom, #4477AA 47%, #225588 100%);
+  background-image: -moz-linear-gradient(bottom, #4477AA 47%, #225588 100%);
+  background-image: -webkit-linear-gradient(bottom, #4477AA 47%, #225588 100%);
+  background-image: -ms-linear-gradient(bottom, #4477AA 47%, #225588 100%);
+  background-image: -webkit-gradient(
+	  linear,
+	  left bottom,
+	  left top,
+	  color-stop(0.47, #4477AA),
+	  color-stop(1, #225588)
+  );
+
+  border: 1px solid #003366;
+  border-radius: 3px 3px 3px 3px;
+  box-shadow: 1px 1px 0 #5588BB inset, -1px -1px 0 #5588BB inset;
+  color: #FFF;
+  cursor:pointer;
+  font-style: "PT Sans Latin CE Regular",Calibri,'Lucida Sans Unicode',Arial,sans-serif;
+  font-size:14px;
+  font-weight: bold !important;
+  height:33px ;
+  padding: 0px 8px !important;
+  text-shadow: 0 -1px 0 #003366;
+  vertical-align: center;
+  width:100px;
+
+  &:disabled {
+    background-image: none;
+    background:#e4e4e4;
+    box-shadow: 0 1px 0 0 #e4e4e4 inset;
+    border:1px solid #c3c3c3;
+    color: #a2a2a2;
+    text-shadow: 0px 0px 0px #495262;
+  }
+
+}
+
+.submit-button:hover, .update:hover {
+  background-image: linear-gradient(bottom, #225588 47%, #225588 100%);
+  background-image: -o-linear-gradient(bottom, #225588 47%, #225588 100%);
+  background-image: -moz-linear-gradient(bottom, #225588 47%, #225588 100%);
+  background-image: -webkit-linear-gradient(bottom, #225588 47%, #225588 100%);
+  background-image: -ms-linear-gradient(bottom, #225588 47%, #225588 100%);
+  background-image: -webkit-gradient(
+	  linear,
+	  left bottom,
+	  left top,
+	  color-stop(0.47, #225588),
+	  color-stop(1, #225588)
+  );
+}

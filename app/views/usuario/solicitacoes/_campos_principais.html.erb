@@ -1,0 +1,73 @@
+<div id="fragment-1">
+<%= form.inputs do %>
+  <%= section_tag  do %>
+    <br>
+    <% if not @solicitacao.atendimento_id %>
+      <%= form.input  :cliente_id,
+                      :collection   => @clientes,
+                      :label        => "Cliente",
+                      :member_label => :nome,
+                      :required     => true,
+                      :input_html   => {:id        => "cliente-select-id",
+                                        :autofocus => true } %>
+    <% end %>
+    <%= form.input :cliente_contato_id,
+                   :as            => :select,
+                   :collection    => @contatos,
+                   :label         => "Solicitante",
+                   :member_label  => :nome,
+                   :prompt        => " ",
+                   :required      => true,
+                   :input_html    => {:id => "cliente-contato-select-id"} %>
+
+    <div class="div-field">
+      <label>Módulo*</label>
+      <% @solucoes = [] if @solucoes.nil? %>
+      <%= grouped_collection_select(:solicitacao,
+                                    :modulo_id,
+                                    @solucoes,
+                                    :solucao_modulos,
+                                    :descricao, :id, :descricao,
+                                    {:prompt => " "} ,
+                                    {:id => "solucao-modulos-select-id"}) %>
+                                    
+    </div>
+
+    <div class="div-field">
+      <label>Sub Módulo*</label>
+      <% @sub_modulos = [] if @sub_modulos.nil? %>
+      <%= collection_select(:solicitacao,
+                            :solucao_sub_modulo_id,
+                            @sub_modulos,
+                            :id,
+                            :descricao,
+                            {:prompt => " "},
+                            {:id => "solucao-sub-modulos-select-id"}) %>
+      <% if @solicitacao.errors[:solucao_sub_modulo_id].present? %>
+          <%= content_tag :p, @solicitacao.errors[:solucao_sub_modulo_id].to_sentence, 
+          :class => "inline-errors" %>
+      <% end %>
+    </div>
+
+    <% if @solicitacao.id.nil? %>
+        <%= form.input :usuario_responsavel,
+                       :collection => @usuarios,
+                       :label => "Responsável",
+                       :member_label => :nome,
+                       :required     => true %>
+    <% end %>
+
+    <%= form.input :prioridade,
+                   :collection    => @prioridades,
+                   :member_label  => :descricao,
+                   :required      => true %>
+
+    <%= form.input :tipo_pendencia,
+                   :collection    => @tipo_pendencias,
+                   :label         => 'Tipo',
+                   :member_label  => :descricao,
+                   :required      => true,
+                   :input_html    => {:id => "solicitacao-tipo-pendencia"} %>
+  <% end %>
+<% end %>
+</div>

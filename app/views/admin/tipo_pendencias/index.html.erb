@@ -1,0 +1,32 @@
+<% title "Listagem de Tipo de Pendências" %>
+<table boder = "0" cellspacing ="1" cellpadding ="0" >
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th width ="10">Det</th>
+      <th width ="10">Edit</th>
+      <th width ="10">Del</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for tipo_pendencia in @tipo_pendencias %>
+      <tr>
+        <td><%=h tipo_pendencia.descricao %></td>
+        <td><%= link_to image_tag(image_link[:show]), [:admin, tipo_pendencia] %></td>
+        <td><%= link_to image_tag(image_link[:edit]), 
+                edit_admin_tipo_pendencia_path(tipo_pendencia) %></td>
+                
+        <td><%= link_to image_tag(image_link[:del]), 
+                      [:admin,tipo_pendencia], 
+                      :method => :delete,
+                      :confirm => 'Confirma exclusão?' %></td>
+      </tr>
+    <% end %>
+  <tbody>
+</table>
+
+<p>
+  <li class ="links">
+    <%= link_to 'Nova Pendência',new_admin_tipo_pendencia_path,:class => 'new' %>
+  </li>
+</p>

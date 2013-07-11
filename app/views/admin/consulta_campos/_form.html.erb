@@ -1,0 +1,25 @@
+<%= render "infos" %>
+<%= semantic_form_for [:admin,@consulta_campo] do |form| %>
+  <%= form.inputs do %>
+    <% section_tag do %>
+      <%= form.input :descricao, :label => "Descrição",:label_method => "descricao" %>
+      <%= form.input :tabela, :label => "Tabela",:label_method => "tabela" %>
+
+      <%= form.input :campo,
+                     :label         => "Campo DB",
+                     :label_method  => "campo",
+                     :hint => "Descrição do Campo deverá ser composto $+nome, e tudo em letra minúscula" %>
+
+      <%= form.input :alias, :label => "Alias",:label_method => "alias" %>
+      <%= form.input :tipo, :label => "Tipo",:label_method => "tipo" %>
+      <%= form.input :selecionado %>
+      <%= form.input :consulta_id, :as => :hidden %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_consulta_campos_path(:consulta => @consulta_campo.consulta_id) %>
+  <% end %>
+
+<% end %>  

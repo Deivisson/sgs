@@ -1,0 +1,75 @@
+<%= form_tag find_usuario_solicitacao_pesquisas_path do %>
+
+  <%= section_tag(:legend => "Opções de Filtros", :class => "section-tag-sized") do %>
+      <div class="div-field">
+        <label>Cliente:</label>
+        <%= select_tag :cliente_ids,
+                       options_for_select(@clientes.collect{|e|[e.nome,e.id]}),
+                       :include_blank => true,
+                       :id => "cliente-select-id" %>
+      </div>
+      <div class="div-field">
+        <label>Solicitante:</label>
+        <%= select_tag :solicitante_ids,
+                       options_for_select([]),
+                       :include_blank => true,
+                       :id => "cliente-contato-select-id" %>
+      </div>
+      <div class="div-field">
+        <label>Cadastrado por:</label>
+        <%= select_tag :cadastrante_ids,
+                       options_for_select(@usuarios.collect{|e|[e.nome,e.id]}),
+                       :include_blank => true %>
+      </div>
+      <div class="div-field">
+        <label>Responsável:</label>
+        <%= select_tag :usuario_ids,
+                       options_for_select(@usuarios.collect{|e|[e.nome,e.id]}),
+                       :include_blank => true %>
+     </div>
+
+      <div class="div-field">
+        <label>Solucao:</label>
+        <%= select_tag :solucao_ids,
+                       options_for_select(@solucoes.collect{|e|[e.descricao,e.id]}),
+                       :include_blank => true %>
+      </div>
+      <div class="div-field">
+        <label>Módulo:</label>
+        <%= select_tag :modulo_ids,
+                       options_for_select(@modulos.collect{|e|[e.descricao,e.id]}),
+                       :include_blank => true %>
+      </div>
+      <div class="div-field">
+        <label>Sub Módulo:</label>
+        <%= select_tag :sub_modulo_ids,
+                       options_for_select(@sub_modulos.collect{|e|[e.descricao,e.id]}),
+                       :include_blank => true %>
+      </div>
+
+      <div class="div-field">
+        <label>Status:</label>
+        <%= select_tag :status_ids,
+                       options_for_select(@status.collect{|e|[e.descricao,e.id]}),
+                       :include_blank => true %>
+      </div>
+      <div class="div-field">
+        <label>Prioridade:</label>
+        <%= select_tag :prioridade_ids,
+                       options_for_select(@prioridades.collect{|e|[e.descricao,e.id]}),
+                       :include_blank => true %>
+     </div>
+
+      <div class="div-field">
+        <label>Tipo:</label>
+        <%= select_tag :tipo_ids,
+                       options_for_select(@tipo_pendencias.collect{|e|[e.descricao,e.id]}),
+                       :include_blank => true %>
+      </div>
+  <% end %>
+
+  <%= content_tag(:div, :class => "buttons-container") do %>
+    <%= submit_tag "Pesquisar" %>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,59 @@
+/*Patient assets tabs
+ul#tab-menu {
+  border-bottom: 0px solid #cccccc;
+  list-style:none;
+  padding:0px;
+  margin:0px 0px 0px 0px;
+  li {
+    border-bottom:0px;
+    float:left;
+    height: 25px;
+    width: auto;
+    padding: 2px 2px 2px 0px;
+    margin: -4px 10px 0 0;
+  }
+  li.active {
+    background:#FFF;
+    border: 1px solid #ccc;
+    border-bottom:0px;
+    border-radius: 3px 3px 0px 0px;
+    -moz-border-radius: 3px 3px 0px 0px;
+    -webkit-border-radius: 3px 3px 0px 0px;
+    float:left;
+    height:25px;
+    z-index:10px;
+    a {
+      color: #555;
+      font-weight:bold;
+    }
+  }
+  li a {
+    color: #2F74A9;
+    font-size: 12px;
+    line-height: 27px;
+    text-decoration: none;
+    padding: 0px 8px 0px 8px;
+    &:focus {      
+      text-decoration: underline;}
+  }
+}
+
+.menutab-content {
+  border-left: none;
+  min-height:26px;
+  height:auto;
+  margin: 10px 0 0 0px;
+}
+*/
+.menutab-content {
+  background-color: #FFF !important;
+  border: 0 !important;
+  .ui-tabs-nav {
+    background: #EEEEEE;
+    border: 0px;
+    padding: 0 !important;
+  }
+  .ui-tabs-panel fieldset ol .section-tag {
+    padding-left: 0 !important;
+  }
+}

@@ -1,0 +1,11 @@
+<% if @solicitacoes.any? %>
+  <%= content_tag :div, :class => "search-result-list" do %>
+    <%- @solicitacoes.each do |solicitacao| %>
+        <%= content_tag(:div, :class => "item") do %>
+          <%= link_to highlight(solicitacao.titulo_formatado,@search_key),
+              usuario_solicitacao_path(solicitacao), :class => "title" %>
+          <p><%= highlight(solicitacao.detalhe.html_safe,@search_key) %></p>
+        <% end %>
+    <% end %>
+  <% end %>
+<% end %>

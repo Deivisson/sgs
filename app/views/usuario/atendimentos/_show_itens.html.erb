@@ -1,0 +1,38 @@
+<table border ="0" cellspacing ="1" cellpadding ="0" >
+  <caption>Solicitações do Atendimento</caption>
+  <thead>
+    <tr>
+      <th>Controle</th>
+      <th>Título</th>
+      <th>Status</th>
+      <th>Sub Módulo</th>
+      <th>Solicitante</th>
+      <th>Tipo</th>
+      <th width = "100">Prev. Liberação</th>
+      <th width = "10">Det</th>
+      <th width = "10">Edit</th>
+      <th width = "10">Del</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for solicitacao in @solicitacoes %>
+      <% @atendimento = solicitacao.atendimento %>
+      <tr>
+        <td><%=h solicitacao.id.to_s.rjust(5,'0') %> </td> 
+        <td><%=h solicitacao.titulo %></td>
+        <td><%=h solicitacao.status_descricao %></td>
+        <td><%=h solicitacao.sub_modulo %></td>
+        <td><%=h solicitacao.nome_contato %></td>
+        <td><%=h solicitacao.tipo_descricao %></td>
+        <td><%=h solicitacao.data_previsao_liberacao.to_s_br %></td>
+        <td><%= link_to image_tag(image_link[:show]), [:usuario, solicitacao] %></td>
+        <td><%= link_to image_tag(image_link[:edit]), [:edit, :usuario,solicitacao]  %></td>
+        <td><%= link_to image_tag(image_link[:del]),  
+                                  [:usuario, solicitacao], 
+                                  :confirm => 'Confirma exclusão?', 
+                                  :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,22 @@
+<%= content_tag :div, :class => "ordem-servico-itens-container" do  %>
+	<table border="0"  cellspacing="1" cellpadding="0" >
+    	<thead>
+	      <tr>
+	        <th>Módulo*</th>
+	        <th>Sub Módulo*</th>
+	        <th>Setor</th>
+	        <th>Usuários</th>
+	        <th>Avaliação*</th>
+	        <th>Situação*</th>
+	        <th></th>
+	      </tr>
+	    </thead>
+	    <tbody id="ordem-servico-itens">
+    		<%= render :partial => "item_fields" %>
+	    	<%= f.fields_for :itens do |builder, i|  %>
+	    		<%= puts i %>
+				<%= render :partial => "item", :locals => {:f => builder} %>
+	    	<% end %>
+      </tbody>
+  </table>
+<% end %>

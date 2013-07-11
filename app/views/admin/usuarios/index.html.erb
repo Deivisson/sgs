@@ -1,0 +1,29 @@
+<% title "Listagem de Usuários" %>
+<table border="0"  cellspacing="1" cellpadding="0" >
+  <thead>
+    <tr>
+      <th>Cargo</th>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Celular</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Del</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for usuario in @usuarios %>
+      <tr>
+        <td width="100" ><%=h usuario.usuario_cargo.descricao %></td>
+        <td><%=h usuario.nome %></td>
+        <td width ="300" ><%=h usuario.email %></td>
+        <td width ="100"><%=h usuario.celular %></td>
+        <td width ="10" ><%= link_to "Show",[:admin, usuario],:class => 'show' %></td>
+        <td width ="10"><%= link_to "Edit", edit_admin_usuario_path(usuario),:class => 'edit' %></td>
+        <td width ="10"><%= link_to "Del", [:admin,usuario], :class => 'del',:confirm => 'Confirma exclusão?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<li class ="links"><%= link_to 'Novo Usuários', new_admin_usuario_path,:class => 'new' %></li>

@@ -1,0 +1,38 @@
+<% title "Listagem Atendimentos" %>
+<table boder = "0" cellspacing = "1" cellpadding = "0" >
+  <thead>
+    <tr>
+      <th width ="60">Nº Atend.</th>
+      <th width = "200" >Cliente</th>
+      <th>Descrição</th>
+      <th width = "180"> Atendente</th>
+      <th width = "180">Cadastro</th>
+      <th width ="10">Det</th>
+      <th width ="10">Edit</th>
+      <th width ="10">Del</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for atendimento in @atendimentos %>
+      <tr>
+        <td><%= atendimento.id.to_s.rjust(5,'0') %></td>
+        <td><%=h atendimento.nome_cliente %></td>
+        <td><%=h atendimento.descricao%> </td>
+        <td><%=h atendimento.solicitante %></td>
+        <td><%= atendimento.created_at.to_s_br %></td>
+        <td><%= link_to image_tag(image_link[:show]), [:usuario, atendimento]  %></td>
+        <td><%= link_to image_tag(image_link[:edit]), [:edit, :usuario, atendimento] %></td>
+        <td><%= link_to image_tag(image_link[:del]), 
+                        [:usuario, atendimento] ,
+                        :confirm => 'Confirma exclusão?', 
+                        :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+<li class ="links"><%= link_to 'Novo Atendimento',
+                        [:new, :usuario,:atendimento],
+                        :class => 'new' %></li>
+</p>

@@ -1,0 +1,25 @@
+<% title "Histórico Solicitação" %>
+<div id="div_show">
+  <p>
+    <strong>Solicitação:</strong>
+    <%=h "#{@solicitacao_historico.solicitacao.id.to_s.rjust(5,'0')} - #{@solicitacao_historico.solicitacao.titulo}" %>
+  </p>
+   <p>
+    <strong>Usuário:</strong>
+    <%=h @solicitacao_historico.usuario.nome %>
+  </p>
+  <p>
+    <strong>Resposável:</strong>
+    <%=h @solicitacao_historico.usuario_responsavel.nome %>
+  </p>
+ <p>
+    <strong>Status:</strong>
+    <%= @solicitacao_historico.status.descricao%>
+  </p> 
+ <p>
+    <strong>Detalhe:</strong>
+    <%= @solicitacao_historico.detalhe %>
+  </p> 
+</div>
+<%= link_voltar %>
+

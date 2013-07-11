@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
+  <%= yield(:tiny_mce) %>  
+  <%= csrf_meta_tag %>
+
+</head>
+
+<body>
+
+  <%= content_tag :div, :class => "head" do %>
+    <%= content_tag :div, :class => "user-container" do %>
+      <div class="user-photo" >
+
+      </div>
+      <div class ="login-info">
+        <% if admin_signed_in? %>
+      	  <%= link_to "Sair",destroy_admin_session_path %>
+      	  <%= content_tag(:p, current_admin.email, :class => "email") %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class = "left">
+    <ul id="slide">
+      <li class="top clicked">
+        <h1 class="title first">Cadastros Básicos</h1>
+        <ul>
+          <li><%= link_to 'Cargos dos Usuários',admin_usuario_cargos_path %></li>
+          <li><%= link_to 'Usuários',admin_usuarios_path %></li>
+          <li><%= link_to 'Solucoes',admin_solucoes_path %></li>
+          <li><%= link_to 'Clientes',admin_clientes_path %></li>
+          <li><%= link_to 'Status',:controller => 'status',:action => 'index' %></li>
+          <li><%= link_to 'Tipo Pendências',admin_tipo_pendencias_path %></li>
+          <li><%= link_to 'Prioridade',admin_prioridades_path %></li>
+        </ul>
+      </li>
+
+      <li class="top">
+        <h1 class="title">Sistema</h1>
+        <ul>
+          <li><%= link_to 'Empresa',edit_admin_empresa_path(1) %></li>
+          <li><%= link_to "Configurações",edit_admin_configuracao_path(1) %></li>
+          <li><%= link_to "Consultas",admin_consultas_path %> </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div id="toolbar" >
+    <%- if show_title? -%>
+      <h1 class="title" ><%=h yield(:title) %></h1>
+    <%- end -%>
+    <%= yield :bar %>
+  </div>
+
+  <div class="content">
+    <div id="container" >
+      <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <%- end -%>
+    </div>
+    <%= yield %>
+  </div>
+ </body>
+</html>

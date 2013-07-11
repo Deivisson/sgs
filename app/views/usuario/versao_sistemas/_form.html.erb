@@ -1,0 +1,10 @@
+<% semantic_form_for @versao_sistema do |form| %>
+  <% form.inputs do %> 
+    <%= form.input :versao,:input_html => {:style => "width:150px"} %>
+    <%= form.input :detalhe %>
+  <% end %>
+
+  <% form.inputs do %>
+    <%= form.commit_button 'Salvar' %>
+  <% end %>
+<% end %>

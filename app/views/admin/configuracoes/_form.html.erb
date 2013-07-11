@@ -1,0 +1,12 @@
+<%= semantic_form_for [:admin,@configuracao] do |form|%>
+  
+  <%= form.inputs do %>
+  	<% form.input :mensagem_os , :input_html => {:rows => 6} %>
+  <% end %>
+
+  <br>
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+  <% end %>
+<% end %>  
+

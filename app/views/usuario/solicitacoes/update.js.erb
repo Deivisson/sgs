@@ -1,0 +1,16 @@
+<%- if @solicitacao.errors.any? %>
+  $('#dialog-form').html('<%= escape_javascript(render('form')) %>');
+  $("#tabs").tabs();
+  var qtd_errors = <%= @solicitacao.errors.count %>;
+  var tam = (540 + (qtd_errors * 12) );
+  $('#dialog-form').css("height",tam + "px");
+  $('.ui-dialog').css("top","10px");
+  $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange).focus();
+  $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos)
+  inicializaTinyMCE();
+  bindSolicitacaoUIEvents();
+<%- else %>
+  $('#dialog-form').dialog('close');
+  $('#dialog-form').remove();
+  $(window.location.replace("/usuario/solicitacoes/<%= @solicitacao.id %>"));
+<%- end %>

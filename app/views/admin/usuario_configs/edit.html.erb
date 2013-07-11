@@ -1,0 +1,13 @@
+<% title "Configuração do usuário" %>
+<% semantic_form_for @usuario_config do |form| %>
+  <% form.inputs do %> 
+    <%= form.input :assinatura_email,:label => 'Assinatura Email', :as => :text ,:input_html => {:rows => 10},:required => false %>
+    <%= form.input :usuario_id, :as => :hidden %>
+  <% end %>  
+  
+  <% form.inputs do %>
+    <%= form.commit_button "Salvar" %>
+  <% end %>  
+<% end %>
+
+

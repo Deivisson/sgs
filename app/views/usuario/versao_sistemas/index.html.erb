@@ -1,0 +1,12 @@
+<% title "Atualização do Sistema" %>
+<% for versao in @versao_sistemas %>
+  <div class="msg_list">
+    <p class="msg_head">
+      <%= "Versão #{versao.versao} atualizada em #{versao.created_at.to_s_br}"  %> 
+    </p>
+    <div class="msg_body">
+        <%= versao.detalhe.html_safe %> 
+   </div>
+  </div>
+<% end %>
+

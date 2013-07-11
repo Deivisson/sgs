@@ -1,0 +1,14 @@
+<%= semantic_form_for [:admin, @prioridade] do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag :legend => "Informações da Prioridade" do %>
+      <%= form.input :descricao,
+                     :label       => "Descrição",
+                     :input_html  => {:autofocus => true} %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_prioridades_path %>
+  <% end %>
+<% end %>

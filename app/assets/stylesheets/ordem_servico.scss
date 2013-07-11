@@ -1,0 +1,71 @@
+.table-fields-container {
+  display: table;
+  margin-left: 22%;
+  margin-top: 10px;
+  li {
+    float: left;
+    max-width: 115px;
+    label {
+      min-width:  100px !important;
+    }
+    input {
+      min-width: 90px !important;
+      max-width: 90px !important;
+    } 
+    p.inline-errors {
+      margin-left: 0px !important;
+    }
+  }
+}
+
+.ordem-servico-itens-container {
+  margin-left: -40px;
+  table tbody tr.fixed-itens-row,
+  table tbody tr.dynamic-itens-row {
+    margin:0px;
+    height: 25px;
+    &:hover {background-color: #ECEBEB !important;}
+    td {
+      margin:0px;
+      padding: 0px;
+      border-bottom: 0px;
+      input {
+        max-width: 100%;
+        min-width: 100%;
+      }
+      select {
+        max-width: 100%;
+        min-width: 100%;
+      }
+      &.modulos {width: 150px; max-width: 150px;}
+      &.sub-modulos {width: 200px; max-width: 200px;}
+      &.free-texts {width: 110px; max-width: 110px;}
+      &.default {width: 90px; max-width: 90px;}
+      a {
+        border: 1px solid #ECEBEB;
+        float: left;
+        height: 26px;
+        margin-left: 2px;
+        padding: 1px;
+        &:hover { border: 1px solid #D8D8D8; background-color: #DBDBDB; }
+        &:focus { border: 1px dotted #969393; background-color: #DBDBDB; }
+        img { margin-left: 0px;   }
+      }
+    }
+  }
+  table tbody tr.fixed-itens-row {
+    background-color: #ECEBEB !important;
+    margin-bottom: 5px;
+
+    td {padding: 4px 0 4px 0}
+  }
+  table tbody tr.dynamic-itens-row {
+    background-color: #FFF!important;
+    &:hover {background-color: #FFF;}
+    td {
+      &:hover {background-color: #FFF;}
+    }
+  }
+
+}
+

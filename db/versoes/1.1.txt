@@ -1,0 +1,50 @@
+<ul>
+<li><span><strong>Cadastro de Status</strong></span>
+<ul>
+<li>Ser&aacute; poss&iacute;vel cadastrar novos status. Para isto, dever&aacute; entrar em \"Suporte -&gt; B&aacute;sicos -&gt; Status\".</li>
+<li>Quando cadastrado novos status, haver&aacute; a op&ccedil;&atilde;o de assinalar o mesmo como sendo de encerramento, com isto, quando alguma solicita&ccedil;&atilde;o receber este status ficar&aacute; como encerrada.&nbsp; </li>
+<li>Os status padr&otilde;es do sistema n&atilde;o poder&atilde;o ser modificados e nem exclu&iacute;dos.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span><strong>Cadastro de Cargos</strong></span> <br />
+<ul>
+<li><span>Foi implementado no cadastro de cargos a configura&ccedil;&atilde;o dos status. Esta configura&ccedil;&atilde;o permitir&aacute; definir quais cargos poder&atilde;o ser respons&aacute;veis por determinada solicita&ccedil;&atilde;ol.</span></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span><strong>Configura&ccedil;&otilde;es Usu&aacute;rios</strong></span>
+<ul>
+<li><span>Configurar sistemas no qual trabalha.<br /></span></li>
+</ul>
+</li>
+<li><span>Criado no menu lateral, a op&ccedil;&atilde;o de Nova Solicita&ccedil;&atilde;o.<br /></span></li>
+<li><strong><span>Minhas Tarefas (</span></strong><strong>Resumo de solicita&ccedil;&otilde;es no qual sou respons&aacute;vel)</strong>
+<ul>
+<li><strong>&nbsp;</strong>Somente ser&atilde;o exibidos os status que n&atilde;o s&atilde;o de encerramento. </li>
+<li>O resumo apresentado por status com a quantidade de &iacute;tens, ficr&aacute; em negrito quando possuir &iacute;tens ainda n&atilde;o visualizados. </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Listagem de Solicita&ccedil;&otilde;es por status</strong> <br />
+<ul>
+<li>Foi acrescentado o combo de Solucao, permitindo assim filtrar as solicita&ccedil;&otilde;es de um solucao espec&iacute;fico.</li>
+<li>Criado op&ccedil;&atilde;o para imprimir &iacute;tens listados para PDF.</li>
+<li>Ao registrar a altera&ccedil;&atilde;o no status das solicita&ccedil;&otilde;es, voltar&aacute; para a tela principal, posicionando no mesmo status anterior. Ex: Ao consultar as solicita&ccedil;&otilde;es \"Em desenvolvimento\", seleciono alguns &iacute;tens e clico em registrar. Abrir&aacute; outra tela, no qual ser&aacute; preenchido as informa&ccedil;&otilde;es necess&aacute;rias e confirmar. Logo em seguida ir&aacute; voltar para a tela de controle de solicita&ccedil;&otilde;es posicionando nos &iacute;tens \"Em Desenvolvimento\".</li>
+<li>Na tela que registra a os status, foi&nbsp; feita uma invers&atilde;o dos combos. Agora ser&aacute; necess&aacute;rio selecionar primeiro o status e em seguida o usu&aacute;rio respons&aacute;vel. O combo de usu&aacute;rios respons&aacute;veis ser&atilde;o carregados apenas os usu&aacute;rios que podem assumir solicita&ccedil;&otilde;es para o status selecionado anteriormente.&nbsp;</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Cadastro de Solicita&ccedil;&otilde;es</strong>:
+<ul>
+<li>Ser&atilde;o carregados apenas os clientes no qual utilizam os solucoes configurados para o usu&aacute;rio do sistema.</li>
+<li>Ao cadastrar nova solicita&ccedil;&atilde;o, no qual o usu&aacute;rio respons&aacute;vel n&atilde;o seja o pr&oacute;prio cadastrante, a solicita&ccedil;&atilde;o aparecer&aacute; em negrito para o respons&aacute;vel como &iacute;tem n&atilde;o lido.</li>
+<li>Ao cadastrar nova solicita&ccedil;&atilde;o, ser&aacute; poss&iacute;vel solicitar confirma&ccedil;&atilde;o de leitura. Se solicitado, quando o respons&aacute;vel visualizar a mesma, ser&aacute; enviado autom&aacute;ticamente um email para o cadastrante.</li>
+</ul>
+</li>
+</ul>
+<p>&nbsp;</p>

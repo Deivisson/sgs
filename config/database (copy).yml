@@ -1,0 +1,55 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  #database: siematec
+  database: sgs_development
+  pool: 5
+  username: root
+  password: master1
+  host: localhost
+
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: sgs_production
+  pool: 5
+  username: root
+  password: master1
+  host: localhost
+
+
+
+
+  #Postgresql
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: pmanager_development
+  pool: 5
+  username: postgres
+  password: master1
+  host: localhost
+  port: 5432
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: pmanager_test
+  pool: 5
+  username: postgres
+  password: master1
+  host: localhost
+  port: 5432
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: pmanager_production
+  pool: 5
+  username: postgres
+  password: master1
+  host: localhost
+  port: 5432

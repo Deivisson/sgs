@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  projeto_modulo_id: 1
+  descricao: MyString
+  detalhe: MyString
+  data_criacao: 2010-02-24
+
+two:
+  projeto_modulo_id: 1
+  descricao: MyString
+  detalhe: MyString
+  data_criacao: 2010-02-24

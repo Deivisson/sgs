@@ -1,0 +1,34 @@
+<%= semantic_form_for [:admin, @cliente_contato] do |form| %>
+
+  <%= form.inputs do %>
+    <%= section_tag(:legend => "Informações do Contato") do %>
+      <% if @cliente_contato.cliente_id %>
+        <%= form.input :cliente_id,:as => :hidden %>
+      <% else %>
+        <%= form.input :cliente,
+                       :collection => @clientes,
+                       :label => "Cliente",
+                       :member_label => :nome %>
+      <% end %>
+      <%= form.input :nome %>
+      <%= form.input :email, :required => false %>
+
+      <%= form.input :telefone ,
+                     :required => false,
+                     :input_html => {:style => "width:200px"} %>
+
+      <%= form.input :celular ,
+                     :required => false,
+                     :input_html => {:style => "width:200px"} %>
+
+      <%= form.input :departamento,
+                     :required => false,
+                     :input_html => {:style => "width:200px"} %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form  %>
+    <%= link_to_cancel [:admin, @cliente_contato.cliente]  %>
+  <% end %>
+ <% end %>

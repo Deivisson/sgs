@@ -1,0 +1,28 @@
+<% title "Listagem de Cargos" %>
+<table border="0" cellpadding ="0" cellspacing = "1"  >
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th width="10">Det</th>
+      <th width="10">Edit</th>
+      <th width="10">Del</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for usuario_cargo in @usuario_cargos %>
+      <tr>
+        <td><%=h usuario_cargo.descricao %></td>
+        <td><%= link_to image_tag(image_link[:show]), [:admin, usuario_cargo] %></td>
+        <td><%= link_to image_tag(image_link[:edit]), edit_admin_usuario_cargo_path(usuario_cargo) %></td>
+        <td><%= link_to image_tag(image_link[:del]), [:admin,usuario_cargo], :confirm => 'Confirma exclusão?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<p> 
+  <li class="links" >
+    <%= link_to "Novo Cargo", new_admin_usuario_cargo_path, :class => "new" %>
+  </li>
+</p>

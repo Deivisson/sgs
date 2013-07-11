@@ -1,0 +1,44 @@
+<% title "Empresa" %>
+<div id="div_show">
+  <p>
+    <strong>Razão Social:</strong>
+    <%=h @empresa.razao %>
+  </p>
+
+  <p>
+    <strong>Nome Fantasia:</strong>
+    <%=h @empresa.fantasia %>
+  </p>
+
+  <p>
+    <strong>Cnpj:</strong>
+    <%=h @empresa.cnpj %>
+  </p>
+  <p>
+    <strong>Telefone:</strong>
+    <%=h @empresa.telefone %>
+  </p>
+  <p>
+    <strong>Email Suporte</strong>
+    <%=h @empresa.email_suporte %>
+  </p>    
+  <p>
+    <strong>Endereço:</strong>
+    <%=h @empresa.endereco %>
+  </p>
+  <p>
+    <strong>Complemento:</strong>
+    <%=h @empresa.complemento %>
+  </p>
+  <p>
+    <strong>Cidade:</strong>
+    <%=h @empresa.cidade %>
+  </p>
+  <p>
+    <strong>UF:</strong>
+    <%=h @empresa.uf %>
+  </p>
+</div>
+<p>
+  <%= link_to "Editar",edit_admin_empresa_path(@empresa),:class => 'edit' %>
+</p>

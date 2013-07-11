@@ -1,0 +1,19 @@
+$("#solicitacoes-OS").html("<%= escape_javascript(render 'ordem_servico_solicitacoes') %>");
+
+$("#checkall").bind("click", function(e) {
+    checkallTableItens($(this));
+});
+
+//Soma valor total das Solicitações 
+$('input[class*="ordem-servico-solicitacao-item"]').click(function() {
+	var total = 0;
+	var valor = "";
+    $('table tbody tr').each(function(index){
+        if (index > 0  && $(this).children('td').find(":checkbox:checked").length == 1){
+        	valor = $(this).children('td:eq(2)').text();
+        	valor = valor.replace(",",".");
+        	total +=  parseFloat(valor, 10);
+        }
+    });
+    alert(total);
+});

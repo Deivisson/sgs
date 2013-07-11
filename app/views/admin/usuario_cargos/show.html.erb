@@ -1,0 +1,18 @@
+<% title "Cargo" %>
+<div id="div_show">
+    <p>
+      <strong>Descrição:</strong>
+      <%=h @usuario_cargo.descricao %>
+    </p>
+    <p>
+      <fieldset id="legenda" style ="margin:0px" 
+        <legend> Status Permitidos </legend>
+        <% for status in @usuario_cargo.status %>
+          <div> <%= status.descricao %> </div>
+        <% end %>  
+      </fieldset>
+    </p>
+</div>
+<p>
+  <li class ="links"><%= link_to 'Voltar Lista',admin_usuario_cargos_path,:class => 'back' %></li>
+</p>

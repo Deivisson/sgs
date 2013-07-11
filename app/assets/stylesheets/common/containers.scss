@@ -1,0 +1,53 @@
+.section-tag,.section-tag-sized  {
+  border-bottom: 1px dotted #D8DBE0;
+  padding: 5px 0 25px 40px;
+  h3.title {
+    color: #C9000C;
+    font-family: "Adelle SemiBold",Cambria,Georgia,serif;
+    font-size: 16px;
+    font-size-adjust: 0.52;
+    font-style: normal;
+    font-weight: bold;
+    margin: 10px 0 30px -40px;
+  }
+  li {
+    width: 730px;
+  }
+  .short-fields {
+    li {
+      input {
+        width: 150px;
+        max-width: 150px;
+        min-widht: 150px;
+      }
+    }
+  }  
+}
+.section-tag-sized {
+  width: 800px;
+}
+
+#div_show {
+  dl {
+    padding:15px 0px 0px 0px;
+    margin:0px 0px 0px 0px;
+    dt {
+      float: left;
+      clear: left;
+      width: 160px;
+      text-align: right;
+      font-weight: bold;
+      color: #545151;
+      margin-right: 10px;
+    }
+    dt:after {
+      content: ": ";
+    }
+    dd {
+      margin: 0 0 0 100px;
+      max-width: 460px;
+      padding: 0 0 0.5em 0;
+      min-height:15px;
+    }
+  }
+}

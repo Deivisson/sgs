@@ -1,0 +1,26 @@
+<tr class ="dynamic-itens-row">
+  <td class="modulos">
+    <%= f.hidden_field :solucao_modulo_id %>
+    <%= text_field_tag :solucao_modulo_id, 
+                        f.object.descricao_modulo,
+                        :disabled => true  %>
+  <td class="sub-modulos">
+    <%= f.hidden_field :solucao_sub_modulo_id %>
+    <%= text_field_tag :solucao_sub_modulo_id, 
+                        f.object.solucao_sub_modulo.descricao,
+                        :disabled => true %>
+	</td>
+  <td class="free-texts"><%= f.text_field :setor %></td>
+  <td class="free-texts"><%= f.text_field :usuarios  %></td>
+  <td class="default">
+    <%= f.select(:tipo_avaliacao_id, @tipo_avaliacoes.collect{|a|[a.descricao,a.id]}) %>
+	</td>	
+	<td class="default">
+    <%= f.select(:situacao_id, @situacoes.collect{|c| [c.descricao, c.id]}) %>
+	</td>	
+  <td>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to image_tag(image_link[:remove24]), "#",
+        :class  => "remove-item-link"  %>
+  </td> 
+</tr>

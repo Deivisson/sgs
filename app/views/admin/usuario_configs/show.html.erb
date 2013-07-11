@@ -1,0 +1,16 @@
+<% title "Configuração do Usuário" %>
+
+
+
+<p>
+  <strong>Usuario:</strong>
+  <%=h @usuario_config.usuario_id %>
+</p>
+<p>
+  <strong>Assinatura Email:</strong>
+  <%=h @usuario_config.assinatura_email %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_usuario_config_path(@usuario_config) %> |
+</p>

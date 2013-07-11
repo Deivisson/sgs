@@ -1,0 +1,19 @@
+<div class="menutab-content">
+  <%= content_tag :ul, :id => "tab-menu" do %>
+    <li class="active"><%= link_to "Descrição *", "#descricao" %></li>
+    <li><%= link_to "Observações", "#observacao"%></li>
+
+    <%= content_tag :div, :id => "descricao" do %>
+      <%= f.input :descricao, 
+                  :as         => :text , 
+                  :label      => false,
+                  :input_html => {:rows => 8} %>
+    <% end %>
+    <%= content_tag :div, :id => "observacao" do %>
+      <%= f.input :observacoes, 
+                  :as         => :text, 
+                  :label      => false,
+                  :input_html => {:rows => 8} %>
+    <% end %>
+  <% end %>
+</div> 

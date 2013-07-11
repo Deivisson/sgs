@@ -1,0 +1,40 @@
+<div id="modal-container">
+
+  <%= semantic_form_for [:usuario, @solicitacao] , 
+        remote:true, html: {multipart:true} do |form| %>
+    <div id="tabs" class="menutab-content">
+      <%= content_tag :ul do %>
+        <li id = "solicitacao-tab1">
+          <%= link_to "#fragment-1" do  %>
+            <span>Dados Principais</span>
+          <% end %>
+        </li>
+        <li id = "solicitacao-tab2" >
+          <%= link_to "#fragment-2" do  %>
+            <span>Detalhes</span>
+          <% end %>
+        </li>
+        <li >
+          <%= link_to "#fragment-3" do  %>
+            <span>Anexos/Outros</span>
+          <% end %>
+        </li>
+      <% end %>
+
+      <%= render partial:"campos_principais", locals: {form:form} %>
+      <%= render partial:"campos_detalhes", locals: {form:form}  %>
+      <%= render partial:"campos_outros", locals: {form:form}  %>
+    </div>
+    <%= form.inputs do %>
+      <%= form.input :atendimento_id, :as => :hidden %>
+      <%= form.input :status_id, :as => :hidden %>
+      
+    <% end %>
+
+    <%= form.actions :class => "buttons-container modal-form-button" do %>
+      <%= submit_button form %>
+      <%= link_to_cancel "#", id:'solicitacao-cancel-link' %>
+    <% end -%>
+  <% end %>
+
+</div>
