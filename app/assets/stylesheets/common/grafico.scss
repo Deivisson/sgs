@@ -1,0 +1,30 @@
+.grafico-container {
+	border: 1px solid gray;
+	height: 100%;
+	width: 100%;
+	margin: -4px 0 0 -2px;
+	text-align: center;
+	vertical-align: center;
+}
+.grafico, .grafico-noprazo {
+	color:#FFF;
+	font-weight: bold;
+	height: 100%;
+	
+
+}
+.grafico-noprazo {
+	background-image: linear-gradient(bottom, rgb(40,111,173) 20%, rgb(12,144,232) 60%);
+	background-image: -o-linear-gradient(bottom, rgb(40,111,173) 20%, rgb(12,144,232) 60%);
+	background-image: -moz-linear-gradient(bottom, rgb(40,111,173) 20%, rgb(12,144,232) 60%);
+	background-image: -webkit-linear-gradient(bottom, rgb(40,111,173) 20%, rgb(12,144,232) 60%);
+	background-image: -ms-linear-gradient(bottom, rgb(40,111,173) 20%, rgb(12,144,232) 60%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.2, rgb(40,111,173)),
+		color-stop(0.6, rgb(12,144,232))
+	);
+}

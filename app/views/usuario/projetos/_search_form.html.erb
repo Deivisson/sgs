@@ -1,0 +1,19 @@
+<%= form_for usuario_projetos_path, 
+			remote:true, :html => {class:"search-form" }, :method => :get do |f| %>
+	
+	<h1 class="title-search-form">Filtros</h1>
+
+	<div class="field">
+		<%= content_tag :label, "Nome Projeto" %>
+		<%= text_field_tag "conditions[nome.lk]","" %>
+	</div>
+	
+	<div class="field">
+		<%= content_tag :label, "Cliente" %>
+		<%= select_tag "conditions[cliente_id]",
+					options_for_select(@clientes.collect{|c| [c.nome, c.id]}), 
+					:include_blank => true %>
+	</div>
+	<%= submit_tag "Pesquisar" %>
+
+<% end %>

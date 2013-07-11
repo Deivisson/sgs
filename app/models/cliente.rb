@@ -28,7 +28,8 @@ class Cliente < ActiveRecord::Base
   has_many :pendencias
   has_and_belongs_to_many :solucoes
   has_many :ordem_servicos
-
+  has_many :projetos
+  
   attr_accessor :horas_bonus
 
   scope :to_select, :select => 'nome,id', :order => :nome

@@ -1,0 +1,32 @@
+<div id="modal-container">
+  <%= semantic_form_for [:usuario, @projeto], remote:true do |f| %>
+    <%= f.inputs do %>
+      <%= section_tag do %>
+        <%= f.input :cliente_id, 
+                    :as         => :select, 
+                    :required   => true,
+                    :collection => @clientes.collect{|c| [c.nome, c.id]},
+                    :input_html => {:id => "cliente-select-id"}  %>
+
+        <%= f.input :nome, :label => "Nome Projeto" %>
+        <%= f.input :descricao, 
+                    :label       => "Descrição",
+                    :input_html => {:rows => 15 }%>
+        
+        <%= f.input :data_inicio, 
+                    :as         => :string, 
+                    :label      => "Data Início",
+                    :input_html => {:style => "max-width: 150px !important;"} %>
+
+        <%= f.input :data_prevista_termino, 
+                    :as         => :string, 
+                    :label      => "Data Prevista Término",
+                    :input_html => {:size => 40} %>
+      <% end %>
+    <% end %>
+    <%= f.actions :class => "buttons-container modal-form-button" do %>
+      <%= submit_button f %>
+      <%= link_to_cancel "#", id:'projeto-cancel-link' %>
+    <% end -%>
+  <% end %>
+</div>

@@ -1,0 +1,28 @@
+.projetos-lista {
+	background-color: #FFF;
+	border-radius: 5px 0 0 5px;
+  height: 91.5%;
+  list-style: none outside none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 300px;
+}
+#toolbar {
+	left: 301px !important;
+}
+.projetos-conteudo {
+	background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #C3C7D0;
+  border-radius: 0 0 5px 0;
+  bottom: 0;
+  left: 301px;
+  margin: 4px;
+  overflow: auto;
+  padding: 0 7px;
+  position: absolute;
+  right: 0;
+  top: 85px;
+  z-index: 3;
+}

@@ -1,0 +1,34 @@
+.search-form {
+	float: left;
+	padding: 5px;
+	margin: 10px;
+	width: 70%;
+	.title-search-form {
+		background: #F5F5F5;
+    border: 1px solid #C3C7D0;
+    color: #625B5B;
+    font-size: 16px;
+    font-size-adjust: 0.523;
+    font-style: normal;
+    font-weight: bold;    
+    height: 32px;
+    line-height: 32px;
+    margin: -20px 0 20px -16px;
+    padding-left: 18px;
+    text-shadow: 0 1px 0 white;
+    width: 350px;
+	}
+	.field {
+		float: left;
+		margin-bottom: 10px;
+		width: 100%;
+		label {
+			color: #625B5B;
+		}
+		input,select {
+			float: left;
+			width: 270px;
+			min-width: 270px;
+		}
+	}
+}

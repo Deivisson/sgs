@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application', :media => "all" %>
+  
+  <%= yield(:tiny_mce) %>  
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <%= render "/shared/header" %>
+  <div class="projetos-lista">
+    <%= yield :search_form %>
+  </div>
+  <div id="toolbar" >
+    <%- if show_title? -%>
+      <h1 class="title" id="content-title" ><%=h yield(:title) %></h1>
+    <%- end -%>
+    <%= yield :bar %>
+  </div>
+  <div class="projetos-conteudo">
+    <div id="container" >
+      <%- flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <%- end %>
+    </div>
+    <%= yield %>
+  </div>
+ </body>
+</html>
