@@ -5,10 +5,6 @@ $(document).ready(function(){
   gerenciaCamposDesenvolvimento();
   gerenciaEstadoCampoValorCobranca();
 
-  $("#tb1").click(function() {
-    alert("LLLL");
-    $("#cliente-select-id").focus();
-  });
 
   $("#solicitacao-select-status-id").change(function(){
     gerenciaCamposDesenvolvimento();

@@ -1,0 +1,21 @@
+<%= content_tag :tr do %>
+  <td><%= solicitacao.id.to_s.rjust(5,'0') %></td>
+  <td><%=h solicitacao.titulo %></td>
+  <td>
+    <%= link_to image_tag(image_link[:show]), 
+        :controller => 'solicitacoes',
+        :action => 'show' ,
+        :id => solicitacao.id,:local => 'tasks_user' %>
+  </td>
+
+  <td>
+    <%= link_to image_tag(image_link[:edit]), 
+      [:edit, :usuario, solicitacao], 
+      remote:true, 
+      class:'solicitacao-link' %>
+  </td>
+  <td>
+      <%= link_to image_tag(image_link[:del]), 
+        [:usuario, solicitacao], 
+        :confirm => 'Confirma exclusão ?',:method => :delete %></td>
+<% end %>

@@ -61,11 +61,14 @@ class Usuario::SolicitacoesController < Usuario::BaseController
   def new
     @solicitacao = Solicitacao.new(:status_id => Status::ABERTO)
     if params[:atendimento]
+      
       @atendimento = Atendimento.find(params[:atendimento])
       @solicitacao.atendimento = @atendimento
       @contatos = ClienteContato.find_all_by_cliente_id(@atendimento.cliente_id)
       @solucoes = Solucao.all(:joins => :clientes,
                   :conditions => ["clientes.id = ?",@atendimento.cliente_id])
+    elsif params[:projeto_id]
+      @solicitacao.projeto_id = params[:projeto_id]
     end
     @local = params[:local] if params[:local]
     @status_id = params[:status_id] if params[:status_id]

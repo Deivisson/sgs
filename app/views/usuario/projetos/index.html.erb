@@ -1,5 +1,5 @@
 <% title 'Lista de Projetos' %>
-<% content_for :search_form do %>
+<% content_for :left_container do %>
   <%= render "search_form" %>
 <% end %>
 <%= content_tag :div, id:"projetos" do %>
@@ -9,3 +9,4 @@
 <% content_for :bar do %>
 	<%= link_to 'New Projeto', new_usuario_projeto_path, remote:true, id:'projeto-link'  %>
 <% end %>
+

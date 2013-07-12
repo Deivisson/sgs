@@ -1,0 +1,21 @@
+<%= link_to "Adicionar Tarefa", 
+        [:new,:usuario,@projeto,:solicitacao],
+        remote:true,
+        class:'solicitacao-link' %>
+        
+<table border="0"  cellspacing="1" cellpadding="0" class="tablesorter" >
+  <thead>
+    <tr>
+      <th width = "70">Nº Solic.</th>
+      <th>Título</th>
+      <th width ="10">Det</th>
+      <th width ="10">Edit</th>
+      <th width ="10">Del</th>
+    </tr>
+  </thead>
+<tbody id="projeto-solicitacao-items">
+  <%- @projeto.solicitacoes.each do |solicitacao| %>
+    <%= render partial:'solicitacao_item', locals: {solicitacao:solicitacao} %>
+  <% end %>
+</tbody>
+</table>

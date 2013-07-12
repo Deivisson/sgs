@@ -39,6 +39,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
             } 
 
   belongs_to :atendimento
+  belongs_to :projeto
   belongs_to :status
   belongs_to :prioridade
   belongs_to :solucao_sub_modulo

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711135706) do
+ActiveRecord::Schema.define(:version => 20130712170844) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -192,9 +192,12 @@ ActiveRecord::Schema.define(:version => 20130711135706) do
     t.date     "data_prevista_termino",               :null => false
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+    t.integer  "status",                              :null => false
+    t.integer  "usuario_id",                          :null => false
   end
 
   add_index "projetos", ["cliente_id"], :name => "index_projetos_on_cliente_id"
+  add_index "projetos", ["usuario_id"], :name => "index_projetos_on_usuario_id"
 
   create_table "situacoes", :force => true do |t|
     t.string   "descricao"
@@ -246,12 +249,14 @@ ActiveRecord::Schema.define(:version => 20130711135706) do
     t.integer  "nivel_complexidade"
     t.boolean  "gera_cobranca"
     t.decimal  "valor_cobranca",                         :precision => 10, :scale => 2, :default => 0.0,   :null => false
+    t.integer  "projeto_id"
   end
 
   add_index "solicitacoes", ["atendimento_id"], :name => "index_solicitacoes_on_atendimento_id"
   add_index "solicitacoes", ["cliente_contato_id"], :name => "index_solicitacoes_on_cliente_contato_id"
   add_index "solicitacoes", ["ordem_servico_id"], :name => "fk_solicitacoes_ordem_servicos"
   add_index "solicitacoes", ["prioridade_id"], :name => "index_solicitacoes_on_prioridade_id"
+  add_index "solicitacoes", ["projeto_id"], :name => "index_solicitacoes_on_projeto_id"
   add_index "solicitacoes", ["solucao_sub_modulo_id"], :name => "index_solicitacoes_on_solucao_sub_modulo_id"
   add_index "solicitacoes", ["status_id"], :name => "index_solicitacoes_on_status_id"
   add_index "solicitacoes", ["tipo_pendencia_id"], :name => "index_solicitacoes_on_tipo_pendencia_id"
@@ -402,6 +407,7 @@ ActiveRecord::Schema.define(:version => 20130711135706) do
   add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_responsaveis", :column => "usuario_responsavel_id"
 
   add_foreign_key "projetos", "clientes", :name => "fk_projetos_clientes"
+  add_foreign_key "projetos", "usuarios", :name => "fk_projetos_usuarios"
 
   add_foreign_key "solicitacao_historicos", "solicitacoes", :name => "fk_solicitacao_historico_solicitacoes", :dependent => :delete
   add_foreign_key "solicitacao_historicos", "status", :name => "fk_solicitacao_historico_status"
@@ -412,6 +418,7 @@ ActiveRecord::Schema.define(:version => 20130711135706) do
   add_foreign_key "solicitacoes", "cliente_contatos", :name => "fk_solicitacoes_cliente_contatos_id"
   add_foreign_key "solicitacoes", "ordem_servicos", :name => "fk_solicitacoes_ordem_servicos"
   add_foreign_key "solicitacoes", "prioridades", :name => "fk_solicitacoes_prioridades"
+  add_foreign_key "solicitacoes", "projetos", :name => "fk_solicitacoes_projetos"
   add_foreign_key "solicitacoes", "solucao_sub_modulos", :name => "fk_solucao_sub_modulos_solicitacoes"
   add_foreign_key "solicitacoes", "status", :name => "fk_solicitacoes_status"
   add_foreign_key "solicitacoes", "tipo_pendencias", :name => "fk_solicitacoes_tipo_pendencias"

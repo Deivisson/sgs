@@ -12,13 +12,10 @@
   <div class="projetos-left-container">
     <%= yield :left_container %>
   </div>
-  <div id="toolbar" >
-    <%- if show_title? -%>
-      <h1 class="title" id="content-title" ><%=h yield(:title) %></h1>
-    <%- end -%>
-    <%= yield :bar %>
+  <div class="projeto-menu-container" >
+   <%= yield :menu %>
   </div>
-  <div class="projetos-conteudo">
+  <div class="projeto-conteudo">
     <div id="container" >
       <%- flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>

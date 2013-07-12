@@ -14,6 +14,12 @@
 					options_for_select(@clientes.collect{|c| [c.nome, c.id]}), 
 					:include_blank => true %>
 	</div>
+	<div class="field">
+		<%= content_tag :label, "Aberto por: <span>(Usuários)</span>".html_safe %>
+		<%= select_tag "conditions[usuario_id]",
+					options_for_select(@usuarios.collect{|u| [u.nome, u.id]}), 
+					:include_blank => true %>
+	</div>
 	<%= submit_tag "Pesquisar" %>
 
 <% end %>

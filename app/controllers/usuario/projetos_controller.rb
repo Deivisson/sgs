@@ -1,14 +1,15 @@
 class Usuario::ProjetosController < Usuario::BaseController
-  before_filter :load_dados, except:[:show,:destroy]
+  before_filter :load_clientes, except:[:show,:destroy]
+  before_filter :load_usuarios, only:[:index]
 
   def index
-    @projetos = Projeto.includes(:cliente).search(params[:conditions])
+    @projetos = Projeto.includes(:cliente, :usuario).search(params[:conditions])
     render :layout  => "lista_projetos"
   end
 
   def show
     @projeto = Projeto.find(params[:id])
-    render :layout  => "lista_projetos"
+    render :layout  => "projeto"
   end
 
   def new
@@ -20,6 +21,7 @@ class Usuario::ProjetosController < Usuario::BaseController
   end
 
   def create
+    params[:projeto].merge!({usuario_id:current_usuario.id,status:Projeto::ATIVO})
     @projeto = Projeto.new(params[:projeto])
     if @projeto.save
       flash[:notice]= "Abertura de Projeto realizad com sucesso."
@@ -42,7 +44,11 @@ class Usuario::ProjetosController < Usuario::BaseController
 
 private
 
-  def load_dados
+  def load_clientes
     @clientes = Cliente.to_select
+  end
+
+  def load_usuarios
+    @usuarios = Usuario.to_select
   end
 end

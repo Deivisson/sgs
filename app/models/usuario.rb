@@ -23,6 +23,7 @@ class Usuario < ActiveRecord::Base
   has_and_belongs_to_many :solucoes
   has_one :usuario_config
   has_many :ordem_servicos    
+  has_many :projetos
 
   scope :to_select,:select => 'nome,id', :order => :nome
   scope :to_select_by_status, lambda {|status_id|{

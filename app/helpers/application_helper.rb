@@ -54,9 +54,9 @@ module ApplicationHelper
     }
   end
 
-  def formata_data(date)
+  def formata_data(date, format = :default)
     return "" if date.nil?
-    date.strftime("%d/%m/%Y")
+    I18n.localize(date, :format => format)
   end
 
   def formata_hora(hora)

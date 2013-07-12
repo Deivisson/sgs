@@ -1,6 +1,6 @@
 <div id="modal-container">
 
-  <%= semantic_form_for [:usuario, @solicitacao] , 
+  <%= semantic_form_for [:usuario,@solicitacao] , 
         remote:true, html: {multipart:true} do |form| %>
     <div id="tabs" class="menutab-content">
       <%= content_tag :ul do %>
@@ -27,8 +27,8 @@
     </div>
     <%= form.inputs do %>
       <%= form.input :atendimento_id, :as => :hidden %>
+      <%= form.input :projeto_id, :as => :hidden %>
       <%= form.input :status_id, :as => :hidden %>
-      
     <% end %>
 
     <%= form.actions :class => "buttons-container modal-form-button" do %>

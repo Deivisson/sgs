@@ -33,7 +33,9 @@ Sgsoft::Application.routes.draw do
     resources :usuario_configs
     resources :atendimentos
     resources :solicitacao_historicos
-    resources :projetos
+    resources :projetos do 
+      resources :solicitacoes
+    end
     resources :solicitacao_pesquisas do
        post :find,  :on =>  :collection
     end

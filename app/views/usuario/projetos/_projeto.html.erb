@@ -1,9 +1,14 @@
 <tr>
-  <td><%= link_to projeto.nome, [:usuario,projeto] %></td>
-  <td><%= projeto.cliente.nome %></td>
+  <td>
+  	<%= link_to projeto.nome, [:usuario,projeto] %>
+  	<span>criado em <%= projeto.informacoes_sobre_criacao %></span>
+  </td>
+  <td>
+		<%= projeto.cliente.nome %>
+	</td>
   <td>
   	<div class="grafico-container">
-  		<%= content_tag(:div, "#{projeto.id * 20}%", class:"grafico-noprazo", :style => "width:#{projeto.id * 10}%") %>
+  		<%= plota_grafico(perc:(projeto.id * 10)) %>
 		</div>
 	</td>
 </tr>

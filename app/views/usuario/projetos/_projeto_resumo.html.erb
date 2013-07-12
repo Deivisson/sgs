@@ -1,0 +1,24 @@
+<%= content_tag :div, class:"projeto-resumo" do %>
+
+  <%= content_tag :div, class:"titulo-container" do %>
+    <%= image_tag("icons/32/project.png", class:"projeto-imagem") %>
+    <h1><%= @projeto.nome %></h1>
+  <% end %>
+  <%= content_tag :div, class:"projeto-detalhes" do %>
+    <dl>
+      <dt>Abertura</dt>
+      <dd><%= formata_data(@projeto.created_at,:long) %></dd>
+      <dt>Aberto por</dt>
+      <dd><%= @projeto.usuario.nome %></dd>
+      <dt>Cliente</dt>
+      <dd><%= @projeto.cliente.nome %></dd>
+      <dt>Início</dt>
+      <dd><%= formata_data(@projeto.data_inicio) %></dd>
+      <dt>Previsão Término</dt>
+      <dd><%= formata_data(@projeto.data_prevista_termino) %></dd>
+      <br>
+      <dt>Status</dt>
+      <dd class="destak"><%= @projeto.descricao_status %></dd>      
+    </dl>
+  <% end %>  
+<% end %>

@@ -1,30 +1,14 @@
-<p id="notice"><%= notice %></p>
+<% title 'Tarefas' %>
+<% content_for :left_container do %>
+  <%= render "projeto_resumo" %>
+<% end %>
 
-<p>
-  <b>Nome:</b>
-  <%= @projeto.nome %>
-</p>
-
-<p>
-  <b>Descricao:</b>
-  <%= @projeto.descricao %>
-</p>
-
-<p>
-  <b>Cliente:</b>
-  <%= @projeto.cliente %>
-</p>
-
-<p>
-  <b>Data inicio:</b>
-  <%= @projeto.data_inicio %>
-</p>
-
-<p>
-  <b>Data prevista termino:</b>
-  <%= @projeto.data_prevista_termino %>
-</p>
+<% content_for :menu do %>
+  <ul>
+  	<li class="active"><%= link_to "Tarefas / Solicitações", "#" %></li>
+  	<li><%= link_to "Plano de Implantação", "#" %></li>
+  </ul>
+<% end %>
 
 
-<%= link_to 'Edit', edit_projeto_path(@projeto) %> |
-<%= link_to 'Back', projetos_path %>
+<%= render 'solicitacoes' %>
