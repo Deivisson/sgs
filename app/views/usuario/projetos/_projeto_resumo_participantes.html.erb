@@ -1,0 +1,17 @@
+<%= section_tag id:"fragment-2", class:"section-tag-whiteBg" do %>
+	<% if @projeto.participantes.any? %>
+		<table>
+		  <tbody>
+		  	<% @projeto.participantes.each do |p| %>
+			  	<tr>
+
+				  	<td>
+				  		<%= image_tag(p.photo.url(:tiny), class:"avatar-tiny for-grid") %>
+				  		<%= p.nome %>
+				  	</td>
+		  		<tr>
+  			<% end %>
+		  </tbody>
+		</table>
+	<% end %>
+<% end %>

@@ -43,6 +43,12 @@ table tbody tr {
       font-weight: bold;
     }
   }
+  td .container-oculto {
+    visibility: hidden;
+  }
+  &:hover {
+    td .container-oculto {visibility: visible;}
+  };
 }
 
 

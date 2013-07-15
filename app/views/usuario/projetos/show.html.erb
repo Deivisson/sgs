@@ -1,6 +1,24 @@
 <% title 'Tarefas' %>
 <% content_for :left_container do %>
-  <%= render "projeto_resumo" %>
+  <%= render "projeto_resumo_detalhes" %>
+  <%= content_tag :div, class:"menutab-mini-content", style:"margin-top: 10px;" do %>
+ 		<div id="tab-resumo-projeto" >
+      <%= content_tag :ul do %>
+        <li id = "projeto-tab1">
+          <%= link_to "#fragment-1" do  %>
+            <span>Progresso</span>
+          <% end %>
+        </li>
+        <li id = "projeto-tab2" >
+          <%= link_to "#fragment-2" do  %>
+            <span>Participantes</span>
+          <% end %>
+        </li>
+      <% end %>
+      <%= render "projeto_resumo_progresso" %>
+      <%= render "projeto_resumo_participantes" %>
+    </div>
+  <% end %>
 <% end %>
 
 <% content_for :menu do %>

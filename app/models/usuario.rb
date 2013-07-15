@@ -17,9 +17,10 @@ class Usuario < ActiveRecord::Base
 					  :message => 'e-mail inválido'
 
   belongs_to :usuario_cargo
-  has_many :pendencias
-  has_many :pendencia_itens
-  has_many :pendencia_item_historicos
+  # has_many :pendencias
+  # has_many :pendencia_itens
+  # has_many :pendencia_item_historicos
+  has_many :solicitacao_historicos, :foreign_key   => "usuario_responsavel_id"
   has_and_belongs_to_many :solucoes
   has_one :usuario_config
   has_many :ordem_servicos    
@@ -35,6 +36,12 @@ class Usuario < ActiveRecord::Base
 
   before_destroy :validate_destroy
   after_create :adiciona_usuario_config
+  
+  has_attached_file :photo,
+                      :styles => { :tiny => ["32x32>",:png], :medium => ["176x190>",:png]},
+                      :path => ":rails_root/public/images/uploads/:class/:attachment/:id/:style/:basename.:extension",
+                      :url => "/images/uploads/:class/:attachment/:id/:style/:basename.:extension",
+                      :default_url => "/assets/foto/foto.png"
 
 private
   def password_required?

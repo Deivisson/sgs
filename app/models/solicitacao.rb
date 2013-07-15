@@ -50,7 +50,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
              :foreign_key => "usuario_responsavel_id"
 
   belongs_to :ordem_servico
-  has_many :solicitacao_historicos
+  has_many :historicos, class_name:"SolicitacaoHistorico"
 
   attr_writer :cliente_id,:solucao_id,:modulo_id
   attr_accessor :previsao_duracao_horas
@@ -61,16 +61,22 @@ class Solicitacao < ActiveRecord::Base.extend Search
     end
   end
 
+
   def titulo_formatado
     "#{self.id.to_s.rjust(6,'0')} - #{self.titulo}"
   end
 
   def cliente_id
-    if cliente_contato.nil? && atendimento.nil?
-      @cliente_id = nil
-    else
-      @cliente_id = (!atendimento.nil? ? atendimento.cliente_id : cliente_contato.cliente_id)
-    end
+    # if cliente_contato.nil? && atendimento.nil?
+    #   @cliente_id = nil
+    # else
+    #   @cliente_id = (!atendimento.nil? ? atendimento.cliente_id : cliente_contato.cliente_id)
+    # end
+    associador.cliente_id unless associador.nil?
+  end
+
+  def associador
+    self.atendimento || self.projeto
   end
 
   def solucao_id
@@ -95,6 +101,10 @@ class Solicitacao < ActiveRecord::Base.extend Search
     self.previsao_duracao_minutos == 0 ||
     self.nivel_complexidade.nil?       ||
     self.gera_cobranca.nil?
+  end
+
+  def permite_alterar_cliente?
+    !(self.atendimento_id.present? || self.projeto_id.present?)
   end
 
   #callbacks
@@ -150,7 +160,7 @@ private
   #After_Create
   #Insercao de historico padrao para a solicitacao, no qual iniciara com status de Aberto.
   def inserir_historico_padrao
-    solicitacao_historicos  << SolicitacaoHistorico.new(
+    historicos  << SolicitacaoHistorico.new(
         :usuario => atendimento.usuario_cadastrante,:usuario_responsavel => usuario_responsavel,
         :status  => status,:detalhe => 'Solicitação cadastrada'
     )

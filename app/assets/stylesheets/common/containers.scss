@@ -1,4 +1,4 @@
-.section-tag,.section-tag-sized  {
+.section-tag,.section-tag-sized, .section-tag-whiteBg  {
   border-bottom: 1px dotted #D8DBE0;
   padding: 5px 0 25px 40px;
   h3.title {
@@ -25,6 +25,9 @@
 }
 .section-tag-sized {
   width: 800px;
+}
+.section-tag-whiteBg {
+  background-color: #FFF !important;
 }
 
 #div_show {

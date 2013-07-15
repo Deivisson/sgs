@@ -29,6 +29,16 @@ class Projeto < ActiveRecord::Base
     STATUS[status - 1]
   end
 
+  def participantes
+    participantes = []
+    #Participantes recuperados a partir dos históricos de movimentações das solicitacoes
+    usuarios = Usuario.joins(:solicitacao_historicos => [:solicitacao => :projeto])
+    usuarios = usuarios.select("usuarios.*")
+    usuarios = usuarios.where("projetos.id = ?", self.id)
+    usuarios.each{|u| participantes << u unless participantes.include?(u)}
+    return participantes
+  end
+
 private 
 
   def previsao_termino_menor_que_data_inicio

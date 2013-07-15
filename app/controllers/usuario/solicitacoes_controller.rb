@@ -3,7 +3,10 @@ class Usuario::SolicitacoesController < Usuario::BaseController
 
   before_filter :carrega_solicitacao, :only => [:show, :edit, :update, :destroy]
   before_filter :carrega_dados, :only => [:new,:edit]
+  after_filter :carrega_contatos_e_projetos_cliente, :only => [:new,:edit]
   before_filter :atualizacao_multipla_permitida, :only => :update_multiple
+
+
 
   #Carrega Solicitacoes para usuario logado no sistema.
   #Condicoes de filtro
@@ -61,15 +64,12 @@ class Usuario::SolicitacoesController < Usuario::BaseController
   def new
     @solicitacao = Solicitacao.new(:status_id => Status::ABERTO)
     if params[:atendimento]
-      
       @atendimento = Atendimento.find(params[:atendimento])
       @solicitacao.atendimento = @atendimento
-      @contatos = ClienteContato.find_all_by_cliente_id(@atendimento.cliente_id)
-      @solucoes = Solucao.all(:joins => :clientes,
-                  :conditions => ["clientes.id = ?",@atendimento.cliente_id])
     elsif params[:projeto_id]
       @solicitacao.projeto_id = params[:projeto_id]
     end
+    carrega_contatos_e_projetos_cliente
     @local = params[:local] if params[:local]
     @status_id = params[:status_id] if params[:status_id]
     @usuarios = Usuario.to_select_by_status(Status::ABERTO)
@@ -177,25 +177,6 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     end
   end
 
-  #Carrega dados para Combos Fixos
-  def carrega_dados
-    @clientes = Cliente.to_select_by_usuario(current_usuario.id).order(:nome)
-    flash[:notice] = "#{current_usuario.nome}, entre nas suas configurações e 
-                      informe quais Solucoes você irá trabalhar, para que os
-                      clientes sejam carregados." if @clientes.empty?
-    @prioridades = Prioridade.to_select
-    @tipo_pendencias = TipoPendencia.to_select
-  end
-
-  #Carrega sub modulos para combo de acordo com Modulo selecionado
-  # def carrega_sub_modulos
-  #    @sub_modulos = SolucaoSubModulo.to_select_by_modulo params[:modulo]
-  #    render :update do |page|
-  #      page.replace_html 'sub_modulos',:partial => 'sub_modulos',:object => 'sub_modulos'
-  #    end
-  # end
-
-
   def enviar_email_confirmacao_leitura
     #Recupera o usuário que solicitou a confirmacao de leitura apartir do ultimo histórico
     #begin
@@ -212,6 +193,26 @@ class Usuario::SolicitacoesController < Usuario::BaseController
 
 private 
   
+  #Carrega dados para Combos Fixos
+  def carrega_dados
+    @clientes = Cliente.to_select_by_usuario(current_usuario.id).order(:nome)
+    flash[:notice] = "#{current_usuario.nome}, entre nas suas configurações e 
+                      informe quais Solucoes você irá trabalhar, para que os
+                      clientes sejam carregados." if @clientes.empty?
+    @prioridades = Prioridade.to_select
+    @tipo_pendencias = TipoPendencia.to_select
+    carrega_contatos_e_projetos_cliente
+  end
+
+  def carrega_contatos_e_projetos_cliente
+    return if @solicitacao.nil?
+    unless @solicitacao.associador.nil?
+      id = @solicitacao.associador.cliente_id
+      @contatos = ClienteContato.where(cliente_id:id) 
+      @solucoes = Solucao.joins(:clientes).where("clientes.id = ?",id)
+    end
+  end
+
   def carrega_solicitacao
     @solicitacao = Solicitacao.find(params[:id])
   end

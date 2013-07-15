@@ -1,13 +1,17 @@
 module GraficoHelper
 	def plota_grafico(params={})
 		perc = params[:perc]
-		html = []
-		html << content_tag(:div, class:grafico_css_class(perc), style:"width:#{perc}%") do 
-			inner_html = []
-			inner_html << "#{perc}%"
-			inner_html.join.html_safe
+		super_html = []
+		super_html << content_tag(:div,class:"grafico-container") do 
+			html = []
+			html << content_tag(:div, class:grafico_css_class(perc), style:"width:#{perc}%") do 
+				inner_html = []
+				inner_html << "#{perc}%"
+				inner_html.join.html_safe
+			end
+			html.join.html_safe
 		end
-		html.join.html_safe
+		super_html.join.html_safe
 	end
 
 private

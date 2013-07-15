@@ -22,6 +22,10 @@ $(document).ready(function(){
     dialog_form.dialog('open');
     e.preventDefault();
   });
+
+  //TAB
+  $("#tab-resumo-projeto").tabs();
+
 });
 
 function bindProjetoUIEvents() {

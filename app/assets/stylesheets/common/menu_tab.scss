@@ -40,14 +40,17 @@ ul#tab-menu {
 
 .menutab-content {
   border-left: none;
+
   min-height:26px;
   height:auto;
   margin: 10px 0 0 0px;
 }
 */
-.menutab-content {
+.menutab-content, .menutab-mini-content {
   background-color: #FFF !important;
   border: 0 !important;
+  float: left;
+  width: 100%;
   .ui-tabs-nav {
     background: #EEEEEE;
     border: 0px;
@@ -56,4 +59,9 @@ ul#tab-menu {
   .ui-tabs-panel fieldset ol .section-tag {
     padding-left: 0 !important;
   }
+}
+
+.menutab-mini-content {
+  height: 30px;
+  font-size: 10px;
 }
