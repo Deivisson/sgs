@@ -25,7 +25,7 @@ $(document).ready(function(){
 
   //TAB
   $("#tab-resumo-projeto").tabs();
-
+  $("#tab-menu-projeto").tabs();
 });
 
 function bindProjetoUIEvents() {

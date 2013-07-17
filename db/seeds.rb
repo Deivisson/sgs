@@ -69,3 +69,9 @@ end
 open("#{Rails.root}/db/versoes/1.1.txt") do |versao|
   VersaoSistema.find_or_create_by_id(:id => 1,:detalhe => "#{versao.read}")
 end
+
+#Alimenta tabela de Processos
+processos = [{descricao:'Desenvolvimento'},{descricao:'Treinamento'},{descricao:'Implantação'}]
+processos.each do |processo|
+  Processo.where(processo).first_or_create!
+end

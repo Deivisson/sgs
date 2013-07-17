@@ -1,5 +1,8 @@
 Sgsoft::Application.routes.draw do
 
+  resources :processos
+
+
   resources :ordem_servico_itens
 
   devise_for :admins

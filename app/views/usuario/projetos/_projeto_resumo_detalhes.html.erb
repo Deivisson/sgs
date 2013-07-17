@@ -18,7 +18,7 @@
       <dd><%= formata_data(@projeto.data_prevista_termino) %></dd>
       <br>
       <dt>Status</dt>
-      <dd class="destak"><%= @projeto.descricao_status %></dd>      
+      <dd class="destak"><%= "#{@projeto.descricao_status} (65% concluído)" %></dd>      
     </dl>
   <% end %> 
 <% end %>

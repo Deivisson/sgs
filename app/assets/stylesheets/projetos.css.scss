@@ -53,51 +53,60 @@
   z-index: 3;
 }
 .projeto-menu-container {
+  background-color: transparent;
   left: 301px !important;
   height: 34px;
   margin: 4px;
   position: fixed;
   top: 19px;
-  ul {
-    list-style: none;
-    height: 100%;
-    li {
-      background-color: #FFF;
-      color: #FFF;
-      display: block;
-      float: left;
-      height: 100%;
-      padding: 0 10px 0 10px;
-      margin-left:1px; 
-      background-image: linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
-      background-image: -o-linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
-      background-image: -moz-linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
-      background-image: -webkit-linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
-      background-image: -ms-linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
-
-      background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.12, rgb(102,120,173)),
-        color-stop(0.56, rgb(111,128,179))
-      );
-      border-radius: 8px 5px 0px 0px; 
-      -moz-border-radius: 8px 5px 0px 0px; 
-      -webkit-border-radius: 8px 5px 0px 0px; 
-
-      a {
-        color: #FFF;
-        display: table;
-        font-weight: bold;
-        height: 100%;
-        line-height: 35px;
-        text-decoration: none;
-        }
-      &.active {
+  right: 0;
+  .ui-tabs, .ui-widget-content {
+    background-color: transparent;
+    border: 0px;
+    .ui-tabs-nav {
+      border: 0px;
+      background-color: transparent;
+      font-size: 14px;
+      margin-top: -9px;
+      li {
         background-color: #FFF;
-        background-image:none;
-        a {color: #777;}
+        border: 0;
+        color: #FFF;
+        display: block;
+        float: left;
+        font-size: 14px;
+        height: 35px;
+        padding: 0 10px 0 10px;
+        margin-left:1px; 
+        background-image: linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
+        background-image: -o-linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
+        background-image: -moz-linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
+        background-image: -webkit-linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
+        background-image: -ms-linear-gradient(bottom, rgb(102,120,173) 12%, rgb(111,128,179) 56%);
+
+        background-image: -webkit-gradient(
+          linear,
+          left bottom,
+          left top,
+          color-stop(0.12, rgb(102,120,173)),
+          color-stop(0.56, rgb(111,128,179))
+        );
+        border-radius: 8px 5px 0px 0px; 
+        -moz-border-radius: 8px 5px 0px 0px; 
+        -webkit-border-radius: 8px 5px 0px 0px; 
+
+        a {
+          color: #FFF;
+          display: table;
+          font-weight: bold;
+          height: 100%;
+          line-height: 27px;
+          text-decoration: none;
+        }
+        &.ui-state-active {
+          background-color: #FFF;
+          background-image:none;
+          a {color: #777;}}
       }
     }
   }

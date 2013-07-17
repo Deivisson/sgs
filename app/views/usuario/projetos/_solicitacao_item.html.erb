@@ -1,6 +1,9 @@
 <%= content_tag :tr do %>
   <td width = "70"><%= solicitacao.id.to_s.rjust(5,'0') %></td>
-  <td><%=h solicitacao.titulo %></td>
+  <td>
+    <%=h solicitacao.titulo %>
+    <%= content_tag :span, solicitacao.status.descricao, class:'labels label-info'%>
+  </td>
   <td>
     <div class="container-oculto">
       <%= link_to image_tag(image_link[:show]), 
