@@ -15,7 +15,7 @@
           <% end %>
         </li>
       <% end %>
-      <%= render "projeto_resumo_progresso" %>
+      <%= render "projeto_resumo_progresso"  %>
       <%= render "projeto_resumo_participantes" %>
     </div>
   <% end %>
@@ -26,18 +26,22 @@
   <%= content_tag :div, class:"projeto-menu-container" do %>
     <div id="tab-menu-projeto" >
       <%= content_tag :ul do %>
-      	<li id = "projeto-menu-tab1">
+      	
+        <%= content_tag :li, :id => "projeto-menu-tab1" do %>
           <%= link_to "Desenvolvimento", "#projeto-menu-aba1" %>
-        </li>
-        <li id = "projeto-menu-tab2">
+        <% end  if @projeto.possui_desenvolvimento? %>
+        
+        <%= content_tag :li, :id => "projeto-menu-tab2" do %>
           <%= link_to "Instalação", "#projeto-menu-aba2" %>
-        </li>
-      	<li id = "projeto-menu-tab3">
+        <% end if @projeto.possui_instalacao? %>
+
+      	<%= content_tag :li, :id => "projeto-menu-tab3" do %>
           <%= link_to "Treinamento", "#projeto-menu-aba3" %>
-        </li>
+        <% end if @projeto.possui_treinamento? %>
+
       <% end %>
-      <%= render 'solicitacoes' %>
-      <%= render 'plano_instalacao' %>
+      <%= render 'etapa_desenvolvimento' if @projeto.possui_desenvolvimento? %>
+      <%= render 'etapa_instalacao' if @projeto.possui_instalacao? %>
     </div>
   <% end %>
 <% end %>

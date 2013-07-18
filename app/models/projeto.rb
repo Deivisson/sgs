@@ -20,7 +20,8 @@ class Projeto < ActiveRecord::Base
   belongs_to :cliente
   belongs_to :usuario
   has_many :solicitacoes
-  
+  has_and_belongs_to_many :etapas
+
   def informacoes_sobre_criacao
     "#{created_at.strftime("%d/%m/%y")} por #{usuario.nome}"
   end
@@ -37,6 +38,17 @@ class Projeto < ActiveRecord::Base
     usuarios = usuarios.where("projetos.id = ?", self.id)
     usuarios.each{|u| participantes << u unless participantes.include?(u)}
     return participantes
+  end
+
+  #definicao de metodos baseado nas etapas existentes
+  Etapa.all.each do |etapa|
+    define_method "possui_#{etapa.descricao.remover_acentos.downcase}?" do
+      etapa_ids.include? etapa.id
+    end
+
+    define_method "solicitacoes_etapa_#{etapa.descricao.remover_acentos.downcase}" do
+      self.solicitacoes.where(etapa_id:etapa.id)
+    end
   end
 
 private 

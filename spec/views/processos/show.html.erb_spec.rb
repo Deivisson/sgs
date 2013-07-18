@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "processos/show.html.erb" do
+describe "etapas/show.html.erb" do
   before(:each) do
-    @processo = assign(:processo, stub_model(Processo,
+    @etapa = assign(:etapa, stub_model(Etapa,
       :descricao => "Descricao",
       :pontos_funcao => 1
     ))

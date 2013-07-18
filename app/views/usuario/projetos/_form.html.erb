@@ -22,6 +22,25 @@
                     :as         => :string, 
                     :label      => "Data Prevista Término",
                     :input_html => {:size => 40} %>
+        
+
+        <fieldset class="choices">
+            <ol class="choices-group">
+                <%- @etapas.each do |etapa| %>
+                  <li class="choice">
+                    <%= content_tag :label, for:"projeto_etapa_ids_1#{etapa.id}" do %>
+                      <%= etapa.descricao %>
+                      <%= check_box_tag "projeto[etapa_ids][]",etapa.id,id:"projeto_etapa_ids_#{etapa.id}" %>
+                    <% end %>
+                  </li>
+                <% end %>
+            </o>
+        </fieldset>
+        
+        <%= f.input :etapas, 
+                    as: :check_boxes,
+                    :collection => @etapas.collect{|e| [e.descricao,e.id]} %>
+
       <% end %>
     <% end %>
     <%= f.actions :class => "buttons-container modal-form-button" do %>

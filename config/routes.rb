@@ -1,6 +1,6 @@
 Sgsoft::Application.routes.draw do
 
-  resources :processos
+  
 
 
   resources :ordem_servico_itens
@@ -23,6 +23,7 @@ Sgsoft::Application.routes.draw do
     resources :status
     resources :configuracoes
     resources :consultas
+    resources :etapas
     resources :consulta_campos do
       collection do
         put :update_individual

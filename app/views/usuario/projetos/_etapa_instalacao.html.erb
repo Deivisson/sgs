@@ -1,0 +1,6 @@
+<%= section_tag id:"projeto-menu-aba2", class:"section-tag-whiteBg" do %>
+		<%= render partial:'solicitacoes', 
+						   locals: {solicitacoes: @projeto.solicitacoes_etapa_instalacao,
+						 						etapa:'instalacao',
+						 						etapa_id:Etapa::INSTALACAO}  %>
+<% end %>

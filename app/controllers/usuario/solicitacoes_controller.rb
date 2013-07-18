@@ -68,6 +68,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
       @solicitacao.atendimento = @atendimento
     elsif params[:projeto_id]
       @solicitacao.projeto_id = params[:projeto_id]
+      @solicitacao.etapa_id = params[:etapa_id]
     end
     carrega_contatos_e_projetos_cliente
     @local = params[:local] if params[:local]

@@ -1,22 +1,20 @@
-<%= section_tag id:"projeto-menu-aba1", class:"section-tag-whiteBg" do %>
-  <%= link_to "Adicionar Tarefa", 
-          [:new,:usuario,@projeto,:solicitacao],
-          remote:true,
-          class:'solicitacao-link button-add-new add-on-index-top' %>
-          
-  <br>
-  <table>
-    <thead>
-      <tr>
-        <th width = "70">Nº Solic.</th>
-        <th style="border-right:0px;">Título</th>
-        <th span='3' width = "120" style="border-left:0px;"></th>
-      </tr>
-    </thead>
-    <tbody id="projeto-solicitacao-items">
-      <%- @projeto.solicitacoes.each do |solicitacao| %>
-        <%= render partial:'solicitacao_item', locals: {solicitacao:solicitacao} %>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+
+<%= link_to "Adicionar Tarefa",
+        new_usuario_projeto_solicitacao_path(projeto_id:@projeto.id,etapa_id:etapa_id), 
+        remote:true,
+        class:'solicitacao-link button-add-new add-on-index-top' %>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th width = "70">Nº Solic.</th>
+      <th style="border-right:0px;">Título</th>
+      <th span='3' width = "120" style="border-left:0px;"></th>
+    </tr>
+  </thead>
+  <tbody id=<%= "projeto-solicitacoes-#{etapa}" %>>
+    <%- solicitacoes.each do |solicitacao| %>
+      <%= render partial:'solicitacao_item', locals: {solicitacao:solicitacao} %>
+    <% end %>
+  </tbody>
+</table>

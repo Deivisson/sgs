@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Descricao:</b>
+  <%= @etapa.descricao %>
+</p>
+
+<p>
+  <b>Pontos funcao:</b>
+  <%= @etapa.pontos_funcao %>
+</p>
+
+
+<%= link_to 'Edit', edit_etapa_path(@etapa) %> |
+<%= link_to 'Back', etapas_path %>

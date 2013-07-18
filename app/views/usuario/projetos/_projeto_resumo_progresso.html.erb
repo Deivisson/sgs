@@ -1,18 +1,22 @@
 <%= section_tag id:"fragment-1", class:"section-tag-whiteBg" do %>
 	<table>
 	  <tbody>
-	  	<tr>
+	  	
+	  	<%= content_tag :tr do %>
 		  	<td><%= "Desenvolvimento" %></td>
 	  		<td width="120"><%= plota_grafico(perc:93) %></td>
-  		<tr>
-	  	<tr>
+  		<% end if @projeto.possui_desenvolvimento? %>
+
+	  	<%= content_tag :tr do %>
 		  	<td><%= "Instalação" %></td>
 	  		<td width="120"><%= plota_grafico(perc:100) %></td>
-  		<tr>  			
-	  	<tr>
+  		<% end if @projeto.possui_instalacao? %>  			
+	  	
+	  	<%= content_tag :tr do %>
 		  	<td><%= "Treinamento" %></td>
 	  		<td width="120"><%= plota_grafico(perc:40) %></td>
-  		<tr>
+  		<% end if @projeto.possui_treinamento? %>
+
 	  </tbody>
 	</table>
 <% end %>

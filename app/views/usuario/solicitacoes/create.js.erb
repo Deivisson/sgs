@@ -13,7 +13,8 @@
   $('#dialog-form').dialog('close');
   $('#dialog-form').remove();
   <%- if @solicitacao.projeto_id.present? %>
-    $('#projeto-solicitacao-items').append('<%= escape_javascript(render partial:'usuario/projetos/solicitacao_item', locals: {solicitacao:@solicitacao}) %>');
+    var etapa = "<%= @solicitacao.etapa.descricao.remover_acentos.downcase %>";
+    $("#projeto-solicitacoes-" + etapa).append('<%= escape_javascript(render partial:'usuario/projetos/solicitacao_item', locals: {solicitacao:@solicitacao}) %>');
   <% else %>
     $(window.location.replace("/usuario/solicitacoes/<%= @solicitacao.id %>"));
   <% end %>

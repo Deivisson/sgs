@@ -50,17 +50,18 @@ class Solicitacao < ActiveRecord::Base.extend Search
              :foreign_key => "usuario_responsavel_id"
 
   belongs_to :ordem_servico
+  belongs_to :etapa
   has_many :historicos, class_name:"SolicitacaoHistorico"
 
   attr_writer :cliente_id,:solucao_id,:modulo_id
   attr_accessor :previsao_duracao_horas
+
 
   Status::ITENS.each do |s|
     define_method "#{s[:descricao]}?" do 
       self.status_id == s[:id] 
     end
   end
-
 
   def titulo_formatado
     "#{self.id.to_s.rjust(6,'0')} - #{self.titulo}"

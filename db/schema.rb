@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717202633) do
+ActiveRecord::Schema.define(:version => 20130718190526) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -131,6 +131,22 @@ ActiveRecord::Schema.define(:version => 20130717202633) do
     t.string   "telefone",          :limit => 14
   end
 
+  create_table "etapas", :force => true do |t|
+    t.string   "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "etapas_projetos", :force => true do |t|
+    t.integer  "etapa_id"
+    t.integer  "projeto_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "etapas_projetos", ["etapa_id"], :name => "index_etapas_projetos_on_etapa_id"
+  add_index "etapas_projetos", ["projeto_id"], :name => "index_etapas_projetos_on_projeto_id"
+
   create_table "ordem_servico_itens", :force => true do |t|
     t.integer  "ordem_servico_id",                     :null => false
     t.integer  "projeto_sub_modulo_id",                :null => false
@@ -182,13 +198,6 @@ ActiveRecord::Schema.define(:version => 20130717202633) do
     t.string   "descricao",  :limit => 20, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "processos", :force => true do |t|
-    t.string   "descricao"
-    t.integer  "pontos_funcao"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
   end
 
   create_table "projetos", :force => true do |t|
@@ -257,10 +266,12 @@ ActiveRecord::Schema.define(:version => 20130717202633) do
     t.boolean  "gera_cobranca"
     t.decimal  "valor_cobranca",                         :precision => 10, :scale => 2, :default => 0.0,   :null => false
     t.integer  "projeto_id"
+    t.integer  "etapa_id"
   end
 
   add_index "solicitacoes", ["atendimento_id"], :name => "index_solicitacoes_on_atendimento_id"
   add_index "solicitacoes", ["cliente_contato_id"], :name => "index_solicitacoes_on_cliente_contato_id"
+  add_index "solicitacoes", ["etapa_id"], :name => "index_solicitacoes_on_etapa_id"
   add_index "solicitacoes", ["ordem_servico_id"], :name => "fk_solicitacoes_ordem_servicos"
   add_index "solicitacoes", ["prioridade_id"], :name => "index_solicitacoes_on_prioridade_id"
   add_index "solicitacoes", ["projeto_id"], :name => "index_solicitacoes_on_projeto_id"
@@ -403,6 +414,9 @@ ActiveRecord::Schema.define(:version => 20130717202633) do
 
   add_foreign_key "consulta_campos", "consultas", :name => "fk_consulta_campos_consultas"
 
+  add_foreign_key "etapas_projetos", "etapas", :name => "fk_etapas_projetos_etapas"
+  add_foreign_key "etapas_projetos", "projetos", :name => "fk_etapas_projetos_projetos"
+
   add_foreign_key "ordem_servico_itens", "ordem_servicos", :name => "fk_ordem_servico_itens_ordem_servico"
   add_foreign_key "ordem_servico_itens", "situacoes", :name => "fk_ordem_servico_itens_situacoes"
   add_foreign_key "ordem_servico_itens", "solucao_sub_modulos", :name => "fk_ordem_servico_itens_sub_modulo", :column => "projeto_sub_modulo_id"
@@ -423,6 +437,7 @@ ActiveRecord::Schema.define(:version => 20130717202633) do
 
   add_foreign_key "solicitacoes", "atendimentos", :name => "fk_solicitacoes_atendimentos"
   add_foreign_key "solicitacoes", "cliente_contatos", :name => "fk_solicitacoes_cliente_contatos_id"
+  add_foreign_key "solicitacoes", "etapas", :name => "fk_solicitacoes_etapas"
   add_foreign_key "solicitacoes", "ordem_servicos", :name => "fk_solicitacoes_ordem_servicos"
   add_foreign_key "solicitacoes", "prioridades", :name => "fk_solicitacoes_prioridades"
   add_foreign_key "solicitacoes", "projetos", :name => "fk_solicitacoes_projetos"

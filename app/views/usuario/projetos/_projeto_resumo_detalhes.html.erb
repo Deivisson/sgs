@@ -3,7 +3,9 @@
   <%= content_tag :div, class:"titulo-container" do %>
     <%= image_tag("icons/32/project.png", class:"projeto-imagem") %>
     <h1><%= @projeto.nome %></h1>
+    <%= link_to "Editar", edit_usuario_projeto_path(@projeto),remote:true, id:'projeto-link' %>
   <% end %>
+
   <%= content_tag :div, class:"projeto-detalhes" do %>
     <dl>
       <dt>Abertura</dt>

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe "Processos" do
-  describe "GET /processos" do
+describe "Etapas" do
+  describe "GET /etapas" do
     it "works! (now write some real specs)" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get processos_path
+      get etapas_path
       response.status.should be(200)
     end
   end
