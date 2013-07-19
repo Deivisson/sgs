@@ -3,6 +3,8 @@
   <%= form.inputs do %>
     <%= section_tag(:legend => "Informações do Cargo") do %>
       <%= form.input :descricao,:label => "Descrição"  %>
+      <%= form.input :estima_desenvolvimento,:label => "Permite Estimar Desenvolvimento"  %>
+      <%= form.input :estima_instalacao,:label => "Permite Estimar Instalação"  %>
     <% end %>
     <br>
     <br>

@@ -19,11 +19,23 @@
             <span>Anexos/Outros</span>
           <% end %>
         </li>
+        
+        <% if @solicitacao.projeto_id.present? %>
+          <%= content_tag :li do %>
+            <%= link_to "#fragment-4" do  %>
+              <span>Estimativas</span>
+            <% end  %>
+          <% end if permite_estimar(@solicitacao) %>        
+        <% end %>
+
       <% end %>
 
       <%= render partial:"campos_principais", locals: {form:form} %>
       <%= render partial:"campos_detalhes", locals: {form:form}  %>
       <%= render partial:"campos_outros", locals: {form:form}  %>
+      <% if @solicitacao.projeto_id.present? %>
+        <%= render partial:"campos_estimativas", locals: {form:form} if permite_estimar(@solicitacao) %>
+      <% end %>
     </div>
     <%= form.inputs do %>
       <%= form.input :atendimento_id, :as => :hidden %>

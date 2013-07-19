@@ -1,12 +1,12 @@
 <tr>
   <td>
-  	<%= link_to projeto.nome, [:usuario,projeto] %>
+  	<%= link_to projeto.nome, [:usuario,projeto], class:'inline-link' %>
   	<span>criado em <%= projeto.informacoes_sobre_criacao %></span>
   </td>
   <td>
 		<%= projeto.cliente.nome %>
 	</td>
   <td>
-		<%= plota_grafico(perc:(projeto.id * 10)) %>
+		<%= plota_grafico(perc:(projeto.progresso)) %>
 	</td>
 </tr>

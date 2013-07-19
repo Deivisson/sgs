@@ -63,10 +63,12 @@
                      :required    => false %>
     <% end %>
   <% end %>
+  
+  <%= content_tag :div, :id => "desenvolvimento-section" do %>
+    <%= render :partial => "campos_estimativas", 
+               :locals  => {:form => form} if @solicitacoes[0].pendente_previsao? %>
+ <% end %>
  
-  <%= render :partial => "informacoes_desenvolvimento", 
-             :locals  => {:form => form} if @solicitacoes[0].pendente_previsao? %>
-
   <%= section_tag(:legend => "Solicitações a serem afetadas") do %>
     <ul>
       <% @solicitacoes.each do |solicitacao| %>

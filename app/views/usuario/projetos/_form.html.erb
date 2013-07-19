@@ -6,12 +6,12 @@
                     :as         => :select, 
                     :required   => true,
                     :collection => @clientes.collect{|c| [c.nome, c.id]},
-                    :input_html => {:id => "cliente-select-id"}  %>
+                    :input_html => {:id => "cliente-select-id", autofocus:true}  %>
 
         <%= f.input :nome, :label => "Nome Projeto" %>
         <%= f.input :descricao, 
                     :label       => "Descrição",
-                    :input_html => {:rows => 10 }%>
+                    :input_html => {:rows => 8 }%>
         
         <%= f.input :data_inicio, 
                     :as         => :string, 
@@ -23,23 +23,23 @@
                     :label      => "Data Prevista Término",
                     :input_html => {:size => 40} %>
         
-
-        <fieldset class="choices">
-            <ol class="choices-group">
-                <%- @etapas.each do |etapa| %>
-                  <li class="choice">
-                    <%= content_tag :label, for:"projeto_etapa_ids_1#{etapa.id}" do %>
-                      <%= etapa.descricao %>
-                      <%= check_box_tag "projeto[etapa_ids][]",etapa.id,id:"projeto_etapa_ids_#{etapa.id}" %>
-                    <% end %>
-                  </li>
-                <% end %>
-            </o>
-        </fieldset>
-        
-        <%= f.input :etapas, 
-                    as: :check_boxes,
-                    :collection => @etapas.collect{|e| [e.descricao,e.id]} %>
+        <li class="check_boxes input optional" style="margin: 30px 0 0 -25px">
+          <fieldset class="choices">
+              <ol class="choices-group">
+                  <%- @etapas.each do |etapa| %>
+                    <li class="choice">
+                      <%= content_tag :label, for:"projeto_etapa_ids_1#{etapa.id}" do %>
+                        <%= check_box_tag "projeto[etapa_ids][]",
+                                      etapa.id ,
+                                      @projeto.etapa_ids.include?(etapa.id),
+                                      id:"projeto_etapa_ids_#{etapa.id}" %>
+                        <%= etapa.descricao %>
+                      <% end %>
+                    </li>
+                  <% end %>
+              </o>
+          </fieldset>
+        <li>        
 
       <% end %>
     <% end %>

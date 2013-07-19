@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718190526) do
+ActiveRecord::Schema.define(:version => 20130719115337) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -267,6 +267,7 @@ ActiveRecord::Schema.define(:version => 20130718190526) do
     t.decimal  "valor_cobranca",                         :precision => 10, :scale => 2, :default => 0.0,   :null => false
     t.integer  "projeto_id"
     t.integer  "etapa_id"
+    t.integer  "peso"
   end
 
   add_index "solicitacoes", ["atendimento_id"], :name => "index_solicitacoes_on_atendimento_id"
@@ -350,9 +351,11 @@ ActiveRecord::Schema.define(:version => 20130718190526) do
   end
 
   create_table "usuario_cargos", :force => true do |t|
-    t.string   "descricao",  :limit => 30, :null => false
+    t.string   "descricao",              :limit => 30,                    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "estima_desenvolvimento",               :default => false, :null => false
+    t.boolean  "estima_instalacao",                    :default => false, :null => false
   end
 
   create_table "usuario_configs", :force => true do |t|
@@ -428,7 +431,6 @@ ActiveRecord::Schema.define(:version => 20130718190526) do
   add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_responsaveis", :column => "usuario_responsavel_id"
 
   add_foreign_key "projetos", "clientes", :name => "fk_projetos_clientes"
-  add_foreign_key "projetos", "usuarios", :name => "fk_projetos_usuarios"
 
   add_foreign_key "solicitacao_historicos", "solicitacoes", :name => "fk_solicitacao_historico_solicitacoes", :dependent => :delete
   add_foreign_key "solicitacao_historicos", "status", :name => "fk_solicitacao_historico_status"

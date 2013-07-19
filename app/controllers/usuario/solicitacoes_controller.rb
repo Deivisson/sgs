@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Usuario::SolicitacoesController < Usuario::BaseController
 
-  before_filter :carrega_solicitacao, :only => [:show, :edit, :update, :destroy]
+  before_filter :carrega_solicitacao, :only => [:show, :edit, :update, :destroy,:programar]
   before_filter :carrega_dados, :only => [:new,:edit]
   after_filter :carrega_contatos_e_projetos_cliente, :only => [:new,:edit]
   before_filter :atualizacao_multipla_permitida, :only => :update_multiple
@@ -105,6 +105,10 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     redirect_to :controller => 'solicitacoes', 
                 :action => 'index',
                 :status_id => @solicitacao.status_id if not permite_alterar_excluir
+  end
+
+  def programar
+    
   end
 
   def update

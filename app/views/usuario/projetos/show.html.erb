@@ -1,4 +1,3 @@
-<% title 'Tarefas' %>
 <% content_for :left_container do %>
   <%= render "projeto_resumo_detalhes" %>
   <%= content_tag :div, class:"menutab-mini-content", style:"margin-top: 10px;" do %>
@@ -15,8 +14,13 @@
           <% end %>
         </li>
       <% end %>
-      <%= render "projeto_resumo_progresso"  %>
-      <%= render "projeto_resumo_participantes" %>
+
+      <div id="projeto-progresso">
+        <%= render partial:"projeto_resumo_progresso", locals: {projeto:@projeto} %>
+      </div>
+      <div id="projeto-participantes">
+        <%= render partial:"projeto_resumo_participantes", locals: {projeto:@projeto} %>
+      </div>
     </div>
   <% end %>
 <% end %>
@@ -26,19 +30,12 @@
   <%= content_tag :div, class:"projeto-menu-container" do %>
     <div id="tab-menu-projeto" >
       <%= content_tag :ul do %>
-      	
-        <%= content_tag :li, :id => "projeto-menu-tab1" do %>
-          <%= link_to "Desenvolvimento", "#projeto-menu-aba1" %>
-        <% end  if @projeto.possui_desenvolvimento? %>
-        
-        <%= content_tag :li, :id => "projeto-menu-tab2" do %>
-          <%= link_to "Instalação", "#projeto-menu-aba2" %>
-        <% end if @projeto.possui_instalacao? %>
-
-      	<%= content_tag :li, :id => "projeto-menu-tab3" do %>
-          <%= link_to "Treinamento", "#projeto-menu-aba3" %>
-        <% end if @projeto.possui_treinamento? %>
-
+      	<% etapas = @projeto.etapas %>
+        <% etapas.each do |etapa| %>
+          <%= content_tag :li, :id => "projeto-menu-tab-#{etapa.contexto}" do %>
+            <%= link_to etapa.descricao, "#projeto-menu-aba-#{etapa.contexto}" %>
+          <% end %>
+        <% end %>
       <% end %>
       <%= render 'etapa_desenvolvimento' if @projeto.possui_desenvolvimento? %>
       <%= render 'etapa_instalacao' if @projeto.possui_instalacao? %>

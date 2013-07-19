@@ -1,0 +1,10 @@
+<div id="modal-container">
+  <%= semantic_form_for [:usuario,@solicitacao] , 
+        remote:true, html: {multipart:true} do |form| %>
+    <%= render :partial => "informacoes_desenvolvimento", :locals  => {:form => form} %>
+    <%= form.actions :class => "buttons-container modal-form-button" do %>
+      <%= submit_button form %>
+      <%= link_to_cancel "#", id:'solicitacao-cancel-link' %>
+    <% end -%>
+  <% end %>
+</div>

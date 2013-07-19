@@ -58,7 +58,13 @@ table tbody td {
   padding: 7px 0 0 2px;
   vertical-align: center;
   border-bottom: 1px solid #d6d6d6;
-
+  a.inline-link {
+    color: #3D3D3D ;
+    text-decoration: none; 
+    diplay: block;
+    position: absolute;
+    width: 100%;
+  }
 }
 table tbody td span {
   color: #AAAAAA;

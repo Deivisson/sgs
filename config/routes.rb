@@ -1,6 +1,5 @@
 Sgsoft::Application.routes.draw do
 
-  
 
 
   resources :ordem_servico_itens
@@ -50,7 +49,9 @@ Sgsoft::Application.routes.draw do
     	 	put  :update_multiple
     	 	get :search
     	 end
+
 	  end
+    get 'solicitacoes/:id/programar', :to => 'solicitacoes#programar', :as => "programar_solicitacao"
     resources :ordem_servicos 
     get '/ordem_servico/:ordem_servico_id/:cliente_id/carrega_solicitacoes', 
             :to => 'ordem_servicos#carrega_solicitacoes', 

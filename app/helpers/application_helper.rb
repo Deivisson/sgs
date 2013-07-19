@@ -90,5 +90,12 @@ module ApplicationHelper
     mce.html_safe
   end
 
+  def permite_estimar(solicitacao)
+    if solicitacao.etapa_desenvolvimento? 
+      return current_usuario.estima_desenvolvimento? 
+    elsif solicitacao.etapa_instalacao? 
+      return current_usuario.estima_instalacao?
+    end
+  end
 
 end

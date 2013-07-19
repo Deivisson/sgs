@@ -2,6 +2,10 @@
 include DataHoraHelper
 class Solicitacao < ActiveRecord::Base.extend Search
 
+  COMPLEXIDADE_BAIXA = 1
+  COMPLEXIDADE_MEDIA = 2
+  COMPLEXIDADE_ALTA = 3
+
   has_attached_file :anexo, 
                     :style => {:medium => "250x250>",:thumb => "100x100>"},
           					:path => ":rails_root/public/anexos/:class/:attachment/:id/:style/:basename.:extension",
@@ -62,6 +66,15 @@ class Solicitacao < ActiveRecord::Base.extend Search
       self.status_id == s[:id] 
     end
   end
+
+  def etapa_desenvolvimento?
+    etapa_id == Etapa::DESENVOLVIMENTO
+  end
+
+  def etapa_instalacao?
+    etapa_id == Etapa::INSTALACAO
+  end
+
 
   def titulo_formatado
     "#{self.id.to_s.rjust(6,'0')} - #{self.titulo}"

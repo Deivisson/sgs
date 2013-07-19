@@ -43,6 +43,14 @@ class Usuario < ActiveRecord::Base
                       :url => "/images/uploads/:class/:attachment/:id/:style/:basename.:extension",
                       :default_url => "/assets/foto/foto.png"
 
+  def estima_desenvolvimento?
+    self.usuario_cargo.estima_desenvolvimento
+  end
+
+  def estima_instalacao?
+    self.usuario_cargo.estima_instalacao
+  end
+
 private
   def password_required?
     !persisted? || password.present? || password_confirmation.present?

@@ -15,6 +15,8 @@
   <%- if @solicitacao.projeto_id.present? %>
     var etapa = "<%= @solicitacao.etapa.descricao.remover_acentos.downcase %>";
     $("#projeto-solicitacoes-" + etapa).append('<%= escape_javascript(render partial:'usuario/projetos/solicitacao_item', locals: {solicitacao:@solicitacao}) %>');
+    //$("#projeto-progresso").html('<%= escape_javascript(render partial:'usuario/projetos/projeto_resumo_progresso', locals: {projeto:@solicitacao.projeto})%>');
+    //$("#projeto-participantes").html('<%= escape_javascript(render partial:'usuario/projetos/projeto_resumo_participantes', locals: {projeto:@solicitacao.projeto})%>');
   <% else %>
     $(window.location.replace("/usuario/solicitacoes/<%= @solicitacao.id %>"));
   <% end %>

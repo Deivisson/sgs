@@ -8,8 +8,8 @@
                     :member_label => :nome,
                     :required     => true,
                     :input_html   => {:id        => "cliente-select-id",
-                                      :autofocus => true,
                                       :disabled  => !@solicitacao.permite_alterar_cliente? } %>
+                                      
     <%= form.input :cliente_contato_id,
                    :as            => :select,
                    :collection    => @contatos,
@@ -17,8 +17,7 @@
                    :member_label  => :nome,
                    :prompt        => " ",
                    :required      => true,
-                   :input_html    => {:id => "cliente-contato-select-id",
-                                      :autofocus => !@solicitacao.permite_alterar_cliente?} %>
+                   :input_html    => {:id => "cliente-contato-select-id"} %>
 
     <div class="div-field">
       <label>Módulo*</label>
@@ -28,7 +27,7 @@
                                     @solucoes,
                                     :solucao_modulos,
                                     :descricao, :id, :descricao,
-                                    {:prompt => " "} ,
+                                    {:include_blank => true},
                                     {:id => "solucao-modulos-select-id"}) %>
                                     
     </div>

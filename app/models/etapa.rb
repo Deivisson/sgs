@@ -4,7 +4,22 @@ class Etapa < ActiveRecord::Base
   TREINAMENTO = 2
   INSTALACAO = 3
   
-  has_and_belongs_to_many :projetos
-  has_many :solicitacoes
   
+  has_many :solicitacoes
+  has_many :etapas_projetos
+  has_many :projetos, through: :etapas_projetos
+
+  attr_reader :context, :peso
+
+  def percentual_participacao_projeto
+  	solicitacoes.sum(:peso)
+  end
+
+  def percentual
+  	return 30
+  end
+
+  def contexto
+  	@contexto ||= self.descricao.remover_acentos.downcase
+  end
 end

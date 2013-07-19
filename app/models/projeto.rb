@@ -20,7 +20,23 @@ class Projeto < ActiveRecord::Base
   belongs_to :cliente
   belongs_to :usuario
   has_many :solicitacoes
-  has_and_belongs_to_many :etapas
+  #has_and_belongs_to_many :etapas
+  has_many :etapas_projetos
+  has_many :etapas, through: :etapas_projetos
+
+  attr_reader :peso_total
+
+  def peso_total
+    @peso_total ||= (solicitacoes.sum(:peso) || 0)
+  end
+
+  def progresso
+    return 0 if peso_total == 0
+    total_concluido = 0
+    self.etapas_projetos.each{|etapa| total_concluido += etapa.peso_concluido_etapa}
+    resultado = total_concluido.to_f / peso_total.to_f
+    return (resultado * 100).round(2)
+  end
 
   def informacoes_sobre_criacao
     "#{created_at.strftime("%d/%m/%y")} por #{usuario.nome}"
@@ -42,11 +58,11 @@ class Projeto < ActiveRecord::Base
 
   #definicao de metodos baseado nas etapas existentes
   Etapa.all.each do |etapa|
-    define_method "possui_#{etapa.descricao.remover_acentos.downcase}?" do
+    define_method "possui_#{etapa.contexto}?" do
       etapa_ids.include? etapa.id
     end
 
-    define_method "solicitacoes_etapa_#{etapa.descricao.remover_acentos.downcase}" do
+    define_method "solicitacoes_etapa_#{etapa.contexto}" do
       self.solicitacoes.where(etapa_id:etapa.id)
     end
   end

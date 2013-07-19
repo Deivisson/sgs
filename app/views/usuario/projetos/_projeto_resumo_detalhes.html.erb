@@ -2,8 +2,14 @@
 
   <%= content_tag :div, class:"titulo-container" do %>
     <%= image_tag("icons/32/project.png", class:"projeto-imagem") %>
-    <h1><%= @projeto.nome %></h1>
-    <%= link_to "Editar", edit_usuario_projeto_path(@projeto),remote:true, id:'projeto-link' %>
+    <p><%= @projeto.nome %></p>
+    <div class="projeto-links">
+      <%= link_to "Projetos", usuario_projetos_path %>
+      <%= link_to "Editar", edit_usuario_projeto_path(@projeto),
+                            remote:true, id:'projeto-link', 
+                            class:'first' %>
+    </div>
+    
   <% end %>
 
   <%= content_tag :div, class:"projeto-detalhes" do %>
@@ -19,8 +25,11 @@
       <dt>Previsão Término</dt>
       <dd><%= formata_data(@projeto.data_prevista_termino) %></dd>
       <br>
+      <dt>Pontos de Função</dt>
+      <dd><%= @projeto.peso_total %></dd>
+      <br>  
       <dt>Status</dt>
-      <dd class="destak"><%= "#{@projeto.descricao_status} (65% concluído)" %></dd>      
+      <dd class="destak"><%= "#{@projeto.descricao_status} (#{@projeto.progresso}% concluído)" %></dd>      
     </dl>
   <% end %> 
 <% end %>

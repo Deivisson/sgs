@@ -53,10 +53,15 @@ function solicitacaoModalForm(){
       $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange);
       $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos);
       $("#tabs").tabs(); //tabify(); 
-
-      $("#cliente-select-id").focus();
+      
       inicializaTinyMCE();
       bindSolicitacaoUIEvents();
+      setMaskFields();
+      if ($("#cliente-select-id").attr("disabled") == undefined) {
+        $("#cliente-select-id").focus();
+      } else {
+        $("#cliente-contato-select-id").focus();
+      }
     });
     dialog_form.dialog('open');
     e.preventDefault();

@@ -1,0 +1,35 @@
+<div id="fragment-4">
+	<%= section_tag do %>
+		<%= form.inputs do %>
+		  <%= form.input :nivel_complexidade ,
+		  				 :as 					=> :select,
+		  				 :collection  => options_for_nivel_complexidade,	
+		  				 :label				=> "Nível Complexidade",
+		  				 :required 		=> true,
+		  				 :input_html  => {:style => "min-width: 210px;max-width: 210px;"} %>
+
+		  <%= form.input :peso, 
+		  				 :label 		=> "Pontos de Função",
+		  				 :hint			=> "Definição do peso da solicitação",
+		  				 :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
+
+
+		  <%= form.input :previsao_duracao_horas, 
+		  				 :label 		=> "Duração Prevista",
+		  				 :hint			=> "Total de horas prevista para execução da atividade",
+		  				 :required 	=> true,
+		  				 :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
+
+
+		  <%= form.input :gera_cobranca,
+		  				 :label				=> "Gerar Cobrança?",
+		  				 :input_html  => {:style => "margin-left: -10px;",
+		  				 :id    			=> "gera-cobranca-solicitacao" } %>
+
+		  <%= form.input :valor_cobranca,
+		  				 :label				=> "Valor Cobrança",
+		  				 :input_html  => {:style 	  => "min-width: 210px;max-width: 210px;",
+							 :id 	  			=> "valor-cobranca-solicitacao"} %>
+		<% end %>
+	<% end %>
+</div>
