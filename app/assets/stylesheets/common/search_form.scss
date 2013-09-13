@@ -2,7 +2,7 @@
 	float: left;
 	padding: 5px;
 	margin: 10px;
-	width: 70%;
+	width: 86%;
 	.title-search-form {
 		background: #F5F5F5;
     border: 1px solid #C3C7D0;
@@ -31,8 +31,8 @@
 		}
 		input,select {
 			float: left;
-			width: 270px;
-			min-width: 270px;
+			width: 100%;
+			min-width: 100%;
 		}
 	}
 }

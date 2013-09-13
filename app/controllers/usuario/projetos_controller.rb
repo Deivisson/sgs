@@ -6,7 +6,7 @@ class Usuario::ProjetosController < Usuario::BaseController
   def index
     @projetos = Projeto.includes(:cliente, :usuario)
     @projetos = @projetos.search(params[:conditions])
-    render :layout  => "lista_projetos"
+    #render :layout  => "lista_projetos"
   end
 
   def show

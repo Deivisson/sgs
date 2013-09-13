@@ -58,9 +58,9 @@ body, p, ol, ul, td {
   position:fixed;
   width:85.79;
   height:34px;
-  left:200px;
+  left:256px;
   right:0;
-  top:52px;
+  top:51px;
   background: #F5F5F5;
   margin:4px;
   border: 1px solid #C3C7D0;
@@ -103,7 +103,7 @@ body, p, ol, ul, td {
   z-index:3;
   top:85px;
   bottom:0px;
-  left:200px;
+  left:256px;
   right:0;
   background:#FFF;
   margin:4px;
@@ -260,43 +260,56 @@ body, p, ol, ul, td {
 /*Container menu lateral esquerdo
 ------------------------------------------------------------------*/
 .left {
-  background-color: #F5F5F5;
+  /*background-color: #F5F5F5;*/
   position:absolute;
   left:0;
   top:52px;
-  bottom:0px; width:199px;
+  bottom:0px; width:230px;
   font-size:1.2em;
   z-index:4;
   overflow:auto;
   margin:3px 0;
-  width: 199px;
-  height: 93%;
-  padding-bottom: 4px;
+  width: 260px;
+  bottom: 0;
 }
 * html .left {
-  height: 92%;
   top:0; bottom:0;
-  border-top:100px solid #fff;
-  border-bottom:50px solid #fff; color:#fff;
-  padding-bottom: 4px;
+  color:#fff;
 }
 
 
+ul.menu-icon-bar {
+  float: left;
+  padding:0;
+  margin:0 0 0 10px;
+  list-style:none;
+  width:50px;
+  height:99%;;
+  position:relative;
+  overflow:hidden;
+
+}
 
 
 /*Menu Vertical ---> Lateral esquerdo
 ------------------------------------------------------------------ */
 ul#slide {
+  background-color: #F5F5F5;
+  float: left;
   padding:0;
   margin:0;
   list-style:none;
-  width:199px;
-  height:99%;;
-  position:relative;
+  left:60px;
+  width:200px;
+  position:absolute;
   overflow:hidden;
+  border-bottom: 1px solid #C3C7D0;
   border-radius: 5px 0px 0px 5px; 
   -moz-border-radius: 5px 0px 0px 5px; 
-  -webkit-border-radius: 5px 0px 0px 5px; 
+  -webkit-border-radius: 5px 0px 0px 5px;
+  bottom: 0;
+  top: 0;
+
 }
 
 ul li div {position:absolute; left:-9999px; background:#fff;}
@@ -333,10 +346,6 @@ ul li div {position:absolute; left:-9999px; background:#fff;}
 #slide li.clicked {
   color:#333;
   background:#f5f5f5;
-  border-bottom: 1px solid #C3C7D0;
-  border-radius: 5px 0px 0px 5px; 
-  -moz-border-radius: 5px 0px 0px 5px; 
-  -webkit-border-radius: 5px 0px 0px 5px; 
 }
 #slide li.clicked h1.title,
 #slide li.clicked h1.first {
