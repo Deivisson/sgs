@@ -1,0 +1,19 @@
+<div id="aba-cliente-cobranca">
+	<%= form.inputs do %>
+	  <%= section_tag  do %>
+      <div class="short-fields">
+        <%= form.input :valor_hora_visita,
+                       :as         => :string, 
+                       :label      => "Valor Hora Visita",
+                       :input_html => {:id => "valor_visita"} %>
+        
+        <%= form.input :valor_deslocamento,
+                       :as         => :string,
+                       :label      => "Valor Deslocamento" %>
+
+        <%= form.input :horas_bonus,
+                       :label      => "Horas de Bônus" %>      
+      </div>
+	  <% end %>
+	<% end %>
+</div>

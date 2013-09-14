@@ -1,0 +1,35 @@
+<li class="top clicked">
+        <ul>
+          <li class="static-item">
+            <%= link_to 'Projetos', ,:class => 'header-link' %>
+          </li>
+          <li class="static-item">
+            <%= link_to 'Ordens Serviços', ,:class => 'header-link' %>
+            <%= link_to '',
+                      new_usuario_ordem_servico_path(),:class => 'add-link' %>
+          </li>
+          <li class="static-item">
+            <%= link_to 'Atendimentos', ,:class => 'header-link' %>
+            <%= link_to '',new_usuario_atendimento_path,:class => 'add-link' %>
+          </li>
+          <li class="static-item">
+            <h2>Solicitações</h2>
+            <%= link_to '',new_usuario_solicitacao_pesquisa_path,class:'find-link' %>
+            <%= link_to '',
+                      new_usuario_solicitacao_path(local:"tasks_user",status_id:@status_id),
+                                                  class:'add-link solicitacao-link',remote:true %>
+          </li>
+          <li class="static-item">
+            <h2>Minhas Tarefas</h2>
+          </li>
+          <% @status = load_status %>
+          <% for status in @status %>
+            <li>
+              <%= link_to status[0],
+                  usuario_solicitacoes_path(:status_id  => status[2]),
+                                :style => (status[3] == true ? "font-weight: bold" : "")  %>
+                <span><%= status[1] %></span>
+            </li>
+          <% end %>
+        </ul>
+      </li>

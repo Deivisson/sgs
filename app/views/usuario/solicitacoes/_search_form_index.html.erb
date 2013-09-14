@@ -1,0 +1,20 @@
+<%= form_for usuario_solicitacoes_path, 
+			remote:true, :html => {class:"search-form" }, :method => :get do |f| %>
+	
+	<!-- <h1 class="title-search-form">Filtros</h1> -->
+
+	<div class="field">
+		<%= content_tag :label, "Nº Solicitações" %>
+		<%= text_field_tag "conditions[solicitacoes.id]","" %>
+		<%= hidden_field_tag "conditions[status_id]",@status_id %>
+	</div>
+	
+	<div class="field">
+		<%= content_tag :label, "Cliente" %>
+		<%= select_tag "conditions[atendimentos.cliente_id]",
+					options_for_select(@clientes.collect{|c| [c.nome, c.id]}), 
+					:include_blank => true %>
+	</div>
+	<%= submit_tag "Pesquisar" %>
+
+<% end %>

@@ -2,7 +2,7 @@
 class Usuario::SolicitacoesController < Usuario::BaseController
 
   before_filter :carrega_solicitacao, :only => [:show, :edit, :update, :destroy,:programar]
-  before_filter :carrega_dados, :only => [:new,:edit]
+  before_filter :carrega_dados, :only => [:new,:edit,:index]
   after_filter :carrega_contatos_e_projetos_cliente, :only => [:new,:edit]
   before_filter :atualizacao_multipla_permitida, :only => :update_multiple
 
@@ -19,17 +19,22 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     @solicitacoes = []
     @solucao_id = params[:solucao_id] if params[:solucao_id]
 
-    if params[:status_id]
-      @status_id = params[:status_id] 
-      @status_description = Status.find(params[:status_id]).descricao if params[:status_id]
-    else  
-      @status = Status.primeira_ocorrencia_por_status(current_usuario.id)
-      @status_id = @status.id if @status
-      @status_description = @status.descricao if @status
+    if params[:conditions]    
+      @status_id = params[:conditions]["status_id"] 
+      @status = Status.find(@status_id)
+    else
+      if params[:status_id]
+        @status_id = params[:status_id] 
+        @status_description = Status.find(params[:status_id]).descricao if params[:status_id]
+      else  
+        @status = Status.primeira_ocorrencia_por_status(current_usuario.id)
+        @status_id = @status.id if @status
+        @status_description = @status.descricao if @status
+      end
+
     end
-      
     if @status != nil or params[:status_id]
-      @solicitacoes = Solicitacao.tarefas_do_usuario_por_status(
+      @solicitacoes = Solicitacao.search(params[:conditions]).tarefas_do_usuario_por_status(
                       monta_filtro,params['page'],9990) 
     end
     respond_with @solicitacoes

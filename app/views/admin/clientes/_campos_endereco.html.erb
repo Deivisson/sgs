@@ -1,0 +1,29 @@
+<div id="aba-cliente-endereco">
+	<%= form.inputs do %>
+    <%= section_tag do %>
+      <%= form.input :endereco,:label => 'Endereço',:required => false %>
+      <%= form.input :complemento ,:required => false %>
+      <%= form.input :bairro ,:required => false %>
+      <%= form.input :cidade ,:required => false %>
+
+      <%= form.input :uf,:include_blank =>false,
+                     :as          => :select,
+                     :collection  => carrega_ufs,
+                     :required    => false,
+                     :label       => 'UF',
+                     :input_html  => {:style => "width:200px"} %>
+
+      <%= form.input :cep,
+                     :required    => false,
+                     :input_html  => {:style => "width:200px"} %>
+
+      <%= form.input :telefone,
+                     :required    => false,
+                     :input_html  => {:style => "width:200px"} %>
+
+      <%= form.input :fax ,
+                     :input_html  => {:style => "max-width:200px;"} ,
+                     :required    => false %>
+    <% end %>	  
+	<% end %>
+</div>

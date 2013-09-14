@@ -6,6 +6,7 @@
 //= require ordem_servicos
 //= require solicitacoes
 //= require projetos
+//= require clientes
 //= require jquery.maskedinput-1.3.min
 //= require jquery_price_format
 //= require masks

@@ -2,11 +2,12 @@
 class Usuario::OrdemServicosController < Usuario::BaseController
 
   before_filter :carrega_ordem_servico, :except => [:index,:create,:new, :carrega_solicitacoes]
-  before_filter :carrega_dados, :only  => [:new,:edit,:update, :create]
+  before_filter :carrega_dados, :only  => [:new,:edit,:update, :create, :index]
   before_filter :permite_editar_excluir, :only => [:edit, :destroy]  
 
   def index
-    @ordem_servicos = OrdemServico.all(:order => "data_execucao desc")
+    @ordem_servicos = OrdemServico.search(params[:conditions])
+    @ordem_servicos = @ordem_servicos.order("data_execucao desc")
     respond_with(@ordem_servicos)
   end
 

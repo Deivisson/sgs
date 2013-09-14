@@ -1,51 +1,33 @@
 <%= semantic_form_for [:admin,@cliente] do |form| %>
-  <%= form.inputs do %>
+    <div id="cliente-tabs" class="menutab-content">
+      <%= content_tag :ul do %>
+        <li>
+          <%= link_to "#aba-cliente-basicos" do  %>
+            <span>Dados Principais</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#aba-cliente-endereco" do  %>
+            <span>Endereço</span>
+          <% end %>
+        </li>        
+        <li>
+          <%= link_to "#aba-cliente-cobranca" do  %>
+            <span>Cobrança</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#aba-cliente-solucoes" do  %>
+            <span>Soluções</span>
+          <% end %>
+        </li>        
+      <% end %>
+      <%= render partial:"campos_basicos", locals: {form:form} %>
+      <%= render partial:"campos_endereco", locals: {form:form} %>
+      <%= render partial:"campos_cobranca", locals: {form:form} %>
+      <%= render partial:"campos_solucoes", locals: {form:form} %>
+    </div>
 
-    <%= section_tag(:legend => "Informações do Cliente") do %>
-      <%= form.input :nome, :required => true, :input_html => {:autofocus => true} %>
-      <div class="short-fields">
-        <%= form.input :valor_hora_visita,
-                       :as         => :string, 
-                       :label      => "Valor Hora Visita",
-                       :input_html => {:id => "valor_visita"} %>
-        
-        <%= form.input :valor_deslocamento,
-                       :as         => :string,
-                       :label      => "Valor Deslocamento" %>
-
-        <%= form.input :horas_bonus,
-                       :label      => "Horas de Bônus" %>      
-      </div>
-    <% end %>
-
-    <%= section_tag(:legend => "Endereço") do %>
-      <%= form.input :endereco,:label => 'Endereço',:required => false %>
-      <%= form.input :complemento ,:required => false %>
-      <%= form.input :bairro ,:required => false %>
-      <%= form.input :cidade ,:required => false %>
-
-      <%= form.input :uf,:include_blank =>false,
-                     :as          => :select,
-                     :collection  => carrega_ufs,
-                     :required    => false,
-                     :label       => 'UF',
-                     :input_html  => {:style => "width:200px"} %>
-
-      <%= form.input :cep,
-                     :required    => false,
-                     :input_html  => {:style => "width:200px"} %>
-
-      <%= form.input :telefone,
-                     :required    => false,
-                     :input_html  => {:style => "width:200px"} %>
-
-      <%= form.input :fax ,
-                     :input_html  => {:style => "max-width:200px;"} ,
-                     :required    => false %>
-    <% end %>
-
-    <%= render "projects" %>
-  <% end %>
 
   <%= form.actions :class => "buttons-container" do %>
      <%= submit_button form %>

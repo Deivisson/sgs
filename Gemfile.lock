@@ -83,6 +83,13 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    columnize (0.3.6)
+    debugger (1.5.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.0)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.0)
     delocalize (0.2.6)
     devise (2.0.4)
       bcrypt-ruby (~> 3.0)
@@ -205,6 +212,7 @@ PLATFORMS
 DEPENDENCIES
   brazilian-rails
   coffee-rails (~> 3.2.1)
+  debugger
   delocalize (~> 0.2.3)
   devise (= 2.0.4)
   execjs

@@ -1,11 +1,11 @@
-<%= form_for usuario_projetos_path, 
+<%= form_for usuario_ordem_servicos_path, 
 			remote:true, :html => {class:"search-form" }, :method => :get do |f| %>
 	
 	<!-- <h1 class="title-search-form">Filtros</h1> -->
 
 	<div class="field">
-		<%= content_tag :label, "Nome Projeto" %>
-		<%= text_field_tag "conditions[nome.lk]","" %>
+		<%= content_tag :label, "Nº O.S" %>
+		<%= text_field_tag "conditions[ordem_servicos.id]","" %>
 	</div>
 	
 	<div class="field">
@@ -15,8 +15,8 @@
 					:include_blank => true %>
 	</div>
 	<div class="field">
-		<%= content_tag :label, "Aberto por: <span>(Usuários)</span>".html_safe %>
-		<%= select_tag "conditions[usuario_id]",
+		<%= content_tag :label, "Técnico Responsável: <span>(Usuários)</span>".html_safe %>
+		<%= select_tag "conditions[usuario_responsavel_id]",
 					options_for_select(@usuarios.collect{|u| [u.nome, u.id]}), 
 					:include_blank => true %>
 	</div>

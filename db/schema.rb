@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130719115337) do
+ActiveRecord::Schema.define(:version => 20130914110058) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20130719115337) do
 
   create_table "ordem_servico_itens", :force => true do |t|
     t.integer  "ordem_servico_id",                     :null => false
-    t.integer  "projeto_sub_modulo_id",                :null => false
+    t.integer  "solucao_sub_modulo_id",                :null => false
     t.integer  "tipo_avaliacao_id",                    :null => false
     t.integer  "situacao_id",                          :null => false
     t.string   "usuarios",              :limit => 100, :null => false
@@ -159,8 +159,8 @@ ActiveRecord::Schema.define(:version => 20130719115337) do
   end
 
   add_index "ordem_servico_itens", ["ordem_servico_id"], :name => "index_ordem_servico_itens_on_ordem_servico_id"
-  add_index "ordem_servico_itens", ["projeto_sub_modulo_id"], :name => "index_ordem_servico_itens_on_projeto_sub_modulo_id"
   add_index "ordem_servico_itens", ["situacao_id"], :name => "index_ordem_servico_itens_on_situacao_id"
+  add_index "ordem_servico_itens", ["solucao_sub_modulo_id"], :name => "index_ordem_servico_itens_on_solucao_sub_modulo_id"
   add_index "ordem_servico_itens", ["tipo_avaliacao_id"], :name => "index_ordem_servico_itens_on_tipo_avaliacao_id"
 
   create_table "ordem_servicos", :force => true do |t|
@@ -422,7 +422,7 @@ ActiveRecord::Schema.define(:version => 20130719115337) do
 
   add_foreign_key "ordem_servico_itens", "ordem_servicos", :name => "fk_ordem_servico_itens_ordem_servico"
   add_foreign_key "ordem_servico_itens", "situacoes", :name => "fk_ordem_servico_itens_situacoes"
-  add_foreign_key "ordem_servico_itens", "solucao_sub_modulos", :name => "fk_ordem_servico_itens_sub_modulo", :column => "projeto_sub_modulo_id"
+  add_foreign_key "ordem_servico_itens", "solucao_sub_modulos", :name => "fk_solucao_sub_modulos_ordem_servico_itens"
   add_foreign_key "ordem_servico_itens", "tipo_avaliacoes", :name => "fk_ordem_servico_itens_tipo_avaliacoes"
 
   add_foreign_key "ordem_servicos", "cliente_contatos", :name => "fk_ordem_servicos_cliente_contato"
@@ -431,7 +431,6 @@ ActiveRecord::Schema.define(:version => 20130719115337) do
   add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_responsaveis", :column => "usuario_responsavel_id"
 
   add_foreign_key "projetos", "clientes", :name => "fk_projetos_clientes"
-  add_foreign_key "projetos", "usuarios", :name => "fk_projetos_usuarios"
 
   add_foreign_key "solicitacao_historicos", "solicitacoes", :name => "fk_solicitacao_historico_solicitacoes", :dependent => :delete
   add_foreign_key "solicitacao_historicos", "status", :name => "fk_solicitacao_historico_status"

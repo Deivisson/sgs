@@ -1,3 +1,21 @@
+<% content_for :left_container do %>
+  <h1>Solicitações</h1>
+  <%= render "search_form_index" %>
+
+  <ul class="my-tasks">
+    <h1>Minhas Tarefas </h1>    
+    <% @status = load_status %>
+    <% for status in @status %>
+      <li>
+        <%= link_to status[0],
+            usuario_solicitacoes_path(:status_id  => status[2]),
+                          :style => (status[3] == true ? "font-weight: bold" : "")  %>
+          <span><%= status[1] %></span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_tag [:edit_multiple, :usuario, :solicitacoes] do %>
    <table border="0"  cellspacing="1" cellpadding="0" class="tablesorter" >
     <thead>

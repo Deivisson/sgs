@@ -54,7 +54,12 @@ private
   end
 
   def carrega_solucoes
-    @solucoes = Solucao.to_select
+    @solucoes = Solucao.joins(:solucao_modulos => :solucao_sub_modulos)
+    @solucoes = @solucoes.order("solucoes.descricao,solucao_modulos.descricao,
+                                solucao_sub_modulos.descricao")
+    @solucoes = @solucoes.select("solucoes.id as solucao_id, solucoes.descricao as solucao_descricao,
+                                  solucao_modulos.id as modulo_id, solucao_modulos.descricao as modulo_descricao,
+                                  solucao_sub_modulos.id as sub_modulo_id, solucao_sub_modulos.descricao as sub_modulo_descricao")
   end
 
 end

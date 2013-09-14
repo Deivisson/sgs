@@ -1,3 +1,7 @@
+<% content_for :left_container do %>
+  <h1>Minhas </h1>
+  <%= render "search_form" %>
+<% end %>
 
 <%= link_to "Adicionar Tarefa",
         new_usuario_projeto_solicitacao_path(projeto_id:@projeto.id,etapa_id:etapa_id), 
