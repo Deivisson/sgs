@@ -11,10 +11,10 @@
   <%= render "/shared/header" %>
   <div class = "left">
     <ul class="menu-icon-bar">
-        <li> <%= link_to image_tag("/assets/icons/32/tasks.png"), usuario_solicitacoes_path %></li>
-        <li> <%= link_to image_tag("/assets/icons/32/project.png"),usuario_projetos_path %> </li>
-        <li> <%= link_to image_tag("/assets/icons/32/services.png"), usuario_ordem_servicos_path %> </li>
-        <li> <%= link_to image_tag("/assets/icons/32/callcenter.png"),"#" %> </li>
+        <%= main_menu(usuario_solicitacoes_path, icon_name:"tasks",target:'solicitacao') %>
+        <%= main_menu(usuario_projetos_path, icon_name:"project",target:'projeto') %>
+        <%= main_menu(usuario_ordem_servicos_path, icon_name:"services",target:'ordem_servico') %>
+        <%= main_menu(usuario_ordem_servicos_path, icon_name:"callcenter",target:'atendimento') %>
     </ul>
     <ul class="left-col-container">
       <%= yield :left_container %>

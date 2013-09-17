@@ -1,4 +1,5 @@
 class Usuario::ProjetosController < Usuario::BaseController
+  before_filter :set_current_menu
   before_filter :load_clientes, except:[:show,:destroy]
   before_filter :load_usuarios, only:[:index]
   before_filter :load_dados, except:[:show,:index,:destroy]
@@ -58,5 +59,9 @@ private
 
   def load_dados
     @etapas = Etapa.all
+  end
+
+  def set_current_menu
+    session[:current_menu] = "projeto"
   end
 end

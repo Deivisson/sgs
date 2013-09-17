@@ -4,6 +4,7 @@
     <br>
     <%= form.input  :cliente_id,
                     :collection   => @clientes,
+                    :as           => :select,
                     :label        => "Cliente",
                     :member_label => :nome,
                     :required     => true,

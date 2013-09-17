@@ -1,12 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Usuario::SolicitacoesController < Usuario::BaseController
-
+  before_filter :set_current_menu
   before_filter :carrega_solicitacao, :only => [:show, :edit, :update, :destroy,:programar]
   before_filter :carrega_dados, :only => [:new,:edit,:index]
   after_filter :carrega_contatos_e_projetos_cliente, :only => [:new,:edit]
   before_filter :atualizacao_multipla_permitida, :only => :update_multiple
-
-
 
   #Carrega Solicitacoes para usuario logado no sistema.
   #Condicoes de filtro
@@ -18,7 +16,6 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     @status_description = "Sem Solicitações"
     @solicitacoes = []
     @solucao_id = params[:solucao_id] if params[:solucao_id]
-
     if params[:conditions]    
       @status_id = params[:conditions]["status_id"] 
       @status = Status.find(@status_id)
@@ -43,8 +40,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
   def search
     @search_key = params[:search_key]
     if @search_key.to_i == 0
-      @solicitacoes = Solicitacao.where("titulo like :a OR detalhe like :a",
-                                          :a => "%#{@search_key}%")
+      @solicitacoes = Solicitacao.where("titulo like :a OR detalhe like :a",:a => "%#{@search_key}%")
     else
       @solicitacoes = Solicitacao.where("id = ? ", @search_key)
     end  
@@ -52,7 +48,6 @@ class Usuario::SolicitacoesController < Usuario::BaseController
   end
 
   def show
-
     @local = params[:local] if params[:local]
     if @solicitacao.nao_lido and @solicitacao.usuario_responsavel_id == current_usuario.id
       @solicitacao.update_attributes!(:nao_lido => false) 
@@ -60,18 +55,14 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     # if @solicitacao.confirmacao_leitura and @solicitacao.usuario_responsavel_id == current_usuario.id
     #   enviar_email_confirmacao_leitura 
     # end
-    @solicitacao_historicos = SolicitacaoHistorico.find_all_by_solicitacao_id(
-      @solicitacao.id,:order => "created_at DESC")
-
+    @solicitacao_historicos = SolicitacaoHistorico.where(solicitacao_id:@solicitacao.id)
+    @solicitacao_historicos = @solicitacao_historicos.order("created_at DESC")
     respond_with @solicitacao
   end
 
   def new
     @solicitacao = Solicitacao.new(:status_id => Status::ABERTO)
-    if params[:atendimento]
-      @atendimento = Atendimento.find(params[:atendimento])
-      @solicitacao.atendimento = @atendimento
-    elsif params[:projeto_id]
+    if params[:projeto_id]
       @solicitacao.projeto_id = params[:projeto_id]
       @solicitacao.etapa_id = params[:etapa_id]
     end
@@ -82,23 +73,13 @@ class Usuario::SolicitacoesController < Usuario::BaseController
   end
 
   def create
+    params[:solicitacao].merge!(:usuario_cadastrante_id => current_usuario.id)
+    puts params[:solicitacao]
     @solicitacao = Solicitacao.new(params[:solicitacao])
-    if @solicitacao.atendimento.nil?
-      attributes = {:cliente_id          => @solicitacao.cliente_id,
-                    :usuario_cadastrante => current_usuario,
-                    :usuario_solicitante => @solicitacao.usuario_responsavel,
-                    :descricao           => '',
-                    :interno             => true}
-      @atendimento =  Atendimento.new(attributes)
-    else
-      @atendimento = Atendimento.find(@solicitacao.atendimento_id)
-    end
-    @atendimento.solicitacoes << @solicitacao
-    if @atendimento.save
+    if @solicitacao.save
       flash[:notice] = "Solicitação cadastrada com sucesso."
     else
       carrega_dados
-      @atendimento.errors.full_messages
     end
   end
 
@@ -139,7 +120,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
   #Valida quem esta tentando editar ou excluir uma solicitacao.
   #Operacao permitida apenas para usuario que cadastrou
   def permite_alterar_excluir(tipo = 1)
-    if @solicitacao.atendimento.usuario_cadastrante.id == current_usuario.id
+    if @solicitacao.usuario_cadastrante.id == current_usuario.id
       return true
     else
       flash[:warning] = "#{tipo == 1 ? 'Edição' : 'Exclusão'} 
@@ -265,5 +246,9 @@ private
       {:usuario_responsavel_id => current_usuario.id,
        :status_id => @status_id}
     end
+  end
+
+  def set_current_menu
+    session[:current_menu] = "solicitacao"
   end
 end

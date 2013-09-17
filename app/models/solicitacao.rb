@@ -11,7 +11,9 @@ class Solicitacao < ActiveRecord::Base.extend Search
           					:path => ":rails_root/public/anexos/:class/:attachment/:id/:style/:basename.:extension",
           					:url => "/anexos/:class/:attachment/:id/:style/:basename.:extension"
 
-  validates_presence_of :status_id,:prioridade_id, :solucao_sub_modulo_id,:cliente_id
+  validates :cliente_id, presence:true
+  validates :usuario_cadastrante_id, presence:true
+  validates_presence_of :status_id,:prioridade_id, :solucao_sub_modulo_id
   validates_presence_of :cliente_contato_id,:tipo_pendencia_id,:titulo,:detalhe
   validates_presence_of :usuario_responsavel_id
   validate :validate_presence_of_detalhe_ultimo_historico
@@ -42,7 +44,8 @@ class Solicitacao < ActiveRecord::Base.extend Search
               s.gera_cobranca == true
             } 
 
-  belongs_to :atendimento
+
+  belongs_to :cliente
   belongs_to :projeto
   belongs_to :status
   belongs_to :prioridade
@@ -52,12 +55,16 @@ class Solicitacao < ActiveRecord::Base.extend Search
   belongs_to :usuario_responsavel,
              :class_name => "Usuario",
              :foreign_key => "usuario_responsavel_id"
+  
+  belongs_to :usuario_cadastrante,
+             :class_name => "Usuario",
+             :foreign_key => "usuario_cadastrante_id"
 
   belongs_to :ordem_servico
   belongs_to :etapa
   has_many :historicos, class_name:"SolicitacaoHistorico"
 
-  attr_writer :cliente_id,:solucao_id,:modulo_id
+  attr_writer :solucao_id,:modulo_id
   attr_accessor :previsao_duracao_horas
 
 
@@ -80,17 +87,8 @@ class Solicitacao < ActiveRecord::Base.extend Search
     "#{self.id.to_s.rjust(6,'0')} - #{self.titulo}"
   end
 
-  def cliente_id
-    # if cliente_contato.nil? && atendimento.nil?
-    #   @cliente_id = nil
-    # else
-    #   @cliente_id = (!atendimento.nil? ? atendimento.cliente_id : cliente_contato.cliente_id)
-    # end
-    associador.cliente_id unless associador.nil?
-  end
-
   def associador
-    self.atendimento || self.projeto
+    self.projeto
   end
 
   def solucao_id
@@ -118,7 +116,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
   end
 
   def permite_alterar_cliente?
-    !(self.atendimento_id.present? || self.projeto_id.present?)
+    !(self.projeto_id.present?)
   end
 
   #callbacks
@@ -141,7 +139,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
     end
     true
   end
-  after_destroy :delete_atendimento_interno
+  # after_destroy :delete_atendimento_interno
 
 
   #named_scopes
@@ -151,7 +149,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
                           solucao_sub_modulos.descricao as sub_modulo,
                           prioridades.descricao as prioridade_descricao,
                           tipo_pendencias.descricao as tipo_descricao,status.encerramento",
-              :joins => [:atendimento,{:cliente_contato => [:cliente]},
+              :joins => [{:cliente_contato => [:cliente]},
                         {:solucao_sub_modulo => [:solucao_modulo => [:solucao]]},
                         :status,:prioridade,:tipo_pendencia],
               :conditions => filtro,
@@ -160,14 +158,14 @@ class Solicitacao < ActiveRecord::Base.extend Search
      )
   end
 
-  scope :solicitacoes_por_atendimento, lambda {|atendimento_id|{
-              :select => "solicitacoes.id,solicitacoes.titulo,solucao_sub_modulos.descricao as sub_modulo,
-                          tipo_pendencias.descricao as tipo_descricao,status.descricao as status_descricao,
-                          cliente_contatos.nome as nome_contato,solicitacoes.data_previsao_liberacao",
-              :joins => [:atendimento,:cliente_contato,:solucao_sub_modulo,:status,:tipo_pendencia],
-              :conditions => {:atendimento_id => atendimento_id}
+  # scope :solicitacoes_por_atendimento, lambda {|atendimento_id|{
+  #             :select => "solicitacoes.id,solicitacoes.titulo,solucao_sub_modulos.descricao as sub_modulo,
+  #                         tipo_pendencias.descricao as tipo_descricao,status.descricao as status_descricao,
+  #                         cliente_contatos.nome as nome_contato,solicitacoes.data_previsao_liberacao",
+  #             :joins => [:atendimento,:cliente_contato,:solucao_sub_modulo,:status,:tipo_pendencia],
+  #             :conditions => {:atendimento_id => atendimento_id}
 
-  }}
+  # }}
 
 private
 
@@ -175,7 +173,7 @@ private
   #Insercao de historico padrao para a solicitacao, no qual iniciara com status de Aberto.
   def inserir_historico_padrao
     historicos  << SolicitacaoHistorico.new(
-        :usuario => atendimento.usuario_cadastrante,:usuario_responsavel => usuario_responsavel,
+        :usuario => self.usuario_cadastrante,:usuario_responsavel => usuario_responsavel,
         :status  => status,:detalhe => 'Solicitação cadastrada'
     )
   end
@@ -183,9 +181,9 @@ private
   #After_Destroy
   #Caso a solicitacao estiver vinculada a um atendimento que é interno,
   #ou seja, não possui um atendimento formal. Irá deletar o mesmo
-  def delete_atendimento_interno
-    Atendimento.destroy(atendimento.id) if atendimento.interno
-  end
+  # def delete_atendimento_interno
+  #   Atendimento.destroy(atendimento.id) if atendimento.interno
+  # end
 
   #Validacoes
   def validate_presence_of_detalhe_ultimo_historico

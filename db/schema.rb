@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130914110058) do
+ActiveRecord::Schema.define(:version => 20130917142718) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -268,10 +268,13 @@ ActiveRecord::Schema.define(:version => 20130914110058) do
     t.integer  "projeto_id"
     t.integer  "etapa_id"
     t.integer  "peso"
+    t.integer  "cliente_id"
+    t.integer  "usuario_cadastrante_id"
   end
 
   add_index "solicitacoes", ["atendimento_id"], :name => "index_solicitacoes_on_atendimento_id"
   add_index "solicitacoes", ["cliente_contato_id"], :name => "index_solicitacoes_on_cliente_contato_id"
+  add_index "solicitacoes", ["cliente_id"], :name => "index_solicitacoes_on_cliente_id"
   add_index "solicitacoes", ["etapa_id"], :name => "index_solicitacoes_on_etapa_id"
   add_index "solicitacoes", ["ordem_servico_id"], :name => "fk_solicitacoes_ordem_servicos"
   add_index "solicitacoes", ["prioridade_id"], :name => "index_solicitacoes_on_prioridade_id"
@@ -279,6 +282,7 @@ ActiveRecord::Schema.define(:version => 20130914110058) do
   add_index "solicitacoes", ["solucao_sub_modulo_id"], :name => "index_solicitacoes_on_solucao_sub_modulo_id"
   add_index "solicitacoes", ["status_id"], :name => "index_solicitacoes_on_status_id"
   add_index "solicitacoes", ["tipo_pendencia_id"], :name => "index_solicitacoes_on_tipo_pendencia_id"
+  add_index "solicitacoes", ["usuario_cadastrante_id"], :name => "index_solicitacoes_on_usuario_cadastrante_id"
   add_index "solicitacoes", ["usuario_responsavel_id"], :name => "index_solicitacoes_on_usuario_responsavel_id"
 
   create_table "solucao_modulos", :force => true do |t|
@@ -440,6 +444,7 @@ ActiveRecord::Schema.define(:version => 20130914110058) do
 
   add_foreign_key "solicitacoes", "atendimentos", :name => "fk_solicitacoes_atendimentos"
   add_foreign_key "solicitacoes", "cliente_contatos", :name => "fk_solicitacoes_cliente_contatos_id"
+  add_foreign_key "solicitacoes", "clientes", :name => "fk_solicitacoes_clientes"
   add_foreign_key "solicitacoes", "etapas", :name => "fk_solicitacoes_etapas"
   add_foreign_key "solicitacoes", "ordem_servicos", :name => "fk_solicitacoes_ordem_servicos"
   add_foreign_key "solicitacoes", "prioridades", :name => "fk_solicitacoes_prioridades"
@@ -448,6 +453,7 @@ ActiveRecord::Schema.define(:version => 20130914110058) do
   add_foreign_key "solicitacoes", "status", :name => "fk_solicitacoes_status"
   add_foreign_key "solicitacoes", "tipo_pendencias", :name => "fk_solicitacoes_tipo_pendencias"
   add_foreign_key "solicitacoes", "usuarios", :name => "fk_pendencias_itens_usuario_responsavel", :column => "usuario_responsavel_id"
+  add_foreign_key "solicitacoes", "usuarios", :name => "fk_solicitacaoes_usuario_cadastrante", :column => "usuario_cadastrante_id"
 
   add_foreign_key "solucao_modulos", "solucoes", :name => "fk_modulos_solucoes"
 

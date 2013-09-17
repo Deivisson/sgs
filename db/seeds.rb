@@ -75,3 +75,4 @@ etapas = [{descricao:'Desenvolvimento'},{descricao:'Treinamento'},{descricao:'In
 etapas.each do |etapa|
   Etapa.where(etapa).first_or_create!
 end
+

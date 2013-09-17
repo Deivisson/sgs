@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Usuario::OrdemServicosController < Usuario::BaseController
-
+  before_filter :set_current_menu
   before_filter :carrega_ordem_servico, :except => [:index,:create,:new, :carrega_solicitacoes]
   before_filter :carrega_dados, :only  => [:new,:edit,:update, :create, :index]
   before_filter :permite_editar_excluir, :only => [:edit, :destroy]  
@@ -107,4 +107,7 @@ private
                       que cadastrou (#{@ordem_servico.cadastrante.nome})."
   end
 
+  def set_current_menu
+    session[:current_menu] = "ordem_servico"
+  end
 end

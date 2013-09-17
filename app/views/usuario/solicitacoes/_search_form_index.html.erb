@@ -11,7 +11,7 @@
 	
 	<div class="field">
 		<%= content_tag :label, "Cliente" %>
-		<%= select_tag "conditions[atendimentos.cliente_id]",
+		<%= select_tag "conditions[solicitacoes.cliente_id]",
 					options_for_select(@clientes.collect{|c| [c.nome, c.id]}), 
 					:include_blank => true %>
 	</div>
