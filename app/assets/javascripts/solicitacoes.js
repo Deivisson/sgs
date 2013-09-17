@@ -34,7 +34,7 @@ $(document).ready(function(){
 
 //MODAL FORM
 function solicitacaoModalForm(){
-  $("a.solicitacao-link").click(function(e){
+  $("a#solicitacao-link").click(function(e){
     var url = $(this).attr('href');
     var dialog_form = $(getModalContainer()).dialog({
         autoOpen: false,

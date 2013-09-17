@@ -12,7 +12,7 @@
 		<%= content_tag :label, "Cliente" %>
 		<%= select_tag "conditions[cliente_id]",
 					options_for_select(@clientes.collect{|c| [c.nome, c.id]}), 
-					:include_blank => true %>
+					:include_blank => true  %>
 	</div>
 	<div class="field">
 		<%= content_tag :label, "Aberto por: <span>(Usuários)</span>".html_safe %>

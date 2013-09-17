@@ -98,6 +98,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
       flash[:notice] = "Solicitação cadastrada com sucesso."
     else
       carrega_dados
+      @atendimento.errors.full_messages
     end
   end
 
