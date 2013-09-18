@@ -1,10 +1,10 @@
-<%= content_tag :div, class:"projeto-resumo" do %>
+<%= content_tag :div, class:"show-resumo" do %>
 
   <%= content_tag :div, class:"titulo-container" do %>
     <%= image_tag("icons/32/project.png", class:"projeto-imagem") %>
     <p><%= @projeto.nome %></p>
-    <div class="projeto-links">
-      <%= link_to "Projetos", usuario_projetos_path %>
+    <div class="show-links">
+      <%= link_to "Voltar", usuario_projetos_path %>
       <%= link_to "Editar", edit_usuario_projeto_path(@projeto),
                             remote:true, id:'projeto-link', 
                             class:'first' %>
@@ -12,7 +12,7 @@
     
   <% end %>
 
-  <%= content_tag :div, class:"projeto-detalhes" do %>
+  <%= content_tag :div, class:"detalhes" do %>
     <dl>
       <dt>Abertura</dt>
       <dd><%= formata_data(@projeto.created_at,:long) %></dd>

@@ -1,0 +1,24 @@
+
+<%= section_tag id:"solicitacao-tab-detalhes", class:"section-tag-whiteBg" do %>
+  <%= form_tag edit_multiple_usuario_solicitacoes_path do %>
+    <div id="div_show">
+      <p><strong>Título:</strong> <%=h @solicitacao.titulo %> </p>
+      <p><strong>Sub Módulo:</strong><%=h @solicitacao.solucao_sub_modulo.descricao %></p>
+      <p><strong>Cliente:</strong><%=h @solicitacao.cliente_contato.cliente.nome %> </p>
+      <p><strong>Solicitante:</strong><%=h @solicitacao.cliente_contato.nome %> </p>
+      <p><strong>Prioridade:</strong><%=h @solicitacao.prioridade.descricao %> </p>
+      <p><strong>Tipo:</strong><%=h @solicitacao.tipo_pendencia.descricao %></p>
+      <p><strong>Previsão Liberação:</strong><%=h @solicitacao.data_previsao_liberacao.to_s_br %></p>
+      <p><strong>Liberacao:</strong><%=h @solicitacao.data_hora_real_liberacao.to_s_br %></p>
+      <p><strong>Versão Liberação:</strong><%=h @solicitacao.versao_liberacao %></p>
+      <p><strong>Anexo:</strong><%= link_to @solicitacao.anexo_file_name,@solicitacao.anexo.url if @solicitacao.anexo.exists? %> <br></p>
+      <p><strong>Detalhe:</strong><%= @solicitacao.detalhe.html_safe %></p>
+    </div>
+    <%= hidden_field_tag  "solicitacao_ids[]", @solicitacao.id  %>
+    <!-- Utlizado para retornar lista de solicitacoes do status atual. Ex: se estiver
+        Selecionando registros com status Aberto, deverá retornar para a lista de status
+        Aberto após realizar a movimentacao -->
+    <%= hidden_field_tag "status_id",@solicitacao.status_id %>
+    <%= submit_tag "Registrar Status" %>
+  <% end %>
+<% end %>

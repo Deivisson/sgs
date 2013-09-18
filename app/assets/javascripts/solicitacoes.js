@@ -29,6 +29,7 @@ $(document).ready(function(){
   }
 
   solicitacaoModalForm();
+  $("#tab-menu-solicitacoes").tabs();
 });
 
 
@@ -36,36 +37,40 @@ $(document).ready(function(){
 function solicitacaoModalForm(){
   $("a#solicitacao-link, a.solicitacao-link").click(function(e){
     var url = $(this).attr('href');
-    var dialog_form = $(getModalContainer()).dialog({
-        autoOpen: false,
-        width: 830,
-        height: 540,
-        modal: true,
-        closeText: "Fechar",
-        close: function() {
-          $('#dialog-form').remove();
-        }
-    });
-
-    dialog_form.load(url + ' #modal-container', function(){
-      //to change the title, see hidden-title-label on new, edit or show page
-      $(this).dialog('option',"title","Nova Solicitação");
-      $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange);
-      $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos);
-      $("#tabs").tabs(); //tabify(); 
-      
-      inicializaTinyMCE();
-      bindSolicitacaoUIEvents();
-      setMaskFields();
-      if ($("#cliente-select-id").attr("disabled") == undefined) {
-        $("#cliente-select-id").focus();
-      } else {
-        $("#cliente-contato-select-id").focus();
-      }
-    });
-    dialog_form.dialog('open');
-    e.preventDefault();
+    callSolicitcaoModalFormToNew(url);
   });
+}
+
+function  callSolicitcaoModalFormToNew(url){
+  var dialog_form = $(getModalContainer()).dialog({
+      autoOpen: false,
+      width: 830,
+      height: 540,
+      modal: true,
+      closeText: "Fechar",
+      close: function() {
+        $('#dialog-form').remove();
+      }
+  });
+
+  dialog_form.load(url + ' #modal-container', function(){
+    //to change the title, see hidden-title-label on new, edit or show page
+    $(this).dialog('option',"title","Nova Solicitação");
+    $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange);
+    $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos);
+    $("#tabs").tabs(); //tabify(); 
+    
+    inicializaTinyMCE();
+    bindSolicitacaoUIEvents();
+    setMaskFields();
+    if ($("#cliente-select-id").attr("disabled") == undefined) {
+      $("#cliente-select-id").focus();
+    } else {
+      $("#cliente-contato-select-id").focus();
+    }
+  });
+  dialog_form.dialog('open');
+  e.preventDefault();
 }
 
 function bindSolicitacaoUIEvents() {

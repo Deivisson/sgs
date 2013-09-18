@@ -52,18 +52,17 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     if @solicitacao.nao_lido and @solicitacao.usuario_responsavel_id == current_usuario.id
       @solicitacao.update_attributes!(:nao_lido => false) 
     end
-    # if @solicitacao.confirmacao_leitura and @solicitacao.usuario_responsavel_id == current_usuario.id
-    #   enviar_email_confirmacao_leitura 
-    # end
     @solicitacao_historicos = SolicitacaoHistorico.where(solicitacao_id:@solicitacao.id)
     @solicitacao_historicos = @solicitacao_historicos.order("created_at DESC")
-    respond_with @solicitacao
+    render :layout  => "projeto"
   end
 
   def new
     @solicitacao = Solicitacao.new(:status_id => Status::ABERTO)
     if params[:projeto_id]
-      @solicitacao.projeto_id = params[:projeto_id]
+      projeto = Projeto.find(params[:projeto_id])
+      @solicitacao.cliente_id = projeto.cliente_id
+      @solicitacao.projeto_id = projeto.id
       @solicitacao.etapa_id = params[:etapa_id]
     end
     carrega_contatos_e_projetos_cliente

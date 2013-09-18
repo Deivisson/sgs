@@ -10,7 +10,7 @@
                     :required     => true,
                     :input_html   => {:id        => "cliente-select-id",
                                       :disabled  => !@solicitacao.permite_alterar_cliente? } %>
-                                      
+    <%= hidden_field_tag "solicitacao[cliente_id]",@solicitacao.cliente_id if !@solicitacao.permite_alterar_cliente? %>
     <%= form.input :cliente_contato_id,
                    :as            => :select,
                    :collection    => @contatos,

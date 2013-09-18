@@ -1,42 +1,55 @@
-<% title "Solicitação nº: #{@solicitacao.id.to_s.rjust(5,'0')}" %>
-<% content_for :bar do %>
-  <div id="toolbar_itens">
-    <ul>
-      <li><%= link_to image_tag(image_link[:pdf],:border => 0),usuario_solicitacao_path(@solicitacao,:format => 'pdf') %></li>
-    </ul>
-  </div>
-<% end %>
-<%= form_tag edit_multiple_usuario_solicitacoes_path do %> <!-- Permite registrar movimentacao -->
-  <div id="div_show">
-    <p><strong>Título:</strong> <%=h @solicitacao.titulo %> </p>
-    <p><strong>Solucao:</strong><%=h @solicitacao.solucao_sub_modulo.solucao_modulo.solucao.descricao %></p>
-    <p><strong>Sub Módulo:</strong><%=h @solicitacao.solucao_sub_modulo.descricao %></p>
-    <p><strong>Cliente:</strong><%=h @solicitacao.cliente_contato.cliente.nome %> </p>
-    <p><strong>Solicitante:</strong><%=h @solicitacao.cliente_contato.nome %> </p>
-    <p><strong>Prioridade:</strong><%=h @solicitacao.prioridade.descricao %> </p>
-    <p><strong>Tipo:</strong><%=h @solicitacao.tipo_pendencia.descricao %></p>
-    <p><strong>Status:</strong> <%=h @solicitacao.status.descricao %> </p>
-    <p><strong>Cadastrado em:</strong><%=h @solicitacao.created_at.to_s_br %></p>
-    <p><strong>Previsão Liberação:</strong><%=h @solicitacao.data_previsao_liberacao.to_s_br %></p>
-    <p><strong>Liberacao:</strong><%=h @solicitacao.data_hora_real_liberacao.to_s_br %></p>
-    <p><strong>Versão Liberação:</strong><%=h @solicitacao.versao_liberacao %></p>
-    <p><strong>Anexo:</strong><%= link_to @solicitacao.anexo_file_name,@solicitacao.anexo.url if @solicitacao.anexo.exists? %> <br></p>
-    <p><strong>Detalhe:</strong><%= @solicitacao.detalhe.html_safe %></p>
-  </div>
-  <div>
-    <%= render :partial => "show_historicos" %>
-  </div>
-  <%= hidden_field_tag  "solicitacao_ids[]", @solicitacao.id  %>
-  <!-- Utlizado para retornar lista de solicitacoes do status atual. Ex: se estiver
-      Selecionando registros com status Aberto, deverá retornar para a lista de status
-      Aberto após realizar a movimentacao -->
-  <%= hidden_field_tag "status_id",@solicitacao.status_id %>
+<% content_for :left_container do %>
+  <%= content_tag :div, class:"show-resumo" do %>
+    <%= content_tag :div, class:"titulo-container" do %>
+      <p style="width:100%"><%="Solicitação nº: #{@solicitacao.id.to_s.rjust(5,'0')}" %></p>
+      <div class="show-links">
+        <%= link_to "Voltar", usuario_solicitacoes_path %>
+        <%= link_to 'Registrar Status', "#" %>   
+        <%= link_to "Editar",  
+            [:edit, :usuario, @solicitacao], remote:true, id:'solicitacao-link',class:'first' %>         
+      </div>    
+    <% end %>
 
-  <%= submit_tag "Registrar Status" %>
-  <% if not @local.nil? %>
-    <%= link_voltar %>
-  <% else %>
-    <%= link_to 'Voltar',usuario_solicitacoes_path %>
+    <%= content_tag :div, class:"detalhes" do %>
+      <dl>
+        <dt>Solução</dt>
+        <dd><%= @solicitacao.solucao_sub_modulo.solucao_modulo.solucao.descricao %></dd>
+        <dt>Status</dt>
+        <dd class="destak"><%= @solicitacao.status.descricao %></dd>      
+        <dt>Cadas. por</dt>
+        <dd><%= @solicitacao.usuario_cadastrante.nome %></dd>
+        <dt>Cadastro</dt>
+        <dd><%= formata_data(@solicitacao.created_at,:long) %></dd>
+      </dl>
+    <% end %> 
   <% end %>
-  <%= link_to "Edit", [:edit, :usuario, @solicitacao], remote:true, class:'solicitacao-link' %>
 <% end %>
+
+
+<% content_for :menu do %>
+  <%= content_tag :div, class:"show-menu-container" do %>
+    <div id="tab-menu-solicitacoes" >
+      <%= content_tag :ul do %>
+        <%= content_tag :li, :id => "solicitacao-menu-tab-detalhes" do %>
+          <%= link_to "Detalhes", "#solicitacao-tab-detalhes" %>
+        <% end %>
+        <%= content_tag :li, :id => "solicitacao-menu-tab-historico" do %>
+          <%= link_to "Histórico Movimentações", "#solicitacao-tab-historico" %>
+        <% end %>
+
+      <% end %>
+      <!--
+      <div class="show-content-menu">
+        <%= link_to "Editar",  
+            [:edit, :usuario, @solicitacao], remote:true, id:'solicitacao-link',class:'first' %> 
+        <%= link_to 'Nova Solicitação', new_usuario_solicitacao_path, remote:true, id:'solicitacao-link' %>        
+        <%= link_to 'Registrar Status', "#" %>   
+        <%= link_to "Voltar", usuario_solicitacoes_path %>
+      </div>
+      -->
+      <%= render 'show_detalhes' %>
+      <%= render 'show_historicos' %>
+    </div>
+  <% end %>
+<% end %>
+

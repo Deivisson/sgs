@@ -9,11 +9,11 @@
 </head>
 <body>
   <%= render "/shared/header" %>
-  <div class="projetos-left-container">
+  <div class="show-left-container">
     <%= yield :left_container %>
   </div>
   
-  <div class="projeto-conteudo">
+  <div class="show-container">
     <div id="container" >
       <%- flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>

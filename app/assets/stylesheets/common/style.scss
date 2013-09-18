@@ -294,8 +294,8 @@ ul.menu-icon-bar {
   -moz-border-radius: 5px; 
   -webkit-border-radius: 5px; 
   border: 1px solid #BFBFBF;
-  
-  background-color: #9499A9;*/
+  */
+  background-color: #DBDBDB;
   float: left;
   padding: 5px 5px 0 5px;
   margin:0 0 0 0;
@@ -656,35 +656,7 @@ a:hover { color: #fff; background-color:#000; }
 }
 
 
-/* Container Show
----------------------------------------------------------*/
-#div_show {
 
-  background-color:#f5f5f5;
-  width:98.3%;
-  min-width:60%;
-  padding:0px 10px 10px 10px ;
-  border: 1px solid #d6d6d6;
-  border-bottom:2px solid #d6d6d6;
-  margin-top: 10px;
-
-}
-#div_show p {
-  display: table;
-  margin-top:1px; 
-  margin-bottom:2px;
-  padding: 2px;
-  width: 100%;
-}
-
-#div_show p strong {
-  border-bottom: 1px dotted  #ccc;
-  float: left;
-  font-weight: bold;
-  text-align:right;
-  margin:0 5px 2px 0;
-  width:150px;
-}
 
 /* Container grid
 ---------------------------------------------------------*/

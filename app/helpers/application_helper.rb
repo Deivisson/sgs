@@ -12,16 +12,16 @@ module ApplicationHelper
 
 
   def load_status
-    status_list = Solicitacao.all(:group => 'status_id,status.descricao,nao_lido',
+    status_list = Solicitacao.all(:group => 'status_id,status.descricao',
                                   :conditions => ['usuario_responsavel_id = ? and status.encerramento = ?',current_usuario,false],
                                   :select => 'count(status_id) as qtde,status.descricao, nao_lido,status_id',
                                   :joins => :status)
     result = Array.new
     for status in status_list
       if  (status != nil)
-        item = ["#{status.descricao[0..15]}",status.qtde,status.status_id,status.nao_lido]
+        item = ["#{status.descricao.truncate(18)}",status.qtde,status.status_id,status.nao_lido]
       else
-        item = ["#{status.descricao[0..15]}",0,status.status_id,false]
+        item = ["#{status.descricao.truncate(18)}",0,status.status_id,false]
       end
       result << item
     end
