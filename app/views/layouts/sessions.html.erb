@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <%= stylesheet_link_tag 'application' %>
-  <%= javascript_include_tag 'application', :media => "all" %>
+  <%= stylesheet_link_tag 'session' %>
   <title>SGS- - Sistema de Gerenciamento de Soft</title>
 </head>
 <body>
+	<%= content_tag :div, :class => "head" do %>
+		<div class="centralizer">
+	  	<%= image_tag("/assets/logo-sgs.png",:style =>"margin: 4px 0 0 -25px;") %>
+	  	<% if resource_name == :usuario %>
+	  		<%= link_to "Login Admin", new_admin_session_path %>
+  		<% else %> 
+  			<%= link_to "Login Usuário", new_usuario_session_path %>
+  		<% end %>
+		</div>
+	<% end %>
 
-<p style="color: green"><%= flash[:notice] %></p>
-
-<%= yield %>
-
+	<div class="msg-container">
+		<%- flash.each do |name, msg| %>
+	    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+	  <%- end %>
+  <div>
+	<div class="login-form">
+		<%= yield %>
+	</div>
+	
 </body>
 </html>

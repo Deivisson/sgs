@@ -3,7 +3,7 @@
   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'application', :media => "all" %>
-  
+  <%= javascript_include_tag  "//tinymce.cachefly.net/4.0/tinymce.min.js" %>
   <%= yield(:tiny_mce) %>  
   <%= csrf_meta_tag %>
 </head>

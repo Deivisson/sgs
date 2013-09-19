@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Admin::UsuariosController < Admin::BaseController
-
+  
   before_filter :carrega_solucoes, :only => [:new,:edit,:create, :update]
   
   def index

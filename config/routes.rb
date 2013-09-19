@@ -1,11 +1,9 @@
 Sgsoft::Application.routes.draw do
 
-
-
   resources :ordem_servico_itens
 
-  devise_for :admins
-  devise_for :usuarios
+  devise_for :admins, :controllers => { :sessions => "usuario/sessions" }
+  devise_for :usuarios, :controllers => { :sessions => "usuario/sessions" }
 
 
   namespace :admin do
@@ -62,8 +60,14 @@ Sgsoft::Application.routes.draw do
     get '/resources/:cliente_id/solucao_modulos', :to => 'resources#solucao_modulos'
     get '/resources/:modulo_id/solucao_sub_modulos', :to => 'resources#solucao_sub_modulos'
     get '/resources/:status_id/usuarios_responsaveis', :to => 'resources#usuarios_responsaveis'
-  end
 
+
+  end
+  # scope '/usuario' do
+  #   devise_for :usuarios, :controllers => {
+  #       :sessions      => "usuario/sessions"
+  #     }
+  # end
 	root :to => "usuario/solicitacoes#index"
 
 end

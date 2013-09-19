@@ -1,0 +1,18 @@
+<% if resource_name == :usuario %>
+	<h2>Login Usuário</h2>
+<% else %> 
+	<h2>Login Administrador</h2>
+<% end %>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <%= f.email_field :email, :autofocus => true, :placeholder => "Email" %>
+  <div>
+	  <%= f.password_field :password, :placeholder => "Senha",:style => "width: 200px" %>
+	  <% if devise_mapping.rememberable? -%>
+	    <%= f.check_box :remember_me %> <label>Lembra-me</label>
+	  <% end -%>
+  <div>
+  <br>
+  <div><%= f.submit "Logar",class:'submit-button' %></div>
+<% end %>
+
