@@ -148,3 +148,19 @@ body, p, ol, ul, td {
   vertical-align: center;
   width:100px;
 }
+
+.browsers {
+  margin-top: 80px; 
+  width: 430px;
+  img {
+    float:right;
+  }
+  label {
+    color: #8DB400;
+    display: inline;
+    float: right;
+    margin-right:85px;
+    text-align: right;
+    width: 100%;
+  }
+}

@@ -33,24 +33,21 @@ $(document).ready(function(){
     $('.clicked').animate({"height": pY }, 0);
   }
 
-  // var captureKeys = function(ev) {
-  //     ev = ev || window.event;             // gets the event in ie or ns
-  //     kCode = ev.keyCode || ev.which;   // gets the keycode in ie or ns
-  //     if (ev.ctrlKey && ev.shiftKey && kCode == 19 || ev.ctrlKey && ev.shiftKey && kCode == 83) {    // ctrl+alt+s
-  //         callSolicitcaoModalFormToNew("/usuario/solicitacoes/new");
-  //         return false;  // make it so the browser ignores key combo
-  //     }
-  // }
-  // if ($.browser.mozilla) {
-  //     $(document).keypress (function(e){
-  //       captureKeys(e);
-  //     });
-  //     $(document).keydown (function(e){
-  //       captureKeys(e);
-  //     });
-  // } else {
-
-  // }
+  var captureKeys = function(ev) {
+      ev = ev || window.event;           // gets the event in ie or ns
+      kCode = ev.keyCode || ev.which;   // gets the keycode in ie or ns
+      //ev.ctrlKey && ev.shiftKey && kCode == 19 || ev.ctrlKey && ev.shiftKey && kCode == 83
+      if (ev.altKey) { 
+          switch(kCode) {
+            case 50: //Alt+2
+              callSolicitcaoModalFormToNew("/usuario/solicitacoes/new");
+              return false;
+          }
+      }
+  }
+  $(document).keydown (function(e){
+    captureKeys(e);
+  });
   
 });
 

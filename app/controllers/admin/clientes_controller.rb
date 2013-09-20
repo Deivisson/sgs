@@ -5,6 +5,7 @@ class Admin::ClientesController < Admin::BaseController
 
   def index
     @clientes = Cliente.order(:nome).paginate :page => params['page'], :per_page =>25
+    respond_with(@clientes)
   end
 
   def show
