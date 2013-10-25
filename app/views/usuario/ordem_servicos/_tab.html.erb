@@ -1,19 +1,30 @@
-<div class="menutab-content">
-  <%= content_tag :ul, :id => "tab-menu" do %>
-    <li class="active"><%= link_to "Descrição *", "#descricao" %></li>
-    <li><%= link_to "Observações", "#observacao"%></li>
-
-    <%= content_tag :div, :id => "descricao" do %>
-      <%= f.input :descricao, 
-                  :as         => :text , 
-                  :label      => false,
-                  :input_html => {:rows => 8} %>
-    <% end %>
-    <%= content_tag :div, :id => "observacao" do %>
-      <%= f.input :observacoes, 
-                  :as         => :text, 
-                  :label      => false,
-                  :input_html => {:rows => 8} %>
-    <% end %>
+<%= content_tag :div, class:"menutab-content",id:"tab-ordem-servico-detalhes" do %>
+  <%= content_tag :ul do %>
+    <li id = "ordem-servico-tab1">
+      <%= link_to "#tab1" do  %>
+        <span>Descrição</span>
+      <% end %>
+    </li>
+    <li id = "ordem-servico-tab2" >
+      <%= link_to "#tab2" do  %>
+        <span>Observações</span>
+      <% end %>
+    </li>
+    <div id="tab1">
+      <%= content_tag :div, :id => "descricao" do %>
+        <%= f.input :descricao, 
+                    :as         => :text , 
+                    :label      => false,
+                    :input_html => {:rows => 8} %>
+      <% end %>
+    </div>
+    <div id="tab2">
+      <%= content_tag :div, :id => "observacao" do %>
+        <%= f.input :observacoes, 
+                    :as         => :text, 
+                    :label      => false,
+                    :input_html => {:rows => 8} %>
+      <% end %>
+    </div>
   <% end %>
-</div> 
+<% end %>

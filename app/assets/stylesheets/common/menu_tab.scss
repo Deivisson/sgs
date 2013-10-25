@@ -51,6 +51,12 @@ ul#tab-menu {
   border: 0 !important;
   float: left;
   width: 100%;
+  ul li {
+    width: auto !important;
+    .mce-tinymce {
+      margin-left: 0px !important;
+    }
+  }
   .ui-tabs-nav {
     background: #EEEEEE;
     border: 0px;

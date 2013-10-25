@@ -4,7 +4,7 @@ $(document).ready(function(){
 	var TIPO_OS_DESENVOLVIMENTO = 3;
 	var TIPO_OS_TREINAMENTO = 0
 
-  	$('a[class*="remove-item-link"]').bind("click",removeItem);
+	$('a[class*="remove-item-link"]').bind("click",removeItem);
 
 	$("#add-item-link").click(function(){
 		var itemIndex = $('#ordem-servico-itens').find('.dynamic-itens-row').size() - 1;
@@ -155,9 +155,8 @@ $(document).ready(function(){
 		}
 	}
 
-
-
-	///$("#tab-menu").tabify(); 
-	
+	//Inicializa componentes no form
+	$("#tab-ordem-servico-detalhes").tabs(); 
+	inicializaTinyMCE();
 });
 

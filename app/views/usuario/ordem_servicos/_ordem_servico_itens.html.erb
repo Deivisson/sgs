@@ -15,7 +15,7 @@
     		<%= render :partial => "item_fields" %>
 	    	<%= f.fields_for :itens do |builder, i|  %>
 	    		<%= puts i %>
-				<%= render :partial => "item", :locals => {:f => builder} %>
+					<%= render :partial => "item", :locals => {:f => builder} %>
 	    	<% end %>
       </tbody>
   </table>
