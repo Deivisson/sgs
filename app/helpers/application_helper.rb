@@ -101,7 +101,7 @@ module ApplicationHelper
   def main_menu(path,options={})
     html = []
     css_class = session[:current_menu] == options[:target] ? "current" : ""
-    html << content_tag(:li,class:css_class) do
+    html << content_tag(:li,class:css_class,title:options[:title]) do
       inner_html = []
       inner_html << link_to(image_tag("/assets/icons/32/#{options[:icon_name]}.png"),path)
       inner_html.join.html_safe
