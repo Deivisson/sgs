@@ -4,8 +4,9 @@ class Projeto < ActiveRecord::Base
   EM_ANDAMENTO = 2
   INTERROMPIDO = 3
   CANCELADO = 4
-  
-  STATUS = ["Ativo", "Em Andamento", "Interrompido", "Cancelado"]
+  FINALIZADO = 5
+
+  STATUS = ["Ativo", "Em Andamento", "Interrompido", "Cancelado","Finalizado"]
 
 
   validates :nome, presence:true, length:{maximum:50}, uniqueness: {scope: :cliente_id}
