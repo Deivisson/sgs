@@ -27,6 +27,8 @@ background/sprite2.png: background/sprite2-c0e4b46fda9a7cd00fb1c608ace44180.png
 background/sprite2/index.png: background/sprite2-c0e4b46fda9a7cd00fb1c608ace44180.png
 background/user_info.png: background/user_info-faddc4bcc227e95f1784064489e6ff71.png
 background/user_info/index.png: background/user_info-faddc4bcc227e95f1784064489e6ff71.png
+browsers.png: browsers-ec1c44a5b048abf008490881e3c76a68.png
+browsers/index.png: browsers-ec1c44a5b048abf008490881e3c76a68.png
 cliente.png: cliente-afcc6cabe97e3d71640ef61c63915236.png
 cliente/index.png: cliente-afcc6cabe97e3d71640ef61c63915236.png
 foto/Thumbs.db: foto/Thumbs-a31835ee170e7e1222ad9eb07b2a4416.db
@@ -107,8 +109,8 @@ logo-sgs.png: logo-sgs-6e914cfb14095d47254c930e888cb0ad.png
 logo-sgs/index.png: logo-sgs-6e914cfb14095d47254c930e888cb0ad.png
 rails.png: rails-a3386665c05a2d82f711a4aaa72d247c.png
 rails/index.png: rails-a3386665c05a2d82f711a4aaa72d247c.png
-application.js: application-0b24d45b175e8674012014c6445cc29a.js
-application/index.js: application-0b24d45b175e8674012014c6445cc29a.js
+application.js: application-364b78cd528f698256161f6a78b4194b.js
+application/index.js: application-364b78cd528f698256161f6a78b4194b.js
 tiny_mce/license.txt: tiny_mce/license-6b8dfd9d628576a414268f9be344eb0a.txt
 tiny_mce/license/index.txt: tiny_mce/license-6b8dfd9d628576a414268f9be344eb0a.txt
 tiny_mce/plugins/advhr/rule.htm: tiny_mce/plugins/advhr/rule-4a712774567310323ee65f42ebe2f354.htm
@@ -281,5 +283,5 @@ tiny_mce/themes/simple/skins/o2k7/img/Thumbs.db: tiny_mce/themes/simple/skins/o2
 tiny_mce/themes/simple/skins/o2k7/img/Thumbs/index.db: tiny_mce/themes/simple/skins/o2k7/img/Thumbs-26ce0d00468f8b1ffd46e6f6e1cec938.db
 tiny_mce/themes/simple/skins/o2k7/img/button_bg.png: tiny_mce/themes/simple/skins/o2k7/img/button_bg-89e593ea65f65ae49e3c299dc0a19cb1.png
 tiny_mce/themes/simple/skins/o2k7/img/button_bg/index.png: tiny_mce/themes/simple/skins/o2k7/img/button_bg-89e593ea65f65ae49e3c299dc0a19cb1.png
-application.css: application-a152c8e0f1c9c4d4bd3e01f9dcc9ccca.css
-application/index.css: application-a152c8e0f1c9c4d4bd3e01f9dcc9ccca.css
+application.css: application-31eea76cbb11d89034d3bfdd92993b4e.css
+application/index.css: application-31eea76cbb11d89034d3bfdd92993b4e.css
