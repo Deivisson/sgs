@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.integer  "usuario_solicitante_id",                                  :null => false
     t.string   "descricao",              :limit => 50
     t.text     "observacao"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
     t.boolean  "interno",                              :default => false, :null => false
   end
 
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.string   "email",        :limit => 50
     t.string   "telefone",     :limit => 11
     t.string   "celular",      :limit => 11
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   add_index "cliente_contatos", ["cliente_id"], :name => "index_cliente_contatos_on_cliente_id"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.string   "cep",                :limit => 8
     t.string   "telefone",           :limit => 11
     t.string   "fax",                :limit => 11
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                                       :null => false
+    t.datetime "updated_at",                                                                       :null => false
     t.integer  "minutos_bonus",                                                   :default => 0,   :null => false
     t.decimal  "valor_hora_visita",                :precision => 10, :scale => 6, :default => 0.0, :null => false
     t.decimal  "valor_deslocamento",               :precision => 5,  :scale => 2, :default => 0.0, :null => false
@@ -81,12 +81,11 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.integer "solucao_id", :null => false
   end
 
-  add_index "clientes_solucoes", ["cliente_id"], :name => "index_clientes_projetos_on_cliente_id"
   add_index "clientes_solucoes", ["solucao_id"], :name => "index_clientes_solucoes_on_solucao_id"
 
   create_table "configuracoes", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.text     "mensagem_os"
   end
 
@@ -99,8 +98,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.string   "tipo",        :limit => 3
     t.string   "width",       :limit => 3
     t.boolean  "selecionado",                :default => false, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.integer  "ordem"
     t.boolean  "padrao",                     :default => false
   end
@@ -109,8 +108,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
 
   create_table "consultas", :force => true do |t|
     t.string   "descricao",  :limit => 50, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "empresas", :force => true do |t|
@@ -121,8 +120,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.string   "complemento",       :limit => 30
     t.string   "cidade",            :limit => 50
     t.string   "uf",                :limit => 2
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -164,20 +163,19 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
   add_index "ordem_servico_itens", ["tipo_avaliacao_id"], :name => "index_ordem_servico_itens_on_tipo_avaliacao_id"
 
   create_table "ordem_servicos", :force => true do |t|
-    t.integer  "cliente_id",                                                                              :null => false
+    t.integer  "cliente_id"
     t.integer  "local_execucao",                                                                          :null => false
-    t.integer  "cliente_contato_id",                                                                      :null => false
-    t.integer  "tipo_os",                                                                                 :null => false
-    t.integer  "usuario_responsavel_id",                                                                  :null => false
-    t.integer  "usuario_cadastrante_id",                                                                  :null => false
-    t.time     "hora_inicio"
-    t.time     "hora_fim"
-    t.time     "tempo_intervalo"
+    t.integer  "cliente_contato_id"
+    t.integer  "tipo_os"
+    t.integer  "usuario_id"
+    t.datetime "data_hora_inicio"
+    t.datetime "data_hora_fim"
+    t.datetime "tempo_intervalo"
     t.text     "descricao"
     t.text     "observacoes"
-    t.string   "usuarios_participantes",   :limit => 254,                                                 :null => false
-    t.decimal  "valor_total",                             :precision => 10, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "valor_deslocamento",                      :precision => 10, :scale => 2, :default => 0.0, :null => false
+    t.string   "usuarios_participantes",   :limit => 254
+    t.decimal  "valor",                                   :precision => 10, :scale => 0, :default => 0
+    t.decimal  "valor_deslocamento",                      :precision => 10, :scale => 0, :default => 0
     t.datetime "created_at",                                                                              :null => false
     t.datetime "updated_at",                                                                              :null => false
     t.date     "data_execucao",                                                                           :null => false
@@ -191,13 +189,12 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
 
   add_index "ordem_servicos", ["cliente_contato_id"], :name => "index_ordem_servicos_on_cliente_contato_id"
   add_index "ordem_servicos", ["cliente_id"], :name => "index_ordem_servicos_on_cliente_id"
-  add_index "ordem_servicos", ["usuario_cadastrante_id"], :name => "index_ordem_servicos_on_usuario_cadastrante_id"
-  add_index "ordem_servicos", ["usuario_responsavel_id"], :name => "index_ordem_servicos_on_usuario_responsavel_id"
+  add_index "ordem_servicos", ["usuario_id"], :name => "index_ordem_servicos_on_usuario_id"
 
   create_table "prioridades", :force => true do |t|
     t.string   "descricao",  :limit => 20, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "projetos", :force => true do |t|
@@ -228,8 +225,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.text     "detalhe"
     t.integer  "status_id",              :null => false
     t.integer  "usuario_responsavel_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   add_index "solicitacao_historicos", ["solicitacao_id"], :name => "index_solicitacao_historicos_on_solicitacao_id"
@@ -251,8 +248,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.datetime "data_hora_real_liberacao"
     t.string   "versao_liberacao",         :limit => 15
     t.string   "anexo",                    :limit => 50
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                                               :null => false
+    t.datetime "updated_at",                                                                               :null => false
     t.text     "detalhe_ultimo_historico"
     t.string   "anexo_file_name"
     t.string   "anexo_content_type"
@@ -289,8 +286,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.integer  "solucao_id"
     t.string   "descricao",  :limit => 50, :null => false
     t.string   "detalhe"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   add_index "solucao_modulos", ["solucao_id"], :name => "index_solucao_modulos_on_solucao_id"
@@ -300,8 +297,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.string   "descricao",         :limit => 50, :null => false
     t.string   "detalhe"
     t.date     "data_criacao"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   add_index "solucao_sub_modulos", ["solucao_modulo_id"], :name => "index_solucao_sub_modulos_on_solucao_modulo_id"
@@ -312,8 +309,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.date     "data_criacao",                           :null => false
     t.date     "data_ultima_atualizacao"
     t.string   "versao_atual",            :limit => 15
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "solucoes_usuarios", :id => false, :force => true do |t|
@@ -322,12 +319,11 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
   end
 
   add_index "solucoes_usuarios", ["solucao_id"], :name => "index_solucoes_usuarios_on_solucao_id"
-  add_index "solucoes_usuarios", ["usuario_id"], :name => "index_projetos_usuarios_on_usuario_id"
 
   create_table "status", :force => true do |t|
     t.string   "descricao",    :limit => 30,                    :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.boolean  "padrao",                     :default => false
     t.boolean  "encerramento",               :default => false
   end
@@ -350,14 +346,14 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
 
   create_table "tipo_pendencias", :force => true do |t|
     t.string   "descricao",  :limit => 20, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "usuario_cargos", :force => true do |t|
     t.string   "descricao",              :limit => 30,                    :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
     t.boolean  "estima_desenvolvimento",               :default => false, :null => false
     t.boolean  "estima_instalacao",                    :default => false, :null => false
   end
@@ -365,8 +361,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
   create_table "usuario_configs", :force => true do |t|
     t.integer  "usuario_id"
     t.text     "assinatura_email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "versao_sistema_id", :default => 0
   end
 
@@ -374,28 +370,28 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
 
   create_table "usuarios", :force => true do |t|
     t.integer  "usuario_cargo_id"
-    t.string   "nome",                 :limit => 50, :null => false
-    t.string   "email",                              :null => false
-    t.string   "celular",              :limit => 11
-    t.string   "encrypted_password",   :limit => 40, :null => false
-    t.string   "password_salt",                      :null => false
-    t.string   "confirmation_token",   :limit => 20
+    t.string   "nome",                   :limit => 50,                  :null => false
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "celular",                :limit => 11
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "reset_password_token", :limit => 20
-    t.string   "remember_token",       :limit => 20
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count"
+    t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "password_salt"
   end
 
   add_index "usuarios", ["confirmation_token"], :name => "index_usuarios_on_confirmation_token", :unique => true
@@ -406,8 +402,8 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
   create_table "versao_sistemas", :force => true do |t|
     t.string   "versao",     :limit => 10
     t.text     "detalhe"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   add_foreign_key "atendimentos", "clientes", :name => "fk_atendimentos_clientes"
@@ -416,7 +412,6 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
 
   add_foreign_key "cliente_contatos", "clientes", :name => "fk_cliente_contatos_clientes"
 
-  add_foreign_key "clientes_solucoes", "clientes", :name => "clientes_projetos_cliente_id_fk", :dependent => :delete
   add_foreign_key "clientes_solucoes", "solucoes", :name => "fk_solucoes_clientes"
 
   add_foreign_key "consulta_campos", "consultas", :name => "fk_consulta_campos_consultas"
@@ -431,10 +426,10 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
 
   add_foreign_key "ordem_servicos", "cliente_contatos", :name => "fk_ordem_servicos_cliente_contato"
   add_foreign_key "ordem_servicos", "clientes", :name => "fk_ordem_servicos_cliente"
-  add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_cadastrantes", :column => "usuario_cadastrante_id"
-  add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_responsaveis", :column => "usuario_responsavel_id"
+  add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios"
 
   add_foreign_key "projetos", "clientes", :name => "fk_projetos_clientes"
+  add_foreign_key "projetos", "usuarios", :name => "fk_projetos_usuarios"
 
   add_foreign_key "solicitacao_historicos", "solicitacoes", :name => "fk_solicitacao_historico_solicitacoes", :dependent => :delete
   add_foreign_key "solicitacao_historicos", "status", :name => "fk_solicitacao_historico_status"
@@ -459,7 +454,6 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
   add_foreign_key "solucao_sub_modulos", "solucao_modulos", :name => "fk_solucao_sub_modulos_projeto_modulos"
 
   add_foreign_key "solucoes_usuarios", "solucoes", :name => "fk_solucoes_solucoes_usuarios"
-  add_foreign_key "solucoes_usuarios", "usuarios", :name => "projetos_usuarios_usuario_id_fk", :dependent => :delete
 
   add_foreign_key "status_usuario_cargos", "status", :name => "fk_status_usuario_cargos_status"
   add_foreign_key "status_usuario_cargos", "usuario_cargos", :name => "fk_status_usuario_cargos_cargos"

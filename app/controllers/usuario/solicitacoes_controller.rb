@@ -73,7 +73,6 @@ class Usuario::SolicitacoesController < Usuario::BaseController
 
   def create
     params[:solicitacao].merge!(:usuario_cadastrante_id => current_usuario.id)
-    puts params[:solicitacao]
     @solicitacao = Solicitacao.new(params[:solicitacao])
     if @solicitacao.save
       flash[:notice] = "Solicitação cadastrada com sucesso."
