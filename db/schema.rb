@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130917142718) do
+ActiveRecord::Schema.define(:version => 20131228180024) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -234,8 +234,27 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
   add_index "solicitacao_historicos", ["usuario_id"], :name => "index_solicitacao_historicos_on_usuario_id"
   add_index "solicitacao_historicos", ["usuario_responsavel_id"], :name => "index_solicitacao_historicos_on_usuario_responsavel_id"
 
+  create_table "solicitacao_log_alteracao_itens", :force => true do |t|
+    t.integer  "solicitacao_log_alteracao_id"
+    t.string   "campo"
+    t.text     "descricao"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "solicitacao_log_alteracao_itens", ["solicitacao_log_alteracao_id"], :name => "solicitacao_log_alteracao_itens_log_alteracao"
+
+  create_table "solicitacao_log_alteracoes", :force => true do |t|
+    t.integer  "usuario_id"
+    t.integer  "solicitacao_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "solicitacao_log_alteracoes", ["solicitacao_id"], :name => "solicitacao_log_alteracoes_solicitacoes"
+  add_index "solicitacao_log_alteracoes", ["usuario_id"], :name => "solicitacao_log_alteracoes_usuarios"
+
   create_table "solicitacoes", :force => true do |t|
-    t.integer  "atendimento_id",                                                                           :null => false
     t.integer  "status_id",                                                                                :null => false
     t.integer  "prioridade_id",                                                                            :null => false
     t.integer  "solucao_sub_modulo_id",                                                                    :null => false
@@ -269,7 +288,6 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
     t.integer  "usuario_cadastrante_id"
   end
 
-  add_index "solicitacoes", ["atendimento_id"], :name => "index_solicitacoes_on_atendimento_id"
   add_index "solicitacoes", ["cliente_contato_id"], :name => "index_solicitacoes_on_cliente_contato_id"
   add_index "solicitacoes", ["cliente_id"], :name => "index_solicitacoes_on_cliente_id"
   add_index "solicitacoes", ["etapa_id"], :name => "index_solicitacoes_on_etapa_id"
@@ -436,7 +454,11 @@ ActiveRecord::Schema.define(:version => 20130917142718) do
   add_foreign_key "solicitacao_historicos", "usuarios", :name => "fk_solicitacao_historico_usuario_responsavel", :column => "usuario_responsavel_id"
   add_foreign_key "solicitacao_historicos", "usuarios", :name => "fk_solicitacao_historico_usuarios"
 
-  add_foreign_key "solicitacoes", "atendimentos", :name => "fk_solicitacoes_atendimentos"
+  add_foreign_key "solicitacao_log_alteracao_itens", "solicitacao_log_alteracoes", :name => "solicitacao_log_alteracao_itens_log_alteracao"
+
+  add_foreign_key "solicitacao_log_alteracoes", "solicitacoes", :name => "solicitacao_log_alteracoes_solicitacoes"
+  add_foreign_key "solicitacao_log_alteracoes", "usuarios", :name => "solicitacao_log_alteracoes_usuarios"
+
   add_foreign_key "solicitacoes", "cliente_contatos", :name => "fk_solicitacoes_cliente_contatos_id"
   add_foreign_key "solicitacoes", "clientes", :name => "fk_solicitacoes_clientes"
   add_foreign_key "solicitacoes", "etapas", :name => "fk_solicitacoes_etapas"

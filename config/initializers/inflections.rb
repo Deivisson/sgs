@@ -13,4 +13,6 @@
    inflect.irregular 'avaliacao','avaliacoes'
    inflect.irregular 'situacao','situacoes'
    inflect.irregular 'solucao','solucoes'
+	 inflect.irregular 'alteracao','alteracoes'
+
  end

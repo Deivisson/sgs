@@ -97,6 +97,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
   end
 
   def update
+    params[:solicitacao].merge!(:usuario_editor => current_usuario.id)
     if @solicitacao.update_attributes(params[:solicitacao])
       flash[:notice] = "Solicitação atualizada com sucesso."
     end

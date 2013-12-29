@@ -63,9 +63,10 @@ class Solicitacao < ActiveRecord::Base.extend Search
   belongs_to :ordem_servico
   belongs_to :etapa
   has_many :historicos, class_name:"SolicitacaoHistorico"
-
+  has_many :alteracoes, class_name:"SolicitacaoLogAlteracao"
+  
   attr_writer :solucao_id,:modulo_id
-  attr_accessor :previsao_duracao_horas
+  attr_accessor :previsao_duracao_horas,:usuario_editor
 
 
   Status::ITENS.each do |s|
@@ -122,6 +123,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
   #callbacks
   before_validation :attribui_minutos_previsao_duracao
   after_create :inserir_historico_padrao
+  after_update :registrar_log_alteracao
 
   def before_destroy
     #Não permite excluir se ja foi encerrado
@@ -210,4 +212,15 @@ private
     self.previsao_duracao_minutos = total_minutos(self.previsao_duracao_horas)
   end
 
+  def registrar_log_alteracao
+    return unless self.changed?
+    log = self.alteracoes.build(usuario_id:self.usuario_editor)
+    self.changes.each do |k,v|
+      unless ['created_at','updated_at'].include?(k.to_s)
+        _attributes = {campo:k, descricao:"De: #{v.first.to_s} <br>Para: #{v.second.to_s}"}
+        log.itens << SolicitacaoLogAlteracaoItem.new(_attributes)
+      end
+    end
+    log.save
+  end
 end
