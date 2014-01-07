@@ -237,7 +237,8 @@ ActiveRecord::Schema.define(:version => 20131228180024) do
   create_table "solicitacao_log_alteracao_itens", :force => true do |t|
     t.integer  "solicitacao_log_alteracao_id"
     t.string   "campo"
-    t.text     "descricao"
+    t.text     "velho_conteudo"
+    t.text     "novo_conteudo"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end

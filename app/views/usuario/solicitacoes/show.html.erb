@@ -36,7 +36,9 @@
         <%= content_tag :li, :id => "solicitacao-menu-tab-historico" do %>
           <%= link_to "Histórico Movimentações", "#solicitacao-tab-historico" %>
         <% end %>
-
+        <%= content_tag :li, :id => "solicitacao-menu-tab-alteracoes" do %>
+          <%= link_to "Log de Alterações", "#solicitacao-tab-alteracoes" %>
+        <% end %>
       <% end %>
       <!--
       <div class="show-content-menu">
@@ -49,6 +51,7 @@
       -->
       <%= render 'show_detalhes' %>
       <%= render 'show_historicos' %>
+      <%= render 'show_alteracoes' %>
     </div>
   <% end %>
 <% end %>

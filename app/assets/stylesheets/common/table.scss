@@ -38,6 +38,7 @@ table tbody tr {
   background-color: #FFF;
   vertical-align: center;
   font-size:bold;
+  &:hover {background-color:#d6e2e5;};
   &.unread {
     td {
       font-weight: bold;
@@ -49,6 +50,14 @@ table tbody tr {
   &:hover {
     td .container-oculto {visibility: visible;}
   };
+  &.even {
+    background-color: #FFF;
+    &:hover {background-color: #FFF;};
+  }
+  &.odd {
+    background-color: #E9E9E9;
+    &:hover {background-color: #E9E9E9;};
+  }
 }
 
 

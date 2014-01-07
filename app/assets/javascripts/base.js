@@ -63,6 +63,8 @@ $(document).ready(function(){
 
  
 //Mudar cor linha ao passar mouse
+
+/*
 $(document).ready(function(){
 	$('table tr').hover(function(){
 		$(this).css("background-color","#d6e2e5");
@@ -70,7 +72,7 @@ $(document).ready(function(){
 		$(this).css("background-color","white");
 	});
 });
-
+*/
 
 $(document).ready(function()
   {

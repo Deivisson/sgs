@@ -3,7 +3,9 @@ class CreateSolicitacaoLogAlteracaoItens < ActiveRecord::Migration
     create_table :solicitacao_log_alteracao_itens do |t|
       t.references :solicitacao_log_alteracao
       t.string :campo
-      t.text :descricao
+      t.text :velho_conteudo
+			t.text :novo_conteudo
+
 
       t.timestamps
     end

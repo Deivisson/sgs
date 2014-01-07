@@ -1,0 +1,38 @@
+<%= section_tag id:"solicitacao-tab-alteracoes", class:"section-tag-whiteBg" do %>
+  <% if @solicitacao.alteracoes.any? %>
+    <%= content_tag :table, class:'logs' do %>
+      <tbody>
+        <% @solicitacao.alteracoes.each do |alteracao| %>
+          <tr>
+            <td width="180">
+              <%= image_tag(current_usuario.photo.url(:tiny),class:'user-avatar') %>             
+              <b><%= alteracao.usuario.nome %></b><br>
+              <p><%= formata_data(alteracao.created_at, :long) %></p><br>
+            </td>
+            <td>
+              
+              <%= content_tag :table do %>
+                <thead>
+                  <tr>
+                    <th width="150">Campo</th>
+                    <th>Alteração realizada</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%- alteracao.itens.each do |item| %>
+                    <tr class="<%= cycle("odd","even",name:"row-bg-colors") %>">
+                      <td><%= item.campo %></td>
+                      <td><%= item.descricao.html_safe %></td>
+                    </tr>
+                  <% end %>
+                  <% reset_cycle("row-bg-colors") %>
+                </tbody>                  
+              <% end %>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,32 @@
+table.logs {
+	tbody {
+		tr {
+			padding-bottom: 20px;
+			td {
+				border-bottom: 2px solid #999;
+				p {
+					font-size: 10px;
+				}
+			}
+
+		}
+	}
+	table {
+		thead {
+			tr {
+				th {
+					background-color: #FFF;
+					border-right: 0px;
+				}
+			}
+		}
+		tbody {
+			tr {
+				td {
+					border-bottom: 0px;
+
+				}
+			}
+		}
+	}
+}

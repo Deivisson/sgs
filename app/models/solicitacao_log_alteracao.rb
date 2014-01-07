@@ -4,4 +4,5 @@ class SolicitacaoLogAlteracao  < ActiveRecord::Base
 	validates :solicitacao_id, presence:true
 	belongs_to :solicitacao
 	has_many :itens, class_name:'SolicitacaoLogAlteracaoItem'
+	belongs_to :usuario
 end
