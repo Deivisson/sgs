@@ -51,6 +51,7 @@ function carregaContatos(){
 function carregaModulos(){
   cliente_id = $("#cliente-select-id").val();
   $("#solucao-modulos-select-id").find('option').remove();
+  $("#solucao-modulos-select-id").find('optgroup').remove();
   if (cliente_id > 0) {
     $.getJSON("/usuario/resources/" + cliente_id + '/solucao_modulos.json',function(data){
       $("#solucao-modulos-select-id").append('<option></option>');

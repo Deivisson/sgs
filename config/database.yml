@@ -12,8 +12,8 @@ development:
  adapter: mysql2
  encoding: utf8
  reconnect: false
- #database: siematec
- database: sgs_development
+ database: siematec
+ #database: sgs_development
  pool: 5
  username: root
  password: master1

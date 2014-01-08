@@ -85,11 +85,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     @contatos = ClienteContato.to_select_by_cliente @solicitacao.cliente_id
     @solucoes = Solucao.to_select_by_cliente @solicitacao.cliente_id
     @sub_modulos = SolucaoSubModulo.to_select_by_modulo @solicitacao.modulo_id
-
-    @local = params[:local] if params[:local] and permite_alterar_excluir
-    redirect_to :controller => 'solicitacoes', 
-                :action => 'index',
-                :status_id => @solicitacao.status_id if not permite_alterar_excluir
+    @local = params[:local] if params[:local]
   end
 
   def programar
