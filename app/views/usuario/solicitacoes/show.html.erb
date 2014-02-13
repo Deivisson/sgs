@@ -16,9 +16,9 @@
         <dd><%= @solicitacao.solucao_sub_modulo.solucao_modulo.solucao.descricao %></dd>
         <dt>Status</dt>
         <dd class="destak"><%= @solicitacao.status.descricao %></dd>      
-        <dt>Cadas. por</dt>
+        <dt>Cadastrado por</dt>
         <dd><%= @solicitacao.usuario_cadastrante.nome %></dd>
-        <dt>Cadastro</dt>
+        <dt>Data Cadastro</dt>
         <dd><%= formata_data(@solicitacao.created_at,:long) %></dd>
       </dl>
     <% end %> 

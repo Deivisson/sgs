@@ -1,7 +1,4 @@
 <% content_for :left_container do %>
-  <h1>Solicitações</h1>
-  <%= render "search_form_index" %>
-
   <ul class="my-tasks">
     <h1>Minhas Tarefas </h1>    
     <% @status = load_status %>
@@ -14,6 +11,8 @@
       </li>
     <% end %>
   </ul>
+  <h1>Solicitações</h1>
+  <%= render "search_form_index" %>
 <% end %>
 
 <%= form_tag [:edit_multiple, :usuario, :solicitacoes] do %>

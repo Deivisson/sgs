@@ -24,10 +24,8 @@
       <dd><%= formata_data(@projeto.data_inicio) %></dd>
       <dt>Previsão Término</dt>
       <dd><%= formata_data(@projeto.data_prevista_termino) %></dd>
-      <br>
       <dt>Pontos de Função</dt>
       <dd><%= @projeto.peso_total %></dd>
-      <br>  
       <dt>Status</dt>
       <dd class="destak"><%= "#{@projeto.descricao_status} (#{@projeto.progresso}% concluído)" %></dd>      
     </dl>
