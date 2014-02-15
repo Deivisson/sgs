@@ -3,7 +3,6 @@
   <thead>
     <tr>
       <th>Descrição</th>
-      <th width="10">Det</th>
       <th width="10">Edit</th>
       <th width="10">Del</th>
     </tr>
@@ -11,8 +10,7 @@
   <tbody>
     <% for status in @status %>
       <tr>
-        <td><%=h status.descricao %></td>
-        <td><%= link_to image_tag(image_link[:show]),admin_status_path(status.id) %></td>
+        <td><%=link_to status.descricao,admin_status_path(status.id), class:'inline-link'%></td>
         <td><%= link_to image_tag(image_link[:edit]), edit_admin_status_path(status)  %></td>
         <td><%= link_to image_tag(image_link[:del]), [:admin,status], 
                   :confirm => 'Confirma exclusão?', :method => :delete %></td>

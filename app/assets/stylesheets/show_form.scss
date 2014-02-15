@@ -22,6 +22,19 @@
     padding: 4px;
     width:150px;
   }
+  fieldset {
+    border: 1px solid #eee;
+    padding: 4px;
+    legend {
+      font-weight: bold;
+      font-size: 14px;
+      margin: 5px;
+      padding: 4px;
+    }
+    .item {
+      margin-left: 7px;
+    }
+  }
 }
 
 .show-left-container {

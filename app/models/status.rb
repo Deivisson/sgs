@@ -27,9 +27,7 @@ class Status < ActiveRecord::Base
 
 
   validates_presence_of :descricao
-
   validates_uniqueness_of :descricao
-
   validates_length_of :descricao, :maximum => 30
 
   has_many :pendencia_itens

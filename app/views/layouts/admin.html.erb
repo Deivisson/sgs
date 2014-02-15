@@ -25,14 +25,14 @@
     <% end %>
   <% end %>
 
-  <div class = "left">
-    <ul id="slide">
-      <li class="top clicked">
-        <h1 class="title first">Cadastros Básicos</h1>
+  <div class = "left" style="background-color: #FFF; border-right: 1px solid #C3C7D0">
+    <ul class="menu-admin">
+      <li>
+        <h1 class="basicos">Cadastros Básicos</h1>
         <ul>
           <li><%= link_to 'Cargos dos Usuários',admin_usuario_cargos_path %></li>
           <li><%= link_to 'Usuários',admin_usuarios_path %></li>
-          <li><%= link_to 'Solucoes',admin_solucoes_path %></li>
+          <li><%= link_to 'Soluções',admin_solucoes_path %></li>
           <li><%= link_to 'Clientes',admin_clientes_path %></li>
           <li><%= link_to 'Status',:controller => 'status',:action => 'index' %></li>
           <li><%= link_to 'Tipo Pendências',admin_tipo_pendencias_path %></li>
@@ -40,8 +40,8 @@
         </ul>
       </li>
 
-      <li class="top">
-        <h1 class="title">Sistema</h1>
+      <li>
+        <h1 class="system">Sistema</h1>
         <ul>
           <li><%= link_to 'Empresa',edit_admin_empresa_path(1) %></li>
           <li><%= link_to "Configurações",edit_admin_configuracao_path(1) %></li>

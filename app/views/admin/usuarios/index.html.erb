@@ -6,7 +6,6 @@
       <th>Nome</th>
       <th>Email</th>
       <th>Celular</th>
-      <th>Show</th>
       <th>Edit</th>
       <th>Del</th>
     </tr>
@@ -14,11 +13,12 @@
   <tbody>
     <% for usuario in @usuarios %>
       <tr>
-        <td width="100" ><%=h usuario.usuario_cargo.descricao %></td>
+        <td width="100" >
+          <%= link_to usuario.usuario_cargo.descricao,[:admin, usuario],class:'inline-link' %>
+        </td>
         <td><%=h usuario.nome %></td>
         <td width ="300" ><%=h usuario.email %></td>
         <td width ="100"><%=h usuario.celular %></td>
-        <td width ="10" ><%= link_to "Show",[:admin, usuario],:class => 'show' %></td>
         <td width ="10"><%= link_to "Edit", edit_admin_usuario_path(usuario),:class => 'edit' %></td>
         <td width ="10"><%= link_to "Del", [:admin,usuario], :class => 'del',:confirm => 'Confirma exclusão?', :method => :delete %></td>
       </tr>

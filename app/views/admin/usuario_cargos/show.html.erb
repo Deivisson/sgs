@@ -5,10 +5,10 @@
       <%=h @usuario_cargo.descricao %>
     </p>
     <p>
-      <fieldset id="legenda" style ="margin:0px" 
+      <fieldset style ="margin:0px">
         <legend> Status Permitidos </legend>
         <% for status in @usuario_cargo.status %>
-          <div> <%= status.descricao %> </div>
+          <div class="item"> <%= status.descricao %> </div>
         <% end %>  
       </fieldset>
     </p>

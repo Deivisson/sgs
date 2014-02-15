@@ -4,15 +4,13 @@
     <tr>
       <th>Descrição</th>
       <th width ="10">Det</th>
-      <th width ="10">Edit</th>
       <th width ="10">Del</th>
     </tr>
   </thead>
   <tbody>
     <% for tipo_pendencia in @tipo_pendencias %>
       <tr>
-        <td><%=h tipo_pendencia.descricao %></td>
-        <td><%= link_to image_tag(image_link[:show]), [:admin, tipo_pendencia] %></td>
+        <td><%= link_to tipo_pendencia.descricao,[:admin, tipo_pendencia],class:"inline-link" %></td>
         <td><%= link_to image_tag(image_link[:edit]), 
                 edit_admin_tipo_pendencia_path(tipo_pendencia) %></td>
                 

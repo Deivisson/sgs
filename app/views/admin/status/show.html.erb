@@ -4,5 +4,13 @@
     <strong>Descrição:</strong>
     <%=h @status.descricao %>
   </p>
+  <p>
+    <strong>Padrão:</strong>
+    <%= @status.padrao? ? 'Sim' : 'Não' %>
+  </p>
+  <p>
+    <strong>Encerramento:</strong>
+    <%= @status.encerramento? ? 'Sim' : 'Não' %>
+  </p>    
 </div>
 <%= link_voltar %>
