@@ -1,0 +1,39 @@
+ul.menu-admin {
+	width: 100%;
+	li {
+		width: 100%;
+		float: left;
+		h1 {
+			border-bottom: 2px solid  #EBEAEA;
+			font-size: 16px;
+			font-weight: bold;
+			float: left;
+			margin: 10px 0 16px 10px;
+			text-indent: 30px;
+			width: 90%;
+			&.basicos {background: url('/assets/icons/24/fragments.png') no-repeat;}
+			&.system {background: url('/assets/icons/24/system.png') no-repeat;}
+		}
+		ul {
+			margin-left: 5px;
+			width: 257px;
+			li {
+				float: left;
+				height: 30px;
+				width: 100%;
+				line-height: 30px;
+				a {
+					display: block;
+					color: #557494;
+					font-size: 14px;
+					width: 100%;
+					text-indent: 20px;
+					text-decoration: none;
+					&:hover {
+						background-color: #eee;
+					};
+				}
+			}
+		}
+	}
+}
