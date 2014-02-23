@@ -1,7 +1,16 @@
 <div id="aba-cliente-solucoes">
-	<%= form.inputs do %>
-    <%= section_tag do %>
-     <%= monta_arvore_solucoes %>
-    <% end %>	  
-	<% end %>
+  <div id="solucoes-tabs" class="menutab-content">
+    <%= content_tag :ul, style:'background-color: #FFF' do %>
+    	<% @solucoes.each do |solucao| %>
+        <li>
+          <%= link_to "#aba-#{solucao.descricao.gsub(" ","")}" do %>
+            <span><%= solucao.descricao %></span>
+          <% end %>
+        </li>
+  		<% end %>
+    <% end %>
+    <% @solucoes.each do |solucao| %>
+      <%= render partial:"solucoes_tab", :locals => {solucao:solucao} %>  
+    <% end %>
+  </div>
 </div>

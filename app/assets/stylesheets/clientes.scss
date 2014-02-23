@@ -1,9 +1,16 @@
 ul.solucoes {
-	background-color: #eee;
 	padding: 5px;
-
+	label.solucao-label {
+		color: blue;
+	}
 	ul {
-		margin-left: 30px;
+		margin:0 0 10px 0px;
+		label.modulo-label {
+			color: blue;
+			font-size: 14px;
+			width: 100%;
+		}
+
 		li {
 			margin-left: 30px;
 		}

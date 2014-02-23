@@ -44,6 +44,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
               s.gera_cobranca == true
             } 
 
+  validates :peso, :numericality => {only_integer:true}
 
   belongs_to :cliente
   belongs_to :projeto

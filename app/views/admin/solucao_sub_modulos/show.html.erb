@@ -16,16 +16,17 @@
       <strong>Data Criação:</strong>
       <%=h @solucao_sub_modulo.data_criacao.to_s_br %>
     </p>
+    <p>
+      <strong>Pontos de Função:</strong>
+      <%= @solucao_sub_modulo.peso %>
+    </p>        
+    <p>
+      <strong>Previsão Treinamento(hrs):</strong>
+      <%= @solucao_sub_modulo.previsao_treinamento_horas %>
+    </p>
 </div>
 <p>
-   <% if @local == 'modulo_show' %> 
-      <li class ="links">
-        <%= link_to 'Voltar Módulo', [:admin, @solucao_sub_modulo.solucao_modulo],:class => 'back' %>
-      </li>
-   <% else %>
-      <li class ="links">
-        <%= link_to 'Voltar Lista',admin_solucao_sub_modulos_path,:class => 'back' %>
-      </li>
-   <% end %>
-  
+  <li class ="links">
+    <%= link_to 'Voltar Módulo', [:admin, @solucao_sub_modulo.solucao_modulo],:class => 'back' %>
+  </li>
 </p>

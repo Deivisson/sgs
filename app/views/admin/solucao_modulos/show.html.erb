@@ -13,19 +13,20 @@
     <strong>Detalhe:</strong>
     <%=h @solucao_modulo.detalhe %>
   </p>
+  <p>
+    <strong>Total Pontos de Função:</strong>
+    <%= @solucao_modulo.peso_total %>
+  </p>    
+  <p>
+    <strong>Previsão Total Treinamento(hrs):</strong>
+    <%= @solucao_modulo.tempo_previsto_treinamento %>
+  </p>
 </div>
 <%= render :partial => 'show_sub_modulos' %>
 <p>
-  <% if @local == 'solucao_show' %>
-    <li class ="links">
-      <%= link_to 'Voltar Solucao',[:admin,@solucao],:class => 'back' %>
-    </li>
-  <% else %> 
-    <li class ="links">
-      <%= link_to 'Voltar Lista',admin_solucao_modulos_path,:class => 'back' %>
-    </li>
-  <% end %>
-
+  <li class ="links">
+    <%= link_to 'Voltar Solução',[:admin,@solucao],:class => 'back' %>
+  </li>
   <li class ="links">
     <%= link_to 'Sub Módulo',new_admin_solucao_sub_modulo_path(:solucao_modulo => @solucao_modulo),:class => 'new' %>
   </li>
@@ -33,7 +34,7 @@
     <%= link_to 'Novo Módulo',new_admin_solucao_modulo_path(:solucao => @solucao) ,:class => 'new' %>
   </li>
   <li class ="links">    
-    <%= link_to 'Novo Solucao',new_admin_solucao_path() ,:class => 'new' %>
+    <%= link_to 'Nova Solução',new_admin_solucao_path() ,:class => 'new' %>
   </li>
   
 </p>

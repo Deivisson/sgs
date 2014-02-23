@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131228180024) do
+ActiveRecord::Schema.define(:version => 20140222105941) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -316,11 +316,13 @@ ActiveRecord::Schema.define(:version => 20131228180024) do
 
   create_table "solucao_sub_modulos", :force => true do |t|
     t.integer  "solucao_modulo_id"
-    t.string   "descricao",         :limit => 50, :null => false
+    t.string   "descricao",                    :limit => 50, :null => false
     t.string   "detalhe"
     t.date     "data_criacao"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "previsao_treinamento_minutos"
+    t.integer  "peso"
   end
 
   add_index "solucao_sub_modulos", ["solucao_modulo_id"], :name => "index_solucao_sub_modulos_on_solucao_modulo_id"

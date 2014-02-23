@@ -2,7 +2,9 @@
   <caption>Módulos da Solução </caption>
   <thead>
     <tr>
-      <th>Descrição</th>
+      <th width ="40%">Descrição</th>
+      <th>Total Pontos de Função do Módulo</th>
+      <th>Previsão Total Treinamento do Módulo(hrs)</th>
       <th width ="10">Edit</th>
       <th width ="10">Del</th>
     </tr>
@@ -15,6 +17,8 @@
             admin_solucao_modulo_path(:id => solucao_modulo.id ,
             :local => :solucao_show),class:'inline-link' %>
         </td>
+        <td><%= solucao_modulo.peso_total %></td>
+        <td><%= solucao_modulo.tempo_previsto_treinamento %></td>
         <td>
           <%= link_to image_tag(image_link[:edit]), 
               edit_admin_solucao_modulo_path(solucao_modulo,:local => :solucao_show) %></td>

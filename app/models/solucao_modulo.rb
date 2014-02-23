@@ -22,8 +22,17 @@ class SolucaoModulo < ActiveRecord::Base
     :conditions => ["cliente_id = ? ", cliente_id],
     :order      => ["solucoes.descricao,solucao_modulos.descricao"]
   }}
-  
-  
+
+  def peso_total
+    self.solucao_sub_modulos.where("peso > 0").sum("peso")
+  end  
+
+  def tempo_previsto_treinamento
+    minutos = self.solucao_sub_modulos.where("previsao_treinamento_minutos > 0").sum("previsao_treinamento_minutos")
+    minutos_em_horas(minutos) 
+  end
+
+private   
   #Apenas gera excessao se descricao informada já tiver sido cadastrada para 
   #o solucao selecionado.
   def valida_descricao

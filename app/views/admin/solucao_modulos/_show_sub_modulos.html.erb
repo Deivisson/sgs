@@ -2,7 +2,9 @@
   <caption>Sub Módulos </caption>
   <thead>
     <tr>
-      <th>Descrição</th>
+      <th width="40%">Descrição</th>
+      <th>Total Pontos de Função Sub Módulo</th>
+      <th>Previsão Total Treinamento Sub Módulo(hrs)</th>
       <th width="10">Edit</th>
       <th width="10">Del</th>
     </tr>
@@ -15,7 +17,8 @@
               admin_solucao_sub_modulo_path(:id => solucao_sub_modulo.id,:local => :modulo_show),
               class:'inline-link' %>
         </td>
-               
+        <td><%= solucao_sub_modulo.peso %></td> 
+        <td><%= solucao_sub_modulo.previsao_treinamento_horas %></td> 
         <td><%= link_to image_tag(image_link[:edit]), 
             edit_admin_solucao_sub_modulo_path(solucao_sub_modulo,:local => :modulo_show) %></td>
             

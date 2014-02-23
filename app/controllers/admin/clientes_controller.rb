@@ -14,6 +14,7 @@ class Admin::ClientesController < Admin::BaseController
 
   def new
     @cliente = Cliente.new
+    
   end
 
   def create
@@ -55,12 +56,13 @@ private
   end
 
   def carrega_solucoes
-    @solucoes = Solucao.joins(:solucao_modulos => :solucao_sub_modulos)
-    @solucoes = @solucoes.order("solucoes.descricao,solucao_modulos.descricao,
-                                solucao_sub_modulos.descricao")
-    @solucoes = @solucoes.select("solucoes.id as solucao_id, solucoes.descricao as solucao_descricao,
-                                  solucao_modulos.id as modulo_id, solucao_modulos.descricao as modulo_descricao,
-                                  solucao_sub_modulos.id as sub_modulo_id, solucao_sub_modulos.descricao as sub_modulo_descricao")
+    @solucoes = Solucao.all
+    #@solucoes = Solucao.joins(:solucao_modulos => :solucao_sub_modulos)
+    #@solucoes = @solucoes.order("solucoes.descricao,solucao_modulos.descricao,
+    #                            solucao_sub_modulos.descricao")
+    #@solucoes = @solucoes.select("solucoes.id as solucao_id, solucoes.descricao as solucao_descricao,
+    #                              solucao_modulos.id as modulo_id, solucao_modulos.descricao as modulo_descricao,
+    #                              solucao_sub_modulos.id as sub_modulo_id, solucao_sub_modulos.descricao as sub_modulo_descricao")
   end
 
 end

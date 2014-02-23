@@ -13,7 +13,8 @@ module DataHoraHelper
 	end
 
 	def minutos_em_horas(minutos)
-		minutos.divmod(60).collect{|i|i.to_s.rjust(2,'0')}.join(":")
+		return "00:00" if minutos.nil?
+		minutos.to_i.divmod(60).collect{|i|i.to_s.rjust(2,'0')}.join(":")
 	end
 
 end

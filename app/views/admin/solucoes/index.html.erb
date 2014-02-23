@@ -3,11 +3,13 @@
 <table border ="0" cellspacing = "1" cellpadding ="0" >
   <thead>
     <tr>
-      <th>Descrição</th>
+      <th width="30%">Descrição</th>
       <th>Última Atualização</th>
       <th>Versão Atual</th>
-      <th>Edit</th>
-      <th>Del</th>
+      <th>Total Pontos de Função</th>
+      <th>Previsão Total Treinamento(Hrs)</th>
+      <th width="10">Edit</th>
+      <th width="10">Del</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +18,8 @@
         <td><%= link_to solucao.descricao,[:admin,solucao],class:"inline-link" %></td>
         <td width ="140"><%= solucao.data_ultima_atualizacao.to_s_br %></td>
         <td width ="90"><%=h solucao.versao_atual %></td>
+        <td><%= solucao.peso_total %></td>
+        <td><%= solucao.tempo_previsto_treinamento %></td>
         <td width ="10"><%= link_to image_tag(image_link[:edit]), edit_admin_solucao_path(solucao) %></td>
         <td width ="10"><%= link_to image_tag(image_link[:del]), [:admin,solucao],
                           :confirm => 'Confirma exclusão?', :method => :delete %></td>

@@ -22,11 +22,20 @@
                      :input_html => {:autofocus => true} %>
 
       <%= form.input :detalhe, :required => false %>
-      <%= form.input :data_criacao,
-                      :as => :date,
-                      :order => [:day,:month,:year],
-                      :required => false,
+      <%= form.input :data_criacao,:as => :string,:required => false,
                       :label => "Data Criação"%>
+
+      <%= form.input :peso, 
+               :label     => "Pontos de Função",
+               :hint      => "Definição do peso para treinamento do sub-módulo",
+               :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
+
+      <%= form.input :previsao_treinamento_horas, 
+               :label     => "Duração Prevista",
+               :hint      => "Tempo previsto para treinamento",
+               :required  => true,
+               :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
+
     <% end %>
   <% end %>
 

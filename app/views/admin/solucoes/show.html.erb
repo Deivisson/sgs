@@ -20,6 +20,15 @@
     <strong>Versão Atual:</strong>
     <%=h @solucao.versao_atual %>
   </p>
+  <p>
+    <strong>Total Pontos de Função:</strong>
+    <%= @solucao.peso_total.to_i %>
+  </p>
+  <p>
+    <strong>Previsão Total Treinamento(hrs):</strong>
+    <%= @solucao.tempo_previsto_treinamento %>
+  </p>
+
 </div>
 <%= render :partial => 'show_modulos' %>
 <p>

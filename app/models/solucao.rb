@@ -20,5 +20,15 @@ class Solucao < ActiveRecord::Base
     :conditions => ['clientes.id = ?',cliente_id],
     :order => :descricao
   }}
+
+  def peso_total
+    total = self.solucao_modulos.joins(:solucao_sub_modulos).where("solucao_sub_modulos.peso > 0").sum("solucao_sub_modulos.peso")
+    total.nil? ? 0 : total.to_i
+  end  
+
+  def tempo_previsto_treinamento
+    minutos = self.solucao_modulos.joins(:solucao_sub_modulos).where("solucao_sub_modulos.previsao_treinamento_minutos > 0").sum("solucao_sub_modulos.previsao_treinamento_minutos")
+    minutos_em_horas(minutos) 
+  end
   
 end
