@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::ClientesController < Admin::BaseController
-  before_filter :carrega_solucoes,  :only => [:new,:edit,:create,:update]
   before_filter :carrega_cliente,   :except => [:index,:new, :create]
+  before_filter :carrega_solucoes,  :except => [:index]
 
   def index
     @clientes = Cliente.order(:nome).paginate :page => params['page'], :per_page =>25
@@ -56,13 +56,11 @@ private
   end
 
   def carrega_solucoes
-    @solucoes = Solucao.all
-    #@solucoes = Solucao.joins(:solucao_modulos => :solucao_sub_modulos)
-    #@solucoes = @solucoes.order("solucoes.descricao,solucao_modulos.descricao,
-    #                            solucao_sub_modulos.descricao")
-    #@solucoes = @solucoes.select("solucoes.id as solucao_id, solucoes.descricao as solucao_descricao,
-    #                              solucao_modulos.id as modulo_id, solucao_modulos.descricao as modulo_descricao,
-    #                              solucao_sub_modulos.id as sub_modulo_id, solucao_sub_modulos.descricao as sub_modulo_descricao")
+    if action_name == "show"
+      @solucoes = @cliente.solucoes.order(:descricao)
+    else
+      @solucoes = Solucao.order(:descricao)
+    end
   end
 
 end

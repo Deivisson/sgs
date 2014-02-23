@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140222105941) do
+ActiveRecord::Schema.define(:version => 20140223132349) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -75,6 +75,16 @@ ActiveRecord::Schema.define(:version => 20140222105941) do
     t.decimal  "valor_hora_visita",                :precision => 10, :scale => 6, :default => 0.0, :null => false
     t.decimal  "valor_deslocamento",               :precision => 5,  :scale => 2, :default => 0.0, :null => false
   end
+
+  create_table "clientes_solucao_sub_modulos", :id => false, :force => true do |t|
+    t.integer  "cliente_id",            :null => false
+    t.integer  "solucao_sub_modulo_id", :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "clientes_solucao_sub_modulos", ["cliente_id"], :name => "clientes_solucao_sub_modulos_clientes"
+  add_index "clientes_solucao_sub_modulos", ["solucao_sub_modulo_id"], :name => "clientes_solucao_sub_modulos_solucao_sub_modulos"
 
   create_table "clientes_solucoes", :id => false, :force => true do |t|
     t.integer "cliente_id", :null => false
@@ -436,6 +446,9 @@ ActiveRecord::Schema.define(:version => 20140222105941) do
   add_foreign_key "atendimentos", "usuarios", :name => "fk_atendimentos_usuario_solicitante", :column => "usuario_solicitante_id"
 
   add_foreign_key "cliente_contatos", "clientes", :name => "fk_cliente_contatos_clientes"
+
+  add_foreign_key "clientes_solucao_sub_modulos", "clientes", :name => "clientes_solucao_sub_modulos_clientes"
+  add_foreign_key "clientes_solucao_sub_modulos", "solucao_sub_modulos", :name => "clientes_solucao_sub_modulos_solucao_sub_modulos"
 
   add_foreign_key "clientes_solucoes", "clientes", :name => "clientes_projetos_cliente_id_fk", :dependent => :delete
   add_foreign_key "clientes_solucoes", "solucoes", :name => "fk_solucoes_clientes"

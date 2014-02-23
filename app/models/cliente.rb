@@ -27,6 +27,7 @@ class Cliente < ActiveRecord::Base
   has_many :cliente_contatos
   has_many :pendencias
   has_and_belongs_to_many :solucoes
+  has_and_belongs_to_many :solucao_sub_modulos
   has_many :ordem_servicos
   has_many :projetos
   
@@ -57,6 +58,19 @@ class Cliente < ActiveRecord::Base
     self.save
   end
 
+  def solucao_modulo_ids
+    return [] if self.new_record?
+    inner_sql=<<-SQL
+                id in (
+                  select distinct m.id 
+                  from solucao_sub_modulos sm 
+                  inner join solucao_modulos m on m.id = sm.solucao_modulo_id
+                  inner join clientes_solucao_sub_modulos csm on csm.solucao_sub_modulo_id = sm.id
+                  where csm.cliente_id = #{self.id}
+                )
+              SQL
+    SolucaoModulo.where(inner_sql).collect{|m| m.id}
+  end
   # def valor_hora_visita
   #   return 0 unless valor_minuto_visita > 0 
   #   number_to_currency ((valor_minuto_visita.to_f * 60).round(2))

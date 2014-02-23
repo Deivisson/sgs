@@ -36,15 +36,17 @@
     <strong>Fax:</strong>
     <%=h @cliente.fax %>
   </p>
-  <fieldset id="legenda" style ="margin-left:0px">
-    <legend> Solucoes utlizados pelo Cliente </legend>
-    <% for solucao in @cliente.solucoes %>
-      <div><%= solucao.descricao %></div>
-    <% end %>
-  </fieldset>  
 </div>
 <%= render :partial => 'show_contatos' %>
+
+<fieldset id="legenda" style ="margin:10px 0 0 14px;float:left;width:95%;">
+  <legend style ="font-size:14px"> Soluções/Módulos/Sub Módulos contratados pelo Cliente </legend>
+  <%= render partial:"campos_solucoes",locals:{from: :show} %>
+</fieldset> 
+<br>
+<br>
+<br>
 <p>
-  <%= link_to "Lista Clientes ", admin_clientes_path,:class => 'back' %>
+  <%= link_to "Voltar ", admin_clientes_path,:class => 'back' %>
 </p>
 

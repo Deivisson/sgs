@@ -10,7 +10,7 @@
   		<% end %>
     <% end %>
     <% @solucoes.each do |solucao| %>
-      <%= render partial:"solucoes_tab", :locals => {solucao:solucao} %>  
+      <%= render partial:"solucoes_tab", :locals => {solucao:solucao,from:from} %>  
     <% end %>
   </div>
 </div>

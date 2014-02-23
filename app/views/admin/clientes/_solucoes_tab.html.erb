@@ -1,3 +1,15 @@
 <div id=<%="aba-#{solucao.descricao.gsub(" ","")}"%>>
-	<%= monta_arvore_solucoes(solucao) %>
+	<% if from == :form %>
+		<%= monta_arvore_solucoes(solucao,
+													solucao_ids:@cliente.solucao_ids,
+													modulo_ids:@cliente.solucao_modulo_ids,
+													sub_modulo_ids:@cliente.solucao_sub_modulo_ids) %>
+	<% else %>
+	  <%= monta_arvore_solucoes(solucao,
+                    solucao_ids:@cliente.solucao_ids,
+                    modulo_ids:@cliente.solucao_modulo_ids,
+                    sub_modulo_ids:@cliente.solucao_sub_modulo_ids,
+                    modo_consulta:true,
+                    todos:false) %>
+	<% end %>
 </div>
