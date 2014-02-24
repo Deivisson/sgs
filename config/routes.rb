@@ -1,3 +1,4 @@
+
 Sgsoft::Application.routes.draw do
 
   resources :ordem_servico_itens
@@ -17,7 +18,9 @@ Sgsoft::Application.routes.draw do
     resources :usuario_cargos
     resources :tipo_pendencias
     resources :prioridades
-    resources :status
+    resources :status do
+      resources :status_tempo_evolucoes
+    end 
     resources :configuracoes
     resources :consultas
     resources :etapas

@@ -1,0 +1,23 @@
+<%= semantic_form_for [:admin,:status,@status_tempo_evolucao], remote:true do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag do %>
+      <%= form.input :tipo_pendencia,
+                     :collection => @tipo_pendencias.collect{|p|[p.descricao,p.id]},
+                     :input_html => {autofocus:true,id:'tipo-pendencia'} %>
+
+      <%= form.input :prioridade,
+                     :collection => @prioridades.collect{|p|[p.descricao,p.id]} %>
+
+      <%= form.input :tempo_horas,
+                     :input_html => {:style => "width: 120px !important"} %>
+      
+      <%= check_box_tag("name", 1, false)%>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_status_index_path %>
+  <% end %>
+
+<% end %>

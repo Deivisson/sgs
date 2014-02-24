@@ -1,0 +1,29 @@
+<h1>Listing status_tempo_evolucoes</h1>
+
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Tipo pendencia</th>
+    <th>Prioridade</th>
+    <th>Tempo minutos</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @status_tempo_evolucoes.each do |status_tempo_evolucao| %>
+  <tr>
+    <td><%= status_tempo_evolucao.status %></td>
+    <td><%= status_tempo_evolucao.tipo_pendencia %></td>
+    <td><%= status_tempo_evolucao.prioridade %></td>
+    <td><%= status_tempo_evolucao.tempo_minutos %></td>
+    <td><%= link_to 'Show', status_tempo_evolucao %></td>
+    <td><%= link_to 'Edit', edit_status_tempo_evolucao_path(status_tempo_evolucao) %></td>
+    <td><%= link_to 'Destroy', status_tempo_evolucao, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Status tempo evolucao', new_status_tempo_evolucao_path %>

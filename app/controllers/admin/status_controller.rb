@@ -6,6 +6,7 @@ class Admin::StatusController <  Admin::BaseController
 
   def show
     @status = Status.find(params[:id])
+    @tempo_evolucoes = @status.tempo_evolucoes
   end
 
   def new

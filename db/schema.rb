@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140223132349) do
+ActiveRecord::Schema.define(:version => 20140223200441) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -363,6 +363,19 @@ ActiveRecord::Schema.define(:version => 20140223132349) do
     t.boolean  "encerramento",               :default => false
   end
 
+  create_table "status_tempo_evolucoes", :force => true do |t|
+    t.integer  "status_id",         :null => false
+    t.integer  "tipo_pendencia_id", :null => false
+    t.integer  "prioridade_id",     :null => false
+    t.integer  "tempo_minutos",     :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "status_tempo_evolucoes", ["prioridade_id"], :name => "index_status_tempo_evolucoes_on_prioridade_id"
+  add_index "status_tempo_evolucoes", ["status_id"], :name => "index_status_tempo_evolucoes_on_status_id"
+  add_index "status_tempo_evolucoes", ["tipo_pendencia_id"], :name => "index_status_tempo_evolucoes_on_tipo_pendencia_id"
+
   create_table "status_usuario_cargos", :id => false, :force => true do |t|
     t.integer "status_id"
     t.integer "usuario_cargo_id"
@@ -498,6 +511,10 @@ ActiveRecord::Schema.define(:version => 20140223132349) do
 
   add_foreign_key "solucoes_usuarios", "solucoes", :name => "fk_solucoes_solucoes_usuarios"
   add_foreign_key "solucoes_usuarios", "usuarios", :name => "projetos_usuarios_usuario_id_fk", :dependent => :delete
+
+  add_foreign_key "status_tempo_evolucoes", "prioridades", :name => "status_tempo_evolucoes_prioridades"
+  add_foreign_key "status_tempo_evolucoes", "status", :name => "status_tempo_evolucoes_status"
+  add_foreign_key "status_tempo_evolucoes", "tipo_pendencias", :name => "status_tempo_evolucoes_tipo_pendencias"
 
   add_foreign_key "status_usuario_cargos", "status", :name => "fk_status_usuario_cargos_status"
   add_foreign_key "status_usuario_cargos", "usuario_cargos", :name => "fk_status_usuario_cargos_cargos"

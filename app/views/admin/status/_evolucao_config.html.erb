@@ -1,0 +1,22 @@
+<table border="0" cellpadding="0" cellspacing="1"  >
+  <thead>
+    <tr>
+      <th>Tipo</th>
+      <th>Prioridade</th>
+      <th>Tempo(Hrs)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tempo_evolucoes.each do |evolucao|  %>
+      <tr>
+        <td><%= evolucao.tipo_pendencia.descricao %></td>
+        <td><%= evolucao.prioridade.descricao %></td>
+        <td><%= evolucao.tempo_horas %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Adicionar", 
+      new_admin_status_status_tempo_evolucao_path(@status),
+      id:'status-tempo-link',
+      remote:true%>

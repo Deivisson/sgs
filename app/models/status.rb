@@ -30,9 +30,10 @@ class Status < ActiveRecord::Base
   validates_uniqueness_of :descricao
   validates_length_of :descricao, :maximum => 30
 
-  has_many :pendencia_itens
+  #has_many :pendencia_itens
   has_many :pendencia_item_historicos
   has_many :solicitacoes
+  has_many :tempo_evolucoes, class_name:'StatusTempoEvolucao'
 
   def self.primeira_ocorrencia_por_status(usuario_id)
     first(:joins => [:solicitacoes],:order => "status.id",

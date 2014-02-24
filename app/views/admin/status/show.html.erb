@@ -11,6 +11,9 @@
   <p>
     <strong>Encerramento:</strong>
     <%= @status.encerramento? ? 'Sim' : 'Não' %>
-  </p>    
+  </p>
+  <div id="status-tempo-evolucoes">
+    <%= render "evolucao_config" %>   
+  </div>
 </div>
 <%= link_voltar %>

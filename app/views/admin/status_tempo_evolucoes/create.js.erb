@@ -1,0 +1,9 @@
+<% if @status_tempo_evolucao.errors.any? %>
+	$('#dialog-form').html('<%= escape_javascript(render('form')) %>');
+	$("#tipo-pendencia").focus();
+<% else %>
+  $('#dialog-form').dialog('close');
+	$('#dialog-form').remove();
+	$("#status-tempo-evolucoes").replaceWith('<%= escape_javascript(render 'admin/status/evolucao_config') %>');
+<% end %>
+setMaskFields();

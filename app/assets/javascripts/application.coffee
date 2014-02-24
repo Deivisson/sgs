@@ -11,6 +11,7 @@
 //= require jquery_price_format
 //= require masks
 //= require modal_form
+//= require status_tempo_evolucoes
 //= require tiny_mce
 //= require jquery-ui-1.10.0.custom.min.js
 //= require jquery.simulate.js
