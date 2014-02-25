@@ -3,15 +3,22 @@
     <%= section_tag do %>
       <%= form.input :tipo_pendencia,
                      :collection => @tipo_pendencias.collect{|p|[p.descricao,p.id]},
+                     :label      => 'Tipo Pendência',
                      :input_html => {autofocus:true,id:'tipo-pendencia'} %>
 
       <%= form.input :prioridade,
-                     :collection => @prioridades.collect{|p|[p.descricao,p.id]} %>
+                     :collection => @prioridades.collect{|p|[p.descricao,p.id]},
+                     :input_html => {id:'prioridade'}  %>
 
       <%= form.input :tempo_horas,
-                     :input_html => {:style => "width: 120px !important"} %>
+                     :input_html => {style:"width: 120px !important",id:'tempo-horas'} %>
       
-      <%= check_box_tag("name", 1, false)%>
+      <% if @status_tempo_evolucao.new_record? %>
+        <div class="check-label-container">
+          <%= check_box_tag("continuar_cadastrando", 1, true)%>
+          <%= label("", "Continuar Cadastrando") %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 

@@ -15,5 +15,9 @@
   <div id="status-tempo-evolucoes">
     <%= render "evolucao_config" %>   
   </div>
+  <%= link_to "Adicionar Configuração", 
+      new_admin_status_status_tempo_evolucao_path(@status),
+      id:'status-tempo-link',
+      remote:true%>
 </div>
 <%= link_voltar %>

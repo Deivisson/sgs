@@ -1,0 +1,10 @@
+<% if @status_tempo_evolucao.errors.any? %>
+	$('#dialog-form').html('<%= escape_javascript(render('form')) %>');
+	$("#tipo-pendencia").focus();
+<% else %>
+	alert("Registro Atualizado com Sucesso!");
+	$(window.location.replace("/admin/status/<%= @status_tempo_evolucao.status_id %>"));
+	$('#dialog-form').dialog('close');
+	$('#dialog-form').remove();
+	
+<% end %>

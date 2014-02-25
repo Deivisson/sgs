@@ -2,8 +2,50 @@
 	$('#dialog-form').html('<%= escape_javascript(render('form')) %>');
 	$("#tipo-pendencia").focus();
 <% else %>
-  $('#dialog-form').dialog('close');
-	$('#dialog-form').remove();
-	$("#status-tempo-evolucoes").replaceWith('<%= escape_javascript(render 'admin/status/evolucao_config') %>');
+	$("#status-tempo-evolucoes").html('<%= escape_javascript(render 'admin/status/evolucao_config') %>');
+	if ($("#continuar_cadastrando").is(":checked")) {
+		prioridadeId =<%= @status_tempo_evolucao.prioridade_id %>
+		tipoPendenciaId=<%= @status_tempo_evolucao.tipo_pendencia_id %>
+		<% @status_tempo_evolucao = StatusTempoEvolucao.new(tipo_pendencia_id:@status_tempo_evolucao.tipo_pendencia_id) %>
+		$('#dialog-form').html('<%= escape_javascript(render('form')) %>');
+
+		//posiciona na próxima prioridade
+		posicionaPrioridade(prioridadeId);
+		if($('#prioridade option:selected').text() == ""){
+			posicionaTipoPendencia(tipoPendenciaId);	
+		}
+
+	} else {
+  	$('#dialog-form').dialog('close');
+		$('#dialog-form').remove();
+	}
 <% end %>
 setMaskFields();
+
+function posicionaPrioridade(prioridadeId){
+	set = false;
+ 	$("#prioridade option").each(function(i){
+ 		if (prioridadeId == $(this).val() || set == true ) {
+ 			set = true;
+ 			if (prioridadeId != $(this).val()) {
+    		$("#prioridade").val($(this).val());
+    		$("#tempo-horas").focus();
+    		return false;
+    	}
+  	}
+ 	});
+}
+
+function posicionaTipoPendencia(tipoPendenciaId){
+	set = false;
+ 	$("#tipo-pendencia option").each(function(i){
+ 		if (tipoPendenciaId == $(this).val() || set == true ) {
+ 			set = true;
+ 			if (tipoPendenciaId != $(this).val()) {
+    		$("#tipo-pendencia").val($(this).val());
+    		$("#prioridade").focus();
+    		return false;
+    	}
+  	}
+ 	});
+}
