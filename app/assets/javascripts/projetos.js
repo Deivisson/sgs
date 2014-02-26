@@ -4,7 +4,7 @@ $(document).ready(function(){
     var dialog_form = $(getModalContainer()).dialog({
         autoOpen: false,
         width: 830,
-        height: 650,
+        height: 500,
         modal: true,
         closeText: "Fechar",
         close: function() {
@@ -18,11 +18,12 @@ $(document).ready(function(){
       inicializaTinyMCE();
       setMaskFields();
       bindProjetoUIEvents();
+      $("#project-form-tabs").tabs();
+      $("#sortable").sortable();
     });
     dialog_form.dialog('open');
     e.preventDefault();
   });
-
   //TAB
   $("#tab-resumo-projeto").tabs();
   $("#tab-menu-projeto").tabs();

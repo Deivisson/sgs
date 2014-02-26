@@ -3,6 +3,7 @@ class Usuario::ProjetosController < Usuario::BaseController
   before_filter :load_clientes, except:[:show,:destroy]
   before_filter :load_usuarios, only:[:index]
   before_filter :load_dados, except:[:show,:index,:destroy]
+  before_filter :get_etapas_ids, :only => [:update,:create]
 
   def index
     @projetos = Projeto.includes(:cliente, :usuario)
@@ -26,6 +27,7 @@ class Usuario::ProjetosController < Usuario::BaseController
   def create
     params[:projeto].merge!({usuario_id:current_usuario.id,status:Projeto::ATIVO})
     @projeto = Projeto.new(params[:projeto])
+    @projeto.ordem = @etapas_ordem
     if @projeto.save
       flash[:notice]= "Abertura de Projeto realizada com sucesso."
     end
@@ -34,6 +36,7 @@ class Usuario::ProjetosController < Usuario::BaseController
 
   def update
     @projeto = Projeto.find(params[:id])
+    @projeto.ordem = @etapas_ordem
     if @projeto.update_attributes(params[:projeto])
       flash[:notice]= "Atualizacao de Projeto realizada com sucesso."
     end    
@@ -48,6 +51,10 @@ class Usuario::ProjetosController < Usuario::BaseController
 
 
 private
+  
+  def get_etapas_ids
+    @etapas_ordem = params[:projeto][:etapa_ids] || []
+  end
 
   def load_clientes
     @clientes = Cliente.to_select

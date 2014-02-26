@@ -1,10 +1,12 @@
 <%- if @projeto.errors.any? %>
   $('#dialog-form').html('<%= escape_javascript(render('form')) %>');
   var qtd_errors = <%= @projeto.errors.count %>;
-  var tam = (540 + (qtd_errors * 12) );
+  var tam = (500 + (qtd_errors * 12) );
   $('#dialog-form').css("height",tam + "px");
   $('.ui-dialog').css("top","10px");
   $('#cliente-select-id').focus();
+  $("#project-form-tabs").tabs();
+  $("#sortable").sortable();
   inicializaTinyMCE();
   setMaskFields();
   bindProjetoUIEvents();

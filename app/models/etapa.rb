@@ -10,6 +10,7 @@ class Etapa < ActiveRecord::Base
   has_many :projetos, through: :etapas_projetos
 
   attr_reader :context, :peso
+  default_scope :order => "ordem asc"
 
   def percentual_participacao_projeto
   	solicitacoes.sum(:peso)

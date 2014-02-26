@@ -26,6 +26,8 @@ class Projeto < ActiveRecord::Base
   has_many :etapas, through: :etapas_projetos
 
   attr_reader :peso_total
+  attr_accessor :ordem
+  after_save :atualiza_ordem_etapas
 
   def peso_total
     @peso_total ||= (solicitacoes.sum(:peso) || 0)
@@ -75,5 +77,12 @@ private
   	if data_inicio > data_prevista_termino
   		errors.add(:data_prevista_termino, "Data Prevista para Termino devera ser maior que a Data de Inicio.")
   	end
+  end
+
+  def atualiza_ordem_etapas
+    self.ordem.each_with_index do |e,i|
+      etapa = self.etapas.where(id:e).first
+      etapa.update_attributes(ordem:i)
+    end
   end
 end

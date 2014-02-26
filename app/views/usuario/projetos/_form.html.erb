@@ -1,48 +1,22 @@
 <div id="modal-container">
   <%= semantic_form_for [:usuario, @projeto], remote:true do |f| %>
-    <%= f.inputs do %>
-      <%= section_tag do %>
-        <%= f.input :cliente_id, 
-                    :as         => :select, 
-                    :required   => true,
-                    :collection => @clientes.collect{|c| [c.nome, c.id]},
-                    :input_html => {:id => "cliente-select-id", autofocus:true}  %>
-
-        <%= f.input :nome, :label => "Nome Projeto" %>
-        <%= f.input :descricao, 
-                    :label       => "Descrição",
-                    :input_html => {:rows => 7, :cols => 12 }%>
-        
-        <%= f.input :data_inicio, 
-                    :as         => :string, 
-                    :label      => "Data Início",
-                    :input_html => {:style => "max-width: 150px !important;"} %>
-
-        <%= f.input :data_prevista_termino, 
-                    :as         => :string, 
-                    :label      => "Data Prevista Término",
-                    :input_html => {:size => 40} %>
-        
-        <li class="check_boxes input optional" style="margin: 30px 0 0 -25px">
-          <fieldset class="choices">
-              <ol class="choices-group">
-                  <%- @etapas.each do |etapa| %>
-                    <li class="choice">
-                      <%= content_tag :label, for:"projeto_etapa_ids_1#{etapa.id}" do %>
-                        <%= check_box_tag "projeto[etapa_ids][]",
-                                      etapa.id ,
-                                      @projeto.etapa_ids.include?(etapa.id),
-                                      id:"projeto_etapa_ids_#{etapa.id}" %>
-                        <%= etapa.descricao %>
-                      <% end %>
-                    </li>
-                  <% end %>
-              </o>
-          </fieldset>
-        <li>        
-
+    <div id="project-form-tabs" class="menutab-content">
+      <%= content_tag :ul do %>
+        <li id = "projeto-form-tab1">
+          <%= link_to "#fragment-1" do  %>
+            <span>Dados Principais</span>
+          <% end %>
+        </li>
+        <li id = "projeto-form-tab2" >
+          <%= link_to "#fragment-2" do  %>
+            <span>Descrição</span>
+          <% end %>
+        </li>
       <% end %>
-    <% end %>
+      <%= render partial:"form_campos_principais", locals: {:f => f} %>
+      <%= render partial:"form_campos_detalhes", locals: {:f => f} %>
+    </div>
+  
     <%= f.actions :class => "buttons-container modal-form-button" do %>
       <%= submit_button f %>
       <%= link_to_cancel "#", id:'projeto-cancel-link' %>
