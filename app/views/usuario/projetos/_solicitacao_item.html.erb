@@ -1,10 +1,14 @@
 <%= content_tag :tr do %>
   <td width = "70"><%= solicitacao.id.to_s.rjust(5,'0') %></td>
+  <td><%=h solicitacao.cliente.nome %></td>
+  <td><%=h solicitacao.titulo %></td>
+  <td><%=h solicitacao.solucao_sub_modulo.descricao %></td>
+  <td><%=h solicitacao.usuario_responsavel.nome %></td>
+  <td><%=h solicitacao.prioridade.descricao %></td>
+  <td><%=h solicitacao.tipo_pendencia.descricao %></td>
+  <td><%= content_tag :span, solicitacao.status.descricao, class:'labels label-info'%></td>
   <td>
-    <%=h solicitacao.titulo %>
-    <%= content_tag :span, solicitacao.status.descricao, class:'labels label-info'%>
-  </td>
-  <td>
+    
     <div class="container-oculto">
       <%= link_to image_tag(image_link[:show]), 
           :controller => 'solicitacoes',

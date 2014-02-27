@@ -5,7 +5,7 @@
 	                :as         => :select, 
 	                :required   => true,
 	                :collection => @clientes.collect{|c| [c.nome, c.id]},
-	                :input_html => {:id => "cliente-select-id", autofocus:true}  %>
+	                :input_html => {:id => "cliente-select-carrega-solucao", autofocus:true}  %>
 
 	    <%= f.input :nome, :label => "Nome Projeto" %>
 	    <%= f.input :data_inicio, 
@@ -18,8 +18,27 @@
 	                :label      => "Data Prevista Término",
 	                :input_html => {:size => 40} %>
 	    
-	    <li class="check_boxes input optional" style="margin: 30px 0 0 -25px">
+	    <li class="check_boxes input optional" style="margin: 0px 0 0 -25px;background-color: #FFF">
 	      <fieldset class="choices">
+	      		<label style="margin-left: 26px;position:absolute">Soluções</label>
+	          <ol class="choices-group" id="projeto-solucoes">
+	              <%- @solucoes.each do |solucao| %>
+	                <li class="choice" id=<%="li-projeto_solucao_id_#{solucao.id}" %>>
+	                  <%= check_box_tag "projeto[solucao_ids][]",
+	                                  solucao.id ,
+	                                  @projeto.solucao_ids.include?(solucao.id),
+	                                  id:"projeto_solucao_id_#{solucao.id}",
+	                                  disabled:@projeto.cliente.nil? %>
+	                  <%= content_tag :label,solucao.descricao, for:"projeto_solucao_ids_#{solucao.id}"  %>
+	                </li>
+	              <% end %>
+	          </o>
+	      </fieldset>
+	    <li>
+
+	    <li class="check_boxes input optional" style="margin: 0px 0 0 -25px">
+	      <fieldset class="choices">
+	      		<label style="margin-left: 26px;position:absolute">Etapas do Projeto</label>
 	          <ol class="choices-group" id="sortable">
 	              <%- @etapas.each do |etapa| %>
 	                <li class="choice">
@@ -33,7 +52,18 @@
 	              <% end %>
 	          </o>
 	      </fieldset>
-	    <li>        
+	    <li>
+		    <%= f.input :frequencia_visita, 
+		                :as         => :select,
+		                :collection => options_for_frequencia,
+		                :label      => "Frequência das Visitas",
+		                :input_html => {disabled: !@projeto.etapa_ids.include?(Etapa::TREINAMENTO),
+		                								id:'frequencia-visita'} %>
+				
+				<%= f.input :duracao_visita_horas,
+										:label      => "Duração das Visitas",
+										:input_html => {disabled: !@projeto.etapa_ids.include?(Etapa::TREINAMENTO),
+																		id:'duracao_visita_horas'}	%>									
 	  <% end %>
 	<% end %>
 </div>

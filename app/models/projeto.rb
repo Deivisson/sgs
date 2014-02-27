@@ -1,13 +1,20 @@
+# -*- encoding : utf-8 -*-
+include DataHoraHelper
 class Projeto < ActiveRecord::Base
   
+  #Status do Projeto
   ATIVO = 1
   EM_ANDAMENTO = 2
   INTERROMPIDO = 3
   CANCELADO = 4
   FINALIZADO = 5
-
   STATUS = ["Ativo", "Em Andamento", "Interrompido", "Cancelado","Finalizado"]
 
+  #Frequencia de visitas
+  DIARIO = 1
+  SEMANAL = 7
+  QUINZENAL = 15
+  MENSAL = 30
 
   validates :nome, presence:true, length:{maximum:50}, uniqueness: {scope: :cliente_id}
   validates :cliente_id, presence:true
@@ -15,18 +22,27 @@ class Projeto < ActiveRecord::Base
   validates :data_prevista_termino, presence:true
   validates :status, presence:true
   validates :usuario_id, presence:true
+  validates :frequencia_visita, :presence => true,
+            :if => Proc.new {|p| p.etapa_ids.include?(Etapa::TREINAMENTO)}
+  validates :duracao_visita_horas, :presence => true,
+            :if => Proc.new {|p| p.etapa_ids.include?(Etapa::TREINAMENTO)}
 
   validate :previsao_termino_menor_que_data_inicio
-  
+  validate :validar_duracao_visita_horas_maior_que_zero
+
   belongs_to :cliente
   belongs_to :usuario
   has_many :solicitacoes
   #has_and_belongs_to_many :etapas
   has_many :etapas_projetos
   has_many :etapas, through: :etapas_projetos
+  has_and_belongs_to_many :solucoes
 
   attr_reader :peso_total
-  attr_accessor :ordem
+  attr_accessor :ordem, :duracao_visita_horas
+
+  before_validation :attribui_minutos_duracao_visita
+  before_save :consiste_campos_atrelados_a_etapa_treinamento
   after_save :atualiza_ordem_etapas
 
   def peso_total
@@ -69,8 +85,25 @@ class Projeto < ActiveRecord::Base
       self.solicitacoes.where(etapa_id:etapa.id)
     end
   end
+  
+  def duracao_visita_horas
+    minutos_em_horas(self.duracao_visita_minutos)
+  end
 
 private 
+  
+  def validar_duracao_visita_horas_maior_que_zero
+    return if !self.etapa_ids.include?(Etapa::TREINAMENTO) 
+    errors.add(:duracao_visita_horas, "Deverá ser maior que zero horas") if duracao_visita_minutos ==0
+    return false
+  end
+
+  def consiste_campos_atrelados_a_etapa_treinamento
+    unless self.etapa_ids.include?(Etapa::TREINAMENTO)
+      self.duracao_visita_minutos = 0
+      self.frequencia_visita = nil
+    end
+  end
 
   def previsao_termino_menor_que_data_inicio
   	return if data_inicio.nil? || data_prevista_termino.nil?
@@ -84,5 +117,11 @@ private
       etapa = self.etapas.where(id:e).first
       etapa.update_attributes(ordem:i)
     end
+  end
+
+  def attribui_minutos_duracao_visita
+    return if @duracao_visita_horas.nil? || @duracao_visita_horas.empty?
+    self.duracao_visita_minutos = total_minutos(@duracao_visita_horas)
+    puts self.duracao_visita_minutos
   end
 end

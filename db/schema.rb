@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140226013530) do
+ActiveRecord::Schema.define(:version => 20140226231512) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -212,19 +212,31 @@ ActiveRecord::Schema.define(:version => 20140226013530) do
   end
 
   create_table "projetos", :force => true do |t|
-    t.string   "nome",                  :limit => 50, :null => false
+    t.string   "nome",                   :limit => 50, :null => false
     t.text     "descricao"
-    t.integer  "cliente_id",                          :null => false
-    t.date     "data_inicio",                         :null => false
-    t.date     "data_prevista_termino",               :null => false
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.integer  "status",                              :null => false
-    t.integer  "usuario_id",                          :null => false
+    t.integer  "cliente_id",                           :null => false
+    t.date     "data_inicio",                          :null => false
+    t.date     "data_prevista_termino",                :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.integer  "status",                               :null => false
+    t.integer  "usuario_id",                           :null => false
+    t.integer  "frequencia_visita"
+    t.integer  "duracao_visita_minutos"
   end
 
   add_index "projetos", ["cliente_id"], :name => "index_projetos_on_cliente_id"
   add_index "projetos", ["usuario_id"], :name => "index_projetos_on_usuario_id"
+
+  create_table "projetos_solucoes", :id => false, :force => true do |t|
+    t.integer  "projeto_id", :null => false
+    t.integer  "solucao_id", :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "projetos_solucoes", ["projeto_id"], :name => "index_projetos_solucoes_on_projeto_id"
+  add_index "projetos_solucoes", ["solucao_id"], :name => "index_projetos_solucoes_on_solucao_id"
 
   create_table "situacoes", :force => true do |t|
     t.string   "descricao"
@@ -483,6 +495,9 @@ ActiveRecord::Schema.define(:version => 20140226013530) do
   add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_responsaveis", :column => "usuario_responsavel_id"
 
   add_foreign_key "projetos", "clientes", :name => "fk_projetos_clientes"
+
+  add_foreign_key "projetos_solucoes", "projetos", :name => "projetos_solucoes_projetos"
+  add_foreign_key "projetos_solucoes", "solucoes", :name => "projetos_solucoes_solucoes"
 
   add_foreign_key "solicitacao_historicos", "solicitacoes", :name => "fk_solicitacao_historico_solicitacoes", :dependent => :delete
   add_foreign_key "solicitacao_historicos", "status", :name => "fk_solicitacao_historico_status"

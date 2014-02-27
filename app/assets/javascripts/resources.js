@@ -30,6 +30,11 @@ function bindEventoComboClienteOnChange() {
   carregaModulos();
 }
 
+function bindEventoComboClienteLoadSolucoes() {
+  carregaSolucoesCliente();
+}
+
+
 function bindEventoComboModulos() {
   carregaSubModulos();
 }
@@ -87,4 +92,21 @@ function carregaSubModulos(){
       });
     });
   }
+}
+
+
+function carregaSolucoesCliente(){
+  cliente_id = $("#cliente-select-carrega-solucao").val();
+  $("li[id*=projeto_solucao_id_]").remove();
+  if (cliente_id > 0) {
+    $.getJSON("/usuario/resources/" + cliente_id + '/solucoes_cliente.json',function(data){
+      $.each(data,function(i,item){
+        html = "<li id='li-projeto_solucao_id_" + item.solucao.id + "' class='choice'>" +
+               "  <input type='checkbox' value='" + item.solucao.id + "' name='projeto[solucao_ids][]' id='projeto_solucao_id_"+ item.solucao.id + "'>" +
+               "     <label for='projeto_solucao_ids_" + item.solucao.id + "'>" + item.solucao.descricao + "</label>" +
+               "</li>";
+        $("#projeto-solucoes").append(html);
+      });
+    });
+  }  
 }

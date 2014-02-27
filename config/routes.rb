@@ -61,6 +61,7 @@ Sgsoft::Application.routes.draw do
     get '/:cliente_id/adiciona_item', :to => 'ordem_servicos#adiciona_item', :as => "adiciona_item_ordem_servico"
     get '/resources/:cliente_id/cliente_contatos', :to => 'resources#cliente_contatos'
     get '/resources/:cliente_id/solucao_modulos', :to => 'resources#solucao_modulos'
+    get '/resources/:cliente_id/solucoes_cliente', :to => 'resources#solucoes_cliente'
     get '/resources/:modulo_id/solucao_sub_modulos', :to => 'resources#solucao_sub_modulos'
     get '/resources/:status_id/usuarios_responsaveis', :to => 'resources#usuarios_responsaveis'
 

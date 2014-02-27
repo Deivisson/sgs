@@ -32,20 +32,22 @@
   z-index: 3;
 }
 
-#sortable {
+ol.choices-group {
   margin-left: 4px;
-  li {
-    background-color: #E1E1E1; 
+  li.choice {
+    float: left;
+    background-color: #EEEEEE; 
     height: 14px;
     padding: 4px;
-    width: 545px;
-    margin: 2px;
+    width: 560px;
+    margin: 2px !important;
+    margin-bottom: 0;
     input {
       float: left;
       margin:1px 0px 0px 10px;
     }
     label {
-      float: left;
+      float: left !important;
       margin:1px 0px 0px 5px;
       width: 100%;
     }

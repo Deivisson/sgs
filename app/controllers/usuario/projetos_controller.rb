@@ -1,5 +1,6 @@
 class Usuario::ProjetosController < Usuario::BaseController
   before_filter :set_current_menu
+  before_filter :carrega_projeto, :except => [:index,:new, :create]
   before_filter :load_clientes, except:[:show,:destroy]
   before_filter :load_usuarios, only:[:index]
   before_filter :load_dados, except:[:show,:index,:destroy]
@@ -20,9 +21,7 @@ class Usuario::ProjetosController < Usuario::BaseController
     @projeto = Projeto.new
   end
 
-  def edit
-    @projeto = Projeto.find(params[:id])
-  end
+  def edit;  end
 
   def create
     params[:projeto].merge!({usuario_id:current_usuario.id,status:Projeto::ATIVO})
@@ -35,7 +34,6 @@ class Usuario::ProjetosController < Usuario::BaseController
   end
 
   def update
-    @projeto = Projeto.find(params[:id])
     @projeto.ordem = @etapas_ordem
     if @projeto.update_attributes(params[:projeto])
       flash[:notice]= "Atualizacao de Projeto realizada com sucesso."
@@ -44,7 +42,6 @@ class Usuario::ProjetosController < Usuario::BaseController
   end
 
   def destroy
-    @projeto = Projeto.find(params[:id])
     @projeto.destroy
     respond_with(@projeto)
   end
@@ -52,6 +49,9 @@ class Usuario::ProjetosController < Usuario::BaseController
 
 private
   
+  def carrega_projeto
+    @projeto = Projeto.find(params[:id])
+  end
   def get_etapas_ids
     @etapas_ordem = params[:projeto][:etapa_ids] || []
   end
@@ -66,6 +66,11 @@ private
 
   def load_dados
     @etapas = Etapa.all
+    if @projeto.nil? || @projeto.cliente.nil?
+      @solucoes = Solucao.all
+    else
+      @solucoes = @projeto.cliente.solucoes
+    end
   end
 
   def set_current_menu

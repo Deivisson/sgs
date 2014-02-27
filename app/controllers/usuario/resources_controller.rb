@@ -13,6 +13,12 @@ class Usuario::ResourcesController < Usuario::BaseController
     @solucoes = Solucao.to_select
   end
 
+  def solucoes_cliente
+    @cliente = Cliente.find(params[:cliente_id])
+    @solucoes = @cliente.solucoes
+    respond_with(@solucoes)
+  end
+
   def solucao_modulos
     @solucao_modulos = SolucaoModulo.for_group_options params[:cliente_id]
     respond_with(@solucao_modulos)
