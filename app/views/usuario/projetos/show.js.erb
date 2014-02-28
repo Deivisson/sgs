@@ -1,0 +1,7 @@
+$("#projeto-solicitacao-desenvolvimento").html('<%= escape_javascript(
+		render partial:'solicitacoes',
+		locals: {solicitacoes: @solicitacoes_etapa_desenvolvimento,
+					 					etapa:'desenvolvimento',
+			 					 etapa_id:Etapa::DESENVOLVIMENTO }
+
+	) %>');

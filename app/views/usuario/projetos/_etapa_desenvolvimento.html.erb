@@ -1,6 +1,28 @@
 <%= section_tag id:"projeto-menu-aba-desenvolvimento", class:"section-tag-whiteBg" do %>
-	<%= render partial:'solicitacoes', 
-						 locals: {solicitacoes: @projeto.solicitacoes_etapa_desenvolvimento,
-						 					etapa:'desenvolvimento',
-						 					etapa_id:Etapa::DESENVOLVIMENTO }  %>
+ <ul class="my-tasks status-solicitacoes-projeto">
+ 		<h1>Filtrar Status</h1>
+    <li>
+        <%= link_to link_to "Todos", 
+        					controller:"projetos", 
+        					action:"show", 
+        					id:@projeto, 
+        					remote:true %>
+    <% @resumo_status.each do |solicitacao| %>
+      <li>
+        <%= link_to solicitacao.descricao_status, 
+        					controller:"projetos", 
+        					action:"show", 
+        					id:@projeto, 
+        					status_id:solicitacao.status_id,
+        					remote:true %>
+          <span><%= solicitacao.qtd %></span>
+      </li>
+    <% end %>
+  </ul>
+  <div id="projeto-solicitacao-desenvolvimento" style="margin-left:200px;float:left;width:83%;">
+		<%= render partial:'solicitacoes', 
+							 locals: {solicitacoes: @solicitacoes_etapa_desenvolvimento,
+							 					etapa:'desenvolvimento',
+							 					etapa_id:Etapa::DESENVOLVIMENTO }  %>
+	</div>
 <% end %>

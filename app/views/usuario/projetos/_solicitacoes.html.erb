@@ -1,3 +1,6 @@
+<h1 class="filtro-solicitacoes-titulo">
+  Status: <%= @current_status.nil? ? "Todos" : @current_status.descricao %>
+</h1>
 <%= link_to "Adicionar Tarefa",
         new_usuario_projeto_solicitacao_path(projeto_id:@projeto.id,etapa_id:etapa_id), 
         remote:true,
@@ -7,7 +10,7 @@
 <table>
   <thead>
     <tr>
-      <th width = "70">Nº Solic.</th>
+      <th width = "60">Nº Solic.</th>
       <th>Cliente</th>
       <th>Título</th>
       <th>Sub Módulo</th>
@@ -15,7 +18,7 @@
       <th width = "70">Prioridade</th>
       <th width ="120">Tipo</th>
       <th>Status</th>
-      <th span='3' width = "80" style="border-left:0px;"></th>
+      <th span='2' width = "40" style="border-left:0px;"></th>
     </tr>
   </thead>
   <tbody id=<%= "projeto-solicitacoes-#{etapa}" %>>

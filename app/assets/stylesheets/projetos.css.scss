@@ -79,3 +79,48 @@ ol.choices-group {
   top: 52px;
   z-index: 3;
 }
+
+ul.status-solicitacoes-projeto {
+  background-color: #F5F5F5;
+  border-radius: 5px; 
+  -moz-border-radius: 5px; 
+  -webkit-border-radius: 5px; 
+  border: 1px solid #D6D6D6;
+  float: left;
+  position: absolute;
+  width: 170px;
+  margin-top: 0px;
+  padding: 4px;
+  min-height: 200px;
+  li {
+    height: 30px !important;
+    width: 170px;
+  }
+  span {
+    height: 20px !important;
+    margin: -25px 0px 0px 126px !important;
+    width: 36px !important;
+  }
+  h1 {
+    color: #625B5B;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 1px 0 white;
+    border-bottom: 1px solid #c3c7d0;
+    height: 35px;
+    line-height: 35px;
+    text-indent: 17px;
+    margin: 0px;
+    padding: 0px;
+  }
+}
+h1.filtro-solicitacoes-titulo {
+    color: #625B5B;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 3px;
+    text-shadow: 0 1px 0 white;
+    width: 450px;
+    margin: 7px 0 0 0;
+}

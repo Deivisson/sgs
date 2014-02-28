@@ -1,5 +1,8 @@
 <%= content_tag :tr do %>
-  <td width = "70"><%= solicitacao.id.to_s.rjust(5,'0') %></td>
+  <td width = "50">
+    <%= link_to solicitacao.id.to_s.rjust(5,'0'), 
+        [:usuario,solicitacao], class:'inline-link',style:"width:65%" %>
+  </td>
   <td><%=h solicitacao.cliente.nome %></td>
   <td><%=h solicitacao.titulo %></td>
   <td><%=h solicitacao.solucao_sub_modulo.descricao %></td>
@@ -10,11 +13,6 @@
   <td>
     
     <div class="container-oculto">
-      <%= link_to image_tag(image_link[:show]), 
-          :controller => 'solicitacoes',
-          :action => 'show' ,
-          :id => solicitacao.id,:local => 'tasks_user' %>
-
       <%= link_to image_tag(image_link[:edit]), 
         [:edit, :usuario, solicitacao], 
         remote:true, 

@@ -14,7 +14,17 @@ class Usuario::ProjetosController < Usuario::BaseController
 
   def show
     @projeto = Projeto.find(params[:id])
-    render :layout  => "projeto"
+
+    @resumo_status = Solicitacao.joins(:status)
+    @resumo_status = @resumo_status.select("count(solicitacoes.id) as qtd, status.descricao as descricao_status,solicitacoes.status_id")
+    @resumo_status = @resumo_status.where(projeto_id:@projeto.id).group(:status_id)
+    @resumo_status = @resumo_status.where(etapa_id:Etapa::DESENVOLVIMENTO)
+
+    @current_status = params[:status_id].present? ? Status.find(params[:status_id]) : nil
+    @solicitacoes_etapa_desenvolvimento = @projeto.solicitacoes_etapa_desenvolvimento
+    @solicitacoes_etapa_desenvolvimento = @solicitacoes_etapa_desenvolvimento.where(status_id:@current_status.id) unless @current_status.nil?
+    
+    respond_with(@projeto,:layout  => "projeto")
   end
 
   def new
