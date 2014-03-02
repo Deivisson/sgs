@@ -31,7 +31,29 @@ $(document).ready(function(){
   //TAB
   $("#tab-resumo-projeto").tabs();
   $("#tab-menu-projeto").tabs();
-});
+  $("#projeto-menu-aba-treinamento").css("height",$("#show-container-id").height()-40);
+  $(".solucoes-container-itens").css("height",$("#show-container-id").height()-40);
+  $("#projeto-menu-aba-treinamento").css("overflow","auto");
+
+
+  //
+  $("#remover-sub-modulos-projeto").toggle(
+    function(){
+      $('input[id*="solucao-modulo-id-"]').css("visibility","visible");
+      $('input[id*="solucao-submodulo-id-"]').css("visibility","visible");
+      $('input[id*="solucao-submodulo-id-"]').attr('checked',false);
+      $('input[id*="solucao-modulo-id-"]').attr('checked',false);
+      $(this).text("Cancelar");
+    },
+    function(){
+      $('input[id*="solucao-modulo-id-"]').css("visibility","hidden");
+      $('input[id*="solucao-submodulo-id-"]').css("visibility","hidden");
+      $('input[id*="solucao-submodulo-id-"]').attr('checked',false);
+      $('input[id*="solucao-modulo-id-"]').attr('checked',false);
+      $(this).text("Remover Módulos/Sub Módulos");      
+    }
+  );
+}); 
 
 function bindProjetoUIEvents() {
   $("#projeto-cancel-link").click(function(){

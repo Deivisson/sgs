@@ -38,6 +38,9 @@ Sgsoft::Application.routes.draw do
     resources :atendimentos
     resources :solicitacao_historicos
     resources :projetos do 
+      collection do
+        put :remove_sub_modulos
+      end
       resources :solicitacoes
     end
     resources :solicitacao_pesquisas do

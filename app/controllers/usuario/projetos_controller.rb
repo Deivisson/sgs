@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Usuario::ProjetosController < Usuario::BaseController
   before_filter :set_current_menu
   before_filter :carrega_projeto, :except => [:index,:new, :create]
@@ -56,6 +57,16 @@ class Usuario::ProjetosController < Usuario::BaseController
     respond_with(@projeto)
   end
 
+  def remove_sub_modulos
+    id = params[:solucao_sub_modulo_ids] || []
+    if id.any?
+      @projeto.projetos_sub_modulos.where(:solucao_sub_modulo_id => id).delete_all
+      flash[:notice]= "Sub Módulos Removidos com sucesso."
+    else
+      flash[:notice]= "É necessário selecionar pelo menos um Sub Módulo a ser removido."
+    end
+    respond_with(@projeto,:location => usuario_projeto_path(@projeto))
+  end
 
 private
   

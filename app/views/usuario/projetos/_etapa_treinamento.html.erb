@@ -1,0 +1,27 @@
+<%= section_tag id:"projeto-menu-aba-treinamento", class:"section-tag-whiteBg" do %>
+	<%= semantic_form_for @projeto,:url => remove_sub_modulos_usuario_projetos_path,
+																																	:html => {:method => :put} do |form| %>
+
+		<%= hidden_field_tag :id, @projeto.id %>
+		<%= content_tag :div, class:'action-buttons' do %>
+			<%= link_to "Remover Módulos/Sub Módulos","#",id:'remover-sub-modulos-projeto' %>|
+			<%= link_to "Adicionar Módulo","#" %> |
+			<%= link_to "Adicionar Sub Módulo","#" %>
+		<% end %>
+
+	  <% @projeto.solucoes.each do |solucao| %>
+	  		<div class="solucoes-container-itens">
+					<%= monta_solucoes_projeto_treinamento(solucao,
+												solucao_ids:@projeto.solucao_ids,
+												modulo_ids:@projeto.solucao_modulo_ids,
+												sub_modulo_ids:@projeto.solucao_sub_modulo_ids) %>
+				</div>
+	  <% end %>
+
+	  <%= form.actions :class => "buttons-container" do %>
+	    <%= submit_button form %>
+	  <% end %>
+  
+  <% end %>
+
+<% end %>

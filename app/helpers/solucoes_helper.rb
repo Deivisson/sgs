@@ -26,6 +26,7 @@ module SolucoesHelper
 		html.join.html_safe
 	end
 
+private
 	def modulos(solucao)
 		html = []
 		solucao.solucao_modulos.each do |m|

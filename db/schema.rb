@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140226231512) do
+ActiveRecord::Schema.define(:version => 20140301010351) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -237,6 +237,16 @@ ActiveRecord::Schema.define(:version => 20140226231512) do
 
   add_index "projetos_solucoes", ["projeto_id"], :name => "index_projetos_solucoes_on_projeto_id"
   add_index "projetos_solucoes", ["solucao_id"], :name => "index_projetos_solucoes_on_solucao_id"
+
+  create_table "projetos_sub_modulos", :force => true do |t|
+    t.integer  "projeto_id"
+    t.integer  "solucao_sub_modulo_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "projetos_sub_modulos", ["projeto_id"], :name => "index_projetos_sub_modulos_on_projeto_id"
+  add_index "projetos_sub_modulos", ["solucao_sub_modulo_id"], :name => "index_projetos_sub_modulos_on_solucao_sub_modulo_id"
 
   create_table "situacoes", :force => true do |t|
     t.string   "descricao"
@@ -498,6 +508,9 @@ ActiveRecord::Schema.define(:version => 20140226231512) do
 
   add_foreign_key "projetos_solucoes", "projetos", :name => "projetos_solucoes_projetos"
   add_foreign_key "projetos_solucoes", "solucoes", :name => "projetos_solucoes_solucoes"
+
+  add_foreign_key "projetos_sub_modulos", "projetos", :name => "projetos_sub_modulos_projetos"
+  add_foreign_key "projetos_sub_modulos", "solucao_sub_modulos", :name => "projetos_sub_modulos_solucao_sub_modulo"
 
   add_foreign_key "solicitacao_historicos", "solicitacoes", :name => "fk_solicitacao_historico_solicitacoes", :dependent => :delete
   add_foreign_key "solicitacao_historicos", "status", :name => "fk_solicitacao_historico_status"

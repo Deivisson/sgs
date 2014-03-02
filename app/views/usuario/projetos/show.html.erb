@@ -38,6 +38,7 @@
         <% end %>
       <% end %>
       <%= render 'etapa_desenvolvimento' if @projeto.possui_desenvolvimento? %>
+      <%= render 'etapa_treinamento' if @projeto.possui_treinamento? %>
       <%= render 'etapa_instalacao' if @projeto.possui_instalacao? %>
     </div>
   <% end %>

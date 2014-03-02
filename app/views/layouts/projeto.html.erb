@@ -13,7 +13,7 @@
     <%= yield :left_container %>
   </div>
   
-  <div class="show-container">
+  <div class="show-container" id="show-container-id">
     <div id="container" >
       <%- flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>

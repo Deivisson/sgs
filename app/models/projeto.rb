@@ -38,12 +38,16 @@ class Projeto < ActiveRecord::Base
   has_many :etapas, through: :etapas_projetos
   has_and_belongs_to_many :solucoes
 
+  has_many :projetos_sub_modulos
+  has_many :solucao_sub_modulos, :through => :projetos_sub_modulos
+
+
   attr_reader :peso_total
   attr_accessor :ordem, :duracao_visita_horas
 
   before_validation :attribui_minutos_duracao_visita
-  before_save :consiste_campos_atrelados_a_etapa_treinamento
-  after_save :atualiza_ordem_etapas
+  before_save :consiste_campos_atrelados_a_etapa_treinamento 
+  after_save :atualiza_ordem_etapas,:save_solucao_sub_modulos
 
   def peso_total
     @peso_total ||= (solicitacoes.sum(:peso) || 0)
@@ -90,8 +94,30 @@ class Projeto < ActiveRecord::Base
     minutos_em_horas(self.duracao_visita_minutos)
   end
 
+  def solucao_modulo_ids
+    return [] if self.new_record?
+    inner_sql=<<-SQL
+                id in (
+                  select distinct sm.solucao_modulo_id
+                  from projetos_sub_modulos psm
+                  inner join solucao_sub_modulos sm on psm.solucao_sub_modulo_id = sm.id
+                  where psm.projeto_id = #{self.id}
+                )
+              SQL
+    SolucaoModulo.where(inner_sql).collect{|m| m.id}
+  end
+
 private 
   
+  def save_solucao_sub_modulos
+    return unless self.solucoes.any?
+      subs = SolucaoSubModulo.joins(:solucao_modulo).where('solucao_modulos.solucao_id' => self.solucao_ids)
+      self.solucao_sub_modulos.delete_all
+      subs.each do |s| 
+        ProjetosSubModulo.create(projeto_id:self.id,solucao_sub_modulo_id:s.id)
+      end
+  end
+
   def validar_duracao_visita_horas_maior_que_zero
     return if !self.etapa_ids.include?(Etapa::TREINAMENTO) 
     errors.add(:duracao_visita_horas, "Deverá ser maior que zero horas") if duracao_visita_minutos ==0
@@ -113,6 +139,7 @@ private
   end
 
   def atualiza_ordem_etapas
+    return if self.ordem.nil?
     self.ordem.each_with_index do |e,i|
       etapa = self.etapas.where(id:e).first
       etapa.update_attributes(ordem:i)

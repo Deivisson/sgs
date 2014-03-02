@@ -117,10 +117,74 @@ ul.status-solicitacoes-projeto {
 h1.filtro-solicitacoes-titulo {
     color: #625B5B;
     float: left;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     padding: 3px;
     text-shadow: 0 1px 0 white;
     width: 450px;
     margin: 7px 0 0 0;
+}
+
+/*Aba de treinamento na tela de show*/
+#projeto-menu-aba-treinamento .action-buttons {
+  border: 1px solid red;
+  height: 40px;
+  margin-bottom: 4px;
+  width: 100%;
+}
+#projeto-menu-aba-treinamento .solucoes-container-itens {
+  float: left;
+  height: 100%;
+  width: 350px;
+  overflow-y: scroll;
+  overflow-x:hidden;
+  margin:0 0 10px 0;
+  padding-right: 5px;
+  border-right: 2px solid #777;
+  border-bottom: 1px solid #777;
+}
+
+#projeto-menu-aba-treinamento .solucoes-container-itens ul.projeto-solucoes {
+  padding: 5px;
+  label.solucao-label {
+    color: #B04240;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  ul.projeto-modulo {
+    float: left;
+    margin:0 0 10px 0px;
+    label.modulo-label {
+      color: blue;
+      font-size: 14px;
+      width: 100%;
+    }
+    input {
+      float: left;
+      visibility: hidden;
+    }
+  }
+  .projeto-modulo li {
+    float: left;
+    margin-left: 30px;
+  }
+  ul.projeto-modulo .projeto-modulo-item, .projeto-modulo li {
+    float: left;
+    &:hover .buttons {visibility:visible; } ;
+    input {
+      float: left;
+      visibility: hidden;
+    }
+    label {
+      float: left;
+      width: auto;
+    }
+    .buttons {
+      visibility: hidden;
+      float: left;
+      width: 40px;
+      height: 17px;
+    }
+  }
+
 }

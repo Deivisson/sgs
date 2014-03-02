@@ -13,6 +13,9 @@ class SolucaoSubModulo < ActiveRecord::Base
   belongs_to :solucao_modulo
   has_many :pendencia_itens
   has_many :ordem_servico_itens
+  
+  has_many :projetos_sub_modulos
+  has_many :projetos, :through => :projetos_sub_modulos
 
   validates :previsao_treinamento_horas, :presence => true
   validates :peso, :numericality => {only_integer:true}
