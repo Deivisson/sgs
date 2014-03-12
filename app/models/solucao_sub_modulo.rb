@@ -17,6 +17,8 @@ class SolucaoSubModulo < ActiveRecord::Base
   has_many :projetos_sub_modulos
   has_many :projetos, :through => :projetos_sub_modulos
 
+  has_and_belongs_to_many :projeto_programacao_treinamentos #_solucao_sub_modulos
+
   validates :previsao_treinamento_horas, :presence => true
   validates :peso, :numericality => {only_integer:true}
   

@@ -37,11 +37,13 @@ Sgsoft::Application.routes.draw do
     resources :usuario_configs
     resources :atendimentos
     resources :solicitacao_historicos
+    resources :projeto_programacao_treinamentos
     resources :projetos do 
       collection do
-        put :remove_sub_modulos
+        put :gerenciar_sub_modulos
       end
       resources :solicitacoes
+      
     end
     resources :solicitacao_pesquisas do
        post :find,  :on =>  :collection

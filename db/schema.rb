@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140301010351) do
+ActiveRecord::Schema.define(:version => 20140306205408) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -210,6 +210,29 @@ ActiveRecord::Schema.define(:version => 20140301010351) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "projeto_programacao_treinamentos", :force => true do |t|
+    t.integer  "projeto_id",       :null => false
+    t.date     "data_programacao", :null => false
+    t.time     "hora_programacao", :null => false
+    t.integer  "usuario_id",       :null => false
+    t.string   "participantes"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "projeto_programacao_treinamentos", ["projeto_id"], :name => "index_projeto_programacao_treinamentos_on_projeto_id"
+  add_index "projeto_programacao_treinamentos", ["usuario_id"], :name => "index_projeto_programacao_treinamentos_on_usuario_id"
+
+  create_table "projeto_programacao_treinamentos_solucao_sub_modulos", :id => false, :force => true do |t|
+    t.integer  "projeto_programacao_treinamento_id"
+    t.integer  "solucao_sub_modulo_id"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "projeto_programacao_treinamentos_solucao_sub_modulos", ["projeto_programacao_treinamento_id"], :name => "projeto_programacao_treinamentos"
+  add_index "projeto_programacao_treinamentos_solucao_sub_modulos", ["solucao_sub_modulo_id"], :name => "programacao_treinamentos_solucao_sub_modulos"
 
   create_table "projetos", :force => true do |t|
     t.string   "nome",                   :limit => 50, :null => false
@@ -503,6 +526,12 @@ ActiveRecord::Schema.define(:version => 20140301010351) do
   add_foreign_key "ordem_servicos", "clientes", :name => "fk_ordem_servicos_cliente"
   add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_cadastrantes", :column => "usuario_cadastrante_id"
   add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_responsaveis", :column => "usuario_responsavel_id"
+
+  add_foreign_key "projeto_programacao_treinamentos", "projetos", :name => "projeto_programacao_treinamentos_projetos"
+  add_foreign_key "projeto_programacao_treinamentos", "usuarios", :name => "projeto_programacao_treinamentos_usuarios"
+
+  add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "projeto_programacao_treinamentos", :name => "projeto_programacao_treinamentos"
+  add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "solucao_sub_modulos", :name => "programacao_treinamentos_solucao_sub_modulos"
 
   add_foreign_key "projetos", "clientes", :name => "fk_projetos_clientes"
 

@@ -1,12 +1,20 @@
 <%= section_tag id:"projeto-menu-aba-treinamento", class:"section-tag-whiteBg" do %>
-	<%= semantic_form_for @projeto,:url => remove_sub_modulos_usuario_projetos_path,
-																																	:html => {:method => :put} do |form| %>
+	<%= semantic_form_for @projeto,url:gerenciar_sub_modulos_usuario_projetos_path,
+																	:html => {:method => :put, 
+																		style:'width: 100%;max-width:100%',
+																		id:"sub-modulos-form"} do |form| %>
 
 		<%= hidden_field_tag :id, @projeto.id %>
+		<%= hidden_field_tag :action_trigger, "",id:'action-trigger' %>
 		<%= content_tag :div, class:'action-buttons' do %>
-			<%= link_to "Remover Módulos/Sub Módulos","#",id:'remover-sub-modulos-projeto' %>|
-			<%= link_to "Adicionar Módulo","#" %> |
-			<%= link_to "Adicionar Sub Módulo","#" %>
+			<%= submit_tag "Salvar", class:"submit-button",id:'submit-sub-modulos-projeto' %>
+			<%= link_to "Adicionar Módulos/Sub Módulos","#", id:'adicionar-sub-modulos-projeto',class:'normal-link' %>
+			<%= link_to "Remover Módulos/Sub Módulos","#",id:'remover-sub-modulos-projeto',class:'normal-link' %>
+			<%= link_to "Programar Treinamento","#",id:'programar-treinamento',class:'normal-link' %>
+			<%= link_to "Teste",new_usuario_projeto_programacao_treinamento_path(projeto_id:@projeto.id,									sub_modulo_ids:""),
+													default_url:new_usuario_projeto_programacao_treinamento_path(projeto_id:@projeto.id,sub_modulo_ids:""),
+													id:'programacao-treinamento-link',
+													remote:true %>
 		<% end %>
 
 	  <% @projeto.solucoes.each do |solucao| %>
@@ -17,11 +25,6 @@
 												sub_modulo_ids:@projeto.solucao_sub_modulo_ids) %>
 				</div>
 	  <% end %>
-
-	  <%= form.actions :class => "buttons-container" do %>
-	    <%= submit_button form %>
-	  <% end %>
-  
+ 
   <% end %>
-
 <% end %>

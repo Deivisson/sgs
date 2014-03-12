@@ -57,11 +57,17 @@ class Usuario::ProjetosController < Usuario::BaseController
     respond_with(@projeto)
   end
 
-  def remove_sub_modulos
-    id = params[:solucao_sub_modulo_ids] || []
-    if id.any?
-      @projeto.projetos_sub_modulos.where(:solucao_sub_modulo_id => id).delete_all
-      flash[:notice]= "Sub Módulos Removidos com sucesso."
+  def gerenciar_sub_modulos
+    act = params["action_trigger"]
+    ids = params[:solucao_sub_modulo_ids] || []
+    if ids.any?
+      if act.to_sym == :remove
+        @projeto.projetos_sub_modulos.where(:solucao_sub_modulo_id => ids).delete_all
+        flash[:notice]= "Sub Módulos Removidos com sucesso."
+      else
+        @projeto.solucao_sub_modulos << SolucaoSubModulo.find(ids)
+        flash[:notice]= "Sub Módulos Adicionados com sucesso."
+      end
     else
       flash[:notice]= "É necessário selecionar pelo menos um Sub Módulo a ser removido."
     end

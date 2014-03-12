@@ -1,0 +1,36 @@
+<div id="modal-container">
+  <%= semantic_form_for [:usuario, @projeto_programacao_treinamento], remote:true do |f|  %>
+    <%= section_tag do %>
+      <%= f.inputs do %>
+        <%= f.input :usuario_id, 
+                    :as         => :select,
+                    :label      => "Técnico",
+                    :collection => @usuarios.collect{|u|[u.nome,u.id]},
+                    :input_html => {:style => "min-width: 410px;max-width: 310px;"} %>
+
+        <%= f.input :participantes, 
+                    :input_html => {:style => "min-width: 410px;max-width: 310px;"}  %>
+
+        <%= f.input :data_programacao, 
+                    :as         => :string, 
+                    :label      => "Data Programação",
+                    :input_html => {:style => "min-width: 210px;max-width: 210px;"}  %>
+
+        <%= f.input :hora_programacao,
+                    :as         => :string, 
+                    :label      => "Hora Programação",
+                    :input_html => {:style => "min-width: 210px;max-width: 210px;"}  %>
+
+        
+        <%= f.input :projeto_id, :as => :hidden %>
+        <%= f.input :solucao_sub_modulo_ids,:as => :hidden %>
+        
+      <% end %>
+    <% end %>
+    <%= f.actions :class => "buttons-container modal-form-button" do %>
+      <%= submit_button f %>
+      <%= link_to_cancel "#", id:'projeto-prog-treinamento-cancel-link' %>
+    <% end -%>
+  <% end %>
+  
+</div>

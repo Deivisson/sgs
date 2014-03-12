@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Projeto:</b>
+  <%= @projeto_programacao_treinamento.projeto %>
+</p>
+
+<p>
+  <b>Data programacao:</b>
+  <%= @projeto_programacao_treinamento.data_programacao %>
+</p>
+
+<p>
+  <b>Hora programacao:</b>
+  <%= @projeto_programacao_treinamento.hora_programacao %>
+</p>
+
+<p>
+  <b>Usuario:</b>
+  <%= @projeto_programacao_treinamento.usuario %>
+</p>
+
+<p>
+  <b>Participantes:</b>
+  <%= @projeto_programacao_treinamento.participantes %>
+</p>
+
+
+<%= link_to 'Edit', edit_projeto_programacao_treinamento_path(@projeto_programacao_treinamento) %> |
+<%= link_to 'Back', projeto_programacao_treinamentos_path %>

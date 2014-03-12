@@ -41,6 +41,7 @@ class Projeto < ActiveRecord::Base
   has_many :projetos_sub_modulos
   has_many :solucao_sub_modulos, :through => :projetos_sub_modulos
 
+  has_many  :programacao_treinamentos, class_name: 'ProjetoProgramacaoTreinamento'
 
   attr_reader :peso_total
   attr_accessor :ordem, :duracao_visita_horas

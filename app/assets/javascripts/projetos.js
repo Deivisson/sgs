@@ -31,28 +31,89 @@ $(document).ready(function(){
   //TAB
   $("#tab-resumo-projeto").tabs();
   $("#tab-menu-projeto").tabs();
-  $("#projeto-menu-aba-treinamento").css("height",$("#show-container-id").height()-40);
-  $(".solucoes-container-itens").css("height",$("#show-container-id").height()-40);
+  $("#projeto-menu-aba-treinamento").css("height",$("#show-container-id").height()-50);
+  $(".solucoes-container-itens").css("height",$("#show-container-id").height()-90);
   $("#projeto-menu-aba-treinamento").css("overflow","auto");
 
 
-  //
+  //Controla tela para permitir remoção de sub-modulos
+  $("#projeto-menu-aba-treinamento").find("[taged$='false']").hide();
   $("#remover-sub-modulos-projeto").toggle(
     function(){
-      $('input[id*="solucao-modulo-id-"]').css("visibility","visible");
-      $('input[id*="solucao-submodulo-id-"]').css("visibility","visible");
-      $('input[id*="solucao-submodulo-id-"]').attr('checked',false);
-      $('input[id*="solucao-modulo-id-"]').attr('checked',false);
-      $(this).text("Cancelar");
+      $(this).text("Cancelar Remoção").switchClass("normal-link","cancel-link",0,"easeInOutQuad")
+      gerenciaChecks(true);
+      $("#projeto-menu-aba-treinamento").find("[taged$='false']").hide();
+      $("#action-trigger").val("remove");
+      $("#adicionar-sub-modulos-projeto").hide();
+      $("#programar-treinamento").hide();
+      $("#submit-sub-modulos-projeto").show();
     },
     function(){
-      $('input[id*="solucao-modulo-id-"]').css("visibility","hidden");
-      $('input[id*="solucao-submodulo-id-"]').css("visibility","hidden");
-      $('input[id*="solucao-submodulo-id-"]').attr('checked',false);
-      $('input[id*="solucao-modulo-id-"]').attr('checked',false);
-      $(this).text("Remover Módulos/Sub Módulos");      
+      $(this).text("Remover Módulos/Sub Módulos").switchClass("cancel-link","normal-link",0,"easeInOutQuad");
+      gerenciaChecks(false);
+      $("#adicionar-sub-modulos-projeto").show();
+      $("#programar-treinamento").show();
+      $("#submit-sub-modulos-projeto").hide();
     }
   );
+
+  //Controla tela para permitir adição de sub-modulos
+  $("#adicionar-sub-modulos-projeto").toggle(
+    function (){
+      gerenciaChecks(true);
+      $("#projeto-menu-aba-treinamento").find("[taged$='false']").show().css("background-color","#FCFF7A");
+      $(this).text("Cancelar Adição").switchClass("normal-link","cancel-link",0,"easeInOutQuad");
+      $("#action-trigger").val("add");
+      $("#remover-sub-modulos-projeto").hide();
+      $("#programar-treinamento").hide();
+      $("#submit-sub-modulos-projeto").show();
+    },
+    function(){
+      gerenciaChecks(false);
+      $("#projeto-menu-aba-treinamento").find("[taged$='false']").hide();
+      $(this).text("Adicionar Módulos/Sub Módulos").switchClass("cancel-link","normal-link",0,"easeInOutQuad");      
+      $("#remover-sub-modulos-projeto").show();
+      $("#programar-treinamento").show();
+      $("#submit-sub-modulos-projeto").hide();
+    }
+  );
+  
+  $("#programar-treinamento").toggle(
+    function(){
+      $(this).text("Cancelar Programação").switchClass("normal-link","cancel-link",0,"easeInOutQuad")
+      gerenciaChecks(true);
+      $("#projeto-menu-aba-treinamento").find("[taged$='false']").hide();
+      $("#action-trigger").val("programar");
+      $("#adicionar-sub-modulos-projeto").hide();
+      $("#remover-sub-modulos-projeto").hide();
+      $("#submit-sub-modulos-projeto").show();
+    },
+    function(){
+      $(this).text("Programar Treinamento").switchClass("cancel-link","normal-link",0,"easeInOutQuad");
+      gerenciaChecks(false);
+      $("#adicionar-sub-modulos-projeto").show();
+      $("#remover-sub-modulos-projeto").show();
+      $("#submit-sub-modulos-projeto").hide();
+    }
+  );
+
+  // $("#teste-treinamento").click(function(){
+  //   //event.preventDefault();
+  //   ids = "";
+  //   link = $(this);
+  //   href = $(this).attr("href");
+  //   $("#projeto-menu-aba-treinamento").find("li > input:checked").each(function(){
+  //     ids += $(this).val() + ",";
+  //   });
+  // });
+
+  function gerenciaChecks(op) {
+    $('input[id*="solucao-modulo-id-"]').css("visibility",op ? "visible" : "hidden");
+    $('input[id*="solucao-submodulo-id-"]').css("visibility",op ? "visible" : "hidden");
+    $('input[id*="solucao-submodulo-id-"]').attr('checked',false);
+    $('input[id*="solucao-modulo-id-"]').attr('checked',false);
+    $("#action-trigger").val("");
+  }
 }); 
 
 function bindProjetoUIEvents() {

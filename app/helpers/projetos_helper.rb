@@ -33,26 +33,26 @@ module ProjetosHelper
 private 
 	def projeto_modulos(solucao)
 		html = []
+
 		solucao.solucao_modulos.each do |m|
-			html << content_tag(:ul,class:'projeto-modulo') do 
+			visible = @modulo_ids.include?(m.id)
+			html << content_tag(:ul,class:'projeto-modulo',taged:visible) do 
 				inner_html = []
-				if @modulo_ids.include?(m.id)
-					inner_html << check_box_tag("", m.id,false, 
-													id:"solucao-modulo-id-#{m.id}",class:'modulo-checkbox',
-													parent:"solucao-id-#{solucao.id}")
-					inner_html << content_tag(:div,class:'projeto-modulo-item') do
-						item = []
+				inner_html << check_box_tag("", m.id,false, 
+												id:"solucao-modulo-id-#{m.id}",class:'modulo-checkbox',
+												parent:"solucao-id-#{solucao.id}")
+				inner_html << content_tag(:div,class:'projeto-modulo-item') do
+					item = []
 						# item << content_tag(:div,class:'buttons') do
 						# 	links = []
 						# 	links << link_to(image_tag(image_link[:edit]),"#")
 						# 	links << link_to(image_tag(image_link[:del]),"#")
 						# 	links.join.html_safe
 						# end
-						item << content_tag(:label, m.descricao,{for:"solucao-modulo-id-#{m.id}",class:"check-label modulo-label"})
-						item.join.html_safe
-					end
+					item << content_tag(:label, m.descricao,{for:"solucao-modulo-id-#{m.id}",class:"check-label modulo-label"})
+					item.join.html_safe
 				end
-				inner_html << projeto_sub_modulos(m) if @modulo_ids.include?(m.id)
+				inner_html << projeto_sub_modulos(m)
 				inner_html.join.html_safe
 			end
 		end
@@ -62,21 +62,20 @@ private
 	def projeto_sub_modulos(modulo)
 		html = []
 		modulo.solucao_sub_modulos.each do |sm|
-			html << content_tag(:li)  do 
+			visible = @sub_modulo_ids.include?(sm.id)
+			html << content_tag(:li,taged:visible)  do 
 				inner_html = []
-				if @sub_modulo_ids.include?(sm.id)
-					inner_html << check_box_tag("solucao_sub_modulo_ids[]", sm.id,
-												false, id:"solucao-submodulo-id-#{sm.id}",
-												parent:"solucao-modulo-id-#{modulo.id}")
-					# inner_html << content_tag(:div,class:'buttons') do
-					# 	links = []
-					# 	links << link_to(image_tag(image_link[:edit]),"#")
-					# 	links << link_to(image_tag(image_link[:del]),"#")
-					# 	links.join.html_safe
-					# end
-					inner_html << content_tag(:label, sm.descricao,{for:"solucao-submodulo-id-#{sm.id}"})
-					inner_html.join.html_safe
-				end
+				inner_html << check_box_tag("solucao_sub_modulo_ids[]", sm.id,
+											false, id:"solucao-submodulo-id-#{sm.id}",
+											parent:"solucao-modulo-id-#{modulo.id}")
+				# inner_html << content_tag(:div,class:'buttons') do
+				# 	links = []
+				# 	links << link_to(image_tag(image_link[:edit]),"#")
+				# 	links << link_to(image_tag(image_link[:del]),"#")
+				# 	links.join.html_safe
+				# end
+				inner_html << content_tag(:label, sm.descricao,{for:"solucao-submodulo-id-#{sm.id}"})
+				inner_html.join.html_safe
 			end
 		end
 		html.join.html_safe
