@@ -108,6 +108,11 @@ class Projeto < ActiveRecord::Base
     SolucaoModulo.where(inner_sql).collect{|m| m.id}
   end
 
+  def sub_modulos_programados_treinamento
+    ids = []
+    self.programacao_treinamentos.each{|p| ids << p.solucao_sub_modulo_ids}
+    ids.flatten
+  end
 private 
   
   def save_solucao_sub_modulos

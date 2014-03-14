@@ -28,6 +28,29 @@ $(document).ready(function(){
     dialog_form.dialog('open');
     e.preventDefault();
   });
+  
+  $("a.programacao-link").click(function(){
+    var url = $(this).attr('href');
+    var dialog_form = $(getModalContainer()).dialog({
+        autoOpen: false,
+        width: 830,
+        height: 450,
+        modal: true,
+        closeText: "Fechar",
+        close: function() {
+          $('#dialog-form').remove();
+        }
+    });
+    dialog_form.load(url + ' #modal-container', function(){
+      //to change the title, see hidden-title-label on new, edit or show page
+      $(this).dialog('option',"title",$("#hidden-title-label").text());
+      bindShowProgramacaoTreinamentoLink();
+    });
+    dialog_form.dialog('open');
+    e.preventDefault();
+  });
+
+
   //TAB
   $("#tab-resumo-projeto").tabs();
   $("#tab-menu-projeto").tabs();
@@ -36,6 +59,7 @@ $(document).ready(function(){
   $("#projeto-menu-aba-treinamento").css("overflow","auto");
 
 
+  $("#programacao-treinamento-link").hide();
   //Controla tela para permitir remoção de sub-modulos
   $("#projeto-menu-aba-treinamento").find("[taged$='false']").hide();
   $("#remover-sub-modulos-projeto").toggle(
@@ -86,14 +110,14 @@ $(document).ready(function(){
       $("#action-trigger").val("programar");
       $("#adicionar-sub-modulos-projeto").hide();
       $("#remover-sub-modulos-projeto").hide();
-      $("#submit-sub-modulos-projeto").show();
+      $("#programacao-treinamento-link").show();
     },
     function(){
       $(this).text("Programar Treinamento").switchClass("cancel-link","normal-link",0,"easeInOutQuad");
       gerenciaChecks(false);
       $("#adicionar-sub-modulos-projeto").show();
       $("#remover-sub-modulos-projeto").show();
-      $("#submit-sub-modulos-projeto").hide();
+      $("#programacao-treinamento-link").hide();
     }
   );
 

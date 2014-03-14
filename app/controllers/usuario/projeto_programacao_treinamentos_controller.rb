@@ -2,6 +2,16 @@ class Usuario::ProjetoProgramacaoTreinamentosController < Usuario::BaseControlle
   before_filter :carrega_programacao_treinamento, :only => [:edit, :update, :show,:delete]
   before_filter :carrega_dados, :except => [:index,:show,:destroy]
 
+  def index
+    @solucao_sub_modulo = SolucaoSubModulo.find(params[:sub_modulo_id])
+    @projeto_programacao_treinamentos =  ProjetoProgramacaoTreinamento.joins(:solucao_sub_modulos)
+    @projeto_programacao_treinamentos = @projeto_programacao_treinamentos.where(
+      "projeto_id = ? and projeto_programacao_treinamentos_solucao_sub_modulos.solucao_sub_modulo_id = ?",
+      params[:projeto_id],params[:sub_modulo_id] 
+    )
+    respond_with(@projeto_programacao_treinamentos)
+  end
+
   def show
     respond_with(@projeto_programacao_treinamento)
   end
@@ -11,7 +21,6 @@ class Usuario::ProjetoProgramacaoTreinamentosController < Usuario::BaseControlle
         projeto_id:params[:projeto_id],
         solucao_sub_modulo_ids:params[:sub_modulo_ids].split(",")
     }
-    puts args
     @projeto_programacao_treinamento = ProjetoProgramacaoTreinamento.new(args)
     respond_with(@projeto_programacao_treinamento)
   end
@@ -35,6 +44,7 @@ class Usuario::ProjetoProgramacaoTreinamentosController < Usuario::BaseControlle
   end
   
 private
+
   def carrega_programacao_treinamento
     @projeto_programacao_treinamento = ProjetoProgramacaoTreinamento.find(params[:id])
   end

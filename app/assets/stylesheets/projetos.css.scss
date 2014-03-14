@@ -136,7 +136,7 @@ h1.filtro-solicitacoes-titulo {
   border-radius: 5px; 
   -moz-border-radius: 5px; 
   -webkit-border-radius: 5px;
-  a.normal-link, a.cancel-link, .submit-button {
+  a.normal-link, a.cancel-link, .submit-button, a.programar-treinamento-link {
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -201,6 +201,39 @@ h1.filtro-solicitacoes-titulo {
     );
     box-shadow: 0 1px 0 0 #fc9696 inset;
   }
+  a.programar-treinamento-link {
+    border:1px solid #3f511d;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    background-image: linear-gradient(bottom, #4477AA 47%, #225588 100%);
+    background-image: -o-linear-gradient(bottom, #4477AA 47%, #225588 100%);
+    background-image: -moz-linear-gradient(bottom, #4477AA 47%, #225588 100%);
+    background-image: -webkit-linear-gradient(bottom, #4477AA 47%, #225588 100%);
+    background-image: -ms-linear-gradient(bottom, #4477AA 47%, #225588 100%);
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0.47, #4477AA),
+      color-stop(1, #225588)
+    );
+
+    border: 1px solid #003366;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 1px 1px 0 #5588BB inset, -1px -1px 0 #5588BB inset;
+    color: #FFF;
+    cursor:pointer;
+    font-style: "PT Sans Latin CE Regular",Calibri,'Lucida Sans Unicode',Arial,sans-serif;
+    font-size:14px;
+    font-weight: bold !important;
+    height: 23px ;
+    padding: 0px 8px !important;
+    text-shadow: 0 -1px 0 #003366;
+    vertical-align: center;
+    width:100px;
+  }
+
 }
 #projeto-menu-aba-treinamento .solucoes-container-itens {
   float: left;
@@ -250,10 +283,22 @@ h1.filtro-solicitacoes-titulo {
       width: auto;
     }
     .buttons {
-      visibility: hidden;
+      /*border: 1px solid gray;
+      visibility: hidden;*/
       float: left;
-      width: 40px;
+      width: 17px;
       height: 17px;
+      margin: 2px 2px 0 0;
+    }
+    .buttons a {
+      &:hover {visibility:visible;};
+      ul.menu-programacao {
+        visibility: hidden;
+        height: 100px;
+        width: 200px;
+        background-color: blue;
+      }
+
     }
   }
 

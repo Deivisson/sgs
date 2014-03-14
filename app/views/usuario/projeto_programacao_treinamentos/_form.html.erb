@@ -23,9 +23,31 @@
 
         
         <%= f.input :projeto_id, :as => :hidden %>
-        <%= f.input :solucao_sub_modulo_ids,:as => :hidden %>
-        
+        <% @projeto_programacao_treinamento.solucao_sub_modulo_ids.each do |s| %>
+          <%= hidden_field_tag "projeto_programacao_treinamento[solucao_sub_modulo_ids][]",s %>
+        <% end %>
       <% end %>
+      <!--
+      <table border="0" cellpadding="0" cellspacing="1" style="width:78%" >
+        <caption>Sub Módulos inclusos na Programação de Treinamento </caption>
+        <thead>
+          <tr>
+            <th width ="10"></th>
+            <th>Sub Módulo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @projeto_programacao_treinamento.solucao_sub_modulos.each do |projeto_programacao_treinamento| %>
+            <tr>
+              <td>
+              <%= check_box_tag "projeto_programacao_treinamento[solucao_sub_modulo_ids][]",projeto_programacao_treinamento.id,true %>
+              </td>
+              <td><%= projeto_programacao_treinamento.descricao %></td>
+            </tr>
+          <% end %>
+         </tbody> 
+      </table>
+    -->
     <% end %>
     <%= f.actions :class => "buttons-container modal-form-button" do %>
       <%= submit_button f %>

@@ -1,13 +1,11 @@
 # -*- encoding : utf-8 -*-
 include DataHoraHelper
 class SolucaoSubModulo < ActiveRecord::Base
+
   validates_presence_of :solucao_modulo_id, :descricao
-
   validate :valida_descricao
-
   validates_length_of :descricao, :maximum => 50
   validates_length_of :detalhe, :maximum => 255, :allow_blank => true
-
   validates_associated :ordem_servico_itens
   
   belongs_to :solucao_modulo

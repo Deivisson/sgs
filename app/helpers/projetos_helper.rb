@@ -12,8 +12,10 @@ module ProjetosHelper
 	#
 	def monta_solucoes_projeto_treinamento(solucao=nil,options={})
  		solucao_ids   					= options[:solucao_ids] 	|| []
+		@projeto_id							= options[:projeto_id] 		|| []
 		@sub_modulo_ids					= options[:sub_modulo_ids]|| []
 		@modulo_ids							= options[:modulo_ids]		|| []
+		@sub_modulos_programados_treinamento = options[:sub_modulos_programados_treinamento]		|| []
 
 		@solucoes = Solucao.includes(:solucao_modulos => :solucao_sub_modulos).order("descricao")
 		@solucoes = @solucoes.where("solucoes.id = ?",solucao.id) unless solucao.nil?
@@ -68,12 +70,16 @@ private
 				inner_html << check_box_tag("solucao_sub_modulo_ids[]", sm.id,
 											false, id:"solucao-submodulo-id-#{sm.id}",
 											parent:"solucao-modulo-id-#{modulo.id}")
-				# inner_html << content_tag(:div,class:'buttons') do
-				# 	links = []
-				# 	links << link_to(image_tag(image_link[:edit]),"#")
-				# 	links << link_to(image_tag(image_link[:del]),"#")
-				# 	links.join.html_safe
-				# end
+			 	inner_html << content_tag(:div,class:'buttons') do
+				 	if @sub_modulos_programados_treinamento.include?(sm.id)
+					 	links = []
+					 	links << link_to(image_tag(image_link[:schedule]),
+					 							usuario_projeto_programacao_treinamentos_path(
+					 								projeto_id:@projeto_id,sub_modulo_id:sm.id),
+					 								class:'programacao-link',remote:true)
+					 	links.join.html_safe
+				 	end
+			 	end 				
 				inner_html << content_tag(:label, sm.descricao,{for:"solucao-submodulo-id-#{sm.id}"})
 				inner_html.join.html_safe
 			end

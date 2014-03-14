@@ -1,31 +1,43 @@
-<h1>Listing projeto_programacao_treinamentos</h1>
-
-<table>
-  <tr>
-    <th>Projeto</th>
-    <th>Data programacao</th>
-    <th>Hora programacao</th>
-    <th>Usuario</th>
-    <th>Participantes</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @projeto_programacao_treinamentos.each do |projeto_programacao_treinamento| %>
-  <tr>
-    <td><%= projeto_programacao_treinamento.projeto %></td>
-    <td><%= projeto_programacao_treinamento.data_programacao %></td>
-    <td><%= projeto_programacao_treinamento.hora_programacao %></td>
-    <td><%= projeto_programacao_treinamento.usuario %></td>
-    <td><%= projeto_programacao_treinamento.participantes %></td>
-    <td><%= link_to 'Show', projeto_programacao_treinamento %></td>
-    <td><%= link_to 'Edit', edit_projeto_programacao_treinamento_path(projeto_programacao_treinamento) %></td>
-    <td><%= link_to 'Destroy', projeto_programacao_treinamento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Projeto programacao treinamento', new_projeto_programacao_treinamento_path %>
+<div id="modal-container">
+  <label id="hidden-title-label">
+    <%="Programações de Treinamento para o Sub Módulo: #{@solucao_sub_modulo.descricao}" %>
+  </label>
+  <table>
+    <thead>
+      <tr>
+        <th width="80">Nº Progr.</th>
+        <th width="160">Data Programação</th>
+        <th width="160"> Hora Programada</th>
+        <th>Técnico</th>
+        <th>Participantes do Treinamento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @projeto_programacao_treinamentos.each do |projeto_programacao_treinamento| %>
+        <tr>
+          <td>
+            <%= link_to projeto_programacao_treinamento.controle, 
+                  usuario_projeto_programacao_treinamento_path(projeto_programacao_treinamento),
+                  class:'inline-link show-programacao-treinamento-link',remote:true
+               %>
+          </td>
+          <td><%= formata_data(projeto_programacao_treinamento.data_programacao) %></td>
+          <td><%= formata_hora(projeto_programacao_treinamento.hora_programacao) %></td>
+          <td><%= projeto_programacao_treinamento.usuario.nome %></td>
+          <td><%= projeto_programacao_treinamento.participantes %></td>
+          <!--
+          <td>
+            <%= link_to image_tag(image_link[:edit]), 
+              edit_usuario_projeto_programacao_treinamento_path(projeto_programacao_treinamento),
+              class:'edit-programacao-treinamento-link',remote:true %>
+          </td>
+          
+          <td>
+            <%= link_to image_tag(image_link[:del]), usuario_projeto_programacao_treinamento_path( projeto_programacao_treinamento), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+          -->
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

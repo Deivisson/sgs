@@ -48,9 +48,11 @@ module ApplicationHelper
      :new => '/assets/icons/16/new.png',
      :anexo => '/assets/icons/16/anexo.png',
      :pdf => '/assets/icons/16/pdf.png',
+     :schedule => '/assets/icons/16/schedule.png',
      :printer24 => '/assets/icons/24/printer.png',
      :add24 => '/assets/icons/24/add.png',
      :remove24 => '/assets/icons/24/remove.png'
+
     }
   end
 

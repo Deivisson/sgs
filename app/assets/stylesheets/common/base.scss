@@ -87,7 +87,9 @@ body, p, ol, ul, td {
   margin:4px 3px 0px 2px;
 }
 
-
+label#hidden-title-label,label.hidden-title-label {
+  display: none;
+}
 
 /*Conteúdo
 ------------------------------------------------------------------*/

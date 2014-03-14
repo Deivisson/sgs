@@ -1,30 +1,47 @@
-<p id="notice"><%= notice %></p>
+<div id="show-modal-container" >
+  <div style="overflow:auto;overflow-x:hidden;height:460px;">
+    <label id="hidden-title-label-prog" class="hidden-title-label">
+      <%= "Programação nº: #{@projeto_programacao_treinamento.controle}" %>
+    </label>
+    <div id="div_show">
+      <p>
+        <strong>Data Programação:</strong>
+        <%= formata_data(@projeto_programacao_treinamento.data_programacao) %>
+      </p>
+      <p>
+        <strong>Hora Programada:</strong>
+        <%= formata_hora(@projeto_programacao_treinamento.hora_programacao) %>
+      </p>
+      <p>
+        <strong>Técnico</strong>
+        <%= @projeto_programacao_treinamento.usuario.nome %>
+      </p>
+      <p>
+        <strong>Participantes:</strong>
+        <%= @projeto_programacao_treinamento.participantes %>
+      </p>
+    </div>
 
-<p>
-  <b>Projeto:</b>
-  <%= @projeto_programacao_treinamento.projeto %>
-</p>
-
-<p>
-  <b>Data programacao:</b>
-  <%= @projeto_programacao_treinamento.data_programacao %>
-</p>
-
-<p>
-  <b>Hora programacao:</b>
-  <%= @projeto_programacao_treinamento.hora_programacao %>
-</p>
-
-<p>
-  <b>Usuario:</b>
-  <%= @projeto_programacao_treinamento.usuario %>
-</p>
-
-<p>
-  <b>Participantes:</b>
-  <%= @projeto_programacao_treinamento.participantes %>
-</p>
-
-
-<%= link_to 'Edit', edit_projeto_programacao_treinamento_path(@projeto_programacao_treinamento) %> |
-<%= link_to 'Back', projeto_programacao_treinamentos_path %>
+    <table border="0" cellpadding="0" cellspacing="1" style="width:99%;margin-left:12px;" >
+      <caption>Sub Módulos inclusos na Programação de Treinamento </caption>
+      <thead>
+        <tr>
+          <th>Sub Módulo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projeto_programacao_treinamento.solucao_sub_modulos.each do |projeto_programacao_treinamento| %>
+          <tr>
+            <td><%= projeto_programacao_treinamento.descricao %></td>
+          </tr>
+        <% end %>
+       </tbody> 
+    </table>
+  </div>
+  <br>
+  <%= link_to "Editar Programação",
+          edit_usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento),
+          class:"common-link edit-projeto-programacao-treinamentos",
+          remote:true %> |
+  <%= link_to "Excluir Programação","#",class:"common-link" %>
+</div>
