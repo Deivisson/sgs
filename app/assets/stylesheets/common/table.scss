@@ -76,6 +76,9 @@ table tbody td {
     position: absolute;
     width: 80%;
   }
+  &.clickableRow {
+    cursor:pointer;
+  }
 }
 table tbody td span {
   color: #AAAAAA;

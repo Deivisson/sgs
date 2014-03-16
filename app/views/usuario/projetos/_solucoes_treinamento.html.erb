@@ -1,0 +1,10 @@
+<% @projeto.solucoes.order(:descricao).each do |solucao| %>
+	<div class="solucoes-container-itens">
+		<%= monta_solucoes_projeto_treinamento(solucao,
+									solucao_ids:@projeto.solucao_ids,
+									projeto_id:@projeto.id,
+									modulo_ids:@projeto.solucao_modulo_ids,
+									sub_modulo_ids:@projeto.solucao_sub_modulo_ids,
+									sub_modulos_programados_treinamento:@projeto.sub_modulos_programados_treinamento) %>
+	</div>
+<% end %>

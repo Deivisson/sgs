@@ -38,6 +38,10 @@ Sgsoft::Application.routes.draw do
     resources :atendimentos
     resources :solicitacao_historicos
     resources :projeto_programacao_treinamentos
+    delete '/projeto_programacao_treinamentos/:id/remove_sub_modulo',
+            :to => 'projeto_programacao_treinamentos#remove_sub_modulo',
+            :as => 'remove_sub_modulo'
+
     resources :projetos do 
       collection do
         put :gerenciar_sub_modulos

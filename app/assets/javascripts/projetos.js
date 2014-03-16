@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  callProgramacaoLink();
  	$("a#projeto-link").click(function(){
     var url = $(this).attr('href');
     var dialog_form = $(getModalContainer()).dialog({
@@ -29,27 +30,8 @@ $(document).ready(function(){
     e.preventDefault();
   });
   
-  $("a.programacao-link").click(function(){
-    var url = $(this).attr('href');
-    var dialog_form = $(getModalContainer()).dialog({
-        autoOpen: false,
-        width: 830,
-        height: 450,
-        modal: true,
-        closeText: "Fechar",
-        close: function() {
-          $('#dialog-form').remove();
-        }
-    });
-    dialog_form.load(url + ' #modal-container', function(){
-      //to change the title, see hidden-title-label on new, edit or show page
-      $(this).dialog('option',"title",$("#hidden-title-label").text());
-      bindShowProgramacaoTreinamentoLink();
-    });
-    dialog_form.dialog('open');
-    e.preventDefault();
-  });
-
+  //link to show programações de treinamento para o sub-modulos
+  callProgramacaoLink();
 
   //TAB
   $("#tab-resumo-projeto").tabs();
@@ -71,12 +53,14 @@ $(document).ready(function(){
       $("#adicionar-sub-modulos-projeto").hide();
       $("#programar-treinamento").hide();
       $("#submit-sub-modulos-projeto").show();
+      $("#ver-programacoes-treinamento-projeto").hide();
     },
     function(){
-      $(this).text("Remover Módulos/Sub Módulos").switchClass("cancel-link","normal-link",0,"easeInOutQuad");
+      $(this).text("Remover Sub Módulos").switchClass("cancel-link","normal-link",0,"easeInOutQuad");
       gerenciaChecks(false);
       $("#adicionar-sub-modulos-projeto").show();
       $("#programar-treinamento").show();
+      $("#ver-programacoes-treinamento-projeto").show();
       $("#submit-sub-modulos-projeto").hide();
     }
   );
@@ -90,14 +74,16 @@ $(document).ready(function(){
       $("#action-trigger").val("add");
       $("#remover-sub-modulos-projeto").hide();
       $("#programar-treinamento").hide();
+      $("#ver-programacoes-treinamento-projeto").hide();
       $("#submit-sub-modulos-projeto").show();
     },
     function(){
       gerenciaChecks(false);
       $("#projeto-menu-aba-treinamento").find("[taged$='false']").hide();
-      $(this).text("Adicionar Módulos/Sub Módulos").switchClass("cancel-link","normal-link",0,"easeInOutQuad");      
+      $(this).text("Adicionar Sub Módulos").switchClass("cancel-link","normal-link",0,"easeInOutQuad");      
       $("#remover-sub-modulos-projeto").show();
       $("#programar-treinamento").show();
+      $("#ver-programacoes-treinamento-projeto").show();
       $("#submit-sub-modulos-projeto").hide();
     }
   );
@@ -110,6 +96,7 @@ $(document).ready(function(){
       $("#action-trigger").val("programar");
       $("#adicionar-sub-modulos-projeto").hide();
       $("#remover-sub-modulos-projeto").hide();
+      $("#ver-programacoes-treinamento-projeto").hide();
       $("#programacao-treinamento-link").show();
     },
     function(){
@@ -117,6 +104,7 @@ $(document).ready(function(){
       gerenciaChecks(false);
       $("#adicionar-sub-modulos-projeto").show();
       $("#remover-sub-modulos-projeto").show();
+      $("#ver-programacoes-treinamento-projeto").show();
       $("#programacao-treinamento-link").hide();
     }
   );
@@ -154,5 +142,28 @@ function bindGerenciamentoCamposFrequenciaEDuracaoTreinamento(){
       $("#frequencia-visita").attr("disabled",!$(this).is(":checked"));
       $("#duracao_visita_horas").attr("disabled",!$(this).is(":checked"));
     }
+  });
+}
+
+function callProgramacaoLink() {
+  $("a.programacao-link,a#ver-programacoes-treinamento-projeto").click(function(){
+    var url = $(this).attr('href');
+    var dialog_form = $(getModalContainer("modal-container-index-dialog-form")).dialog({
+        autoOpen: false,
+        width: 830,
+        height: 450,
+        modal: true,
+        closeText: "Fechar",
+        close: function() {
+          $('#modal-container-index-dialog-form').remove();
+        }
+    });
+    dialog_form.load(url + ' #modal-container-index-prog', function(){
+      //to change the title, see hidden-title-label on new, edit or show page
+      $(this).dialog('option',"title",$("#hidden-title-label-index-prog").text());
+      bindShowProgramacaoTreinamentoLink();
+    });
+    dialog_form.dialog('open');
+    e.preventDefault();
   });
 }

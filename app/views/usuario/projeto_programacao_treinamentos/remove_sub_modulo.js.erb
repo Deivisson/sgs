@@ -1,0 +1,5 @@
+$("#table-row-projeto-programacao-treinamento-"+<%=@projeto_programacao_treinamento.id %>).remove();
+<% if @projeto_programacao_treinamentos.empty? %>
+	$("#button-programacao-"+<%= @solucao_sub_modulo.id %>).find('a.programacao-link').remove();
+<% end %>
+alert("O Sub Módulo foi removido da Programação de Treinamento.");

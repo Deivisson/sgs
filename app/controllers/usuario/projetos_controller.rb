@@ -10,7 +10,6 @@ class Usuario::ProjetosController < Usuario::BaseController
   def index
     @projetos = Projeto.includes(:cliente, :usuario)
     @projetos = @projetos.search(params[:conditions])
-    #render :layout  => "lista_projetos"
   end
 
   def show
@@ -40,6 +39,8 @@ class Usuario::ProjetosController < Usuario::BaseController
     @projeto.ordem = @etapas_ordem
     if @projeto.save
       flash[:notice]= "Abertura de Projeto realizada com sucesso."
+    else
+      load_dados
     end
     respond_with(@projeto)
   end
@@ -69,7 +70,7 @@ class Usuario::ProjetosController < Usuario::BaseController
         flash[:notice]= "Sub Módulos Adicionados com sucesso."
       end
     else
-      flash[:notice]= "É necessário selecionar pelo menos um Sub Módulo a ser removido."
+      flash[:notice]= "É necessário selecionar Sub Módulos."
     end
     respond_with(@projeto,:location => usuario_projeto_path(@projeto))
   end

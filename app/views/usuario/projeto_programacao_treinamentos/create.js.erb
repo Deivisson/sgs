@@ -1,0 +1,19 @@
+<% if @projeto_programacao_treinamento.errors.any? %>
+  $('#dialog-form').html('<%= escape_javascript(render('form')) %>');
+  $("#projeto_programacao_treinamento_usuario_id").focus();
+  setMaskFields();
+  bindProjetoProgramacaoTreinamentoUIEvents();
+<% else %>
+  $('#dialog-form').dialog('close');
+  $('#dialog-form').remove();
+  <% @projeto_programacao_treinamento.solucao_sub_modulos.each do |sm| %>
+  	$("#button-programacao-"+<%= sm.id %>).html('<%= escape_javascript(link_to_programacao(sm,@projeto_programacao_treinamento.projeto_id)) %>');
+  <% end %>
+  callProgramacaoLink();
+  //desmarca todos os check's
+  $('input[id*="solucao-submodulo-id-"]').attr('checked',false);
+  $('input[id*="solucao-modulo-id-"]').attr('checked',false);
+  alert("Programação realizada com sucesso!");
+  //$(window.location.replace("/usuario/projetos/<%=  @projeto_programacao_treinamento.projeto.id %>"));
+<% end %>
+

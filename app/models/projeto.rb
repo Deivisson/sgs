@@ -29,6 +29,10 @@ class Projeto < ActiveRecord::Base
 
   validate :previsao_termino_menor_que_data_inicio
   validate :validar_duracao_visita_horas_maior_que_zero
+  validate :data_inicio_menor_que_data_atual
+  validate :treinamento_sem_solucoes
+  validate :possui_solucoes_sem_treinamento
+  validate :deletando_solucoes_com_programacoes, :on => :update
 
   belongs_to :cliente
   belongs_to :usuario
@@ -47,7 +51,7 @@ class Projeto < ActiveRecord::Base
   attr_accessor :ordem, :duracao_visita_horas
 
   before_validation :attribui_minutos_duracao_visita
-  before_save :consiste_campos_atrelados_a_etapa_treinamento 
+  before_save :limpa_campos_atrelados_a_etapa_treinamento 
   after_save :atualiza_ordem_etapas,:save_solucao_sub_modulos
 
   def peso_total
@@ -113,15 +117,35 @@ class Projeto < ActiveRecord::Base
     self.programacao_treinamentos.each{|p| ids << p.solucao_sub_modulo_ids}
     ids.flatten
   end
+
+  def solucoes_ids_com_programacoes
+    solucoes_com_programacoes.collect{|s| s.id }
+  end
+
+  def solucoes_com_programacoes
+    return [] if self.solucao_ids.empty?
+    Solucao.joins(:solucao_modulos => :solucao_sub_modulos).where("solucao_sub_modulos.id IN (
+      select distinct ts.solucao_sub_modulo_id from projeto_programacao_treinamentos t
+      inner join projeto_programacao_treinamentos_solucao_sub_modulos ts on ts.projeto_programacao_treinamento_id = t.id
+      where projeto_id = ?
+    )",self.id).group("solucoes.id")
+  end
 private 
   
   def save_solucao_sub_modulos
     return unless self.solucoes.any?
-      subs = SolucaoSubModulo.joins(:solucao_modulo).where('solucao_modulos.solucao_id' => self.solucao_ids)
-      self.solucao_sub_modulos.delete_all
+    #monta array apenas com solucoes que não possuem programações, pois a que possuem 
+    #programações não podem ser excluidas
+    itens = self.solucao_ids - solucoes_ids_com_programacoes
+    if itens.any?
+      ProjetosSubModulo.joins(:solucao_sub_modulo => :solucao_modulo).where("projeto_id = ? and solucao_id in (?)",self.id,itens).destroy_all
+      
+      cliente = self.cliente
+      subs = cliente.solucao_sub_modulos.joins(:solucao_modulo).where('solucao_modulos.solucao_id' => itens)
       subs.each do |s| 
         ProjetosSubModulo.create(projeto_id:self.id,solucao_sub_modulo_id:s.id)
       end
+    end
   end
 
   def validar_duracao_visita_horas_maior_que_zero
@@ -130,10 +154,22 @@ private
     return false
   end
 
-  def consiste_campos_atrelados_a_etapa_treinamento
+  def limpa_campos_atrelados_a_etapa_treinamento
     unless self.etapa_ids.include?(Etapa::TREINAMENTO)
       self.duracao_visita_minutos = 0
       self.frequencia_visita = nil
+    end
+  end
+
+  def treinamento_sem_solucoes
+    return unless self.etapa_ids.include?(Etapa::TREINAMENTO)
+    errors.add(:solucao_ids, "Projeto possui Treinamento, portanto selecione as solucões") if self.solucao_ids.empty?
+  end
+
+  def possui_solucoes_sem_treinamento
+    return if self.solucao_ids.empty?
+    unless self.etapa_ids.include?(Etapa::TREINAMENTO)
+      errors.add(:etapa_ids, "Existem Soluções selecionadas, portanto, Etapa Treinamento também deverá estar selecionada.") 
     end
   end
 
@@ -157,4 +193,20 @@ private
     self.duracao_visita_minutos = total_minutos(@duracao_visita_horas)
     puts self.duracao_visita_minutos
   end
+
+  def data_inicio_menor_que_data_atual
+    return if data_inicio.nil?
+    if data_inicio < Date.today 
+      errors.add(:data_inicio, "Data de início deverá ser maior ou igual a data Atual.")
+    end
+  end
+
+  def deletando_solucoes_com_programacoes
+    solucoes_com_programacoes.each do |s|
+      unless self.solucao_ids.include?(s.id)
+        errors.add(:solucao_ids, "#{s.descricao} possui treinamento e não poderá ser removido do projeto.") 
+      end
+    end
+  end
+
 end

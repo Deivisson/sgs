@@ -34,6 +34,9 @@
 	              <% end %>
 	          </o>
 	      </fieldset>
+	      <%= content_tag :p, class:'inline-errors',style:'margin: -5px 0 0 190px' do %>
+	      	<%= @projeto.errors[:solucao_ids].to_sentence  %>
+      	<% end if @projeto.errors[:solucao_ids].present? %>
 	    <li>
 
 	    <li class="check_boxes input optional" style="margin: 0px 0 0 -25px">
@@ -52,6 +55,10 @@
 	              <% end %>
 	          </o>
 	      </fieldset>
+	      <%= content_tag :p, class:'inline-errors',style:'margin: -5px 0 0 190px' do %>
+	      	<%= @projeto.errors[:etapa_ids].to_sentence  %>
+      	<% end if @projeto.errors[:etapa_ids].present? %>
+
 	    <li>
 		    <%= f.input :frequencia_visita, 
 		                :as         => :select,

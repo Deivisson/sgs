@@ -1,0 +1,10 @@
+<% if @projeto_programacao_treinamento.errors.any? %>
+  $('#dialog-form').html('<%= escape_javascript(render('form')) %>');
+  $("#projeto_programacao_treinamento_usuario_id").focus();
+  setMaskFields();
+  bindProjetoProgramacaoTreinamentoUIEvents();
+<% else %>
+  $('#dialog-form').dialog('close');
+  $('#dialog-form').remove();
+  alert("Programação atualizada com sucesso!");
+<% end %>

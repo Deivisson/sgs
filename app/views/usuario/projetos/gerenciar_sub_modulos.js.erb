@@ -1,0 +1,4 @@
+alert("<%= @msg %>");
+<% unless @has_error %>
+	$("#treinamento-solucoes-container").html("<%= escape_javascript(render 'usuario/projetos/solucoes_treinamento') %>");
+<% end %>

@@ -9,7 +9,7 @@
         <%= formata_data(@projeto_programacao_treinamento.data_programacao) %>
       </p>
       <p>
-        <strong>Hora Programada:</strong>
+        <strong>Início Previsto:</strong>
         <%= formata_hora(@projeto_programacao_treinamento.hora_programacao) %>
       </p>
       <p>
@@ -23,10 +23,10 @@
     </div>
 
     <table border="0" cellpadding="0" cellspacing="1" style="width:99%;margin-left:12px;" >
-      <caption>Sub Módulos inclusos na Programação de Treinamento </caption>
+      <caption>Sub Módulos para Treinamento </caption>
       <thead>
         <tr>
-          <th>Sub Módulo</th>
+          <th>Descrição</th>
         </tr>
       </thead>
       <tbody>
@@ -43,5 +43,11 @@
           edit_usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento),
           class:"common-link edit-projeto-programacao-treinamentos",
           remote:true %> |
-  <%= link_to "Excluir Programação","#",class:"common-link" %>
+  
+  <%= link_to "Excluir Programação",
+              usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento),
+              method: :delete,
+              confirm:'Confirma exclusão da Programação?',
+              remote:true,
+              class:"common-link" %>
 </div>

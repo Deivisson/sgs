@@ -1,0 +1,5 @@
+alert("Exlusão realizada com sucesso.");
+$("#treinamento-solucoes-container").html("<%= escape_javascript(render 'usuario/projetos/solucoes_treinamento') %>");
+$("#table-row-projeto-programacao-treinamento-" + <%= @projeto_programacao_treinamento.id %>).remove();
+$('#show-dialog-form').remove();
+fireClickOnChecksSolucaoModuloSub();

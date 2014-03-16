@@ -1,43 +1,55 @@
-<div id="modal-container">
-  <label id="hidden-title-label">
-    <%="Programações de Treinamento para o Sub Módulo: #{@solucao_sub_modulo.descricao}" %>
-  </label>
-  <table>
-    <thead>
-      <tr>
-        <th width="80">Nº Progr.</th>
-        <th width="160">Data Programação</th>
-        <th width="160"> Hora Programada</th>
-        <th>Técnico</th>
-        <th>Participantes do Treinamento</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @projeto_programacao_treinamentos.each do |projeto_programacao_treinamento| %>
-        <tr>
-          <td>
-            <%= link_to projeto_programacao_treinamento.controle, 
-                  usuario_projeto_programacao_treinamento_path(projeto_programacao_treinamento),
-                  class:'inline-link show-programacao-treinamento-link',remote:true
-               %>
-          </td>
-          <td><%= formata_data(projeto_programacao_treinamento.data_programacao) %></td>
-          <td><%= formata_hora(projeto_programacao_treinamento.hora_programacao) %></td>
-          <td><%= projeto_programacao_treinamento.usuario.nome %></td>
-          <td><%= projeto_programacao_treinamento.participantes %></td>
-          <!--
-          <td>
-            <%= link_to image_tag(image_link[:edit]), 
-              edit_usuario_projeto_programacao_treinamento_path(projeto_programacao_treinamento),
-              class:'edit-programacao-treinamento-link',remote:true %>
-          </td>
-          
-          <td>
-            <%= link_to image_tag(image_link[:del]), usuario_projeto_programacao_treinamento_path( projeto_programacao_treinamento), method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-          -->
-        </tr>
+<div id="modal-container-index-prog">
+  <div style="overflow:auto;overflow-x:hidden;height:390px;">
+    <label id="hidden-title-label-index-prog" class="hidden-title-label">
+      <% if @solucao_sub_modulo.nil? %>
+        <%="Programações de Treinamentos para o projeto: #{@projeto.nome}" %>
+      <% else %>
+        <%="Programações de Treinamento para o Sub Módulo: #{@solucao_sub_modulo.descricao}" %>
       <% end %>
-    </tbody>
-  </table>
+    </label>
+    <table>
+      <thead>
+        <tr>
+          <th width="80">Nº Progr.</th>
+          <th width="160">Data Programação</th>
+          <th width="160">Início Previsto</th>
+          <th>Técnico</th>
+          <th>Participantes do Treinamento</th>
+          <%= content_tag(:th,"Del") unless @solucao_sub_modulo.nil? %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projeto_programacao_treinamentos.each do |projeto_programacao_treinamento| %>
+          <% href = usuario_projeto_programacao_treinamento_path(projeto_programacao_treinamento) %>
+          <%= link_to(usuario_projeto_programacao_treinamento_path(projeto_programacao_treinamento)) do %>
+            <tr id=<%="table-row-projeto-programacao-treinamento-#{projeto_programacao_treinamento.id}" %>>
+              <td class="clickableRow" href=<%= href %>>
+                <%= projeto_programacao_treinamento.controle %>
+              </td>
+              <td class="clickableRow" href=<%= href %>>
+                <%= formata_data(projeto_programacao_treinamento.data_programacao) %>
+              </td>
+              <td class="clickableRow" href=<%= href %>>
+                <%= formata_hora(projeto_programacao_treinamento.hora_programacao) %>
+              </td>
+              <td class="clickableRow" href=<%= href %>>
+                <%= projeto_programacao_treinamento.usuario.nome %>
+              </td>
+              <td class="clickableRow" href=<%= href %>>
+                <%= projeto_programacao_treinamento.participantes %>
+              </td>
+              <%= content_tag :td do %>
+                <%= link_to image_tag(image_link[:del]), 
+                        usuario_remove_sub_modulo_path(projeto_programacao_treinamento,
+                              solucao_sub_modulo_id:@solucao_sub_modulo.id),
+                              method: :delete, 
+                              data: { confirm: "Confirma remoção do Sub Módulo da Programação de Treinamento nº#{projeto_programacao_treinamento.controle}?"},
+                            remote:true %>
+              <% end unless @solucao_sub_modulo.nil? %>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
