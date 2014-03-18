@@ -6,5 +6,6 @@
 <% else %>
   $('#dialog-form').dialog('close');
   $('#dialog-form').remove();
+  $("#show-projeto-programacao-treinamento-fields").html("<%= escape_javascript(render('show_fields'))%>");
   alert("Programação atualizada com sucesso!");
 <% end %>

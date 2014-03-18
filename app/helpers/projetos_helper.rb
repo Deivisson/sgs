@@ -64,12 +64,14 @@ private
 
 	def projeto_sub_modulos(modulo)
 		html = []
+		programado = false
 		modulo.solucao_sub_modulos.order(:descricao).each do |sm|
 			visible = @sub_modulo_ids.include?(sm.id)
 			html << content_tag(:li,taged:visible)  do 
 				inner_html = []
 			 	inner_html << content_tag(:div,class:'buttons',id:"button-programacao-#{sm.id}") do
-				 	if @sub_modulos_programados_treinamento.include?(sm.id)
+			 		programado = @sub_modulos_programados_treinamento.include?(sm.id)
+				 	if programado
 					 	links = []
 					 	links << link_to_programacao(sm,@projeto_id)
 					 	links.join.html_safe
@@ -77,7 +79,8 @@ private
 			 	end 	
 				inner_html << check_box_tag("solucao_sub_modulo_ids[]", sm.id,
 											false, id:"solucao-submodulo-id-#{sm.id}",
-											parent:"solucao-modulo-id-#{modulo.id}")
+											parent:"solucao-modulo-id-#{modulo.id}",
+											programado:programado)
 			 				
 				inner_html << content_tag(:label, sm.descricao,{for:"solucao-submodulo-id-#{sm.id}"})
 				inner_html.join.html_safe

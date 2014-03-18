@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140306205408) do
+ActiveRecord::Schema.define(:version => 20140316211854) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -212,13 +212,14 @@ ActiveRecord::Schema.define(:version => 20140306205408) do
   end
 
   create_table "projeto_programacao_treinamentos", :force => true do |t|
-    t.integer  "projeto_id",       :null => false
-    t.date     "data_programacao", :null => false
-    t.time     "hora_programacao", :null => false
-    t.integer  "usuario_id",       :null => false
+    t.integer  "projeto_id",            :null => false
+    t.date     "data_programacao",      :null => false
+    t.time     "hora_programacao",      :null => false
+    t.integer  "usuario_id",            :null => false
     t.string   "participantes"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.datetime "data_previsao_termino"
   end
 
   add_index "projeto_programacao_treinamentos", ["projeto_id"], :name => "index_projeto_programacao_treinamentos_on_projeto_id"

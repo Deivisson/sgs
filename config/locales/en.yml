@@ -93,6 +93,7 @@ en:
       short: "%d de %B"
       long: "%d de %B de %Y"
       month: "%B de %Y"
+      datetime: "%d/%m/%Y às %H:%M"
     day_names: [Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado]
     abbr_day_names: [Dom, Seg, Ter, Qua, Qui, Sex, Sáb]
     month_names: [~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro]
@@ -104,6 +105,7 @@ en:
       default: '%H:%M'
       long: '%d de %b de %Y às %H:%M'
       short: '%H:%M'
+      datetime: "%d/%m/%Y às %H:%M"
     pm: ''
     hour: 'hora'
     minute: "minuto"

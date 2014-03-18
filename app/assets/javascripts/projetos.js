@@ -91,7 +91,7 @@ $(document).ready(function(){
   $("#programar-treinamento").toggle(
     function(){
       $(this).text("Cancelar Programação").switchClass("normal-link","cancel-link",0,"easeInOutQuad")
-      gerenciaChecks(true);
+      gerenciaChecks(true,true);
       $("#projeto-menu-aba-treinamento").find("[taged$='false']").hide();
       $("#action-trigger").val("programar");
       $("#adicionar-sub-modulos-projeto").hide();
@@ -119,12 +119,16 @@ $(document).ready(function(){
   //   });
   // });
 
-  function gerenciaChecks(op) {
+  function gerenciaChecks(op,modoProgramacao=false) {
     $('input[id*="solucao-modulo-id-"]').css("visibility",op ? "visible" : "hidden");
     $('input[id*="solucao-submodulo-id-"]').css("visibility",op ? "visible" : "hidden");
     $('input[id*="solucao-submodulo-id-"]').attr('checked',false);
     $('input[id*="solucao-modulo-id-"]').attr('checked',false);
     $("#action-trigger").val("");
+
+    if(!modoProgramacao){
+      $("input[programado='true']").attr('disabled',op);
+    }
   }
 }); 
 
@@ -150,7 +154,7 @@ function callProgramacaoLink() {
     var url = $(this).attr('href');
     var dialog_form = $(getModalContainer("modal-container-index-dialog-form")).dialog({
         autoOpen: false,
-        width: 830,
+        width: 1030,
         height: 450,
         modal: true,
         closeText: "Fechar",

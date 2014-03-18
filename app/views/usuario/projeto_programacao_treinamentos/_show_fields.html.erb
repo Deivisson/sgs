@@ -1,0 +1,42 @@
+<div id="div_show">
+  <p>
+    <strong>Técnico</strong>
+    <%= @projeto_programacao_treinamento.usuario.nome %>
+  </p>  
+  <p>
+    <strong>Data Programação:</strong>
+    <%= formata_data(@projeto_programacao_treinamento.data_programacao) %>
+  </p>
+  <p>
+    <strong>Início Previsto:</strong>
+    <%= formata_hora(@projeto_programacao_treinamento.hora_programacao) %>
+  </p>  
+  <p>
+    <strong>Duração Prevista (Hrs)</strong>
+    <%= @projeto_programacao_treinamento.duracao_prevista %>
+  </p>
+  <p>
+    <strong>Previsão Término:</strong>
+    <%= formata_data(@projeto_programacao_treinamento.data_previsao_termino,:datetime) %>
+  </p>            
+   <p>
+    <strong>Participantes:</strong>
+    <%= @projeto_programacao_treinamento.participantes %>
+  </p>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="1" style="width:99%;margin-left:12px;" >
+  <caption>Sub Módulos para Treinamento </caption>
+  <thead>
+    <tr>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projeto_programacao_treinamento.solucao_sub_modulos.each do |projeto_programacao_treinamento| %>
+      <tr>
+        <td><%= projeto_programacao_treinamento.descricao %></td>
+      </tr>
+    <% end %>
+   </tbody> 
+</table>

@@ -10,10 +10,13 @@
     <table>
       <thead>
         <tr>
-          <th width="80">Nº Progr.</th>
-          <th width="160">Data Programação</th>
-          <th width="160">Início Previsto</th>
+          <th width="70">Nº Progr.</th>
           <th>Técnico</th>
+          <th width="120">Data Programação</th>
+          <th width="100">Início Previsto</th>
+          <th width="140">Duração Prevista(Hrs)</th>
+          <th width="140">Previsão Término</th>
+          
           <th>Participantes do Treinamento</th>
           <%= content_tag(:th,"Del") unless @solucao_sub_modulo.nil? %>
         </tr>
@@ -27,14 +30,20 @@
                 <%= projeto_programacao_treinamento.controle %>
               </td>
               <td class="clickableRow" href=<%= href %>>
+                <%= projeto_programacao_treinamento.usuario.nome %>
+              </td>              
+              <td class="clickableRow" href=<%= href %>>
                 <%= formata_data(projeto_programacao_treinamento.data_programacao) %>
               </td>
               <td class="clickableRow" href=<%= href %>>
                 <%= formata_hora(projeto_programacao_treinamento.hora_programacao) %>
               </td>
               <td class="clickableRow" href=<%= href %>>
-                <%= projeto_programacao_treinamento.usuario.nome %>
+                <%= projeto_programacao_treinamento.duracao_prevista %>
               </td>
+              <td class="clickableRow" href=<%= href %>>
+                <%= formata_data(projeto_programacao_treinamento.data_previsao_termino,:datetime) %>
+              </td>                            
               <td class="clickableRow" href=<%= href %>>
                 <%= projeto_programacao_treinamento.participantes %>
               </td>
@@ -43,7 +52,7 @@
                         usuario_remove_sub_modulo_path(projeto_programacao_treinamento,
                               solucao_sub_modulo_id:@solucao_sub_modulo.id),
                               method: :delete, 
-                              data: { confirm: "Confirma remoção do Sub Módulo da Programação de Treinamento nº#{projeto_programacao_treinamento.controle}?"},
+                              data: { confirm: "Confirma remoção do Sub Módulo da Programação de Treinamento nº: #{projeto_programacao_treinamento.controle}?"},
                             remote:true %>
               <% end unless @solucao_sub_modulo.nil? %>
             </tr>
