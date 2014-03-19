@@ -4,8 +4,18 @@
   setMaskFields();
   bindProjetoProgramacaoTreinamentoUIEvents();
 <% else %>
+	$("#show-projeto-programacao-treinamento-fields").html("<%= escape_javascript(render('show_fields'))%>");
   $('#dialog-form').dialog('close');
-  $('#dialog-form').remove();
-  $("#show-projeto-programacao-treinamento-fields").html("<%= escape_javascript(render('show_fields'))%>");
-  alert("Programação atualizada com sucesso!");
+  $('#dialog-form').remove();  
+	
+  <% if @projeto_programacao_treinamento.status == ProjetoProgramacaoTreinamento::CANCELADA %>
+  	<% @projeto = @projeto_programacao_treinamento.projeto %>
+  	$("#treinamento-solucoes-container").html("<%= escape_javascript(render 'usuario/projetos/solucoes_treinamento') %>");
+  	$("#buttons-show-projeto-programacao-treinamento").remove();
+		fireClickOnChecksSolucaoModuloSub();
+		callProgramacaoLink();
+    alert("Programação cancelada com sucesso!");
+  <% else %>
+	  alert("Programação atualizada com sucesso!");
+  <% end %>
 <% end %>

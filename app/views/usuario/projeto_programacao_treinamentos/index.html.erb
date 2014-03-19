@@ -18,6 +18,7 @@
           <th width="140">Previsão Término</th>
           
           <th>Participantes do Treinamento</th>
+          <th>Status</th>
           <%= content_tag(:th,"Del") unless @solucao_sub_modulo.nil? %>
         </tr>
       </thead>
@@ -47,12 +48,20 @@
               <td class="clickableRow" href=<%= href %>>
                 <%= projeto_programacao_treinamento.participantes %>
               </td>
+              <td class="clickableRow" href=<%= href %>>
+                <%= projeto_programacao_treinamento.descricao_status %>
+              </td>
               <%= content_tag :td do %>
+                <% if projeto_programacao_treinamento.solucao_sub_modulos.count == 1 %>
+                  <% msg = "Este é o último Sub Módulo contido na Programação de Treinamento nº: #{projeto_programacao_treinamento.controle}, caso seja removido a Programação também será excluída. Deseja Continuar?" %>
+                <% else %>
+                  <% msg = "Confirma remoção do Sub Módulo da Programação de Treinamento nº: #{projeto_programacao_treinamento.controle}?" %>
+                <% end %>                
                 <%= link_to image_tag(image_link[:del]), 
                         usuario_remove_sub_modulo_path(projeto_programacao_treinamento,
                               solucao_sub_modulo_id:@solucao_sub_modulo.id),
                               method: :delete, 
-                              data: { confirm: "Confirma remoção do Sub Módulo da Programação de Treinamento nº: #{projeto_programacao_treinamento.controle}?"},
+                              data: { confirm: msg },
                             remote:true %>
               <% end unless @solucao_sub_modulo.nil? %>
             </tr>

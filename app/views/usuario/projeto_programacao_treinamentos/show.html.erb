@@ -8,15 +8,27 @@
     </div>
   </div>
   <br>
-  <%= link_to "Editar Programação",
-          edit_usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento),
-          class:"common-link edit-projeto-programacao-treinamentos",
-          remote:true %> |
-  
-  <%= link_to "Excluir Programação",
-              usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento),
-              method: :delete,
-              confirm:'Confirma exclusão da Programação?',
-              remote:true,
-              class:"common-link" %>
+  <div id="buttons-show-projeto-programacao-treinamento">
+    <% if @projeto_programacao_treinamento.ativa? %>
+      <%= link_to "Editar Programação",
+              edit_usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento),
+              class:"common-link edit-projeto-programacao-treinamentos",
+              id: 'edit-projeto_programacao_treinamento',
+              remote:true %> |
+
+      <%= link_to "Cancelar Programação",
+              edit_usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento,cancel:true),class:"common-link edit-projeto-programacao-treinamentos",
+              id: 'cancel-projeto_programacao_treinamento',
+              remote:true %> |
+
+      
+      <%= link_to "Excluir Programação",
+                  usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento),
+                  method: :delete,
+                  confirm:'Confirma exclusão da Programação?',
+                  remote:true,
+                  class:"common-link",
+                  id: 'destroy-projeto_programacao_treinamento' %>
+    <% end %>
+  </div>
 </div>

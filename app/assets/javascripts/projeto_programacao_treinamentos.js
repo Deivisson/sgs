@@ -19,7 +19,11 @@ function  callProgramacaoTreinamentoModalForm(){
       $(this).dialog('option',"title",$("#hidden-title-label-projeto-treinamento").text());
       setMaskFields();
       bindProjetoProgramacaoTreinamentoUIEvents();
-      $("#projeto_programacao_treinamento_usuario_id").focus();
+      if ($("#projeto_programacao_treinamento_usuario_id").length > 0){
+        $("#projeto_programacao_treinamento_usuario_id").focus();  
+      } else {
+        $("#projeto_programacao_treinamento_motivo_cancelamento").focus();  
+      }
     });
     dialog_form.dialog('open');
     e.preventDefault();

@@ -2,12 +2,20 @@
 class ProjetoProgramacaoTreinamento < ActiveRecord::Base
   include DataHoraHelper
 
+  ATIVA = 1
+  CANCELADA = 2
+
+  STATUS = {:ativa => ATIVA,:cancelada => CANCELADA}
+  DESCRICAO_STATUS = ["Ativa", "Cancelada"]
+
 	validates_associated :projeto, :presence => true
 	validates :usuario_id, :presence => true
 	validates :data_programacao, :presence => true
 	validates :hora_programacao, :presence => true
 	validates :participantes, :presence => true, length: {maximum: 200}
-  
+  validates :motivo_cancelamento, :presence => true, :if => Proc.new{|p| p.status == CANCELADA}
+  validates :status, :presence => true
+
   validate :data_programacao_valida
   validate :valid_solucao_sub_modulos
   validate :conflito_entre_agendamento_tecnico
@@ -16,9 +24,12 @@ class ProjetoProgramacaoTreinamento < ActiveRecord::Base
 
   belongs_to :projeto
   belongs_to :usuario
-  has_and_belongs_to_many :solucao_sub_modulos
+  has_and_belongs_to_many :solucao_sub_modulos,
+                          :after_remove => :destroy_treinamento_if_has_no_sub_modulos
 
   attr_accessor :duracao_prevista, :total_minutos_treinamento_sub_modulos
+
+  after_save :destroy_sub_modulos_if_canceled
 
   def controle
   	self.id.to_s.rjust(6,'0')
@@ -39,6 +50,17 @@ class ProjetoProgramacaoTreinamento < ActiveRecord::Base
     total_minutos = total_minutos_treinamento_sub_modulos
     minutos_em_horas(total_minutos)
   end
+
+  STATUS.each do |k,v|
+    define_method "#{k}?" do 
+      self.status == v
+    end
+  end
+
+  def descricao_status
+    DESCRICAO_STATUS[self.status - 1]
+  end
+
 
 private
   
@@ -69,9 +91,19 @@ private
     p = ProjetoProgramacaoTreinamento.where("usuario_id = ? and ?
         BETWEEN TIMESTAMP(data_programacao,hora_programacao) AND data_previsao_termino",self.usuario_id,self.data_previsao_termino)
     p = p.where("id <> ?",self.id) unless self.new_record?
-
+    p = p.where("status = ?",ATIVA)
+    
     if p.any?
       errors.add(:usuario_id,"Existe conflito de horário com a agenda do Técnico.")
     end
+  end
+
+  def destroy_treinamento_if_has_no_sub_modulos(obj)
+    return if self.status == CANCELADA #SE cancelada, não exlui a programacao sem sub_modulos
+    self.destroy if self.solucao_sub_modulos.empty?
+  end
+
+  def destroy_sub_modulos_if_canceled
+    self.solucao_sub_modulos.destroy_all if self.status == CANCELADA    
   end
 end

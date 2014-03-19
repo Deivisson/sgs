@@ -21,13 +21,18 @@ class Usuario::ProjetoProgramacaoTreinamentosController < Usuario::BaseControlle
   def new
     args = {
         projeto_id:params[:projeto_id],
-        solucao_sub_modulo_ids:params[:sub_modulo_ids].split(",")
+        solucao_sub_modulo_ids:params[:sub_modulo_ids].split(","),
+        status:ProjetoProgramacaoTreinamento::ATIVA
     }
     @projeto_programacao_treinamento = ProjetoProgramacaoTreinamento.new(args)
     respond_with(@projeto_programacao_treinamento)
   end
 
-  def edit; end
+  def edit
+    if params[:cancel].present? || @projeto_programacao_treinamento.status == ProjetoProgramacaoTreinamento::CANCELADA
+      @projeto_programacao_treinamento.status = ProjetoProgramacaoTreinamento::CANCELADA
+    end
+  end
 
   def create
     @projeto_programacao_treinamento = ProjetoProgramacaoTreinamento.new(params[:projeto_programacao_treinamento])

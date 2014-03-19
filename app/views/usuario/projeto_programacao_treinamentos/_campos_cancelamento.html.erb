@@ -1,0 +1,17 @@
+<label id="hidden-title-label-projeto-treinamento" class="hidden-title-label">
+  <%= "Cancelamento da Programação nº:#{@projeto_programacao_treinamento.controle}" %>
+</label>
+<%= semantic_form_for [:usuario, @projeto_programacao_treinamento], remote:true do |f|  %>
+    <%= section_tag do %>
+      <%= f.inputs do %>
+        <%= f.input :motivo_cancelamento, 
+                    :label => "Motivo Cancelamento",
+                    :input_html => {rows:20, :style => "min-width: 400px;width: 400px"} %>
+        <%= f.input :status, :as => :hidden %>
+      <% end %>
+    <% end %>
+  <%= f.actions :class => "buttons-container modal-form-button" do %>
+    <%= submit_button f %>
+    <%= link_to_cancel "#", id:'projeto-prog-treinamento-cancel-link' %>
+  <% end -%>
+<% end %>

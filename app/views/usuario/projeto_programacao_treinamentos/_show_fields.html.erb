@@ -23,6 +23,16 @@
     <strong>Participantes:</strong>
     <%= @projeto_programacao_treinamento.participantes %>
   </p>
+  <p>
+    <strong>Status:</strong>
+    <%= @projeto_programacao_treinamento.descricao_status %>
+  </p>
+  <% if @projeto_programacao_treinamento.cancelada? %>
+    <p>
+      <strong>Motivo Cancelamento:</strong>
+      <%= @projeto_programacao_treinamento.motivo_cancelamento %>
+    </p>
+  <% end %>
 </div>
 
 <table border="0" cellpadding="0" cellspacing="1" style="width:99%;margin-left:12px;" >
