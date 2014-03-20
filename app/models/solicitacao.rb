@@ -76,6 +76,10 @@ class Solicitacao < ActiveRecord::Base.extend Search
     end
   end
 
+  def controle
+    self.id.to_s.rjust(6,'0')
+  end
+
   def etapa_desenvolvimento?
     etapa_id == Etapa::DESENVOLVIMENTO
   end

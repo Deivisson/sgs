@@ -7,6 +7,7 @@
 </div>
 
 <% content_for :bar do %>
+	<%= link_to "Planejar", usuario_tarefas_path(solicitacao_ids:'1,2,3') %>
 	<%= link_to 'Nova Solicitação', 
 							new_usuario_solicitacao_path, 
 							remote:true, 

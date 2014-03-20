@@ -1,0 +1,28 @@
+<%= content_tag :div, class:'sortable-solicitacoes-container' do%>
+	<%= content_tag :div, class:'content-bar-title' do %>
+		"Lista de Solicitações"
+	<% end %>
+	<ul id="planejamento-solicitacoes-container" class="connectedSortable">
+		<% @solicitacoes.each do |solicitacao|%>
+			<li controle=<%=solicitacao.controle %>>
+				<%= "#{solicitacao.controle} - #{solicitacao.titulo}" %>
+			</li>
+		<% end %>	
+	</ul>
+<% end %>
+
+<%= content_tag :div, class:'sortable-usuarios-container' do %>
+	<%= content_tag :div, class:'content-bar-title' do %>
+		Programadores x Tarefas
+	<% end %>
+	<ul class="usuario-tarefas-container">
+		<% @usuarios.each do |usuario|%>
+			<li>
+				<%=content_tag :label, usuario.nome %>
+				<ul id="planejamento-usuarios-container" class="connectedSortable">
+	
+				</ul>
+			</li>
+		<% end %>	
+	</ul>
+<% end %>	

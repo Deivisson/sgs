@@ -53,7 +53,7 @@
   left: 231px !important;
 }
 
-.show-container {
+.show-container,.show-full-width {
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #C3C7D0;
   border-radius: 0 0 5px 0;
@@ -66,6 +66,10 @@
   right: 0;
   top: 52px;
   z-index: 3;
+}
+
+.show-full-width {
+  left: 0;  
 }
 
 .show-menu-container {

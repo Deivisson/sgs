@@ -1,0 +1,63 @@
+.sortable-solicitacoes-container,.sortable-usuarios-container {
+  border: 1px solid gray;
+  margin-bottom: 5px;
+  width: 100%;
+  .content-bar-title {
+    background: url(/assets/background/bg3.png);
+    border-bottom: 1px solid gray;
+    height: 27px;
+  }
+}
+
+.sortable-solicitacoes-container {
+  height: 30%;
+  margin-top: 4px;
+  ul {
+    width: 100%;
+    li {
+      float: left;
+      cursor: pointer;
+      height: 25px;
+      line-height: 25px;
+      text-indent: 5px;
+      width: 100%;
+      &:hover {background-color: #eee;};
+    }
+  }
+}
+
+.sortable-usuarios-container {
+  height: 67%;
+}
+
+
+.sortable-usuarios-container ul.usuario-tarefas-container {
+  float: left;
+  width: 100%;
+  li {
+    float: left;
+    width: 100%;
+    padding: 5px;
+    .content-header {
+      float: left;
+      width: 100%;
+    }
+    label {
+      float: left;
+      width: 100%;
+    }
+    ul {
+      border: 1px dashed #777;
+      background-color: #FDFFE2;
+      float: left;
+      min-height: 27px;
+      width: 99%;
+      li {
+        border: 1px solid red;
+        cursor: pointer;
+        height: 18px;
+        width: 120px;
+      }
+    }
+  }
+}

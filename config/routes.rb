@@ -42,6 +42,7 @@ Sgsoft::Application.routes.draw do
             :to => 'projeto_programacao_treinamentos#remove_sub_modulo',
             :as => 'remove_sub_modulo'
 
+    resources :tarefas
     resources :projetos do 
       collection do
         put :gerenciar_sub_modulos

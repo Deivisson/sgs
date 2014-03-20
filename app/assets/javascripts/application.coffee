@@ -12,6 +12,7 @@
 //= require masks
 //= require modal_form
 //= require status_tempo_evolucoes
+//= require tarefas
 //= require projeto_programacao_treinamentos
 //= require tiny_mce
 //= require jquery-ui-1.10.0.custom.min.js
