@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140319011345) do
+ActiveRecord::Schema.define(:version => 20140321013035) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -434,6 +434,17 @@ ActiveRecord::Schema.define(:version => 20140319011345) do
   add_index "status_usuario_cargos", ["status_id"], :name => "fk_status_usuario_cargos_status"
   add_index "status_usuario_cargos", ["usuario_cargo_id"], :name => "fk_status_usuario_cargos_cargos"
 
+  create_table "tarefas", :force => true do |t|
+    t.integer  "usuario_id"
+    t.integer  "solicitacao_id"
+    t.datetime "data_hora_inicio"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "tarefas", ["solicitacao_id"], :name => "tarefas_solicitacoes"
+  add_index "tarefas", ["usuario_id"], :name => "index_tarefas_on_usuario_id"
+
   create_table "tipo_avaliacoes", :force => true do |t|
     t.string   "descricao",  :limit => 30, :null => false
     t.boolean  "padrao",                   :null => false
@@ -579,6 +590,9 @@ ActiveRecord::Schema.define(:version => 20140319011345) do
 
   add_foreign_key "status_usuario_cargos", "status", :name => "fk_status_usuario_cargos_status"
   add_foreign_key "status_usuario_cargos", "usuario_cargos", :name => "fk_status_usuario_cargos_cargos"
+
+  add_foreign_key "tarefas", "solicitacoes", :name => "tarefas_solicitacoes"
+  add_foreign_key "tarefas", "usuarios", :name => "tarefas_usuarios"
 
   add_foreign_key "usuario_configs", "usuarios", :name => "usuario_configs_usuario_id_fk", :dependent => :delete
 

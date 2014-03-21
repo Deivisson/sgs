@@ -65,7 +65,8 @@ class Solicitacao < ActiveRecord::Base.extend Search
   belongs_to :etapa
   has_many :historicos, class_name:"SolicitacaoHistorico"
   has_many :alteracoes, class_name:"SolicitacaoLogAlteracao"
-  
+  has_one :tarefa
+
   attr_writer :solucao_id,:modulo_id
   attr_accessor :previsao_duracao_horas,:usuario_editor
 

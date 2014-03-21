@@ -1,0 +1,13 @@
+<div id="tarefa-modal-container">
+	<%= semantic_form_for [:usuario,@tarefa],remote:true do |form| %>
+		<%= render partial:"/usuario/solicitacoes/campos_estimativas", locals: {form:form} %>
+		<%= form.inputs do%>
+			<%= form.input :usuario_id, :as => :hidden %>
+			<%= form.input :solicitacao_id, :as => :hidden %>
+		<% end %>
+    <%= form.actions :class => "buttons-container modal-form-button" do %>
+      <%= submit_button form %>
+      <%= link_to_cancel "#", id:'tarefa-cancel-link' %>
+    <% end -%>
+	<% end %>
+</div>

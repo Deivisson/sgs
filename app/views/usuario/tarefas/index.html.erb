@@ -4,8 +4,10 @@
 	<% end %>
 	<ul id="planejamento-solicitacoes-container" class="connectedSortable">
 		<% @solicitacoes.each do |solicitacao|%>
-			<li controle=<%=solicitacao.controle %>>
-				<%= "#{solicitacao.controle} - #{solicitacao.titulo}" %>
+			<li controle=<%=solicitacao.controle %> 
+					prioridade=<%=solicitacao.prioridade.id %>
+					href=<%= new_usuario_tarefa_path(solicitacao_id:solicitacao.id) %>>
+				<%= "#{solicitacao.controle}" %>
 			</li>
 		<% end %>	
 	</ul>
@@ -19,8 +21,11 @@
 		<% @usuarios.each do |usuario|%>
 			<li>
 				<%=content_tag :label, usuario.nome %>
-				<ul id="planejamento-usuarios-container" class="connectedSortable">
-	
+				<ul id="planejamento-usuarios-container-#{usuario.id}" 
+						class="connectedSortable" controle=<%= usuario.id %>>
+						<% usuario.tarefas.each do |tarefa| %>
+							<li><%= tarefa.solicitacao.controle %></li>
+						<% end %>
 				</ul>
 			</li>
 		<% end %>	
