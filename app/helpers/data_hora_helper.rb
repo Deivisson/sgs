@@ -17,4 +17,9 @@ module DataHoraHelper
 		minutos.to_i.divmod(60).collect{|i|i.to_s.rjust(2,'0')}.join(":")
 	end
 
+	def dif_em_minutos(d_ini,d_fim)
+		d_ini = d_ini.to_datetime
+		d_fim = d_fim.to_datetime
+		((d_fim - d_ini) * 24 * 60).to_i
+	end
 end

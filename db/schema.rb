@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140321013035) do
+ActiveRecord::Schema.define(:version => 20140323190932) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -206,9 +206,12 @@ ActiveRecord::Schema.define(:version => 20140321013035) do
   add_index "ordem_servicos", ["usuario_responsavel_id"], :name => "index_ordem_servicos_on_usuario_responsavel_id"
 
   create_table "prioridades", :force => true do |t|
-    t.string   "descricao",  :limit => 20, :null => false
+    t.string   "descricao",        :limit => 20,                        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "background_color",               :default => "#fff",    :null => false
+    t.string   "border_color",                   :default => "#fff",    :null => false
+    t.string   "font_color",                     :default => "#333333", :null => false
   end
 
   create_table "projeto_programacao_treinamentos", :force => true do |t|
@@ -349,6 +352,8 @@ ActiveRecord::Schema.define(:version => 20140321013035) do
     t.integer  "peso"
     t.integer  "cliente_id"
     t.integer  "usuario_cadastrante_id"
+    t.date     "data_inicio"
+    t.time     "hora_inicio"
   end
 
   add_index "solicitacoes", ["cliente_contato_id"], :name => "index_solicitacoes_on_cliente_contato_id"
@@ -440,6 +445,7 @@ ActiveRecord::Schema.define(:version => 20140321013035) do
     t.datetime "data_hora_inicio"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.datetime "data_hora_fim"
   end
 
   add_index "tarefas", ["solicitacao_id"], :name => "tarefas_solicitacoes"

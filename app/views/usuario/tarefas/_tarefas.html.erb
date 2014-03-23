@@ -1,0 +1,44 @@
+<%= content_tag :div, class:'sortable-usuarios-container' do %>
+	<%= content_tag :div, class:'content-bar-title' do %>
+		Programadores x Tarefas
+	<% end %>
+	<div class='grid'>
+		<table>
+			<thead>
+				<th class="first-col">
+					Profissional
+				</th>
+				<% (@d_ini..@d_fim).each do |d| %>
+					<th width="80">
+						<%= formata_data(d,:short_abbr) %>
+					</th>
+				<% end %>
+			</thead>
+			<tbody class="usuario-tarefas-container">
+				<% @usuarios.each do |usuario|%>
+					<tr>
+						<td width="140" class="first-col">
+							<%=content_tag :label, usuario.nome,class:'username'  %>
+						</td>
+
+						<% (@d_ini..@d_fim).each do |d| %>
+							<td width="80">
+								<ul id=<%="planejamento-usuarios-container-#{usuario.id}" %>
+									class="connectedSortable" controle=<%= usuario.id %> >
+									<% usuario.tarefas.each do |tarefa| %>
+										<% if tarefa.solicitacao.data_inicio == d %>
+											<%= content_tag :li, style:prioridade_style(tarefa.solicitacao.prioridade)  do %>
+												<%= tarefa.solicitacao.controle %>
+												<%= duracao_tarefa(tarefa) %>
+											<% end %>
+										<% end %>
+									<% end %>
+								</ul>
+							</td>
+						<% end %>
+					</tr>
+				<% end %>				
+			</tbody>
+		</table>
+	</div>
+<% end %>

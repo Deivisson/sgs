@@ -4,7 +4,7 @@ class CreateTarefas < ActiveRecord::Migration
       t.references :usuario
       t.references :solicitacao
       t.datetime :data_hora_inicio
-
+      t.datetime :data_hora_fim
       t.timestamps
     end
     add_index :tarefas, :usuario_id

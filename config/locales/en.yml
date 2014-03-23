@@ -91,6 +91,7 @@ en:
     formats:
       default: "%d/%m/%Y"
       short: "%d de %B"
+      short_abbr: "%d de %b"
       long: "%d de %B de %Y"
       month: "%B de %Y"
       datetime: "%d/%m/%Y às %H:%M"

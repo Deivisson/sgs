@@ -6,20 +6,27 @@
 		  				 :collection  => options_for_nivel_complexidade,	
 		  				 :label				=> "Nível Complexidade",
 		  				 :required 		=> true,
-		  				 :input_html  => {:style => "min-width: 210px;max-width: 210px;"} %>
+		  				 :input_html  => {:style => "min-width: 210px;max-width: 210px;",
+		  				 									:id => "nivel-complexidade-id"} %>
 
 		  <%= form.input :peso, 
 		  				 :label 		=> "Pontos de Função",
 		  				 :hint			=> "Definição do peso da solicitação",
 		  				 :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
 
-
-		  <%= form.input :previsao_duracao_horas, 
+		  <%= form.input :data_inicio, 
+		  				 :label 		=> "Data Início",
+		  				 :required 	=> true,
+		  				 :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
+		 <%= form.input :hora_inicio, 
+		  				 :label 		=> "Hora Início",
+		  				 :required 	=> true,
+		  				 :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
+		 <%= form.input :previsao_duracao_horas, 
 		  				 :label 		=> "Duração Prevista",
 		  				 :hint			=> "Total de horas prevista para execução da atividade",
 		  				 :required 	=> true,
 		  				 :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
-
 
 		  <%= form.input :gera_cobranca,
 		  				 :as 					=> :boolean,	

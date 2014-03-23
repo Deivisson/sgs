@@ -7,7 +7,10 @@
   .content-bar-title {
     background: url(/assets/background/bg3.png);
     border-bottom: 1px solid gray;
+    font-weight: bold;
     height: 27px;
+    line-height: 25px;
+    padding-left: 5px;
   }
 }
 
@@ -23,23 +26,92 @@
       line-height: 25px;
       text-indent: 5px;
       width: 100%;
-      &:hover {background-color: #eee;};
+      /*&:hover {background-color: #eee;};*/
     }
   }
 }
 
 .sortable-usuarios-container {
-  
-  width: 70%;
+  left: 365px;
+  right: 2px;
+  position: absolute;
   margin-left: 2px;
+
 }
 
+.connectedSortable {
+  min-height: 40px;
+  width: 100%;
+}
 
-.sortable-usuarios-container ul.usuario-tarefas-container {
+.sortable-usuarios-container thead {
+  tr {
+    th.first-col {
+      min-width: 163px !important;
+    }
+  }
+}
+.sortable-usuarios-container tbody.usuario-tarefas-container {
   float: left;
   width: 100%;
   height: 100%;
+  position: absolute;
+  /*top:50px;*/
+  border-bottom: 2px solid gray;
+  tr {
+    background-color: #FFF;
+    td.first-col {
+      background-color: #F7F7F7 ;
+      min-width: 170px !important;
+    }
+    td { 
+      &:hover {background-color:#d6e2e5;}
+      label.username {
+        font-weight: bold;
+        float: left;
+        position: relative;
+        margin: 7px 0 0 7px;
+      }
+      ul li {
+        border: 1px solid red;
+        background-color: #F2DEDE;
+        cursor: pointer;
+        color: #B94A48;
+        font-weight: bold;
+        height: 17px;
+        line-height: 17px;
+        width: 45px;
+        border-radius: 3px; 
+        -moz-border-radius: 3px; 
+        -webkit-border-radius: 3px; 
+        margin: 4px 0px 4px 2px;
+        span {
+          background-color: #AAAAAA;
+          border: 1px solid #6B6B6B;
+          border-radius: 0px 30px 30px 0px; 
+          -moz-border-radius: 0px 30px 30px 0px; 
+          -webkit-border-radius: 0px 30px 30px 0px;
+          height:5px;
+          position: absolute;
+          opacity:0.3;
+          filter:alpha(opacity=30); /* For IE8 and earlier */
+          margin: 5px 0 0 4px;
+          z-index: -20px;
+        }
+        &:hover {
+          border: 1px solid #000;
+          span{
+            background-color: #000;
+            opacity:1.0;
+            filter:alpha(opacity=100); /* For IE8 and earlier */
+          }
+        };
+      }
+    }
+  }
+  /*
   li {
+    border-bottom: 1px solid #DB9897;
     float: left;
     width: 100%;
     padding: 5px;
@@ -47,15 +119,19 @@
       float: left;
       width: 100%;
     }
-    label {
+    label.username {
       float: left;
-      width: 100%;
+      position: absolute;
+      left: 4px;
+      margin-top: 4px;
+      text-transform: uppercase;
     }
     ul {
-      border: 1px dashed #777;
+      /*border: 1px dashed #777;
       background-color: #FDFFE2;
       float: left;
       height: auto;
+      margin-left: 192px;
       min-height: 27px;
 
       width: 99%;
@@ -67,12 +143,75 @@
         font-weight: bold;
         height: 10px;
         line-height: 10px;
-        width: 120px;
+        width: 70px;
         border-radius: 3px; 
         -moz-border-radius: 3px; 
         -webkit-border-radius: 3px; 
-        margin: 4px 0px 4px -1px;
+        margin: 4px 0px 4px 2px;
       }
     }
   }
+  */
+}
+.sortable-usuarios-container {
+  .grid {
+    margin-left: 0px;
+    height: 96%;
+    position: relative;
+    overflow: auto;
+    table {
+      thead {
+        tr {
+          th {
+            min-width: 113px;
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            border-right: 1px solid #F1F0F0;
+            min-width: 120px;
+          }
+        }
+      }
+    }
+    span {
+      
+      font-size: 10px;
+      margin-right: 2px;
+      height: 100%;
+      float: left;
+      width: 30px;
+
+    }
+  }
+}
+
+ul.legenda-prioridades {
+  margin-left: 5px;
+  h5 {
+    font-weight: bold;
+    margin-bottom: 4px;
+    text-decoration: underline;
+  }
+  li {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    height: 18px;
+    span {
+      float: left;
+      height: 15px;
+      width: 15px;
+    }
+    label {
+      float: left;
+    }
+  }
+}
+
+span.span-solicitacao-id {
+  height: 30px;
+  padding: 3px;
 }

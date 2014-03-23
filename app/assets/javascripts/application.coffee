@@ -19,3 +19,5 @@
 //= require jquery.simulate.js
 //= require jquery.mCustomScrollbar.min.js
 //= require jquery.mCustomScrollbar.concat.min
+//= require colorpicker.js
+//= require prioridades.js

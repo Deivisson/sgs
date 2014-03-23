@@ -1,0 +1,12 @@
+<% if @tarefa.errors.any? %>
+  $('#task-dialog-form').html('<%= escape_javascript(render('form')) %>');
+  $("#nivel-complexidade-id").focus();
+  setMaskFields();
+<% else %>
+  $('#solicitacao-tarefas-container').html('<%= escape_javascript(render('tarefas'))%>');
+  sortEvents();
+  $('#task-dialog-form').dialog('close');
+  $('#task-dialog-form').remove();
+  alert("Programação realizada com sucesso!");
+<% end %>
+
