@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Usuario::TarefasController < Usuario::BaseController
 	layout "tarefas"
+  before_filter :carrega_tarefa, :only => [:show]
   before_filter :carrega_dados, :only => [:index,:create,:update]
 
   def index
@@ -21,8 +22,14 @@ class Usuario::TarefasController < Usuario::BaseController
   	respond_with(@tarefa)
   end
 
+  def show;  end
+
 private 
   
+  def carrega_tarefa
+    @tarefa = Tarefa.find(params[:id])  
+  end
+
   def carrega_dados
     @d_ini = Date.today
     @d_fim = Date.today + 20.days

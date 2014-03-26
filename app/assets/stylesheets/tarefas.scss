@@ -16,17 +16,23 @@
 
 .sortable-solicitacoes-container {
   width: 25%;
-  
   ul {
     width: 100%;
     li {
       float: left;
       cursor: pointer;
-      height: 25px;
-      line-height: 25px;
+      margin-bottom: 2px;
+      min-height: 15px;
+      line-height: 15px;
       text-indent: 5px;
       width: 100%;
-      /*&:hover {background-color: #eee;};*/
+      span {
+        float: left;
+
+      }
+      p {
+
+      }
     }
   }
 }
@@ -85,6 +91,8 @@
         -moz-border-radius: 3px; 
         -webkit-border-radius: 3px; 
         margin: 4px 0px 4px 2px;
+        font-size: 10px;
+        text-align: center;
         span {
           background-color: #AAAAAA;
           border: 1px solid #6B6B6B;
@@ -94,8 +102,9 @@
           height:5px;
           position: absolute;
           opacity:0.3;
+          font-size: 9px;
           filter:alpha(opacity=30); /* For IE8 and earlier */
-          margin: 5px 0 0 4px;
+          margin: 5px 0 0 5px;
           z-index: -20px;
         }
         &:hover {
@@ -172,13 +181,16 @@
           td {
             border-right: 1px solid #F1F0F0;
             min-width: 120px;
+            ul li span {
+              font-size: 8px !important;
+            }
           }
         }
       }
     }
     span {
       
-      font-size: 10px;
+      font-size: 9px;
       margin-right: 2px;
       height: 100%;
       float: left;
@@ -212,6 +224,6 @@ ul.legenda-prioridades {
 }
 
 span.span-solicitacao-id {
-  height: 30px;
+  height: 100%;
   padding: 3px;
 }

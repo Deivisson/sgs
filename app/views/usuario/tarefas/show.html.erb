@@ -1,0 +1,52 @@
+<div id="tarefa-show-modal-container">
+	<div id="div_show">
+		<p>
+	    <strong>Nº Tarefa:</strong>
+	    <%= @tarefa.controle %>
+	  </p> 
+	  <p>
+	    <strong>Solicitação:</strong>
+	    <%= "#{@tarefa.solicitacao.controle} - #{@tarefa.solicitacao.titulo}" %>
+	  </p>  
+		<p>
+	    <strong>Profissional</strong>
+	    <%= @tarefa.usuario.nome %>
+	  </p>  
+	  <p>
+	    <strong>Nível Complexidade</strong>
+	    <%= @tarefa.solicitacao.nivel_complexidade %>
+	  </p>  
+	  <p>
+	    <strong>Pontos de Função</strong>
+	    <%= @tarefa.solicitacao.peso %>
+	  </p>  
+	  <p>
+	    <strong>Data Hora Início:</strong>
+	    <%= formata_data(@tarefa.data_hora_inicio,:datetime) %>
+	  </p>
+	  <p>
+    	<strong>Previsão de Duração(Hrs)</strong>
+	    <%= @tarefa.solicitacao.previsao_duracao_horas %>
+	  </p>	  
+	  <p>
+	    <strong>Previsão Término:</strong>
+	    <%= formata_data(@tarefa.data_hora_fim,:datetime) %>
+	  </p>  
+	  <br>
+	  <br>
+	  <br>
+	  <br>
+    <%= link_to "Editar Planejamento",
+            edit_usuario_tarefa_path(@tarefa),
+            class:"common-link edit-tarefa",
+            id: 'edit-tarefa',
+            remote:true %> |
+
+      <%= link_to "Excluir Planejamento",
+                  usuario_tarefa_path(@tarefa),
+                  method: :delete,
+                  confirm:'Confirma exclusão do Planejamento?',
+                  remote:true,
+                  class:"common-link",
+                  id: 'destroy-tarefa' %>
+</div>

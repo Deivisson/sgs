@@ -25,6 +25,10 @@ class Tarefa < ActiveRecord::Base
 
   after_save :atualiza_solicitacao 
 
+  def controle
+    self.id.to_s.rjust(6,'0')  
+  end
+
   def nivel_complexidade
 		@nivel_complexidade || ( self.solicitacao.nil? ? nil : self.solicitacao.nivel_complexidade)
   end

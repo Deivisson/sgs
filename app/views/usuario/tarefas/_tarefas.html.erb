@@ -27,7 +27,11 @@
 									class="connectedSortable" controle=<%= usuario.id %> >
 									<% usuario.tarefas.each do |tarefa| %>
 										<% if tarefa.solicitacao.data_inicio == d %>
-											<%= content_tag :li, style:prioridade_style(tarefa.solicitacao.prioridade)  do %>
+											<%= content_tag :li, 
+													id: "tarefa-item-#{tarefa.id}",
+													style:prioridade_style(tarefa.solicitacao.prioridade),
+													saved:true,
+													href:usuario_tarefa_path(tarefa)  do %>
 												<%= tarefa.solicitacao.controle %>
 												<%= duracao_tarefa(tarefa) %>
 											<% end %>

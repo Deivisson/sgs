@@ -11,7 +11,7 @@
 				<%= content_tag(:span,"#{solicitacao.controle}",
 					style:prioridade_style(solicitacao.prioridade,false),
 					class:"span-solicitacao-id")%>
-				<%= "- #{solicitacao.titulo}" %>
+				<%=content_tag :p, "- #{solicitacao.titulo}" %>
 			<% end %>
 		<% end %>	
 	</ul>
