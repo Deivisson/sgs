@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 include DataHoraHelper
+include SolicitacoesHelper
 class Solicitacao < ActiveRecord::Base.extend Search
 
   COMPLEXIDADE_BAIXA = 1
@@ -126,6 +127,9 @@ class Solicitacao < ActiveRecord::Base.extend Search
     !(self.projeto_id.present?)
   end
 
+  def complexidade
+    options_for_nivel_complexidade.each{|k,v| return k if v==self.nivel_complexidade}
+  end
   #callbacks
   before_validation :attribui_minutos_previsao_duracao
   after_create :inserir_historico_padrao

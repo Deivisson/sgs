@@ -1,6 +1,6 @@
 <%= content_tag :div, class:'sortable-usuarios-container' do %>
 	<%= content_tag :div, class:'content-bar-title' do %>
-		Programadores x Tarefas
+		Programadores x Solicitações
 	<% end %>
 	<div class='grid'>
 		<table>
@@ -31,7 +31,8 @@
 													id: "tarefa-item-#{tarefa.id}",
 													style:prioridade_style(tarefa.solicitacao.prioridade),
 													saved:true,
-													href:usuario_tarefa_path(tarefa)  do %>
+													href:usuario_tarefa_path(tarefa),
+													edit_href:edit_usuario_tarefa_path(tarefa)  do %>
 												<%= tarefa.solicitacao.controle %>
 												<%= duracao_tarefa(tarefa) %>
 											<% end %>

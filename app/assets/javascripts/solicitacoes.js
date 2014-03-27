@@ -29,19 +29,21 @@ $(document).ready(function(){
   }
 
   solicitacaoModalForm();
-  $("#tab-menu-solicitacoes").tabs();
+  if ($("#tab-menu-solicitacoes").length > 0) {
+    $("#tab-menu-solicitacoes").tabs();
+  }
 });
 
 
 //MODAL FORM
 function solicitacaoModalForm(){
-  $("a#solicitacao-link, a.solicitacao-link").click(function(e){
+  $("a#solicitacao-link, a.solicitacao-link").click(function(){
     var url = $(this).attr('href');
-    callSolicitcaoModalFormToNew(url);
+    callSolicitacaoModalFormToNew(url);
   });
 }
 
-function  callSolicitcaoModalFormToNew(url){
+function callSolicitacaoModalFormToNew(url){
   var dialog_form = $(getModalContainer()).dialog({
       autoOpen: false,
       width: 830,
@@ -51,13 +53,16 @@ function  callSolicitcaoModalFormToNew(url){
       close: function() {
         $('#dialog-form').remove();
       }
+
   });
 
   dialog_form.load(url + ' #modal-container', function(){
+
     //to change the title, see hidden-title-label on new, edit or show page
     $(this).dialog('option',"title","Nova Solicitação");
     $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange);
     $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos);
+
     $("#tabs").tabs(); //tabify(); 
     
     inicializaTinyMCE();

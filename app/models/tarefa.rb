@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 include DataHoraHelper
+include ApplicationHelper
 class Tarefa < ActiveRecord::Base
   
 	validates :usuario_id, :presence => true
@@ -38,7 +39,7 @@ class Tarefa < ActiveRecord::Base
   end
 
   def previsao_duracao_horas
-  	@previsao_duracao_horas || ( self.solicitacao.nil? ? nil : self.solicitacao.previsao_duracao_horas)
+  	@previsao_duracao_horas || ( self.solicitacao.nil? ? nil : self.solicitacao.previsao_de_duracao)
   end
 
   def gera_cobranca
@@ -50,16 +51,20 @@ class Tarefa < ActiveRecord::Base
   end
 
   def data_inicio
-    @data_inicio || (self.solicitacao.nil? ? nil : self.solicitacao.data_inicio)
+    d = (@data_inicio || (self.solicitacao.nil? ? nil : self.solicitacao.data_inicio))
+    d = formata_data(d) unless d.is_a?(String)
+    d
   end
 
   def hora_inicio
-    @hora_inicio || (self.solicitacao.nil? ? nil : self.solicitacao.hora_inicio)
+    h = (@hora_inicio || (self.solicitacao.nil? ? nil : self.solicitacao.hora_inicio))
+    h = formata_hora(h) unless h.is_a?(String)
+    h
   end
 
   def periodo_duracao
     datas = []
-    data_ini = self.data_inicio
+    data_ini = self.solicitacao.data_inicio
     unless self.data_hora_fim.nil?
       while data_ini <= self.data_hora_fim.to_date
         datas << data_ini
@@ -78,6 +83,7 @@ private
   end
 
   def calcular_data_hora_fim
+    debugger
     return if self.data_hora_inicio.nil? || self.previsao_duracao_horas.empty?
     mins = total_minutos(self.previsao_duracao_horas)
     t = data_hora_inicio.to_datetime
@@ -92,6 +98,8 @@ private
           t = t + mins.minutes
         end
         mins -= dif_min
+      else
+        mins = 0
       end
     end
     self.data_hora_fim = t

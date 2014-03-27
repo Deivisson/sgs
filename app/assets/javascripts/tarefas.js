@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  //$("#planejamento-solicitacoes-container").sortable();
   sortEvents();
   callShowModalForm();
 });
@@ -18,11 +17,14 @@ function sortEvents() {
   // });
 
   $('ul[id*="planejamento-usuarios-container-"]').on( "sortreceive", function( event, ui ) {
-    href = ui.item.attr("href");
-    href += "&usuario_id="+$(this).attr("controle");
-    ui.item.attr("saved",false);
-    ui.item.text(ui.item.attr("controle"));
-    //alert(ui.item.attr("controle"));
+    href = ui.item.attr("edit_href");
+    if (href == undefined) { 
+      //Add a new Tarefa
+      href = ui.item.attr("href");
+      href += "&usuario_id="+$(this).attr("controle");
+      ui.item.attr("saved",false);
+      ui.item.text(ui.item.attr("controle"));
+    }
     callTarefaModalFormToNew(href);
   });
 }
@@ -36,15 +38,12 @@ function  callTarefaModalFormToNew(url){
       closeText: "Fechar",
       close: function() {
         $('#task-dialog-form').remove();
-        //$("#planejamento-solicitacoes-container").append(
         $('ul[id*="planejamento-usuarios-container-"]').find("[saved$='false']").remove();
-        //);
       }
   });
 
   dialog_form.load(url + ' #tarefa-modal-container', function(){
-    //to change the title, see hidden-title-label on new, edit or show page
-    $(this).dialog('option',"title","Definição Tarefa");
+    $(this).dialog('option',"title",$("#title-task-form").text());
     $("#tarefa-cancel-link").click(function(){
       $('#task-dialog-form').dialog('close');
       $('#task-dialog-form').remove();
@@ -57,7 +56,7 @@ function  callTarefaModalFormToNew(url){
 }
 
 function callShowModalForm() {
-  $("li[id*='tarefa-item-']").click(function(){
+  $("li[id*='tarefa-item-']").dblclick(function(){
     url = $(this).attr("href")
     var dialog_form = $(getModalContainer('task-show-dialog-form')).dialog({
         autoOpen: false,
@@ -66,15 +65,19 @@ function callShowModalForm() {
         modal: true,
         closeText: "Fechar",
         close: function() {
-          $('#task-dialog-form').remove();
+          $('#task-show-dialog-form').remove();
         }
     });
     dialog_form.load(url + ' #tarefa-show-modal-container', function(){
       //to change the title, see hidden-title-label on new, edit or show page
-      $(this).dialog('option',"title","Tarefa");
+      $(this).dialog('option',"title","Detalhes do Planejamento");
       $("#tarefa-cancel-link").click(function(){
         $('#task-show-dialog-form').dialog('close');
         $('#task-show-dialog-form').remove();
+      });
+      $("#edit-tarefa").click(function(){
+        href = $(this).attr("href");
+        callTarefaModalFormToNew(href);
       });
     });
     dialog_form.dialog('open');

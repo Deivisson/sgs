@@ -1,0 +1,32 @@
+<p>
+  <strong>Nº Planejamento:</strong>
+  <%= @tarefa.controle %>
+</p> 
+<p>
+  <strong>Solicitação:</strong>
+  <%= "#{@tarefa.solicitacao.controle} - #{@tarefa.solicitacao.titulo}" %>
+</p>  
+<p>
+  <strong>Profissional</strong>
+  <%= @tarefa.usuario.nome %>
+</p>  
+<p>
+  <strong>Nível Complexidade</strong>
+  <%= @tarefa.solicitacao.complexidade %>
+</p>  
+<p>
+  <strong>Pontos de Função</strong>
+  <%= @tarefa.peso %>
+</p>  
+<p>
+  <strong>Data Hora Início:</strong>
+  <%= formata_data(@tarefa.data_hora_inicio,:datetime) %>
+</p>
+<p>
+	<strong>Previsão de Duração(Hrs)</strong>
+  <%= @tarefa.previsao_duracao_horas %>
+</p>	  
+<p>
+  <strong>Previsão Término:</strong>
+  <%= formata_data(@tarefa.data_hora_fim,:datetime) %>
+</p> 

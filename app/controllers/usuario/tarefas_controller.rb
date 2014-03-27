@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Usuario::TarefasController < Usuario::BaseController
 	layout "tarefas"
-  before_filter :carrega_tarefa, :only => [:show]
+  before_filter :carrega_tarefa, :only => [:show, :edit,:update]
   before_filter :carrega_dados, :only => [:index,:create,:update]
 
   def index
@@ -14,6 +14,15 @@ class Usuario::TarefasController < Usuario::BaseController
   		usuario_id:params[:usuario_id]
   	}
 		@tarefa = Tarefa.new(attributes)
+  end
+
+  def edit; end
+
+  def update
+    puts "aqui"
+    @tarefa.update_attributes(params[:tarefa])
+    respond_with(@tarefa)
+    puts "aqui2"
   end
 
   def create

@@ -4,10 +4,11 @@
   setMaskFields();
 <% else %>
   $('#solicitacao-tarefas-container').html('<%= escape_javascript(render('tarefas'))%>');
+  $('#show-fields').html('<%= escape_javascript(render('show_fields'))%>');
   sortEvents();
   callShowModalForm();
   $('#task-dialog-form').dialog('close');
   $('#task-dialog-form').remove();
-  alert("Planejamento realizado com sucesso!");
+  alert("Planejamento com sucesso!");
 <% end %>
 

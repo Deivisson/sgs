@@ -15,11 +15,13 @@
 		  				 :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
 
 		  <%= form.input :data_inicio, 
+		  				 :as 				=> :string,
 		  				 :label 		=> "Data Início",
 		  				 :required 	=> true,
 		  				 :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
 		 <%= form.input :hora_inicio, 
 		  				 :label 		=> "Hora Início",
+		  				 :as 				=> :string,
 		  				 :required 	=> true,
 		  				 :input_html=> {:style => "min-width: 210px;max-width: 210px;"}  %>
 		 <%= form.input :previsao_duracao_horas, 
