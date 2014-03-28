@@ -19,6 +19,12 @@
                       icon_name:"project",
                       target:'projeto',
                       title:'Projetos') %>
+
+        <%= main_menu(usuario_tarefas_path(from:'list'), 
+                      icon_name:"planning",
+                      target:'tarefas',
+                      title:'Cronograma do Desenvolvimento') %>
+
         <%= main_menu(usuario_ordem_servicos_path, 
                       icon_name:"services",
                       target:'ordem_servico',

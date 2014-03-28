@@ -1,6 +1,11 @@
-<%= content_tag :div, class:'sortable-usuarios-container' do %>
+<%= content_tag :div, class:'sortable-usuarios-container', style: @from_index ? "left:0" : "" do %>
 	<%= content_tag :div, class:'content-bar-title' do %>
-		Programadores x Solicitações
+		<% if @from_index %>
+			CRONOGRAMA DE DESENVOLVIMENTO
+		<% else %>
+			PROGRAMADORES x SOLICITAÇÕES
+		<% end %>
+		<%= link_voltar %>
 	<% end %>
 	<div class='grid'>
 		<table>
@@ -25,7 +30,7 @@
 							<td width="80">
 								<ul id=<%="planejamento-usuarios-container-#{usuario.id}" %>
 									class="connectedSortable" controle=<%= usuario.id %> >
-									<% usuario.tarefas.each do |tarefa| %>
+									<% usuario.tarefas_nao_finalizadas.each do |tarefa| %>
 										<% if tarefa.solicitacao.data_inicio == d %>
 											<%= content_tag :li, 
 													id: "tarefa-item-#{tarefa.id}",

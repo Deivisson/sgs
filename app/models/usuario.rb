@@ -54,6 +54,10 @@ class Usuario < ActiveRecord::Base
     self.usuario_cargo.estima_instalacao
   end
 
+  def tarefas_nao_finalizadas
+    self.tarefas.joins(:solicitacao => :status).where("status.encerramento = ? ",false)
+  end
+  
 private
   def password_required?
     !persisted? || password.present? || password_confirmation.present?

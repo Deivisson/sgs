@@ -12,10 +12,6 @@ function sortEvents() {
     connectWith: ".connectedSortable"
   }).disableSelection();
 
-  // $("#planejamento-solicitacoes-container").on( "sortstart", function( event, ui ) {
-  //   ui.item.text(ui.item.attr("controle"));
-  // });
-
   $('ul[id*="planejamento-usuarios-container-"]').on( "sortreceive", function( event, ui ) {
     href = ui.item.attr("edit_href");
     if (href == undefined) { 

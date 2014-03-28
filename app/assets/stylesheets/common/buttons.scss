@@ -92,15 +92,15 @@
   );
 }
 
-.button-add-new {
+.button-add-new, .button-planing, .register-status {
   height: 19px;
   border: 1px solid #D8D8D8;
-  border-radius: 10px; 
+  border-radius: 5px; 
   color: #4F4F4F;
   float: right;
   font-weight: bold;
-  -moz-border-radius: 10px; 
-  -webkit-border-radius: 10px;
+  -moz-border-radius: 5px; 
+  -webkit-border-radius: 5px;
   padding: 5px 10px 5px 10px;
   background-image: linear-gradient(bottom, rgb(217,217,217) 42%, rgb(247,247,247) 71%);
   background-image: -o-linear-gradient(bottom, rgb(217,217,217) 42%, rgb(247,247,247) 71%);
@@ -140,6 +140,38 @@
   }
 }
 
+.button-add-new {
+  &:before {
+    content: 'icon';
+    float: left;
+    text-indent: -999em;
+    width: 20px;
+    height: 24px;
+    background: url('/assets/icons/16/add-button.png') no-repeat 0  2px; ;
+  }
+}
+
+.register-status {
+  &:before {
+    content: 'icon';
+    float: left;
+    text-indent: -999em;
+    width: 20px;
+    height: 24px;
+    background: url('/assets/icons/16/register-status.png') no-repeat 0  2px; ;
+  }
+}
+
+.button-planing  {
+  &:before {
+    content: 'icon';
+    float: left;
+    text-indent: -999em;
+    width: 20px;
+    height: 24px;
+    background: url('/assets/icons/16/schedule.png') no-repeat 0  2px; ;
+  } 
+}
 .add-on-index-top {
   margin: 0 10px 10px 0;
 }

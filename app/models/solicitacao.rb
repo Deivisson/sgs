@@ -27,14 +27,15 @@ class Solicitacao < ActiveRecord::Base.extend Search
             :presence => true, 
             :if       => Proc.new {|s| 
               ([Status::AG_DESENV, Status::EM_DESENV].include? s.status_id) && 
-              (s.previsao_duracao_minutos.nil? || s.previsao_duracao_minutos == 0 )
+              (s.previsao_duracao_minutos.nil? || s.previsao_duracao_minutos == 0) &&
+              s.projeto_id.present?
             } 
 
   validates :nivel_complexidade, 
             :presence   => true, 
             :if         => Proc.new {|s| 
               ([Status::AG_DESENV, Status::EM_DESENV].include? s.status_id) && 
-              s.nivel_complexidade.nil? 
+              s.nivel_complexidade.nil? && s.projeto_id.present?
             } 
 
   validates :valor_cobranca, 
@@ -42,10 +43,11 @@ class Solicitacao < ActiveRecord::Base.extend Search
             :numericality => {:greater_than_or_equal_to => 1},
             :if           => Proc.new {|s|
               ([Status::AG_DESENV, Status::EM_DESENV].include? s.status_id) && 
-              s.gera_cobranca == true
+              s.gera_cobranca == true && s.projeto_id.present?
             } 
 
-  validates :peso, :numericality => {only_integer:true}
+  validates :peso, :numericality => {only_integer:true},
+            :if => Proc.new{|s| s.projeto_id.present?}
 
   belongs_to :cliente
   belongs_to :projeto
@@ -226,7 +228,7 @@ private
     return unless self.changed?
     log = self.alteracoes.build(usuario_id:self.usuario_editor)
     self.changes.each do |k,v|
-      unless ['created_at','updated_at'].include?(k.to_s)
+      unless ['created_at','updated_at','usuario_responsavel_id'].include?(k.to_s)
         valor_de, valor_para = recupera_alteracoes(k,v.first.to_s,v.second.to_s)
         _attributes = {campo:Solicitacao.human_attribute_name(k), 
                        velho_conteudo:valor_de,

@@ -32,8 +32,29 @@ $(document).ready(function(){
   if ($("#tab-menu-solicitacoes").length > 0) {
     $("#tab-menu-solicitacoes").tabs();
   }
+
+  $("input[id*='solicitacao_ids_']").click(function(){
+    atualizaLinkPlanejamento();
+  });
+
+  $("#registrar-status-submit-link").click(function(){
+    $("#edit-multiple-solicitacoes").submit();
+  });
+
 });
 
+
+function atualizaLinkPlanejamento(){
+  if ($("#planejamento-link").length > 0){
+    ids = "";
+    href = $("#planejamento-link").attr("default_url");
+    $("#solicitacoes-table").find("tbody tr td > input:checked").each(function(){
+      ids += $(this).val() + ",";
+    });
+    if (ids != "") {ids = ids.substring(0,ids.length -1);}
+    $("#planejamento-link").attr("href",href+ids);
+  }
+}
 
 //MODAL FORM
 function solicitacaoModalForm(){

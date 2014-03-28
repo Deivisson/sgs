@@ -24,6 +24,7 @@ class Tarefa < ActiveRecord::Base
 
   before_validation :set_data_hora_inicio, :calcular_data_hora_fim
 
+  before_destroy :verify_if_destroyable
   after_save :atualiza_solicitacao 
 
   def controle
@@ -83,7 +84,6 @@ private
   end
 
   def calcular_data_hora_fim
-    debugger
     return if self.data_hora_inicio.nil? || self.previsao_duracao_horas.empty?
     mins = total_minutos(self.previsao_duracao_horas)
     t = data_hora_inicio.to_datetime
@@ -114,8 +114,16 @@ private
 			valor_cobranca:valor_cobranca,
       data_inicio:data_inicio,
       hora_inicio:hora_inicio,
-      previsao_duracao_horas:previsao_duracao_horas
+      previsao_duracao_horas:previsao_duracao_horas,
+      status_id:Status::AG_DESENV
 		}
 		self.solicitacao.update_attributes(attributes)
 	end
+
+  def verify_if_destroyable
+    nao permitr excluir tarefa se o ultimo status  for diferente de aguardando desenv
+    nao permitr excluir tarefa se o ultimo status  for de fechamento
+    se excluir a tarefa devera voltar o status da solicitacao
+    self.solicitacao.
+  end
 end

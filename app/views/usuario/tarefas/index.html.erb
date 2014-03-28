@@ -1,6 +1,6 @@
 <%= content_tag :div, class:'sortable-solicitacoes-container' do%>
 	<%= content_tag :div, class:'content-bar-title' do %>
-		Lista de Solicitações
+		LISTA DE SOLICITAÇÕES
 	<% end %>
 
 	<ul id="planejamento-solicitacoes-container" class="connectedSortable" style="height:80%" >
@@ -11,7 +11,7 @@
 				<%= content_tag(:span,"#{solicitacao.controle}",
 					style:prioridade_style(solicitacao.prioridade,false),
 					class:"span-solicitacao-id")%>
-				<%=content_tag :p, "- #{solicitacao.titulo}" %>
+				<%=content_tag :p, " #{solicitacao.titulo}" %>
 			<% end %>
 		<% end %>	
 	</ul>
@@ -24,7 +24,7 @@
 			</li>
 		<% end %>
 	<ul>
-<% end %>
+<% end unless @from_index %>
 
 <div id="solicitacao-tarefas-container">
 	<%= render "tarefas" %>

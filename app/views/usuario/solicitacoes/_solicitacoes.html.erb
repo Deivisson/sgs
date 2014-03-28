@@ -15,8 +15,8 @@
   <%= render "search_form_index" %>
 <% end %>
 
-<%= form_tag [:edit_multiple, :usuario, :solicitacoes] do %>
-   <table border="0"  cellspacing="1" cellpadding="0" class="tablesorter" >
+<%= form_tag [:edit_multiple, :usuario, :solicitacoes],id:'edit-multiple-solicitacoes' do %>
+   <table border="0"  cellspacing="1" cellpadding="0" class="tablesorter" id="solicitacoes-table" >
     <thead>
       <tr>
         <th width ="10"><input type="checkbox" id="checkall" class="check" ></th>
@@ -59,8 +59,4 @@
 
   <% b = false %>
   <% b = true if @solicitacoes.empty? %>
-  <div>
-    <%= submit_tag "Registrar Status",:disabled => b %>
-  </div>
-
 <% end %>
