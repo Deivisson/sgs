@@ -1,6 +1,6 @@
 <div id="tarefa-modal-container">
 	<label class="hidden-title-label" id="title-task-form">
-		<%=  @tarefa.new_record? ? "Novo Planejamento" : "Editando Planejamento nº: #{@tarefa.controle}" %>
+		<%=  @tarefa.new_record? ? "Nova Tarefa" : "Editando Tarefa nº: #{@tarefa.controle}" %>
 	</label>
 	<%= semantic_form_for [:usuario,@tarefa] , remote:true do |form| %>
 		<%= render partial:"/usuario/solicitacoes/campos_estimativas", locals: {form:form} %>

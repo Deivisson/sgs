@@ -13,13 +13,14 @@ class SolicitacaoHistorico < ActiveRecord::Base
 
   #callbacks 
   after_create :controla_status_da_solicitacao,:assinala_como_nao_lido
-  def after_destroy
-    controla_status_da_solicitacao(true)
-  end
+  after_destroy :voltar_status
   
   
 private 
 
+  def voltar_status
+    controla_status_da_solicitacao(true)
+  end
   #Método responsável por atualizar o status atual da solicitação.
   #@deletando => Se parâmetro = true, é porque esta excluindo 
   #um histórico. Com isto, recuperará o status e responsável do
@@ -31,7 +32,6 @@ private
       @solicitacao_historico = SolicitacaoHistorico.last(
         :conditions => {:solicitacao_id =>@solicitacao.id}
       )
-
       #Atualiza o Status da Solicitacao
       @solicitacao.status = @solicitacao_historico.status
       @solicitacao.usuario_responsavel = @solicitacao_historico.usuario_responsavel

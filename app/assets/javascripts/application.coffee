@@ -16,8 +16,4 @@
 //= require projeto_programacao_treinamentos
 //= require tiny_mce
 //= require jquery-ui-1.10.0.custom.min.js
-//= require jquery.simulate.js
-//= require jquery.mCustomScrollbar.min.js
-//= require jquery.mCustomScrollbar.concat.min
-//= require colorpicker.js
 //= require prioridades.js

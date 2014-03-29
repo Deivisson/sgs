@@ -1,5 +1,9 @@
-$('#tarefa-item-'+<%= @tarefa.id %>).remove();
-$('#task-show-dialog-form').dialog('close');
-$('#task-show-dialog-form').remove();
-alert("Planejamento excluído com sucesso!");
+<% if @tarefa.errors.any? %>
+	alert("<%= @tarefa.errors[:base].join("") %>");
+<% else %>
+	$('#tarefa-item-'+<%= @tarefa.id %>).remove();
+	$('#task-show-dialog-form').dialog('close');
+	$('#task-show-dialog-form').remove();
+	alert("Tarefa excluída com sucesso!");
+<% end %>
 

@@ -11,6 +11,7 @@ class Usuario::TarefasController < Usuario::BaseController
   	 	@solicitacoes = Solicitacao.joins("LEFT JOIN tarefas on tarefas.solicitacao_id = solicitacoes.id INNER JOIN status on status.id = solicitacoes.status_id")
       @solicitacoes = @solicitacoes.where("solicitacoes.id in (?) and tarefas.id IS NULL ",ids)
       @solicitacoes = @solicitacoes.where("status.encerramento = ?",false)
+
       @solicitacoes = @solicitacoes.order("prioridade_id")
     elsif params[:from].present?
       @from_index = true
@@ -37,6 +38,7 @@ class Usuario::TarefasController < Usuario::BaseController
 
   def create
   	@tarefa = Tarefa.new(params[:tarefa])
+    @tarefa.usuario_cadastrante_id = current_usuario.id
   	@tarefa.save
   	respond_with(@tarefa)
   end

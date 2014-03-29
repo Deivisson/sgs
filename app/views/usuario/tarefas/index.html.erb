@@ -15,15 +15,7 @@
 			<% end %>
 		<% end %>	
 	</ul>
-	<ul class="legenda-prioridades" style="height:20%">
-		<h5>Legenda Priodidades:</h5>
-		<% Prioridade.all.each do |p| %>
-			<li>
-				<%= content_tag(:span,"",style:prioridade_style(p))%>
-				<label><%= p.descricao %></label>
-			</li>
-		<% end %>
-	<ul>
+
 <% end unless @from_index %>
 
 <div id="solicitacao-tarefas-container">

@@ -20,12 +20,15 @@ class Tarefa < ActiveRecord::Base
   belongs_to :solicitacao
 
   attr_accessor :nivel_complexidade, :peso,:previsao_duracao_horas,
-                :gera_cobranca,:valor_cobranca, :data_inicio,:hora_inicio #, :to => :solicitacao
+                :gera_cobranca,:valor_cobranca, :data_inicio,:hora_inicio,
+                :usuario_cadastrante_id#, :to => :solicitacao
 
   before_validation :set_data_hora_inicio, :calcular_data_hora_fim
 
-  before_destroy :verify_if_destroyable
+  before_destroy :verifica_se_excluivel
   after_save :atualiza_solicitacao 
+  after_create :criar_solicitacao_historico
+  after_destroy :retorna_status_solicitacao
 
   def controle
     self.id.to_s.rjust(6,'0')  
@@ -107,23 +110,38 @@ private
 
 	def atualiza_solicitacao
 		attributes = {
-			nivel_complexidade:nivel_complexidade,
-			peso:peso,
-			previsao_duracao_horas:previsao_duracao_horas,
-			gera_cobranca:gera_cobranca,
-			valor_cobranca:valor_cobranca,
-      data_inicio:data_inicio,
-      hora_inicio:hora_inicio,
-      previsao_duracao_horas:previsao_duracao_horas,
-      status_id:Status::AG_DESENV
+			:nivel_complexidade            => nivel_complexidade,
+			:peso                          => peso,
+			:previsao_duracao_horas        => previsao_duracao_horas,
+			:gera_cobranca                 => gera_cobranca,
+			:valor_cobranca                => valor_cobranca,
+      :data_inicio                   => data_inicio,
+      :hora_inicio                   => hora_inicio,
+      :previsao_duracao_horas        => previsao_duracao_horas,
+      :status_id                     => Status::AG_DESENV
 		}
 		self.solicitacao.update_attributes(attributes)
+        
 	end
 
-  def verify_if_destroyable
-    nao permitr excluir tarefa se o ultimo status  for diferente de aguardando desenv
-    nao permitr excluir tarefa se o ultimo status  for de fechamento
-    se excluir a tarefa devera voltar o status da solicitacao
-    self.solicitacao.
+  def criar_solicitacao_historico
+    attributes = {
+      :usuario_id               => self.usuario_cadastrante_id,
+      :status_id                => Status::AG_DESENV,
+      :usuario_responsavel_id   => self.usuario_id
+    }
+    self.solicitacao.historicos << SolicitacaoHistorico.new(attributes)
+  end
+
+  def verifica_se_excluivel
+    @hist = self.solicitacao.historicos.order("id desc").limit(1).first #forçar pergar o ultimo na ordem decrescente
+    if @hist.status_id != Status::AG_DESENV
+      errors.add(:base,"Tarefa não poderá ser excluída! Houve evolução no status da solicitação!")
+      return false
+    end
+  end
+
+  def retorna_status_solicitacao
+    @hist.destroy if self.solicitacao.historicos.count > 1
   end
 end

@@ -55,7 +55,8 @@ class Usuario < ActiveRecord::Base
   end
 
   def tarefas_nao_finalizadas
-    self.tarefas.joins(:solicitacao => :status).where("status.encerramento = ? ",false)
+    tarefas = self.tarefas.includes(:solicitacao => :prioridade)
+    tarefas = tarefas.joins(:solicitacao => :status).where("status.encerramento = ? ",false)
   end
   
 private

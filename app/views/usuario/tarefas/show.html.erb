@@ -7,16 +7,16 @@
 	  <br>
 	  <br>
 	  <br>
-    <%= link_to "Editar Planejamento",
+    <%= link_to "Editar Tarefa",
             edit_usuario_tarefa_path(@tarefa),
             class:"common-link edit-tarefa",
             id: 'edit-tarefa',
             remote:true %> |
 
-    <%= link_to "Excluir Planejamento",
+    <%= link_to "Excluir Tarefa",
                 usuario_tarefa_path(@tarefa),
                 method: :delete,
-                confirm:'Confirma exclusão do Planejamento?',
+                confirm:'Confirma exclusão da Tarefa?',
                 remote:true,
                 class:"common-link",
                 id: 'destroy-tarefa' %>

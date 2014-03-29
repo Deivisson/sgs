@@ -321,6 +321,7 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_index "solicitacao_log_alteracoes", ["usuario_id"], :name => "solicitacao_log_alteracoes_usuarios"
 
   create_table "solicitacoes", :force => true do |t|
+    t.integer  "atendimento_id",                                                                           :null => false
     t.integer  "status_id",                                                                                :null => false
     t.integer  "prioridade_id",                                                                            :null => false
     t.integer  "solucao_sub_modulo_id",                                                                    :null => false
@@ -356,6 +357,7 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
     t.time     "hora_inicio"
   end
 
+  add_index "solicitacoes", ["atendimento_id"], :name => "index_solicitacoes_on_atendimento_id"
   add_index "solicitacoes", ["cliente_contato_id"], :name => "index_solicitacoes_on_cliente_contato_id"
   add_index "solicitacoes", ["cliente_id"], :name => "index_solicitacoes_on_cliente_id"
   add_index "solicitacoes", ["etapa_id"], :name => "index_solicitacoes_on_etapa_id"
@@ -443,9 +445,9 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
     t.integer  "usuario_id"
     t.integer  "solicitacao_id"
     t.datetime "data_hora_inicio"
+    t.datetime "data_hora_fim"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.datetime "data_hora_fim"
   end
 
   add_index "tarefas", ["solicitacao_id"], :name => "tarefas_solicitacoes"
@@ -529,7 +531,6 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_foreign_key "clientes_solucao_sub_modulos", "clientes", :name => "clientes_solucao_sub_modulos_clientes"
   add_foreign_key "clientes_solucao_sub_modulos", "solucao_sub_modulos", :name => "clientes_solucao_sub_modulos_solucao_sub_modulos"
 
-  add_foreign_key "clientes_solucoes", "clientes", :name => "clientes_projetos_cliente_id_fk", :dependent => :delete
   add_foreign_key "clientes_solucoes", "solucoes", :name => "fk_solucoes_clientes"
 
   add_foreign_key "consulta_campos", "consultas", :name => "fk_consulta_campos_consultas"
@@ -554,6 +555,7 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "solucao_sub_modulos", :name => "programacao_treinamentos_solucao_sub_modulos"
 
   add_foreign_key "projetos", "clientes", :name => "fk_projetos_clientes"
+  add_foreign_key "projetos", "usuarios", :name => "fk_projetos_usuarios"
 
   add_foreign_key "projetos_solucoes", "projetos", :name => "projetos_solucoes_projetos"
   add_foreign_key "projetos_solucoes", "solucoes", :name => "projetos_solucoes_solucoes"
@@ -571,6 +573,7 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_foreign_key "solicitacao_log_alteracoes", "solicitacoes", :name => "solicitacao_log_alteracoes_solicitacoes"
   add_foreign_key "solicitacao_log_alteracoes", "usuarios", :name => "solicitacao_log_alteracoes_usuarios"
 
+  add_foreign_key "solicitacoes", "atendimentos", :name => "fk_solicitacoes_atendimentos"
   add_foreign_key "solicitacoes", "cliente_contatos", :name => "fk_solicitacoes_cliente_contatos_id"
   add_foreign_key "solicitacoes", "clientes", :name => "fk_solicitacoes_clientes"
   add_foreign_key "solicitacoes", "etapas", :name => "fk_solicitacoes_etapas"

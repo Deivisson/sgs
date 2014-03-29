@@ -66,7 +66,7 @@ function callShowModalForm() {
     });
     dialog_form.load(url + ' #tarefa-show-modal-container', function(){
       //to change the title, see hidden-title-label on new, edit or show page
-      $(this).dialog('option',"title","Detalhes do Planejamento");
+      $(this).dialog('option',"title","Detalhes da Tarefa");
       $("#tarefa-cancel-link").click(function(){
         $('#task-show-dialog-form').dialog('close');
         $('#task-show-dialog-form').remove();

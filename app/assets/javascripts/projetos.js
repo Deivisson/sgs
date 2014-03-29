@@ -108,29 +108,28 @@ $(document).ready(function(){
       $("#programacao-treinamento-link").hide();
     }
   );
-
-  // $("#teste-treinamento").click(function(){
-  //   //event.preventDefault();
-  //   ids = "";
-  //   link = $(this);
-  //   href = $(this).attr("href");
-  //   $("#projeto-menu-aba-treinamento").find("li > input:checked").each(function(){
-  //     ids += $(this).val() + ",";
-  //   });
-  // });
-
-  function gerenciaChecks(op,modoProgramacao=false) {
-    $('input[id*="solucao-modulo-id-"]').css("visibility",op ? "visible" : "hidden");
-    $('input[id*="solucao-submodulo-id-"]').css("visibility",op ? "visible" : "hidden");
-    $('input[id*="solucao-submodulo-id-"]').attr('checked',false);
-    $('input[id*="solucao-modulo-id-"]').attr('checked',false);
-    $("#action-trigger").val("");
-
-    if(!modoProgramacao){
-      $("input[programado='true']").attr('disabled',op);
-    }
-  }
 }); 
+$("#teste-treinamento").click(function(){
+  ids = "";
+  link = $(this);
+  href = $(this).attr("href");
+  $("#projeto-menu-aba-treinamento").find("li > input:checked").each(function(){
+    ids += $(this).val() + ",";
+  });
+ });
+//---
+function gerenciaChecks(op,modoProgramacao) {
+  //if (modoProgramacao == undefined) { modoProgramacao = false }
+  $('input[id*="solucao-modulo-id-"]').css("visibility",op ? "visible" : "hidden");
+  $('input[id*="solucao-submodulo-id-"]').css("visibility",op ? "visible" : "hidden");
+  $('input[id*="solucao-submodulo-id-"]').attr('checked',false);
+  $('input[id*="solucao-modulo-id-"]').attr('checked',false);
+  $("#action-trigger").val("");
+
+  if(!modoProgramacao){
+    $("input[programado='true']").attr('disabled',op);
+  }
+}
 
 function bindProjetoUIEvents() {
   $("#projeto-cancel-link").click(function(){

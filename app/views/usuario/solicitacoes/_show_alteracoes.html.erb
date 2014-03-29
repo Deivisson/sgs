@@ -1,3 +1,4 @@
+
 <%= section_tag id:"solicitacao-tab-alteracoes", class:"section-tag-whiteBg" do %>
   <% if @solicitacao.alteracoes.any? %>
     <%= content_tag :table, class:'logs' do %>
@@ -6,7 +7,7 @@
           <tr>
             <td width="180">
               <%= image_tag(current_usuario.photo.url(:tiny),class:'user-avatar') %>             
-              <b><%= alteracao.usuario.nome %></b><br>
+              <b><%= alteracao.usuario.nome unless alteracao.usuario.nil? %></b><br>
               <p><%= formata_data(alteracao.created_at, :long) %></p><br>
             </td>
             <td>
