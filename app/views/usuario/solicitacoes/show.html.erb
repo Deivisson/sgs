@@ -4,7 +4,7 @@
       <p style="width:100%"><%="Solicitação nº: #{@solicitacao.id.to_s.rjust(5,'0')}" %></p>
       <div class="show-links">
         <%= link_to "Voltar", usuario_solicitacoes_path %>
-        <%= link_to 'Registrar Status', "#" %>   
+        <%= link_to 'Registrar Status', "#", id:'registrar-status-submit-link' %>   
         <%= link_to "Editar",  
             [:edit, :usuario, @solicitacao], remote:true, id:'solicitacao-link',class:'first' %>         
       </div>    

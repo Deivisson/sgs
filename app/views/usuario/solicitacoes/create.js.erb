@@ -6,7 +6,8 @@
   $('#dialog-form').css("height",tam + "px");
   $('.ui-dialog').css("top","10px");
   $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange).focus();
-  $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos)
+  $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos);
+  setMaskFields();
   inicializaTinyMCE();
   bindSolicitacaoUIEvents();
 <%- else %>
@@ -17,7 +18,9 @@
     $("#projeto-solicitacoes-" + etapa).append('<%= escape_javascript(render partial:'usuario/projetos/solicitacao_item', locals: {solicitacao:@solicitacao}) %>');
     //$("#projeto-progresso").html('<%= escape_javascript(render partial:'usuario/projetos/projeto_resumo_progresso', locals: {projeto:@solicitacao.projeto})%>');
     //$("#projeto-participantes").html('<%= escape_javascript(render partial:'usuario/projetos/projeto_resumo_participantes', locals: {projeto:@solicitacao.projeto})%>');
+    alert("Solicitação cadastrada com sucesso !!");
   <% else %>
     $(window.location.replace("/usuario/solicitacoes/<%= @solicitacao.id %>"));
   <% end %>
+
 <%- end %>

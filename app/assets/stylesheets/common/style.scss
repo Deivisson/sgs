@@ -32,27 +32,44 @@ body, p, ol, ul, td {
   font-size:   13px;
 }
 
-#flash_notice {
-  padding: 5px 8px;
-  margin: 0px 0px 5px 0px;
+.flash-container {
+  position:absolute;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  width: 450px;
+  top: -2px;
+  z-index:999;
+  text-align: center;
+  #flash_notice,#flash_warning {
+    min-height: 30px;
+    padding: 5px 8px;
+    margin: 0px 0px 5px 0px;
+    border-radius: 0px 0px 10px 10px; 
+    -moz-border-radius: 0px 0px 10px 10px; 
+    -webkit-border-radius: 0px 0px 10px 10px;       
+  }
+
+  #flash_notice {
+    background-color: #CFC;
+    border: solid 1px #6C6;
+  }
+
+
+  #flash_warning {
+    padding: 5px 8px;
+    margin: 0px 0px 5px 0px;
+
+  }
+
+  #flash_warning {
+    background-color: #ffc3c6 ;
+    border: solid 1px #e08a8e;
+  }
+
 }
 
-#flash_notice {
-  background-color: #CFC;
-  border: solid 1px #6C6;
-}
-
-
-#flash_warning {
-  padding: 5px 8px;
-  margin: 0px 0px 5px 0px;
-
-}
-
-#flash_warning {
-  background-color: #ffc3c6 ;
-  border: solid 1px #e08a8e;
-}
 
 #toolbar {
   position:fixed;
@@ -348,6 +365,12 @@ ul.menu-icon-bar {
     text-indent: 17px;
     margin: 0px;
     padding: 0px;
+  }
+  p.pesquisa-hint {
+    float:left;
+    margin-left: 10px;
+    width: 190px;
+    font-size: 10px;
   }
 }
 

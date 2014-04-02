@@ -5,19 +5,26 @@
 
 //Marcar ou desmarcar todos os checkbox da Tabela
 $(function () {
-  $('#checkall').click(function() {
+  $('#gridcheck').click(function() {
     checkallTableItens($(this));
   });
 });
 
 function checkallTableItens(element){
-  $('.tablesorter:eq(0)').find(':checkbox').attr('checked', this.checked);
-  //element.parents('table:eq(0)').find(':checkbox').attr('checked', this.checked);
+  //$('.tablesorter:eq(0)').find(':checkbox').attr('checked', this.checked);
+  element.parents('table:eq(0)').find(':checkbox').attr('checked', this.checked);
 }
 
 //Menu Principal
 $(document).ready(function(){
-  
+  //Históricos das solicitaçoes
+  //hide the all of the element with class msg_body
+  $(".msg_body").hide();
+  //toggle the componenet with class msg_body
+  $(".msg_head").click(function(){
+    $(this).next(".msg_body").slideToggle(100);
+  });
+
   sY = 35;
   fY = 92.3;
   animate (fY + "%")
@@ -29,6 +36,7 @@ $(document).ready(function(){
                   animate(fY + "%")
           }
   });
+  
   function animate(pY) {
     $('.clicked').animate({"height": pY }, 0);
   }
@@ -48,18 +56,26 @@ $(document).ready(function(){
   $(document).keydown (function(e){
     captureKeys(e);
   });
-  
+    
+    //REMOVE Flash_notice ou Flash_warning
+  $(function(){
+    if ($("#flash_notice").length > 0 || $("#flash_warning").length > 0)  {
+      setTimeout(removeFlashMenssage,10000);
+    }
+  });
+
 });
 
-//Históricos das solicitaçoes
-$(document).ready(function(){
-	//hide the all of the element with class msg_body
-	$(".msg_body").hide();
-	//toggle the componenet with class msg_body
-	$(".msg_head").click(function(){
-		$(this).next(".msg_body").slideToggle(100);
-	});
-});
+
+function removeFlashMenssage() {
+  $("#flash_notice").remove();
+  $("#flash_warning").remove();
+}
+
+
+// $(document).ready(function(){
+
+// });
 
  
 //Mudar cor linha ao passar mouse
@@ -81,6 +97,7 @@ $(document).ready(function()
         0:{sorter:false}
    }
  });
+
 });
 
 

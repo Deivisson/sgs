@@ -8,11 +8,16 @@ module TarefasHelper
 	 return html.html_safe
 	end
 
-	def prioridade_style(prioridade,show_border=true)
+	def prioridade_style(prioridade,show_border=true,options={})
+		unless prioridade.nil?
+			options.merge!(:bg_color 			=> prioridade.background_color)
+			options.merge!(:border_color 	=> prioridade.border_color)
+			options.merge!(:font_color 		=> prioridade.font_color)
+		end
 		html = []
-		html << "background-color: #{prioridade.background_color}"
-		html << "color: #{prioridade.font_color}"
-		html << "border: 1px solid #{prioridade.border_color}" if show_border
+		html << "background-color: #{options[:bg_color]}"
+		html << "color: #{options[:font_color]}"
+		html << "border: 1px solid #{options[:border_color]}" if show_border
 		html.join(";").html_safe
 	end
 end

@@ -6,7 +6,8 @@
   $('#dialog-form').css("height",tam + "px");
   $('.ui-dialog').css("top","10px");
   $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange).focus();
-  $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos)
+  $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos);
+  setMaskFields();
   inicializaTinyMCE();
   bindSolicitacaoUIEvents();
 <%- else %>

@@ -158,18 +158,33 @@ class Solicitacao < ActiveRecord::Base.extend Search
 
   #named_scopes
   def self.tarefas_do_usuario_por_status(filtro, page, per_page)
-      Solicitacao.all(
-              :select => "solicitacoes.*,clientes.nome as cliente_nome,
-                          solucao_sub_modulos.descricao as sub_modulo,
-                          prioridades.descricao as prioridade_descricao,
-                          tipo_pendencias.descricao as tipo_descricao,status.encerramento",
-              :joins => [{:cliente_contato => [:cliente]},
-                        {:solucao_sub_modulo => [:solucao_modulo => [:solucao]]},
-                        :status,:prioridade,:tipo_pendencia],
-              :conditions => filtro,
-              :order => 'solicitacoes.created_at desc'
-              #{:status_id => status_id,:usuario_responsavel_id => usuario_id}
-     )
+     #  Solicitacao.all(
+     #          :select => "solicitacoes.*,clientes.nome as cliente_nome,
+     #                      solucao_sub_modulos.descricao as sub_modulo,
+     #                      prioridades.descricao as prioridade_descricao,
+     #                      tipo_pendencias.descricao as tipo_descricao,status.encerramento",
+     #          :joins => [{:cliente_contato => [:cliente]},
+     #                    {:solucao_sub_modulo => [:solucao_modulo => [:solucao]]},
+     #                    :status,:prioridade,:tipo_pendencia],
+     #          :conditions => filtro,
+     #          :order => 'solicitacoes.created_at desc'
+     #          #{:status_id => status_id,:usuario_responsavel_id => usuario_id}
+     # )  
+     Solicitacao.where(filtro)
+     .joins(
+        [{:cliente_contato => [:cliente]},
+        {:solucao_sub_modulo => [:solucao_modulo => [:solucao]]},
+        :status,:prioridade,:tipo_pendencia])
+      .select(
+          "solicitacoes.*,clientes.nome as cliente_nome,
+            solucao_sub_modulos.descricao as sub_modulo,
+            prioridades.descricao as prioridade_descricao,
+            tipo_pendencias.descricao as tipo_descricao,
+            status.encerramento,
+            prioridades.background_color as prioridade_bg_color,
+            prioridades.border_color as prioridade_border_color,
+            prioridades.font_color as prioridade_font_color"
+        ) 
   end
 
   # scope :solicitacoes_por_atendimento, lambda {|atendimento_id|{

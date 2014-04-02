@@ -531,6 +531,7 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_foreign_key "clientes_solucao_sub_modulos", "clientes", :name => "clientes_solucao_sub_modulos_clientes"
   add_foreign_key "clientes_solucao_sub_modulos", "solucao_sub_modulos", :name => "clientes_solucao_sub_modulos_solucao_sub_modulos"
 
+  add_foreign_key "clientes_solucoes", "clientes", :name => "clientes_projetos_cliente_id_fk", :dependent => :delete
   add_foreign_key "clientes_solucoes", "solucoes", :name => "fk_solucoes_clientes"
 
   add_foreign_key "consulta_campos", "consultas", :name => "fk_consulta_campos_consultas"

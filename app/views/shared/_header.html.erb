@@ -12,6 +12,11 @@
       <% end %>
     </div>
   <% end %>
+  <div class="flash-container">
+    <%- flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <%- end %>
+  </div>
   <%= content_tag :div, :class => "search-field-container" do %>
     <%= yield :search_field_container %>
   <% end %>

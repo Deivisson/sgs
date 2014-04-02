@@ -13,13 +13,16 @@
   </ul>
   <h1>Pesquisar</h1>
   <%= render "search_form_index" %>
+  <p class="pesquisa-hint">* A pesquisa será realizada para solicitações com o status selecionado</p>
 <% end %>
 
 <%= form_tag [:edit_multiple, :usuario, :solicitacoes],id:'edit-multiple-solicitacoes' do %>
    <table border="0"  cellspacing="1" cellpadding="0" class="tablesorter" id="solicitacoes-table" >
     <thead>
       <tr>
-        <th width ="10"><input type="checkbox" id="checkall" class="check" ></th>
+        <th width ="10">
+          <input type="checkbox" id="checkall" class="check" >
+        </th>
         <th width = "70">Nº Solic.</th>
         <th>Cliente</th>
         <th>Título</th>
@@ -42,7 +45,13 @@
           <td><%=h solicitacao.cliente_nome %></td>
           <td><%=h solicitacao.titulo %></td>
           <td><%=h solicitacao.sub_modulo %></td>
-          <td><%=h solicitacao.prioridade_descricao %></td>
+          <td style="<%=prioridade_style(nil,false,
+                  {:bg_color   => solicitacao.prioridade_bg_color,
+                   :border_color => solicitacao.prioridade_border_color,
+                   :font_color => solicitacao.prioridade_font_color
+                  })%>">
+            <%=h solicitacao.prioridade_descricao %>
+          </td>
           <td><%=h solicitacao.tipo_descricao %></td>
           <td><%=h (hoje - Date.parse(solicitacao.created_at.strftime("%Y-%m-%d"))).to_i %></td>
           <td><%= link_to image_tag(image_link[:edit]), [:edit, :usuario, solicitacao], remote:true, class:'solicitacao-link' %></td>
