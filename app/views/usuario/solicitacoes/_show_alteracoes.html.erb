@@ -22,7 +22,7 @@
                 <tbody>
                   <%- alteracao.itens.each do |item| %>
                     <tr class="<%= cycle("odd","even",name:"row-bg-colors") %>">
-                      <td><%= item.campo %></td>
+                      <td><b><%= item.campo %></b></td>
                       <td><%= item.descricao.html_safe %></td>
                     </tr>
                   <% end %>

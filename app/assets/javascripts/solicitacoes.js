@@ -42,6 +42,11 @@ $(document).ready(function(){
     $("#edit-multiple-solicitacoes").submit();
   });
 
+  //Controla altura do container
+  if ($("#solicitacao-tab-alteracoes").length > 0) {
+    $("#solicitacao-tab-alteracoes").css("height",$("#show-container-id").height() - 40);
+    $("#solicitacao-tab-alteracoes").css("overflow","auto");
+  }
 });
 
 

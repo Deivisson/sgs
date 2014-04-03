@@ -37,8 +37,14 @@ module ApplicationHelper
   end
 
   #Volta a pagina anterior
-  def link_voltar(titulo = 'Voltar' )
-    "<li class='links'><a href='javascript:history.go(-1)' class='back'>#{titulo}</a></li>".html_safe
+  def link_voltar(titulo = 'Voltar',only_link=false )
+    link = ""
+    if only_link
+      link = "<a href='javascript:history.go(-1)'>#{titulo}</a>"
+    else
+      link = "<li class='links'><a href='javascript:history.go(-1)' class='back'>#{titulo}</a></li>"
+    end
+    link.html_safe
   end
 
   def image_link

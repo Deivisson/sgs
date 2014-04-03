@@ -1,16 +1,14 @@
 # -*- encoding : utf-8 -*-
 class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
 
-  #prawnto :prawn => {:page_layout => :landscape}
+  layout "search_layout"
 
   def index
-      @filtro = params[:filtro]
-
-      carrega_solicitacoes
-
-      respond_to do |format|
-        format.pdf {render :layout => false}
-      end
+    @filtro = params[:filtro]
+    carrega_solicitacoes
+    respond_to do |format|
+      format.pdf {render :layout => false}
+    end
   end
 
   def new
@@ -45,7 +43,11 @@ class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
     @campos = Array.new
 
     #Recupera campos a serem exibidos
-    consulta_campos = ConsultaCampo.all(:select => "consultas.*,consulta_campos.*",:joins => [:consulta],:conditions => {:selecionado => true},:order => :ordem )
+    consulta_campos = ConsultaCampo.all(
+      :select => "consultas.*,consulta_campos.*",
+      :joins => [:consulta],
+      :conditions => {:selecionado => true},
+      :order => :ordem )
 
     #Monta sql
     @sql = "solicitacoes.id,"
@@ -56,9 +58,11 @@ class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
     @sql = @sql.slice(0,@sql.size-1)
 
 
-    @solicitacoes = Solicitacao.all(:select => @sql,:joins => [:atendimento,{:cliente_contato => [:cliente]},
-                                                   {:solucao_sub_modulo => [:solucao_modulo => [:solucao]]},:status,:prioridade,:tipo_pendencia],
-                                                    :conditions => @filtro )
+    @solicitacoes = Solicitacao.all(:select => @sql,
+      :joins => [{:cliente_contato => [:cliente]},
+                 {:solucao_sub_modulo => [:solucao_modulo => [:solucao]]},
+                 :status,:prioridade,:tipo_pendencia],
+      :conditions => @filtro )
 
   end
 

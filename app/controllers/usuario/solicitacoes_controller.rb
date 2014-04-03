@@ -45,6 +45,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
       @solicitacoes = Solicitacao.where("id = ? ", @search_key)
     end  
     @solicitacoes = @solicitacoes.order("id desc")
+    respond_with(@projeto,:layout  => "search_layout")
   end
 
   def show

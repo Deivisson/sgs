@@ -1,0 +1,25 @@
+<ul class="menu-icon-bar">
+    <%= main_menu(usuario_solicitacoes_path, 
+                  icon_name:"tasks",
+                  target:'solicitacao',
+                  title:'Solicitações') %>
+    <%= main_menu(usuario_projetos_path, 
+                  icon_name:"project",
+                  target:'projeto',
+                  title:'Projetos') %>
+
+    <%= main_menu(usuario_tarefas_path(from:'list'), 
+                  icon_name:"planning",
+                  target:'tarefas',
+                  title:'Cronograma do Desenvolvimento') %>
+
+    <%= main_menu(usuario_ordem_servicos_path, 
+                  icon_name:"services",
+                  target:'ordem_servico',
+                  title:'Ordens de Serviços') %>
+
+    <%= main_menu(usuario_ordem_servicos_path, 
+                  icon_name:"callcenter",
+                  target:'atendimento',
+                  title:'Em Breve :-)!!') %>
+</ul>

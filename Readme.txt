@@ -24,13 +24,14 @@
 		SHOW
 			OK - Ajustar detalhes para não perder a formatação
 			OK - Mudar Botão "Registrar Status"
-			- Log de Alterações, remover mouse:hover
-			N - Colocar ícone de Anexo e abrir anexo em outra janela "popup"
-			- Link Voltar quando esta chamando a tela de dentro do projeto, volta para a pagina index das solicitações. DEverá voltar para pagina do projeto.
+			OK - Log de Alterações, remover mouse:hover
+			N  - Colocar ícone de Anexo e abrir anexo em outra janela "popup"
+			OK - Link Voltar quando esta chamando a tela de dentro do projeto, volta para a pagina index das solicitações. DEverá voltar para pagina do projeto.
+			- Colocar avatar do usuário no histórico
 
 		SEARCH
-			- Pesquisa (Campo texto topo), mudar layout  para ocupar toda a página
-			- Pesquisa Avançada: Colocar em layout que ocupe toda a página
+			OK - Pesquisa (Campo texto topo), mudar layout  para ocupar toda a página
+>>>>>>   - Pesquisa Avançada: Colocar em layout que ocupe toda a página
 			- Corrigir erro ao mandar filtrar a pesquisa avançada
 		REGISTRAR STATUS
 			- Colocar em tela modal
