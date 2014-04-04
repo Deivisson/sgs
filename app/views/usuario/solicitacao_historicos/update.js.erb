@@ -1,0 +1,7 @@
+<%- if @solicitacao_historico.errors.any? %>
+  $('#dialog-form').html('<%= escape_javascript(render('form')) %>');
+<%- else %>
+  $('#dialog-form').dialog('close');
+  $('#dialog-form').remove();
+  $(window.location.replace("/usuario/solicitacoes/<%= @solicitacao_historico.solicitacao_id %>"));
+<%- end %>

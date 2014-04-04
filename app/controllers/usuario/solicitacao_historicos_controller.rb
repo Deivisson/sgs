@@ -15,10 +15,8 @@ class Usuario::SolicitacaoHistoricosController < Usuario::BaseController
     @solicitacao_historico = SolicitacaoHistorico.find(params[:id])
     if @solicitacao_historico.update_attributes(params[:solicitacao_historico])
       flash[:notice] = "Histórico atualizado com sucesso."
-      redirect_to @solicitacao_historico.solicitacao
-    else
-      render :action => 'edit'
     end
+    respond_with(@solicitacao_historico)
   end
 
   def destroy

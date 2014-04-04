@@ -15,10 +15,23 @@
       <div class="msg_body">
           <%= solicitacao_historico.detalhe.html_safe unless solicitacao_historico.detalhe.nil? %>
           <div class = "msg_foot">
-            <%= link_to "Detalhe" ,:controller => 'solicitacao_historicos',:action => 'show',:id => solicitacao_historico.id, :local => "show_solicitacao" %>
+            <%= link_to "Detalhe" ,
+                      {:controller  => 'solicitacao_historicos',
+                      :action       => 'show',
+                      :id           => solicitacao_historico.id, 
+                      :local        => "show_solicitacao"},
+                      :class        => "show-solicitaco-hist",
+                      :remote       => true %>
             <% if @is_first && @solicitacao_historicos.length > 1 && solicitacao_historico.usuario_id == current_usuario.id %>
-                <%= link_to "Editar", [:edit, :usuario,solicitacao_historico] %>
-                <%= link_to "Deletar", [:usuario, solicitacao_historico], :confirm => 'Confirma exclusão ?',:class => 'del',:method => :delete %></td>
+                <%= link_to "Editar", 
+                            [:edit, :usuario,solicitacao_historico], 
+                            id:'edit-solicitaco-hist',
+                            remote:true %>
+                <%= link_to "Deletar", 
+                            [:usuario, solicitacao_historico], 
+                            :confirm => 'Confirma exclusão ?',
+                            :class => 'del',
+                            :method => :delete %>
             <% end %>
             <% @is_first = false %>
           </div>

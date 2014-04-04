@@ -1,25 +1,27 @@
 <div id="modal-container">
-  <%= semantic_form_for [:usuario, @projeto], remote:true do |f| %>
-    <div id="project-form-tabs" class="menutab-content">
-      <%= content_tag :ul do %>
-        <li id = "projeto-form-tab1">
-          <%= link_to "#fragment-1" do  %>
-            <span>Dados Principais</span>
-          <% end %>
-        </li>
-        <li id = "projeto-form-tab2" >
-          <%= link_to "#fragment-2" do  %>
-            <span>Descrição</span>
-          <% end %>
-        </li>
-      <% end %>
-      <%= render partial:"form_campos_principais", locals: {:f => f} %>
-      <%= render partial:"form_campos_detalhes", locals: {:f => f} %>
-    </div>
-  
-    <%= f.actions :class => "buttons-container modal-form-button" do %>
-      <%= submit_button f %>
-      <%= link_to_cancel "#", id:'projeto-cancel-link' %>
-    <% end -%>
-  <% end %>
+  <div style="height: 600px; overflow-y:scroll; overflow-x:hidden">
+    <%= semantic_form_for [:usuario, @projeto], remote:true do |f| %>
+      <div id="project-form-tabs" class="menutab-content">
+        <%= content_tag :ul do %>
+          <li id = "projeto-form-tab1">
+            <%= link_to "#fragment-1" do  %>
+              <span>Dados Principais</span>
+            <% end %>
+          </li>
+          <li id = "projeto-form-tab2" >
+            <%= link_to "#fragment-2" do  %>
+              <span>Descrição</span>
+            <% end %>
+          </li>
+        <% end %>
+        <%= render partial:"form_campos_principais", locals: {:f => f} %>
+        <%= render partial:"form_campos_detalhes", locals: {:f => f} %>
+      </div>
+    
+      <%= f.actions :class => "buttons-container modal-form-button" do %>
+        <%= submit_button f %>
+        <%= link_to_cancel "#", id:'projeto-cancel-link' %>
+      <% end -%>
+    <% end %>
+  </div>  
 </div>

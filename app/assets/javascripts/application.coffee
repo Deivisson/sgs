@@ -17,3 +17,4 @@
 //= require tiny_mce
 //= require jquery-ui-1.10.0.custom.min.js
 //= require prioridades.js
+//= require solicitacao_historicos.js

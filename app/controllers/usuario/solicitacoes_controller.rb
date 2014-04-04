@@ -45,7 +45,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
       @solicitacoes = Solicitacao.where("id = ? ", @search_key)
     end  
     @solicitacoes = @solicitacoes.order("id desc")
-    respond_with(@projeto,:layout  => "search_layout")
+    respond_with(@projeto,:layout  => "full_layout")
   end
 
   def show
@@ -133,6 +133,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     @status_id = params[:status_id]
     if params[:solicitacao_ids]
       @solicitacoes = Solicitacao.find(params[:solicitacao_ids])
+      render :layout => "full_layout"
     else
       flash[:warning] = 'É necessário selecionar as solicitações.'
       redirect_to :controller => 'solicitacoes',

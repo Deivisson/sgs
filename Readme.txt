@@ -31,20 +31,20 @@
 
 		SEARCH
 			OK - Pesquisa (Campo texto topo), mudar layout  para ocupar toda a página
->>>>>>   - Pesquisa Avançada: Colocar em layout que ocupe toda a página
-			- Corrigir erro ao mandar filtrar a pesquisa avançada
+			OK - Pesquisa Avançada: Colocar em layout que ocupe toda a página
+			OK - Corrigir erro ao mandar filtrar a pesquisa avançada
 		REGISTRAR STATUS
-			- Colocar em tela modal
+			N - Colocar em tela modal
 
 	SOLICITACOES HISTÓRICOS
 		SHOW
-			- Colocar em Modal
+			OK - Colocar em Modal
 		EDIT
-			- Colocar em Modal
+			OK - Colocar em Modal
 
 	PROJETOS
 		CADASTRO 
-			- Adicionar Scroll na tela modal
+			OK - Adicionar Scroll na tela modal
 			- No Gravar da criação do projeto, inserir submódulos que o cliente tem autorização
 			- No Gravar da atualização do projeto, não incluir submódulos
 		INDEX	

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
 
-  layout "search_layout"
+  layout "full_layout"
 
   def index
     @filtro = params[:filtro]
