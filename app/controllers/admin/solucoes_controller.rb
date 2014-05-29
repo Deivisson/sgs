@@ -1,8 +1,9 @@
 # -*- encoding : utf-8 -*-
 class Admin::SolucoesController < Admin::BaseController
+  before_filter :load_check_list_items, :only => [:new,:edit, :create, :update]
 
   def index
-    @solucoes = Solucao.all(:order => "id Desc")
+    @solucoes = Solucao.all(:order => "ordem asc")
   end
 
   def show
@@ -12,6 +13,7 @@ class Admin::SolucoesController < Admin::BaseController
 
   def new
     @solucao = Solucao.new
+
   end
 
   def create
@@ -49,5 +51,29 @@ class Admin::SolucoesController < Admin::BaseController
     ensure
       redirect_to admin_solucoes_url
     end
+  end
+
+  def ordenar
+    @solucoes = Solucao.all(:order => "ordem")
+  end
+
+  def atualiza_ordem
+    #@solucoes = Solucao.where(id: params[:ordem]).order(params[:ordem])
+    i = 1
+    # @solucoes.each do |s|
+    #   s.update_attribute(:ordem,i)
+    #   i += 1
+    # end
+    params[:ordem].each do |id|
+      Solucao.update_all("ordem=#{i}",["id = ?",id])
+      i += 1
+    end
+    flash[:notice] = "Ordenação realizada com sucesso."
+    redirect_to admin_solucoes_url
+  end
+
+private 
+  def load_check_list_items
+    @check_list_items = CheckListItem.all
   end
 end

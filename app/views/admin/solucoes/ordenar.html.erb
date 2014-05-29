@@ -1,0 +1,28 @@
+<div id="modal-container">
+  <div style="height: 330px; overflow-y:scroll; overflow-x:hidden">
+    <%= form_tag atualiza_ordem_admin_solucoes_path do |form| %>
+      <table border ="0" cellspacing = "1" cellpadding ="0" >
+        <thead>
+          <tr>
+            <th width="16">*</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody  id='sortable-solucoes'>
+          <% @solucoes.each do |solucao| %>
+            <tr>
+              <td>
+                <%= link_to image_tag("icons/16/drag-arrow.png"),"#", class:'inline-link'%>
+              </td>
+              <td>
+                <%= solucao.descricao %>
+                <%= hidden_field_tag "ordem[]", solucao.id %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>    
+      </table>
+      <%= submit_tag "Gravar",class:'submit-button' %>
+    <% end %>
+  </div>
+</div>

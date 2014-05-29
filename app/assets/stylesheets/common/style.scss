@@ -574,13 +574,14 @@ a:hover { color: #fff; background-color:#000; }
 ----------------------------------------------------------------*/
 .links{
 	font-size:12px;
-	width:130px;
+	/*width:130px;*/
 	height:20px;
 	padding-top:0px;
 	padding-bottom:0px;
 	list-style:none;
 	float:left;
 	margin-right:5px;
+  width:auto !important;
 
 }
 .links:hover{
@@ -594,11 +595,13 @@ a:hover { color: #fff; background-color:#000; }
 .links a {
 	text-decoration:none;
 	list-style:none;
-	position:absolute;
+	position:relative !important;
 	margin-left:8px;
-	width:130px;
+	
 	height:16px;
 	text-indent: 20px;
+  float: left;
+
 }
 .links a.new {
 	background: url(/assets/icons/16/new.png) no-repeat left center;

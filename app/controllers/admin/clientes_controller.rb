@@ -30,7 +30,7 @@ class Admin::ClientesController < Admin::BaseController
   def edit; end
 
   def update
-    if @cliente.update_attributes(params[:cliente])
+    if @cliente.pdate_attributes(params[:cliente])
       flash[:notice] = "Cliente atualizado com sucesso."
       redirect_to [:admin,@cliente]
     else

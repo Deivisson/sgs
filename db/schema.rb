@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140323190932) do
+ActiveRecord::Schema.define(:version => 20140529012315) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -45,6 +45,22 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_index "atendimentos", ["cliente_id"], :name => "index_atendimentos_on_cliente_id"
   add_index "atendimentos", ["usuario_cadastrante_id"], :name => "index_atendimentos_on_usuario_cadastrante_id"
   add_index "atendimentos", ["usuario_solicitante_id"], :name => "index_atendimentos_on_usuario_solicitante_id"
+
+  create_table "check_list_itens", :force => true do |t|
+    t.string   "descricao",  :limit => 50, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  create_table "check_list_itens_solucoes", :id => false, :force => true do |t|
+    t.integer  "check_list_item_id", :null => false
+    t.integer  "solucao_id",         :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "check_list_itens_solucoes", ["check_list_item_id"], :name => "index_check_list_itens_solucoes_on_check_list_item_id"
+  add_index "check_list_itens_solucoes", ["solucao_id"], :name => "index_check_list_itens_solucoes_on_solucao_id"
 
   create_table "cliente_contatos", :force => true do |t|
     t.integer  "cliente_id",                 :null => false
@@ -87,8 +103,10 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_index "clientes_solucao_sub_modulos", ["solucao_sub_modulo_id"], :name => "clientes_solucao_sub_modulos_solucao_sub_modulos"
 
   create_table "clientes_solucoes", :id => false, :force => true do |t|
-    t.integer "cliente_id", :null => false
-    t.integer "solucao_id", :null => false
+    t.integer "cliente_id",                   :null => false
+    t.integer "solucao_id",                   :null => false
+    t.date    "data_aquisicao"
+    t.string  "num_contrato",   :limit => 20
   end
 
   add_index "clientes_solucoes", ["cliente_id"], :name => "index_clientes_projetos_on_cliente_id"
@@ -321,7 +339,6 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_index "solicitacao_log_alteracoes", ["usuario_id"], :name => "solicitacao_log_alteracoes_usuarios"
 
   create_table "solicitacoes", :force => true do |t|
-    t.integer  "atendimento_id",                                                                           :null => false
     t.integer  "status_id",                                                                                :null => false
     t.integer  "prioridade_id",                                                                            :null => false
     t.integer  "solucao_sub_modulo_id",                                                                    :null => false
@@ -357,7 +374,6 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
     t.time     "hora_inicio"
   end
 
-  add_index "solicitacoes", ["atendimento_id"], :name => "index_solicitacoes_on_atendimento_id"
   add_index "solicitacoes", ["cliente_contato_id"], :name => "index_solicitacoes_on_cliente_contato_id"
   add_index "solicitacoes", ["cliente_id"], :name => "index_solicitacoes_on_cliente_id"
   add_index "solicitacoes", ["etapa_id"], :name => "index_solicitacoes_on_etapa_id"
@@ -394,13 +410,14 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_index "solucao_sub_modulos", ["solucao_modulo_id"], :name => "index_solucao_sub_modulos_on_solucao_modulo_id"
 
   create_table "solucoes", :force => true do |t|
-    t.string   "descricao",               :limit => 50,  :null => false
+    t.string   "descricao",               :limit => 50,                 :null => false
     t.string   "detalhe",                 :limit => 300
-    t.date     "data_criacao",                           :null => false
+    t.date     "data_criacao",                                          :null => false
     t.date     "data_ultima_atualizacao"
     t.string   "versao_atual",            :limit => 15
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ordem",                                  :default => 0, :null => false
   end
 
   create_table "solucoes_usuarios", :id => false, :force => true do |t|
@@ -574,7 +591,6 @@ ActiveRecord::Schema.define(:version => 20140323190932) do
   add_foreign_key "solicitacao_log_alteracoes", "solicitacoes", :name => "solicitacao_log_alteracoes_solicitacoes"
   add_foreign_key "solicitacao_log_alteracoes", "usuarios", :name => "solicitacao_log_alteracoes_usuarios"
 
-  add_foreign_key "solicitacoes", "atendimentos", :name => "fk_solicitacoes_atendimentos"
   add_foreign_key "solicitacoes", "cliente_contatos", :name => "fk_solicitacoes_cliente_contatos_id"
   add_foreign_key "solicitacoes", "clientes", :name => "fk_solicitacoes_clientes"
   add_foreign_key "solicitacoes", "etapas", :name => "fk_solicitacoes_etapas"

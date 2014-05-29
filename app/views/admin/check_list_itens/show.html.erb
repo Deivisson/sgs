@@ -1,0 +1,17 @@
+<% title "Item Checklist" %>
+<div id='div_show'>
+  <p>
+    <strong>Código:</strong>
+    <%= @check_list_item.number %>
+  </p>	
+  <p>
+    <strong>Descrição:</strong>
+    <%=h @check_list_item.descricao %>
+  </p>
+ </div>
+ <p>
+  <li class ="links">
+    <%= link_to 'Voltar Lista',admin_check_list_itens_path,:class => 'back' %>
+  </li>
+</p>
+

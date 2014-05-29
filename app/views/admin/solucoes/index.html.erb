@@ -28,4 +28,7 @@
   </tbody>    
 </table>
 
-<li class ="links"><%= link_to 'Novo Solucao',new_admin_solucao_path,:class => 'new' %></li>
+<li class ="links">
+  <%= link_to 'Novo Solucao',new_admin_solucao_path,:class => 'new' %>
+  <%= link_to 'Alterar Ordenação',ordenar_admin_solucoes_path, remote:true, id:'ordernar-solucoes' %>
+</li>

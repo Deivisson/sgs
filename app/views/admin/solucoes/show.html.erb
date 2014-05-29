@@ -28,6 +28,12 @@
     <strong>Previsão Total Treinamento(hrs):</strong>
     <%= @solucao.tempo_previsto_treinamento %>
   </p>
+  <p>
+    <strong>Itens de Checklist:</strong>
+    <%- items = @solucao.check_list_itens.collect{|i| i.descricao} %>
+    <%= items.to_sentence(last_word_connector: ' e ') %>
+  </p>
+
 
 </div>
 <%= render :partial => 'show_modulos' %>

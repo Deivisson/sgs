@@ -12,4 +12,5 @@
 - Remover manualmente o campo atendimento_id da tabela solicitacoes
    
 
+UPDATE `siematec_bkp`.`consulta_campos` SET `tabela`='solucao_sub_modulos' WHERE `id`='3';
 

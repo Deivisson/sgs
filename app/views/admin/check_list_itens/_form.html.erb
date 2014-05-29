@@ -1,0 +1,14 @@
+<%= semantic_form_for [:admin,@check_list_item] do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag :legend => "Informações do Item de Check List" do %>
+      <%= form.input :descricao,
+                     :label       => 'Descrição',
+                     :input_html  => {:autofocus => true} %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form %>
+    <%= link_to_cancel admin_check_list_itens_path %>
+  <% end %>
+<% end %>

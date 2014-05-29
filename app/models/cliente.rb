@@ -26,7 +26,11 @@ class Cliente < ActiveRecord::Base
 
   has_many :cliente_contatos
   has_many :pendencias
-  has_and_belongs_to_many :solucoes
+  #has_and_belongs_to_many :solucoes
+  has_many :clientes_solucoes
+  has_many :solucoes, through: :clientes_solucoes
+  #accepts_nested_attributes_for :clientes_solucoes
+
   has_and_belongs_to_many :solucao_sub_modulos
   has_many :ordem_servicos
   has_many :projetos

@@ -9,7 +9,12 @@ Sgsoft::Application.routes.draw do
 
   namespace :admin do
     resources :empresas
-    resources :solucoes
+    resources :solucoes do
+      collection do 
+        get :ordenar
+        post :atualiza_ordem
+      end
+    end
     resources :solucao_modulos
     resources :solucao_sub_modulos
     resources :clientes
@@ -18,6 +23,7 @@ Sgsoft::Application.routes.draw do
     resources :usuario_cargos
     resources :tipo_pendencias
     resources :prioridades
+    resources :check_list_itens
     resources :status do
       resources :status_tempo_evolucoes
     end 

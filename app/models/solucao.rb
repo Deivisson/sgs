@@ -9,10 +9,15 @@ class Solucao < ActiveRecord::Base
   validates_length_of :versao_atual, :maximum => 15, :allow_blank => true
 	
   has_many :solucao_modulos
-  has_and_belongs_to_many :clientes
+  #has_and_belongs_to_many :clientes
+  has_many :clientes_solucoes
+  has_many :clientes, through: :clientes_solucoes
+
   has_and_belongs_to_many :usuarios
   has_and_belongs_to_many :projetos
   
+  has_and_belongs_to_many :check_list_itens
+
   scope :to_select, :select => 'descricao,id', :order => :descricao
   
   scope :to_select_by_cliente, lambda{|cliente_id|{
