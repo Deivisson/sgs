@@ -1,0 +1,35 @@
+<h1>Listing compromissos</h1>
+
+<table>
+  <tr>
+    <th>Data inicio</th>
+    <th>Hora inicio</th>
+    <th>Data fim</th>
+    <th>Hora fim</th>
+    <th>Usuario</th>
+    <th>Descricao</th>
+    <th>Usuario cadastrante</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @compromissos.each do |compromisso| %>
+  <tr>
+    <td><%= compromisso.data_inicio %></td>
+    <td><%= compromisso.hora_inicio %></td>
+    <td><%= compromisso.data_fim %></td>
+    <td><%= compromisso.hora_fim %></td>
+    <td><%= compromisso.usuario %></td>
+    <td><%= compromisso.descricao %></td>
+    <td><%= compromisso.usuario_cadastrante_id %></td>
+    <td><%= link_to 'Show', compromisso %></td>
+    <td><%= link_to 'Edit', edit_compromisso_path(compromisso) %></td>
+    <td><%= link_to 'Destroy', compromisso, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Agenda', new_compromisso_path %>

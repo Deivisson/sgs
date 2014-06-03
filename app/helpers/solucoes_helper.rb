@@ -7,7 +7,7 @@ module SolucoesHelper
 		@modo_consulta  				= options[:modo_consulta] || false 
 		@todos  								= options[:todos].nil? ? true : options[:todos]
 
-		@solucoes = Solucao.includes(:solucao_modulos => :solucao_sub_modulos).order("descricao")
+		@solucoes = Solucao.includes(:solucao_modulos => :solucao_sub_modulos).order("ordem")
 		@solucoes = @solucoes.where("solucoes.id = ?",solucao.id) unless solucao.nil?
 		html = []
 		@solucoes.each do |s|
@@ -29,7 +29,7 @@ module SolucoesHelper
 private
 	def modulos(solucao)
 		html = []
-		solucao.solucao_modulos.each do |m|
+		solucao.solucao_modulos.order(:ordem).each do |m|
 			html << content_tag(:ul,class:'solucao_modulo') do 
 				inner_html = []
 				if (@todos || @modulo_ids.include?(m.id))
@@ -47,7 +47,7 @@ private
 
 	def sub_modulos(modulo)
 		html = []
-		modulo.solucao_sub_modulos.each do |sm|
+		modulo.solucao_sub_modulos.order(:ordem).each do |sm|
 			html << content_tag(:li)  do 
 				inner_html = []
 				if (@todos || @sub_modulo_ids.include?(sm.id))

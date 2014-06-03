@@ -19,3 +19,5 @@
 //= require prioridades.js
 //= require solicitacao_historicos.js
 //= require solucoes.js
+//= require solucao_modulos.js
+//= require solucao_sub_modulos.js

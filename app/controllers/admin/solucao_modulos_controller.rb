@@ -7,7 +7,7 @@ class Admin::SolucaoModulosController < Admin::BaseController
 
   def show
     @solucao_modulo = SolucaoModulo.find(params[:id])
-    @solucao_sub_modulos = SolucaoSubModulo.where(solucao_modulo_id:@solucao_modulo.id)
+    @solucao_sub_modulos = SolucaoSubModulo.where(solucao_modulo_id:@solucao_modulo.id).order(:ordem)
     @local = params[:local] if params[:local]
   end
 
@@ -54,4 +54,19 @@ class Admin::SolucaoModulosController < Admin::BaseController
       redirect_to admin_solucao_modulos_url
     end
   end
+
+  def ordenar
+    @solucao_id = params[:solucao_id]
+    @solucao_modulos = SolucaoModulo.where(solucao_id:@solucao_id).order("ordem")
+  end
+
+  def atualiza_ordem
+    i = 0
+    params[:ordem].each do |id|
+      SolucaoModulo.update_all("ordem=#{i}",["id = ?",id])
+      i += 1
+    end
+    flash[:notice] = "Ordenação realizada com sucesso."
+    redirect_to admin_solucao_path(params[:solucao_id])
+  end  
 end

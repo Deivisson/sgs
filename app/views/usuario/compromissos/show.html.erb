@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Data inicio:</b>
+  <%= @compromisso.data_inicio %>
+</p>
+
+<p>
+  <b>Hora inicio:</b>
+  <%= @compromisso.hora_inicio %>
+</p>
+
+<p>
+  <b>Data fim:</b>
+  <%= @compromisso.data_fim %>
+</p>
+
+<p>
+  <b>Hora fim:</b>
+  <%= @compromisso.hora_fim %>
+</p>
+
+<p>
+  <b>Usuario:</b>
+  <%= @compromisso.usuario %>
+</p>
+
+<p>
+  <b>Descricao:</b>
+  <%= @compromisso.descricao %>
+</p>
+
+<p>
+  <b>Usuario cadastrante:</b>
+  <%= @compromisso.usuario_cadastrante_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_compromisso_path(@compromisso) %> |
+<%= link_to 'Back', compromissos_path %>

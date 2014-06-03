@@ -1,4 +1,4 @@
-<% @projeto.solucoes.order(:descricao).each do |solucao| %>
+<% @projeto.solucoes.order(:ordem).each do |solucao| %>
 	<div class="solucoes-container-itens">
 		<%= monta_solucoes_projeto_treinamento(solucao,
 									solucao_ids:@projeto.solucao_ids,

@@ -8,7 +8,7 @@ class Admin::SolucoesController < Admin::BaseController
 
   def show
     @solucao = Solucao.find(params[:id])
-    @solucao_modulos = SolucaoModulo.where(solucao_id:params[:id])
+    @solucao_modulos = SolucaoModulo.where(solucao_id:params[:id]).order(:ordem)
   end
 
   def new

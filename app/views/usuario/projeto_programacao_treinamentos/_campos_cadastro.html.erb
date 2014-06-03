@@ -37,7 +37,12 @@
 
         <%= f.input :participantes, 
                     :input_html => {:style => "min-width: 410px;max-width: 310px;"}  %>
-                              
+              
+        <%= f.input :local_treinamento, 
+                    :collection => ProjetoProgramacaoTreinamento::LOCAL_TREINAMENTO,
+                    :as         => :select,
+                    :input_html => {:style => "min-width: 410px;max-width: 310px;"}  %>
+
         <%= f.input :projeto_id, :as => :hidden %>
         <%= f.input :status, :as => :hidden %>
       <% end %>

@@ -57,9 +57,9 @@ private
 
   def carrega_solucoes
     if action_name == "show"
-      @solucoes = @cliente.solucoes.order(:descricao)
+      @solucoes = @cliente.solucoes.order(:ordem)
     else
-      @solucoes = Solucao.order(:descricao)
+      @solucoes = Solucao.order(:ordem)
     end
   end
 

@@ -46,5 +46,10 @@
   <li class ="links">
     <%= link_to 'Novo Módulo', 
             new_admin_solucao_modulo_path(:solucao => @solucao,:local => :solucao_show ) %>
+
+    <%= link_to 'Ordenar Módulos',
+            ordenar_admin_solucao_modulos_path(solucao_id:@solucao), 
+            remote:true, 
+            id:'ordernar-solucao-modulos' %>
   </li>
 </p>

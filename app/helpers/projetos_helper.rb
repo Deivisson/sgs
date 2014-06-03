@@ -19,7 +19,7 @@ module ProjetosHelper
 
 		@solucoes = Solucao.includes(:solucao_modulos => :solucao_sub_modulos)
 		@solucoes = @solucoes.where("solucoes.id = ?",solucao.id) unless solucao.nil?
-		@solucoes = @solucoes.order("solucoes.descricao")
+		@solucoes = @solucoes.order("solucoes.ordem")
 		html = []
 		@solucoes.each do |s|
 			html << content_tag(:ul,class:'projeto-solucoes')  do 
@@ -37,7 +37,7 @@ private
 	def projeto_modulos(solucao)
 		html = []
 
-		solucao.solucao_modulos.order(:descricao).each do |m|
+		solucao.solucao_modulos.order(:ordem).each do |m|
 			visible = @modulo_ids.include?(m.id)
 			html << content_tag(:ul,class:'projeto-modulo',taged:visible) do 
 				inner_html = []
@@ -65,7 +65,7 @@ private
 	def projeto_sub_modulos(modulo)
 		html = []
 		programado = false
-		modulo.solucao_sub_modulos.order(:descricao).each do |sm|
+		modulo.solucao_sub_modulos.order(:ordem).each do |sm|
 			visible = @sub_modulo_ids.include?(sm.id)
 			html << content_tag(:li,taged:visible)  do 
 				inner_html = []

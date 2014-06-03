@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140529012315) do
+ActiveRecord::Schema.define(:version => 20140603031558) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -111,6 +111,23 @@ ActiveRecord::Schema.define(:version => 20140529012315) do
 
   add_index "clientes_solucoes", ["cliente_id"], :name => "index_clientes_projetos_on_cliente_id"
   add_index "clientes_solucoes", ["solucao_id"], :name => "index_clientes_solucoes_on_solucao_id"
+
+  create_table "compromissos", :force => true do |t|
+    t.date     "data_inicio",                        :null => false
+    t.time     "hora_inicio",                        :null => false
+    t.date     "data_fim"
+    t.time     "hora_fim"
+    t.integer  "usuario_id",                         :null => false
+    t.text     "descricao",                          :null => false
+    t.integer  "usuario_cadastrante_id",             :null => false
+    t.integer  "projeto_programacao_treinamento_id"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "compromissos", ["projeto_programacao_treinamento_id"], :name => "compromissos_projeto_programacao_treinamentos"
+  add_index "compromissos", ["usuario_cadastrante_id"], :name => "compromissos_usuario_cadastrante"
+  add_index "compromissos", ["usuario_id"], :name => "compromissos_usuarios"
 
   create_table "configuracoes", :force => true do |t|
     t.datetime "created_at"
@@ -233,16 +250,17 @@ ActiveRecord::Schema.define(:version => 20140529012315) do
   end
 
   create_table "projeto_programacao_treinamentos", :force => true do |t|
-    t.integer  "projeto_id",            :null => false
-    t.date     "data_programacao",      :null => false
-    t.time     "hora_programacao",      :null => false
-    t.integer  "usuario_id",            :null => false
+    t.integer  "projeto_id",                           :null => false
+    t.date     "data_programacao",                     :null => false
+    t.time     "hora_programacao",                     :null => false
+    t.integer  "usuario_id",                           :null => false
     t.string   "participantes"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.datetime "data_previsao_termino"
     t.text     "motivo_cancelamento"
     t.integer  "status"
+    t.integer  "local_treinamento",     :default => 0, :null => false
   end
 
   add_index "projeto_programacao_treinamentos", ["projeto_id"], :name => "index_projeto_programacao_treinamentos_on_projeto_id"
@@ -388,23 +406,25 @@ ActiveRecord::Schema.define(:version => 20140529012315) do
 
   create_table "solucao_modulos", :force => true do |t|
     t.integer  "solucao_id"
-    t.string   "descricao",  :limit => 50, :null => false
+    t.string   "descricao",  :limit => 50,                :null => false
     t.string   "detalhe"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ordem",                    :default => 0, :null => false
   end
 
   add_index "solucao_modulos", ["solucao_id"], :name => "index_solucao_modulos_on_solucao_id"
 
   create_table "solucao_sub_modulos", :force => true do |t|
     t.integer  "solucao_modulo_id"
-    t.string   "descricao",                    :limit => 50, :null => false
+    t.string   "descricao",                    :limit => 50,                :null => false
     t.string   "detalhe"
     t.date     "data_criacao"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "previsao_treinamento_minutos"
     t.integer  "peso"
+    t.integer  "ordem",                                      :default => 0, :null => false
   end
 
   add_index "solucao_sub_modulos", ["solucao_modulo_id"], :name => "index_solucao_sub_modulos_on_solucao_modulo_id"
@@ -550,6 +570,10 @@ ActiveRecord::Schema.define(:version => 20140529012315) do
 
   add_foreign_key "clientes_solucoes", "clientes", :name => "clientes_projetos_cliente_id_fk", :dependent => :delete
   add_foreign_key "clientes_solucoes", "solucoes", :name => "fk_solucoes_clientes"
+
+  add_foreign_key "compromissos", "projeto_programacao_treinamentos", :name => "compromissos_projeto_programacao_treinamentos"
+  add_foreign_key "compromissos", "usuarios", :name => "compromissos_usuario_cadastrante", :column => "usuario_cadastrante_id"
+  add_foreign_key "compromissos", "usuarios", :name => "compromissos_usuarios"
 
   add_foreign_key "consulta_campos", "consultas", :name => "fk_consulta_campos_consultas"
 

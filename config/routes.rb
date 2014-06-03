@@ -15,8 +15,18 @@ Sgsoft::Application.routes.draw do
         post :atualiza_ordem
       end
     end
-    resources :solucao_modulos
-    resources :solucao_sub_modulos
+    resources :solucao_modulos do
+      collection do 
+        get :ordenar
+        post :atualiza_ordem
+      end
+    end
+    resources :solucao_sub_modulos do
+      collection do 
+        get :ordenar
+        post :atualiza_ordem
+      end
+    end
     resources :clientes
     resources :cliente_contatos
     resources :usuarios
@@ -39,6 +49,8 @@ Sgsoft::Application.routes.draw do
   end
 
   namespace :usuario do
+
+    resources :compromissos
     resources :versao_sistemas
     resources :usuario_configs
     resources :atendimentos
@@ -54,8 +66,8 @@ Sgsoft::Application.routes.draw do
         put :gerenciar_sub_modulos
       end
       resources :solicitacoes
-      
     end
+
     resources :solicitacao_pesquisas do
        post :find,  :on =>  :collection
     end
@@ -66,8 +78,8 @@ Sgsoft::Application.routes.draw do
     	 	put  :update_multiple
     	 	get :search
     	 end
-
 	  end
+
     get 'solicitacoes/:id/programar', :to => 'solicitacoes#programar', :as => "programar_solicitacao"
     resources :ordem_servicos 
     get '/ordem_servico/:ordem_servico_id/:cliente_id/carrega_solicitacoes', 

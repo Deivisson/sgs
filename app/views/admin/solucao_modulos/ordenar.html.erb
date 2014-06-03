@@ -1,0 +1,29 @@
+<div id="modal-container">
+  <div style="height: 330px; overflow-y:scroll; overflow-x:hidden">
+    <%= form_tag atualiza_ordem_admin_solucao_modulos_path do |form| %>
+      <%= hidden_field_tag :solucao_id, @solucao_id %>
+      <table border ="0" cellspacing = "1" cellpadding ="0" >
+        <thead>
+          <tr>
+            <th width="16">*</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody  id='sortable-solucao-modulos'>
+          <% @solucao_modulos.each do |modulo| %>
+            <tr>
+              <td>
+                <%= link_to image_tag("icons/16/drag-arrow.png"),"#" %>
+              </td>
+              <td>
+                <%= modulo.descricao %>
+                <%= hidden_field_tag "ordem[]", modulo.id %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>    
+      </table>
+      <%= submit_tag "Gravar",class:'submit-button' %>
+    <% end %>
+  </div>
+</div>

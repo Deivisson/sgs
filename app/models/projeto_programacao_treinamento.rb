@@ -8,13 +8,21 @@ class ProjetoProgramacaoTreinamento < ActiveRecord::Base
   STATUS = {:ativa => ATIVA,:cancelada => CANCELADA}
   DESCRICAO_STATUS = ["Ativa", "Cancelada"]
 
-	validates_associated :projeto, :presence => true
+  TREINAMENTO_NO_CLIENTE = 1
+  TREINAMENTO_LOCAL = 2
+
+  LOCAL_TREINAMENTO = {"Local"      => TREINAMENTO_LOCAL,
+                       "No Cliente" => TREINAMENTO_NO_CLIENTE}
+  DESCRICAO_LOCAL_TREINAMENTO = ["Local", "No Cliente"]
+
+	#validates_associated :projeto, :presence => true
 	validates :usuario_id, :presence => true
 	validates :data_programacao, :presence => true
 	validates :hora_programacao, :presence => true
 	validates :participantes, :presence => true, length: {maximum: 200}
   validates :motivo_cancelamento, :presence => true, :if => Proc.new{|p| p.status == CANCELADA}
   validates :status, :presence => true
+  validates :local_treinamento, :presence => true
 
   validate :data_programacao_valida
   validate :valid_solucao_sub_modulos
@@ -61,6 +69,10 @@ class ProjetoProgramacaoTreinamento < ActiveRecord::Base
     DESCRICAO_STATUS[self.status - 1]
   end
 
+  def descricao_local_treinamento
+    return "" if self.local_treinamento == 0
+    DESCRICAO_LOCAL_TREINAMENTO[self.local_treinamento - 1]
+  end
 
 private
   
