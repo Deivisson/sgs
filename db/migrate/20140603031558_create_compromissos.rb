@@ -9,6 +9,7 @@ class CreateCompromissos < ActiveRecord::Migration
       t.text :descricao, :null => false
       t.integer :usuario_cadastrante_id, :null => false
       t.integer :projeto_programacao_treinamento_id
+      t.integer :status, :null => false
       t.timestamps
     end
     add_foreign_key :compromissos, :usuarios, name:'compromissos_usuarios'

@@ -20,15 +20,16 @@ class Usuario < ActiveRecord::Base
   # has_many :pendencias
   # has_many :pendencia_itens
   # has_many :pendencia_item_historicos
-  has_many :solicitacao_historicos, :foreign_key   => "usuario_responsavel_id"
+  has_many :solicitacao_historicos, foreign_key:"usuario_responsavel_id"
   has_and_belongs_to_many :solucoes
   has_one :usuario_config
   has_many :ordem_servicos    
   has_many :projetos
   has_many :solicitacao_log_alteracoes
-  has_many  :programacao_treinamentos, class_name: 'ProjetoProgramacaoTreinamento'
+  has_many :programacao_treinamentos, class_name: 'ProjetoProgramacaoTreinamento'
   has_many :tarefas
-      
+  has_many :compromissos
+
   scope :to_select,:select => 'nome,id', :order => :nome
   scope :to_select_by_status, lambda {|status_id|{
       :select => 'usuarios.id,usuarios.nome',

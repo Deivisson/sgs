@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20140603031558) do
     t.text     "descricao",                          :null => false
     t.integer  "usuario_cadastrante_id",             :null => false
     t.integer  "projeto_programacao_treinamento_id"
+    t.integer  "status",                             :null => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
   end

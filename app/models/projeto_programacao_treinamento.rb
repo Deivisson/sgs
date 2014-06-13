@@ -35,9 +35,14 @@ class ProjetoProgramacaoTreinamento < ActiveRecord::Base
   has_and_belongs_to_many :solucao_sub_modulos,
                           :after_remove => :destroy_treinamento_if_has_no_sub_modulos
 
-  attr_accessor :duracao_prevista, :total_minutos_treinamento_sub_modulos
+  has_one :compromisso, :dependent => :destroy
 
-  after_save :destroy_sub_modulos_if_canceled
+  attr_accessor :duracao_prevista, 
+                :total_minutos_treinamento_sub_modulos,
+                :usuario_cadastrante_id
+
+  after_save :destroy_sub_modulos_if_canceled, 
+             :gerencia_compromisso
 
   def controle
   	self.id.to_s.rjust(6,'0')
@@ -117,5 +122,24 @@ private
 
   def destroy_sub_modulos_if_canceled
     self.solucao_sub_modulos.destroy_all if self.status == CANCELADA    
+  end
+
+  def gerencia_compromisso
+    if self.status != CANCELADA
+      comp = self.build_compromisso
+      comp.data_inicio                        = self.data_programacao
+      comp.hora_inicio                        = self.hora_programacao
+      comp.data_fim                           = self.data_previsao_termino.to_date
+      comp.hora_fim                           = self.data_previsao_termino.to_time
+      comp.usuario_id                         = self.usuario_id
+      comp.descricao                          = "Agendamento de Treinamento"
+      comp.usuario_cadastrante_id             = self.usuario_cadastrante_id
+      comp.projeto_programacao_treinamento_id = self.id
+      comp.status                             = Compromisso::ATIVO
+     elsif 
+      comp = self.compromisso
+      comp.status = Compromisso::CANCELADO
+    end
+    comp.save
   end
 end

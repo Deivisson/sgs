@@ -36,6 +36,7 @@ class Usuario::ProjetoProgramacaoTreinamentosController < Usuario::BaseControlle
 
   def create
     @projeto_programacao_treinamento = ProjetoProgramacaoTreinamento.new(params[:projeto_programacao_treinamento])
+    @projeto_programacao_treinamento.usuario_cadastrante_id = current_usuario.id
     @projeto_programacao_treinamento.save
     respond_with(@projeto_programacao_treinamento)
   end

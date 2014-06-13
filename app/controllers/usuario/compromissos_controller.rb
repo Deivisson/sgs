@@ -2,6 +2,8 @@ class Usuario::CompromissosController < Usuario::BaseController
   
   def index
     @compromissos = Compromisso.all
+    @compromissos_por_data = @compromissos.group_by(&:data_inicio)
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
     respond_with(@compromissos)
   end
 
