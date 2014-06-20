@@ -1,7 +1,11 @@
 class Usuario::CompromissosController < Usuario::BaseController
-  
+  before_filter :carregar_dados, :only => :index
+
   def index
-    @compromissos = Compromisso.all
+    @compromissos = Compromisso.where("id > 0")
+    @compromissos = @compromissos.where(usuario_id:params[:usuario_id]) if params[:usuario_id].present?
+    @usuario_id = params[:usuario_id] ? params[:usuario_id] : ""
+
     @compromissos_por_data = @compromissos.group_by(&:data_inicio)
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     respond_with(@compromissos)
@@ -37,5 +41,11 @@ class Usuario::CompromissosController < Usuario::BaseController
     @compromisso = Compromisso.find(params[:id])
     @compromisso.destroy
     respond_with(@compromisso)
+  end
+
+private
+
+  def carregar_dados
+    @usuarios = Usuario.to_select
   end
 end

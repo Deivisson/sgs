@@ -1,15 +1,26 @@
-<div id="compromissos">
+<% title "Agenda de Compromisso" %>
+<%= content_for :bar do %>
   <h2 id="month">
     <%= link_to "<", date: @date.prev_month %>
     <%= @date.strftime("%B %Y") %>
     <%= link_to ">", date: @date.next_month %>
   </h2>
+<% end %>
+
+<% content_for :left_container do %>
+  <h1>Filtros</h1>
+  <%= render "search_form" %>
+<% end %>
+
+<div id="compromissos" style="height: 98%;">
   <%= calendar @date do |date| %>
     <%= date.day %>
     <% if @compromissos_por_data[date] %>
       <ul>
         <% @compromissos_por_data[date].each do |compromisso| %>
-          <li><%= link_to compromisso.descricao, [:usuario,compromisso] %></li>
+          <li class="compromisso-treinamento">
+            <%= link_to compromisso.usuario.nome, [:usuario,compromisso] %>
+          </li>
         <% end %>
       </ul>
     <% end %>

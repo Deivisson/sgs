@@ -1,0 +1,13 @@
+<%= form_for usuario_compromissos_path,
+		:html => {class:"search-form" }, :method => :get do |f| %>
+
+	<div class="field">
+		<%= content_tag :label, "Usuário" %>
+		<%= select_tag "usuario_id",
+					options_for_select(@usuarios.collect{|u| [u.nome, u.id]},@usuario_id), 
+					:include_blank => true  %>
+		<%= hidden_field_tag :date, @date %>
+	</div>
+	<%= submit_tag "Pesquisar" %>
+
+<% end %>

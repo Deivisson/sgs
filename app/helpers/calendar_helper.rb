@@ -17,8 +17,8 @@ module CalendarHelper
     end
 
     def header
-      content_tag :tr do
-        HEADER.map { |day| content_tag :th, day }.join.html_safe
+      content_tag :tr, style:'height: 10px' do
+        HEADER.map { |day| content_tag :th, day,style:'height: 10px' }.join.html_safe
       end
     end
 
