@@ -1,45 +1,44 @@
-<%= form_for(@compromisso) do |f| %>
-  <% if @compromisso.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@compromisso.errors.count, "error") %> prohibited this compromisso from being saved:</h2>
+<div id="compromisso-form-container">
+  <%= semantic_form_for [:usuario,@compromisso], remote:true do |f| %>
+    <div style="overflow:auto;overflow-x:hidden;height:430px; width:700px">
+      <%= section_tag do %>
+        <br>
+        <%= f.inputs do %>
+            <%= f.input :usuario_id,
+                        :label      => "Profissional*",
+                        :as         => :select,
+                        :collection => @usuarios.collect{|c| [c.nome,c.id]},
+                        :input_html => {style: "max-width: 450px;"} %>
 
-      <ul>
-      <% @compromisso.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+            <%= f.input :descricao, 
+                        :label      => "Descrição",
+                        :input_html => {rows: 5, style: "min-width: 200px;max-width: 450px;"} %>        
+
+            <%= f.input :data_inicio, 
+                        :as         => :string,
+                        :label      => "Data início",
+                        :input_html => {style: "min-width: 210px;max-width: 210px;"} %>
+
+            <%= f.input :hora_inicio, 
+                        :as         => :string,
+                        :label      => "Hora início",
+                        :input_html => {style: "min-width: 210px;max-width: 210px;"} %>
+
+            <%= f.input :data_fim, 
+                        :as         => :string,
+                        :label      => "Previsão Término",
+                        :input_html => {style: "min-width: 210px;max-width: 210px;"} %> 
+
+            <%= f.input :hora_fim, 
+                        :as         => :string,
+                        :label      => "Previsão Hora Término",
+                        :input_html => {style: "min-width: 210px;max-width: 210px;"} %>
+        <% end %>
       <% end %>
-      </ul>
+      <%= f.actions :class => "buttons-container modal-form-button" do %>
+        <%= submit_button f %>
+        <%= link_to_cancel "#", id:'compromisso-cancel-link' %>
+      <% end -%>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :data_inicio %><br />
-    <%= f.date_select :data_inicio %>
-  </div>
-  <div class="field">
-    <%= f.label :hora_inicio %><br />
-    <%= f.time_select :hora_inicio %>
-  </div>
-  <div class="field">
-    <%= f.label :data_fim %><br />
-    <%= f.date_select :data_fim %>
-  </div>
-  <div class="field">
-    <%= f.label :hora_fim %><br />
-    <%= f.time_select :hora_fim %>
-  </div>
-  <div class="field">
-    <%= f.label :usuario %><br />
-    <%= f.text_field :usuario %>
-  </div>
-  <div class="field">
-    <%= f.label :descricao %><br />
-    <%= f.text_area :descricao %>
-  </div>
-  <div class="field">
-    <%= f.label :usuario_cadastrante_id %><br />
-    <%= f.number_field :usuario_cadastrante_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

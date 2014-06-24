@@ -1,0 +1,8 @@
+<% unless @compromisso.errors.any? %>
+  alert("Compromisso excluído com sucesso!");
+  $("#compromisso-<%= @compromisso.id %>").remove();
+  $('#dialog-form, #dialog-form-show').dialog('close');
+  $('#dialog-form, #dialog-form-show').remove();
+<% end %>
+
+

@@ -1,0 +1,11 @@
+<% if @compromisso.errors.any? %>
+  $('#dialog-form').html('<%= escape_javascript(render('form')) %>');
+  $("#compromisso_usuario_id").focus();
+  setMaskFields();
+<% else %>
+  alert("Compromisso atualizado com sucesso!");
+  $("#compromissos-form").submit();
+  $('#dialog-form').dialog('close');
+  $('#dialog-form').remove();  
+<% end %>
+

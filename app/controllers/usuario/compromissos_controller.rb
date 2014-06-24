@@ -1,5 +1,7 @@
+# -*- encoding : utf-8 -*-
 class Usuario::CompromissosController < Usuario::BaseController
-  before_filter :carregar_dados, :only => :index
+  before_filter :carrega_compromisso, :except => [:index,:new,:create]
+  before_filter :carregar_dados, :except => [:show, :destroy]
 
   def index
     @compromissos = Compromisso.where("id > 0")
@@ -12,7 +14,6 @@ class Usuario::CompromissosController < Usuario::BaseController
   end
 
   def show
-    @compromisso = Compromisso.find(params[:id])
     respond_with(@compromisso)
   end
 
@@ -21,29 +22,30 @@ class Usuario::CompromissosController < Usuario::BaseController
     respond_with(@compromisso)
   end
 
-  def edit
-    @compromisso = Compromisso.find(params[:id])
-  end
+  def edit;  end
 
   def create
     @compromisso = Compromisso.new(params[:compromisso])
+    @compromisso.usuario_cadastrante_id = current_usuario.id
     @compromisso.save
     respond_with(@compromisso)
   end
 
   def update
-    @compromisso = Compromisso.find(params[:id])
     @compromisso.update_attributes(params[:compromisso])
     respond_with(@compromisso)
   end
 
   def destroy
-    @compromisso = Compromisso.find(params[:id])
     @compromisso.destroy
     respond_with(@compromisso)
   end
 
 private
+  
+  def carrega_compromisso
+    @compromisso = Compromisso.find(params[:id])    
+  end
 
   def carregar_dados
     @usuarios = Usuario.to_select

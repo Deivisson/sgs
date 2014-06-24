@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 include DataHoraHelper
-class Projeto < ActiveRecord::Base
+class Projeto < ActiveRecord::Base.extend Search
   
   #Status do Projeto
   ATIVO = 1

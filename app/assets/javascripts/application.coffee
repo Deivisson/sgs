@@ -21,3 +21,4 @@
 //= require solucoes.js
 //= require solucao_modulos.js
 //= require solucao_sub_modulos.js
+//= require compromissos.js

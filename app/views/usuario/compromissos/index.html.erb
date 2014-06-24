@@ -5,6 +5,7 @@
     <%= @date.strftime("%B %Y") %>
     <%= link_to ">", date: @date.next_month %>
   </h2>
+  <%= link_to "Add New", new_usuario_compromisso_path, remote:true, id:"new-compromisso-link" %>
 <% end %>
 
 <% content_for :left_container do %>
@@ -18,8 +19,11 @@
     <% if @compromissos_por_data[date] %>
       <ul>
         <% @compromissos_por_data[date].each do |compromisso| %>
-          <li class="compromisso-treinamento">
-            <%= link_to compromisso.usuario.nome, [:usuario,compromisso] %>
+          <li class="<%= css_class_for_compromisso_style(compromisso) %>" id="compromisso-<%= compromisso.id %>">
+            <%= link_to "#{compromisso.hora_inicio.to_s(:time)} - #{compromisso.usuario.nome}", 
+                        [:usuario,compromisso], 
+                        remote:true,
+                        class:'show-compromisso-link' %>
           </li>
         <% end %>
       </ul>
