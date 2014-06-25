@@ -1,8 +1,10 @@
+# -*- encoding : utf-8 -*-
 class Compromisso < ActiveRecord::Base
 
 	ATIVO = 1
 	CANCELADO = 2
 	CONCLUIDO = 3
+	STATUS = ["Ativo", "Cancelado", "Concluído"]
 
 	validates :usuario_id, presence:true
 	validates :descricao, presence:true
@@ -29,5 +31,17 @@ class Compromisso < ActiveRecord::Base
 
 	def has_treinamento?
 		self.treinamento.present?
+	end
+
+	def to_text
+		"#{self.hora_inicio.to_s(:time)} - #{self.usuario.nome}"
+	end
+
+	def status_descricao
+		STATUS[self.status - 1]
+	end
+
+	def cancelado?
+		self.status == CANCELADO
 	end
 end

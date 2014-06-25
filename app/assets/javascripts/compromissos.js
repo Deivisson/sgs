@@ -8,7 +8,7 @@ function  callCompromissoShow(){
   var dialog_form = $(getModalContainer("dialog-form-show")).dialog({
       autoOpen: false,
       width: 700,
-      height: 360,
+      height: 410,
       modal: true,
       closeText: "Fechar",
       close: function() {
@@ -22,6 +22,7 @@ function  callCompromissoShow(){
       $('#dialog-form-show').remove();     
     });
     $("a#edit-compromisso-link").bind('click',callCompromissoForm);
+    bindShowProgramacaoTreinamentoLink();
   });
   dialog_form.dialog('open');
   e.preventDefault();

@@ -125,8 +125,8 @@ private
   end
 
   def gerencia_compromisso
+    comp = self.compromisso.nil? ? self.build_compromisso : self.compromisso
     if self.status != CANCELADA
-      comp = self.build_compromisso
       comp.data_inicio                        = self.data_programacao
       comp.hora_inicio                        = self.hora_programacao
       comp.data_fim                           = self.data_previsao_termino.to_date
@@ -136,10 +136,10 @@ private
       comp.usuario_cadastrante_id             = self.usuario_cadastrante_id
       comp.projeto_programacao_treinamento_id = self.id
       comp.status                             = Compromisso::ATIVO
-     elsif 
-      comp = self.compromisso
+    else
       comp.status = Compromisso::CANCELADO
     end
-    comp.save
+    puts comp.save
+    puts comp.errors.full_messages
   end
 end

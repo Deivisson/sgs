@@ -4,7 +4,7 @@ class Usuario::CompromissosController < Usuario::BaseController
   before_filter :carregar_dados, :except => [:show, :destroy]
 
   def index
-    @compromissos = Compromisso.where("id > 0")
+    @compromissos = Compromisso.includes(:usuario).where("id > 0")
     @compromissos = @compromissos.where(usuario_id:params[:usuario_id]) if params[:usuario_id].present?
     @usuario_id = params[:usuario_id] ? params[:usuario_id] : ""
 

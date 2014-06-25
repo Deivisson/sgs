@@ -1,0 +1,10 @@
+<%= content_tag :li,
+		class:css_class_for_compromisso_style(compromisso),	
+	  id:"compromisso-#{compromisso.id}",
+	  programacao_treinamento_id:compromisso.id do %>
+
+  <%= link_to compromisso.to_text, 
+              [:usuario,compromisso], 
+              remote:true,
+              class:'show-compromisso-link' %>
+<% end %>

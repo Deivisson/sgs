@@ -27,24 +27,39 @@
       <strong>Hora Prevista Término:</strong>
       <%= formata_hora(@compromisso.hora_fim) %>
     </p>
+
     <% if @compromisso.has_treinamento? %>
       <p>
-        <strong>Treinamento:</strong>
-        <%= link_to @compromisso.treinamento.controle, "#"%>
+        <strong>Nº Progr. Treinamento:</strong>
+        <%= link_to @compromisso.treinamento.controle, 
+                    usuario_projeto_programacao_treinamento_path(@compromisso.treinamento.id),
+                    class:'show-programacao-treinamento-link',
+                    remote:true %>
       </p>
-    <% end   %>
+    <% end %>
+    <p>
+      <strong>Status:</strong>
+      <%= @compromisso.status_descricao %>
+    </p>
+
   </div>
+
   <br>
-  <%= link_to "Voltar", "#", id:'compromisso-back-link' %> |
   <% unless @compromisso.has_treinamento? %>
-    <%= link_to "Editar", 
+    <%= link_to "Editar",
                 edit_usuario_compromisso_path(@compromisso), 
                 remote:true, id:'edit-compromisso-link' %> |
 
     <%= link_to "Excluir", 
                 [:usuario,@compromisso], method: :delete, 
                 remote:true, 
-                confirm: "Confirma Exclusão do Compromisso?" %> 
+                confirm: "Confirma Exclusão do Compromisso?" %> |
   <% end %>
+  <%= link_to "Fechar", "#", id:'compromisso-back-link' %>
+
+  <br>
+  <%= content_tag :div, 
+      "ATENÇÃO:: A alteração deste compromisso deverá ser realizada 
+      através da Programação de Treinamento",class:'notification-alert' if @compromisso.has_treinamento?  %>
 </div>
 

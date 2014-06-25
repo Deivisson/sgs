@@ -39,6 +39,9 @@
           display: block;
           text-decoration: none;
         }
+        &.compromisso-cancelado {
+          text-decoration: line-through;
+        }
         &.compromisso-treinamento {
           background-color: #F89406;
           border-color: #E58900;

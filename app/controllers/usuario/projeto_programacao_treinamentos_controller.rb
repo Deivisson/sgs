@@ -42,7 +42,9 @@ class Usuario::ProjetoProgramacaoTreinamentosController < Usuario::BaseControlle
   end
 
   def update
-    @projeto_programacao_treinamento.update_attributes(params[:projeto_programacao_treinamento])
+    attributes = params[:projeto_programacao_treinamento]
+    attributes.merge!(usuario_cadastrante_id:current_usuario.id)
+    @projeto_programacao_treinamento.update_attributes(attributes)
     respond_with(@projeto_programacao_treinamento)
   end
 

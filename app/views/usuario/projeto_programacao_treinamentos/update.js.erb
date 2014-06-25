@@ -7,7 +7,7 @@
 	$("#show-projeto-programacao-treinamento-fields").html("<%= escape_javascript(render('show_fields'))%>");
   $('#dialog-form').dialog('close');
   $('#dialog-form').remove();  
-	
+
   <% if @projeto_programacao_treinamento.status == ProjetoProgramacaoTreinamento::CANCELADA %>
   	<% @projeto = @projeto_programacao_treinamento.projeto %>
   	$("#treinamento-solucoes-container").html("<%= escape_javascript(render 'usuario/projetos/solucoes_treinamento') %>");
@@ -18,4 +18,9 @@
   <% else %>
 	  alert("Programação atualizada com sucesso!");
   <% end %>
+  //Caso esteja alterando a programação de dentro da agenda de compromisso
+  if ($("#compromissos-search-form").length > 0) {
+    $("#compromissos-search-form").submit();
+  }
+
 <% end %>
