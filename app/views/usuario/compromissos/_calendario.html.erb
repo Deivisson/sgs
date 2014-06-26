@@ -1,0 +1,23 @@
+<% content_for :left_container do %>
+  <h1>Filtros</h1>
+  <%= render "search_form" %>
+<% end %>
+
+<h2 id="month">
+  <%= link_to "<", date: @date.prev_month, remote:true %>
+  <%= formata_data(@date,:month) %>
+  <%= link_to ">", date: @date.next_month, remote:true %>
+</h2>
+
+<div id="compromissos">
+  <%= calendar @date do |date| %>
+    <%= date.day %>
+    <% if @compromissos_por_data[date] %>
+      <ul>
+        <% @compromissos_por_data[date].each do |compromisso| %>
+          <%= render partial: 'compromisso',locals: {compromisso:compromisso} %>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>

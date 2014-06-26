@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Usuario::CompromissosController < Usuario::BaseController
+
+  before_filter :set_current_menu
   before_filter :carrega_compromisso, :except => [:index,:new,:create]
   before_filter :carregar_dados, :except => [:show, :destroy]
 
@@ -18,7 +20,7 @@ class Usuario::CompromissosController < Usuario::BaseController
   end
 
   def new
-    @compromisso = Compromisso.new
+    @compromisso = Compromisso.new({usuario_id:current_usuario.id})
     respond_with(@compromisso)
   end
 
@@ -50,4 +52,8 @@ private
   def carregar_dados
     @usuarios = Usuario.to_select
   end
+
+  def set_current_menu
+    session[:current_menu] = "agenda"
+  end  
 end

@@ -1,10 +1,5 @@
 <% title "Agenda de Compromisso" %>
 <%= content_for :bar do %>
-  <h2 id="month">
-    <%= link_to "<", date: @date.prev_month %>
-    <%= @date.strftime("%B %Y") %>
-    <%= link_to ">", date: @date.next_month %>
-  </h2>
   <%= link_to "Novo Compromisso", 
               new_usuario_compromisso_path, 
               remote:true, 
@@ -12,21 +7,6 @@
               class:"button-add-new add-on-index-top-with-header" %>
 <% end %>
 
-<% content_for :left_container do %>
-  <h1>Filtros</h1>
-  <%= render "search_form" %>
-<% end %>
-
-<div id="compromissos" style="height: 98%;">
-  <%= calendar @date do |date| %>
-    <%= date.day %>
-    <% if @compromissos_por_data[date] %>
-      <ul>
-        <% @compromissos_por_data[date].each do |compromisso| %>
-          <%= render partial: 'compromisso',locals: {compromisso:compromisso} %>
-        <% end %>
-      </ul>
-    <% end %>
-  <% end %>
+<div id="calendario-container">
+  <%= render 'calendario' %>
 </div>
-

@@ -1,6 +1,6 @@
 <%= form_for usuario_compromissos_path,
 		:html => {class:"search-form", id:'compromissos-search-form'}, 
-		:method => :get do |f| %>
+		:method => :get, remote:true do |f| %>
 
 	<div class="field">
 		<%= content_tag :label, "Usuário" %>
