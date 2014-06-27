@@ -12,7 +12,7 @@ class Usuario::CompromissosController < Usuario::BaseController
 
     @compromissos_por_data = @compromissos.group_by(&:data_inicio)
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    respond_with(@compromissos)
+    respond_with(@compromissos, layout:"compromisso_modal")
   end
 
   def show

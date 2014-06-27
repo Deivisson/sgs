@@ -11,7 +11,11 @@
                     :label      => "Técnico",
                     :collection => @usuarios.collect{|u|[u.nome,u.id]},
                     :input_html => {:style => "min-width: 410px;max-width: 310px;"} %>
-
+        <%= link_to image_tag("icons/24/schedule.png"),
+                    usuario_compromissos_path,
+                    class:"agenda-link",
+                    remote:true,
+                    id:'agenda-profissional-link' %>
 
         <%= f.input :data_programacao, 
                     :as         => :string, 

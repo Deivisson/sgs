@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div class = "left" style="display:none">
+    <ul class="left-col-container">
+      <%= yield :left_container %>
+    </ul>
+  </div>
+  <div class="content" style='top: 0; left: 0'>
+    <%= yield %>
+  </div>
+ </body>
+</html>

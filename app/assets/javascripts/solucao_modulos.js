@@ -4,7 +4,7 @@ $(document).ready(function(){
     var dialog_form = $(getModalContainer("modal-container")).dialog({
         autoOpen: false,
         width: 600,
-        height: 400,
+        height: 750,
         modal: true,
         closeText: "Fechar",
         close: function() {
