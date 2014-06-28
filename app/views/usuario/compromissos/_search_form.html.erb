@@ -5,9 +5,9 @@
 	<div class="field">
 		<%= content_tag :label, "Usuário" %>
 		<%= select_tag "usuario_id",
-					options_for_select(@usuarios.collect{|u| [u.nome, u.id]},@usuario_id), 
+					options_for_select(@usuarios.collect{|u| [u.nome, u.id]}, @usuario.nil? ? "" : @usuario.id), 
 					:include_blank => true  %>
-		<%= hidden_field_tag :date, @date %>
+		<%= hidden_field_tag :date, formata_data(@date), id:'campo-data-compromisso' %>
 	</div>
 	<%= submit_tag "Pesquisar" %>
 

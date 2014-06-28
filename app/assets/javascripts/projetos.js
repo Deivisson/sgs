@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  callProgramacaoLink();
+  //callProgramacaoLink();
  	$("a#projeto-link").click(function(){
     var url = $(this).attr('href');
     var dialog_form = $(getModalContainer()).dialog({
@@ -166,6 +166,6 @@ function callProgramacaoLink() {
       bindShowProgramacaoTreinamentoLink();
     });
     dialog_form.dialog('open');
-    e.preventDefault();
+    e.preventDefault(e);
   });
 }

@@ -1,3 +1,6 @@
 $("#calendario-container").html('<%= escape_javascript(render('calendario')) %>');
-$("a.show-compromisso-link").bind('click',callCompromissoShow);
+if($("a.show-compromisso-link").length > 0)
+	bindCallCompromissoShow();
+
+bindLinkNavegacaoMes();
 bindSelecionaDataParaProgramacaoTreinamento();

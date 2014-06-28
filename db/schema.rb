@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140603031558) do
+ActiveRecord::Schema.define(:version => 20140628201101) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -74,6 +74,26 @@ ActiveRecord::Schema.define(:version => 20140603031558) do
   end
 
   add_index "cliente_contatos", ["cliente_id"], :name => "index_cliente_contatos_on_cliente_id"
+
+  create_table "cliente_infras", :force => true do |t|
+    t.integer  "categoria_servidor"
+    t.string   "sistema_operacional", :limit => 100
+    t.string   "banco_dados",         :limit => 100
+    t.integer  "numero_estacoes"
+    t.boolean  "solucao_backup"
+    t.boolean  "servidor_com_ride"
+    t.integer  "tipo_servidor"
+    t.string   "nome_empresa_ti",     :limit => 100
+    t.string   "responsavel_ti",      :limit => 100
+    t.string   "telefone",            :limit => 100
+    t.string   "email",               :limit => 100
+    t.string   "observacao"
+    t.integer  "cliente_id",                         :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "cliente_infras", ["cliente_id"], :name => "cliente_infras_clientes"
 
   create_table "clientes", :force => true do |t|
     t.string   "nome",               :limit => 50,                                                 :null => false
@@ -565,6 +585,8 @@ ActiveRecord::Schema.define(:version => 20140603031558) do
   add_foreign_key "atendimentos", "usuarios", :name => "fk_atendimentos_usuario_solicitante", :column => "usuario_solicitante_id"
 
   add_foreign_key "cliente_contatos", "clientes", :name => "fk_cliente_contatos_clientes"
+
+  add_foreign_key "cliente_infras", "clientes", :name => "cliente_infras_clientes"
 
   add_foreign_key "clientes_solucao_sub_modulos", "clientes", :name => "clientes_solucao_sub_modulos_clientes"
   add_foreign_key "clientes_solucao_sub_modulos", "solucao_sub_modulos", :name => "clientes_solucao_sub_modulos_solucao_sub_modulos"

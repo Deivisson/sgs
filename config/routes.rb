@@ -93,8 +93,12 @@ Sgsoft::Application.routes.draw do
     get '/resources/:modulo_id/solucao_sub_modulos', :to => 'resources#solucao_sub_modulos'
     get '/resources/:status_id/usuarios_responsaveis', :to => 'resources#usuarios_responsaveis'
 
-
   end
+
+  namespace :shared do
+    resources :cliente_infras, except:[:index,:new,:create,:destroy]
+  end
+
   # scope '/usuario' do
   #   devise_for :usuarios, :controllers => {
   #       :sessions      => "usuario/sessions"

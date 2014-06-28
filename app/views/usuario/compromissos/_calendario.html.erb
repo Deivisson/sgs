@@ -4,9 +4,9 @@
 <% end %>
 
 <h2 id="month">
-  <%= link_to "<", date: @date.prev_month, remote:true %>
+  <%= link_to "<", "#", date: @date.prev_month, id:"compromisso-mes-anterior" %>
   <%= formata_data(@date,:month) %>
-  <%= link_to ">", date: @date.next_month, remote:true %>
+  <%= link_to ">", "#", date: @date.next_month, id:"compromisso-proximo-mes" %>
 </h2>
 
 <div id="compromissos">

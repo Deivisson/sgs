@@ -88,7 +88,7 @@ private
   end
 
   def data_programacao_valida
-    return if self.hora_programacao.nil?
+    return if self.hora_programacao.nil? || !self.new_record?
     if self.data_programacao < Date.today
       errors.add(:data_programacao,"Data da Programação deverá ser maior or igual a data atual.")
     end

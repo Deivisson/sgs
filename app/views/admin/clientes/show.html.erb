@@ -1,51 +1,34 @@
 <% title "Cliente" %>
-<div id="div_show">
-  <p>
-    <strong>Nome:</strong>
-      <%=h @cliente.nome %>
-    </p>
-  <p>
-    <strong>Endereço:</strong>
-    <%=h @cliente.endereco %>
-  </p>
-  <p>
-    <strong>Complemento:</strong>
-    <%=h @cliente.complemento %>
-  </p>
-  <p>
-    <strong>Bairro:</strong>
-    <%=h @cliente.bairro %>
-  </p>
-  <p>
-    <strong>Cidade:</strong>
-    <%=h @cliente.cidade %>
-  </p>
-  <p>
-    <strong>UF:</strong>
-    <%=h @cliente.uf %>
-  </p>
-  <p>
-    <strong>Cep:</strong>
-    <%=h @cliente.cep %>
-  </p>
-  <p>
-    <strong>Telefone:</strong> 
-    <%=h @cliente.telefone %>
-  </p>
-  <p>
-    <strong>Fax:</strong>
-    <%=h @cliente.fax %>
-  </p>
-</div>
-<%= render :partial => 'show_contatos' %>
 
-<fieldset id="legenda" style ="margin:10px 0 0 14px;float:left;width:95%;">
-  <legend style ="font-size:14px"> Soluções/Módulos/Sub Módulos contratados pelo Cliente </legend>
-  <%= render partial:"campos_solucoes",locals:{from: :show} %>
-</fieldset> 
-<br>
-<br>
-<br>
+<div id="cliente-show-tabs" class="menutab-content">
+  <%= content_tag :ul do %>
+    <li>
+      <%= link_to "#aba-cliente-show-basicos" do  %>
+        <span>Dados Cadastrais</span>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to "#aba-cliente-solucoes" do  %>
+        <span>Soluções</span>
+      <% end %>
+    </li>    
+    <li>
+      <%= link_to "#aba-cliente-contatos" do  %>
+        <span>Contatos</span>
+      <% end %>
+    </li>        
+    <li>
+      <%= link_to "#aba-cliente-infra" do  %>
+        <span>Infra</span>
+      <% end %>
+    </li>        
+  <% end %>
+  <%= render "show_dados_basicos" %>
+  <%= render "show_contatos" %>
+  <%= render "show_solucoes" %>
+  <%= render "show_infra" %>
+</div>
+
 <p>
   <%= link_to "Voltar ", admin_clientes_path,:class => 'back' %>
 </p>

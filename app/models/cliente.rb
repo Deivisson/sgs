@@ -34,6 +34,7 @@ class Cliente < ActiveRecord::Base
   has_and_belongs_to_many :solucao_sub_modulos
   has_many :ordem_servicos
   has_many :projetos
+  has_one :infra, class_name:'ClienteInfra'
   
   attr_accessor :horas_bonus
 
@@ -46,6 +47,9 @@ class Cliente < ActiveRecord::Base
   }}
 
   before_save :calcula_minutos_de_bonus
+  after_create do 
+    self.infra = ClienteInfra.new
+  end
 
   def horas_bonus
     return "" unless minutos_bonus > 0

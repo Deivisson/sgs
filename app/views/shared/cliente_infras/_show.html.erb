@@ -1,0 +1,63 @@
+<div id="div_show">
+  <p>
+    <strong>Tipo Servidor:</strong>
+    <%= cliente_infra.categoria_servidor %>
+  </p>
+
+  <p>
+    <strong>Sistema Speracional:</strong>
+    <%= cliente_infra.sistema_operacional %>
+  </p>
+
+  <p>
+    <strong>Banco Dados:</strong>
+    <%= cliente_infra.banco_dados %>
+  </p>
+
+  <p>
+    <strong>Número de Estações:</strong>
+    <%= cliente_infra.numero_estacoes %>
+  </p>
+
+  <p>
+    <strong>Solução Backup:</strong>
+    <%= cliente_infra.solucao_backup %>
+  </p>
+
+  <p>
+    <strong>Servidor com Ride?:</strong>
+    <%= cliente_infra.servidor_com_ride %>
+  </p>
+
+  <p>
+    <strong>Tipo Servidor:</strong>
+    <%= cliente_infra.tipo_servidor %>
+  </p>
+
+  <p>
+    <strong>Nome Empresa TI:</strong>
+    <%= cliente_infra.nome_empresa_ti %>
+  </p>
+
+  <p>
+    <strong>Responsável TI:</strong>
+    <%= cliente_infra.responsavel_ti %>
+  </p>
+
+  <p>
+    <strong>Telefone Contato TI:</strong>
+    <%= cliente_infra.telefone %>
+  </p>
+
+  <p>
+    <strong>Email TI:</strong>
+    <%= cliente_infra.email %>
+  </p>
+
+  <p>
+    <strong>Observação:</strong>
+    <%= cliente_infra.observacao %>
+  </p>
+</div>
+<%= link_to 'Editar Informações de Infra', edit_shared_cliente_infra_path(cliente_infra) %>
+

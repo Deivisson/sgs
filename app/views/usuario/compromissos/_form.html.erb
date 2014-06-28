@@ -1,4 +1,7 @@
 <div id="compromisso-form-container">
+  <%= content_tag(:label, @compromisso.new_record? ? "Novo Compromisso" : "Editando Compromisso",
+                  id:'hidden-title-compromisso-label',
+                  class:'hidden-title-label') %>
   <%= semantic_form_for [:usuario,@compromisso], remote:true do |f| %>
     <div style="overflow:auto;overflow-x:hidden;height:430px; width:700px">
       <%= section_tag do %>

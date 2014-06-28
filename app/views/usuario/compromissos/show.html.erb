@@ -47,7 +47,6 @@
   <% unless @compromisso.has_treinamento? %>
     <%= link_to "Editar",
                 edit_usuario_compromisso_path(@compromisso), 
-                remote:true, 
                 id:'edit-compromisso-link' %> |
 
     <%= link_to "Excluir", 

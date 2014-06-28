@@ -1,6 +1,6 @@
 $(document).ready(function(){
   bindProgramacaoTreinamentoModalForm();
-  bindCallCompromissoShow();
+  bindShowAgendaProjeto();
 });
 
 function  bindProgramacaoTreinamentoModalForm(){
@@ -47,12 +47,10 @@ function bindShowProgramacaoTreinamentoLink(){
         }
     });
     dialog_form.load(url + ' #show-modal-container', function(){
-      //to change the title, see hidden-title-label on new, edit or show page
       $(this).dialog('option',"title",$("#hidden-title-label-prog").text());
       $("#projeto_programacao_treinamento_usuario_id").focus();
       bindProjetoProgramacaoTreinamentoUIEvents();
       bindProgramacaoTreinamentoModalForm();
-      //$("a.edit-projeto-programacao-treinamentos").bind('click',callProgramacaoTreinamentoModalForm);
     });
     dialog_form.dialog('open');
     e.preventDefault();
@@ -68,32 +66,53 @@ function bindProjetoProgramacaoTreinamentoUIEvents() {
 
 function bindShowAgendaProfissional(){
   $("a#agenda-profissional-link").click(function(e){
-    usuarioId = $("#projeto_programacao_treinamento_usuario_id option:selected").val();
+    var usuarioId = $("#projeto_programacao_treinamento_usuario_id option:selected").val();  
     if (usuarioId == "") {
       alert("Selecione o Técnico.");
       ("projeto_programacao_treinamento_usuario_id").focus();
       e.preventDefault();
     } else {
-      var url = $(this).attr('href') + "?usuario_id=" + usuarioId;
-      var dialog_form = $(getModalContainer('dialog-form-professional-agenda')).dialog({
-          autoOpen: false,
-          width: 1000,
-          height: 600,
-          modal: true,
-          closeText: "Fechar",
-          close: function() {
-            $('#dialog-form-professional-agenda').remove();
-          }
-      });
-      dialog_form.load(url + '#show-modal-agenda-container', function(){
-        $(this).dialog('option',"title", "Agenda do Profissional");
-        bindCallCompromissoShow();
-        bindSelecionaDataParaProgramacaoTreinamento();
-      });
-      dialog_form.dialog('open');
-      e.preventDefault();
+      showAgenda($(this),usuarioId,e);
     }
   });
+}
+
+function bindShowAgendaProjeto(){
+  $("a#agenda-compromisso-from-projeto").click(function(e){
+    showAgenda($(this),0,e);
+  });
+}
+
+function  showAgenda(element,usuarioId,e){
+  var url = element.attr('href') + "?prog_treinamento=true";
+  if (usuarioId > 0)
+    url += element.attr('href') + "&usuario_id=" + usuarioId ;
+  else
+    url += "&projeto_id=" + $("#projeto-id").val();
+
+  var dialog_form = $(getModalContainer('dialog-form-professional-agenda')).dialog({
+      autoOpen: false,
+      width: 1000,
+      height: 600,
+      modal: true,
+      closeText: "Fechar",
+      close: function() {
+        $('#dialog-form-professional-agenda').remove();
+      }
+  });
+  dialog_form.load(url + '#show-modal-agenda-container', function(){
+    if (usuarioId > 0)
+      var title = "Agenda do Profissional - " + $("#hidden-title-agenda-profissional").text();
+    else
+      var title = "Agenda de Treinamentos do Projeto";
+
+    $(this).dialog('option',"title",title);
+    bindCallCompromissoShow();
+    bindSelecionaDataParaProgramacaoTreinamento();
+    bindLinkNavegacaoMes();
+  });
+  dialog_form.dialog('open');
+  e.preventDefault();
 }
 
 function bindSelecionaDataParaProgramacaoTreinamento(){

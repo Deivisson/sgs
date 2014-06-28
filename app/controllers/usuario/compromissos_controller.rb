@@ -6,13 +6,17 @@ class Usuario::CompromissosController < Usuario::BaseController
   before_filter :carregar_dados, :except => [:show, :destroy]
 
   def index
-    @compromissos = Compromisso.includes(:usuario).where("id > 0")
-    @compromissos = @compromissos.where(usuario_id:params[:usuario_id]) if params[:usuario_id].present?
-    @usuario_id = params[:usuario_id] ? params[:usuario_id] : ""
+    @usuario = params[:usuario_id].present? ? Usuario.find(params[:usuario_id]) : nil
+    @compromissos = Compromisso.includes(:usuario).where("compromissos.id > 0")
+    if params[:projeto_id].present?
+      @compromissos = @compromissos.joins(:treinamento)
+      @compromissos = @compromissos.where("projeto_programacao_treinamentos.projeto_id = ? ",params[:projeto_id])
+    end
+    @compromissos = @compromissos.where(usuario_id:@usuario.id) unless @usuario.nil?
 
     @compromissos_por_data = @compromissos.group_by(&:data_inicio)
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    respond_with(@compromissos, layout:"compromisso_modal")
+    respond_with(@compromissos, layout: params[:prog_treinamento].present? ? "compromisso_modal"  : "application")
   end
 
   def show

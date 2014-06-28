@@ -76,3 +76,10 @@ etapas.each do |etapa|
   Etapa.where(etapa).first_or_create!
 end
 
+#Popula informacoes iniciais para a tabela de infra dos clientes já cadastrados
+unless ClienteInfra.all.any?
+  Cliente.all.each do |cliente|
+    cliente.infra = ClienteInfra.new()
+  end 
+end
+

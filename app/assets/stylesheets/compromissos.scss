@@ -52,6 +52,15 @@
     height: 80px;
     vertical-align: top;
     font-size: 16px;
+    a.calendar-day-link {
+      color: #000;
+      font-size: 14px;
+      text-decoration: none;
+      &:hover {
+        text-decoration:underline;
+        font-weight: bold;
+      };
+    }
     ul {
       li {
         border: 1px solid;
@@ -83,7 +92,7 @@
     }
   }
 
-  .notmonth, .notmonth a { color: #CCC; }
+  .notmonth, .notmonth a { color: #CCC !important; }
   .today { background-color: #D7F2FF; }
 }
 

@@ -1,4 +1,5 @@
 <% content_for :left_container do %>
+  <%= hidden_field_tag "", @projeto.id, id:"projeto-id" %>
   <%= render "projeto_resumo_detalhes" %>
   <%= content_tag :div, class:"menutab-mini-content", style:"margin-top: 10px;" do %>
  		<div id="tab-resumo-projeto" >

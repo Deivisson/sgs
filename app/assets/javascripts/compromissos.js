@@ -1,6 +1,7 @@
 $(document).ready(function(){
-  bindCallCompromissoShow()
-  $("a#new-compromisso-link").bind('click',callCompromissoForm);
+  bindCallCompromissoShow();
+  bindLinkNavegacaoMes();
+  bindNewCompromissoForm();
 });
 
 function  bindCallCompromissoShow(){
@@ -22,16 +23,28 @@ function  bindCallCompromissoShow(){
         $('#dialog-form-show').dialog('close');
         $('#dialog-form-show').remove();     
       });
-      $("a#edit-compromisso-link").bind('click',callCompromissoForm);
+      bindEditCompromissoForm();
       bindShowProgramacaoTreinamentoLink();
     });
     dialog_form.dialog('open');
-    e.preventDefault();
+    e.preventDefault(e);
   });
 }
 
-function  callCompromissoForm(){
-  var url = $(this).attr('href');
+function bindNewCompromissoForm(){
+  $("a#new-compromisso-link").click(function(e){
+    callCompromissoForm($(this),e);
+  });
+}
+
+function bindEditCompromissoForm(){
+  $("a#edit-compromisso-link").click(function(e){
+    callCompromissoForm($(this),e);
+  });
+}
+
+function callCompromissoForm(element, e){
+  var url = element.attr('href');
   var dialog_form = $(getModalContainer()).dialog({
       autoOpen: false,
       width: 720,
@@ -43,15 +56,14 @@ function  callCompromissoForm(){
       }
   });
   dialog_form.load(url + ' #compromisso-form-container', function(){
-    $(this).dialog('option',"title","Compromisso");
+    $(this).dialog('option',"title",$("#hidden-title-compromisso-label").text());
       setMaskFields();
       $("#compromisso_usuario_id").focus();
       $("#compromisso-cancel-link").bind("click",cancelLink);
   });
   dialog_form.dialog('open');
-  e.preventDefault();
+  e.preventDefault(e);
 }
-
 
 function cancelLink()
 {
@@ -59,4 +71,11 @@ function cancelLink()
   $('#dialog-form').remove();
 }
 
+function bindLinkNavegacaoMes(){
+  $("a#compromisso-mes-anterior, a#compromisso-proximo-mes").click(function(){
+    var date = $(this).attr("date");
+    $("#campo-data-compromisso").attr("value",date);
+    $("#compromissos-search-form").submit();
+  });
+}
 

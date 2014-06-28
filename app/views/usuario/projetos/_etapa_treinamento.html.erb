@@ -22,6 +22,12 @@
 						id:'ver-programacoes-treinamento-projeto',
 						class:'normal-link' %>
 
+			<%= link_to "Agenda",
+						usuario_compromissos_path(),
+						id:'agenda-compromisso-from-projeto',
+						class:'normal-link',
+						style:'min-width: 80px' %>
+						
 		<% end %>
 		<div id="treinamento-solucoes-container">
 			<%= render 'solucoes_treinamento' %>

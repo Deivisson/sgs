@@ -1,10 +1,9 @@
 $(document).ready(function(){
   //TAB
   $("#cliente-tabs").tabs();
+  $("#cliente-show-tabs").tabs();
   $("#solucoes-tabs").tabs();
   fireClickOnChecksSolucaoModuloSub();
-
-
 });
 
 function fireClickOnChecksSolucaoModuloSub(){

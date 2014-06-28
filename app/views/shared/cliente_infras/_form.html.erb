@@ -1,0 +1,34 @@
+<%= semantic_form_for [:shared,@cliente_infra] do |f| %>
+  <%= f.inputs do %>
+    <%= section_tag do %>
+      <%= f.input :tipo_servidor,
+                  :label  => "Tipo Servidor", 
+                  :as     => :select %>
+
+      <%= f.input :categoria_servidor,
+                  :label =>  "Categoria Servidor",
+                  :as     => :select %>
+
+      <%= f.input :sistema_operacional %>
+      <%= f.input :banco_dados %>
+      <%= f.input :numero_estacoes %>
+      <%= f.input :solucao_backup %>
+      <%= f.input :servidor_com_ride %>
+    <% end %>
+
+    <%= section_tag(legend:"Informações da área de TI") do %>  
+      <%= f.input :nome_empresa_ti,
+                  :label =>  "Nome Empresa" %>
+
+      <%= f.input :responsavel_ti,
+                  :label =>  "Nome Responsável"  %>
+                  
+      <%= f.input :telefone %>
+      <%= f.input :email %>
+      <%= f.input :observacao %>
+    <% end %>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
