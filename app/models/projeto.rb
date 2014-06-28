@@ -195,7 +195,7 @@ private
   end
 
   def data_inicio_menor_que_data_atual
-    return if data_inicio.nil?
+    return if data_inicio.nil? || !self.new_record?
     if data_inicio < Date.today 
       errors.add(:data_inicio, "Data de início deverá ser maior ou igual a data Atual.")
     end

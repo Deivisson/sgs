@@ -93,8 +93,7 @@ private
 		link_to(image_tag(image_link[:schedule]),
 						usuario_projeto_programacao_treinamentos_path(
 						projeto_id:projeto_id,sub_modulo_id:sm.id),
-						class:'programacao-link',
-						remote:true)
+						class:'programacao-link')
 	end
 
 end

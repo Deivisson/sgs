@@ -12,14 +12,13 @@
 													projeto_id:@projeto.id,sub_modulo_ids:""),
 													default_url:new_usuario_projeto_programacao_treinamento_path(projeto_id:@projeto.id,sub_modulo_ids:""),
 													id:'programacao-treinamento-link',
-													remote:true,
 													class:'programar-treinamento-link' %>
+													
 			<%= link_to "Adicionar Sub Módulos","#", id:'adicionar-sub-modulos-projeto',class:'normal-link' %>
 			<%= link_to "Remover Sub Módulos","#",id:'remover-sub-modulos-projeto',class:'normal-link' %>
 			<%= link_to "Programar Treinamento","#",id:'programar-treinamento',class:'normal-link' %>
 			<%= link_to "Ver Programações",
 						usuario_projeto_programacao_treinamentos_path(projeto_id:@projeto.id),
-						remote:true,
 						id:'ver-programacoes-treinamento-projeto',
 						class:'normal-link' %>
 

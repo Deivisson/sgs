@@ -149,7 +149,7 @@ function bindGerenciamentoCamposFrequenciaEDuracaoTreinamento(){
 }
 
 function callProgramacaoLink() {
-  $("a.programacao-link,a#ver-programacoes-treinamento-projeto").click(function(){
+  $("a.programacao-link, a#ver-programacoes-treinamento-projeto").click(function(e){
     var url = $(this).attr('href');
     var dialog_form = $(getModalContainer("modal-container-index-dialog-form")).dialog({
         autoOpen: false,
@@ -162,7 +162,6 @@ function callProgramacaoLink() {
         }
     });
     dialog_form.load(url + ' #modal-container-index-prog', function(){
-      //to change the title, see hidden-title-label on new, edit or show page
       $(this).dialog('option',"title",$("#hidden-title-label-index-prog").text());
       bindShowProgramacaoTreinamentoLink();
     });

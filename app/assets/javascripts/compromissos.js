@@ -1,31 +1,33 @@
 $(document).ready(function(){
-  $("a.show-compromisso-link").bind('click',callCompromissoShow);
+  bindCallCompromissoShow()
   $("a#new-compromisso-link").bind('click',callCompromissoForm);
 });
 
-function  callCompromissoShow(){
-  var url = $(this).attr('href');
-  var dialog_form = $(getModalContainer("dialog-form-show")).dialog({
-      autoOpen: false,
-      width: 700,
-      height: 410,
-      modal: true,
-      closeText: "Fechar",
-      close: function() {
-        $('#dialog-form-show').remove();
-      }
-  });
-  dialog_form.load(url + ' #show-compromisso-container', function(){
-    $(this).dialog('option',"title","Compromisso");
-    $("a#compromisso-back-link").bind("click", function(){
-      $('#dialog-form-show').dialog('close');
-      $('#dialog-form-show').remove();     
+function  bindCallCompromissoShow(){
+  $("a.show-compromisso-link").click(function(e){
+    var url = $(this).attr('href');
+    var dialog_form = $(getModalContainer("dialog-form-show")).dialog({
+        autoOpen: false,
+        width: 700,
+        height: 410,
+        modal: true,
+        closeText: "Fechar",
+        close: function() {
+          $('#dialog-form-show').remove();
+        }
     });
-    $("a#edit-compromisso-link").bind('click',callCompromissoForm);
-    bindShowProgramacaoTreinamentoLink();
+    dialog_form.load(url + ' #show-compromisso-container', function(){
+      $(this).dialog('option',"title","Compromisso");
+      $("a#compromisso-back-link").bind("click", function(){
+        $('#dialog-form-show').dialog('close');
+        $('#dialog-form-show').remove();     
+      });
+      $("a#edit-compromisso-link").bind('click',callCompromissoForm);
+      bindShowProgramacaoTreinamentoLink();
+    });
+    dialog_form.dialog('open');
+    e.preventDefault();
   });
-  dialog_form.dialog('open');
-  e.preventDefault();
 }
 
 function  callCompromissoForm(){
@@ -50,8 +52,11 @@ function  callCompromissoForm(){
   e.preventDefault();
 }
 
+
 function cancelLink()
 {
   $('#dialog-form').dialog('close');
   $('#dialog-form').remove();
 }
+
+

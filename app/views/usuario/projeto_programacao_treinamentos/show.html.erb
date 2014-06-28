@@ -13,13 +13,12 @@
       <%= link_to "Editar Programação",
               edit_usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento),
               class:"common-link edit-projeto-programacao-treinamentos",
-              id: 'edit-projeto_programacao_treinamento',
-              remote:true %> |
+              id: 'edit-projeto_programacao_treinamento' %> |
 
       <%= link_to "Cancelar Programação",
-              edit_usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento,cancel:true),class:"common-link edit-projeto-programacao-treinamentos",
-              id: 'cancel-projeto_programacao_treinamento',
-              remote:true %> |
+              edit_usuario_projeto_programacao_treinamento_path(@projeto_programacao_treinamento,cancel:true),
+              class:"common-link edit-projeto-programacao-treinamentos",
+              id: 'cancel-projeto_programacao_treinamento' %> |
 
       
       <%= link_to "Excluir Programação",

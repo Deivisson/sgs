@@ -33,8 +33,7 @@
         <strong>Nº Progr. Treinamento:</strong>
         <%= link_to @compromisso.treinamento.controle, 
                     usuario_projeto_programacao_treinamento_path(@compromisso.treinamento.id),
-                    class:'show-programacao-treinamento-link',
-                    remote:true %>
+                    class:'show-programacao-treinamento-link' %>
       </p>
     <% end %>
     <p>
@@ -48,7 +47,8 @@
   <% unless @compromisso.has_treinamento? %>
     <%= link_to "Editar",
                 edit_usuario_compromisso_path(@compromisso), 
-                remote:true, id:'edit-compromisso-link' %> |
+                remote:true, 
+                id:'edit-compromisso-link' %> |
 
     <%= link_to "Excluir", 
                 [:usuario,@compromisso], method: :delete, 

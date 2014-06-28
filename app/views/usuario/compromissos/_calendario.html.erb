@@ -11,7 +11,7 @@
 
 <div id="compromissos">
   <%= calendar @date do |date| %>
-    <%= date.day %>
+    <%= link_to date.day, "#", class:"calendar-day-link", date:date %>
     <% if @compromissos_por_data[date] %>
       <ul>
         <% @compromissos_por_data[date].each do |compromisso| %>
