@@ -9,7 +9,7 @@ class Shared::ClienteInfrasController < Shared::BaseController
 
   def update
     @cliente_infra.update_attributes(params[:cliente_infra])
-    respond_with(@cliente_infra)
+    respond_with(@cliente_infra, location:admin_cliente_path(@cliente_infra.cliente))
   end
 
 private 

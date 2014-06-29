@@ -71,7 +71,7 @@ open("#{Rails.root}/db/versoes/1.1.txt") do |versao|
 end
 
 #Alimenta tabela de Etapas
-etapas = [{descricao:'Desenvolvimento'},{descricao:'Treinamento'},{descricao:'Instalação'}]
+etapas = [{descricao:'Desenvolvimento'},{descricao:'Treinamento'},{descricao:'Instalação'},{descricao:'Infra-Estrutura'}]
 etapas.each do |etapa|
   Etapa.where(etapa).first_or_create!
 end

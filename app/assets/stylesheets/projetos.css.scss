@@ -303,3 +303,24 @@ h1.filtro-solicitacoes-titulo {
   }
 
 }
+ul.aba-infra {
+  background-color: #EEE !important;
+  li {
+    background-image: none !important;
+  }
+  li.ui-state-default {
+    background-color: #F6F6F6 !important;
+    a {
+      color:#1C9AD2 !important;
+    }
+  }
+  li.ui-tabs-active, li.ui-state-active {
+    border-color: #EB8F00 !important;
+    background-color: #FFF !important;
+    background-image: none;
+    a {
+      color:#EB8F00 !important;
+    }
+    
+  }
+}

@@ -36,6 +36,8 @@ $(document).ready(function(){
   //TAB
   $("#tab-resumo-projeto").tabs();
   $("#tab-menu-projeto").tabs();
+  $("#tab-infra-estrutura-abas").tabs();
+  
   $("#projeto-menu-aba-treinamento").css("height",$("#show-container-id").height()-50);
   $(".solucoes-container-itens").css("height",$("#show-container-id").height()-90);
   $("#projeto-menu-aba-treinamento").css("overflow","auto");

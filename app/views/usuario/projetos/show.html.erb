@@ -41,6 +41,7 @@
       <%= render 'etapa_desenvolvimento' if @projeto.possui_desenvolvimento? %>
       <%= render 'etapa_treinamento' if @projeto.possui_treinamento? %>
       <%= render 'etapa_instalacao' if @projeto.possui_instalacao? %>
+      <%= render 'etapa_infra_estrutura' if @projeto.possui_infra_estrutura? %>
     </div>
   <% end %>
 <% end %>

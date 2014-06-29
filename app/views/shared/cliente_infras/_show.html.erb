@@ -1,9 +1,14 @@
 <div id="div_show">
   <p>
     <strong>Tipo Servidor:</strong>
-    <%= cliente_infra.categoria_servidor %>
+    <%= cliente_infra.tipo_servidor_descricao %>
   </p>
 
+  <p>
+    <strong>Categoria Servidor:</strong>
+    <%= cliente_infra.categoria_servidor_descricao %>
+  </p>
+  
   <p>
     <strong>Sistema Speracional:</strong>
     <%= cliente_infra.sistema_operacional %>
@@ -29,10 +34,7 @@
     <%= cliente_infra.servidor_com_ride %>
   </p>
 
-  <p>
-    <strong>Tipo Servidor:</strong>
-    <%= cliente_infra.tipo_servidor %>
-  </p>
+
 
   <p>
     <strong>Nome Empresa TI:</strong>

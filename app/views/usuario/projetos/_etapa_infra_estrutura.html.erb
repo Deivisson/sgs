@@ -1,0 +1,18 @@
+<%= section_tag id:"projeto-menu-aba-infra_estrutura" do %>
+	<div id="tab-infra-estrutura-abas" class="menutab-content" >
+    <%= content_tag :ul, class:'aba-infra' do %>
+      <li id = "tab-infra-estrutura-basico">
+        <%= link_to "#aba-infra-estrutura-basico" do  %>
+          <span>Básico</span>
+        <% end %>
+      </li>
+      <li id = "tab-infra-estrutura-checklist" >
+        <%= link_to "#aba-infra-estrutura-checklist" do  %>
+          <span>CheckList</span>
+        <% end %>
+      </li>
+    <% end %>
+		<%= render "infra_estrutura_basico" %>
+		<%= render "infra_estrutura_checklist" %>
+  </div>
+<% end %>

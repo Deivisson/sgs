@@ -22,5 +22,6 @@ class Etapa < ActiveRecord::Base
 
   def contexto
   	@contexto ||= self.descricao.remover_acentos.downcase
+    @contexto.gsub("-","_")
   end
 end

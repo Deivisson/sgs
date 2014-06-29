@@ -2,16 +2,19 @@
   <%= f.inputs do %>
     <%= section_tag do %>
       <%= f.input :tipo_servidor,
-                  :label  => "Tipo Servidor", 
-                  :as     => :select %>
+                  :label      => "Tipo Servidor", 
+                  :as         => :select,
+                  :collection => options_for_tipo_servidor %>
 
       <%= f.input :categoria_servidor,
-                  :label =>  "Categoria Servidor",
-                  :as     => :select %>
+                  :label      =>  "Categoria Servidor",
+                  :as         => :select,
+                  :collection => options_for_categoria_servidor %>
 
       <%= f.input :sistema_operacional %>
       <%= f.input :banco_dados %>
-      <%= f.input :numero_estacoes %>
+      <%= f.input :numero_estacoes,
+                  :label      =>  "Número de Estações" %>
       <%= f.input :solucao_backup %>
       <%= f.input :servidor_com_ride %>
     <% end %>
@@ -22,13 +25,15 @@
 
       <%= f.input :responsavel_ti,
                   :label =>  "Nome Responsável"  %>
-                  
+
       <%= f.input :telefone %>
       <%= f.input :email %>
-      <%= f.input :observacao %>
+      <%= f.input :observacao,
+                  :label => "Observação" %>
     <% end %>
   <% end %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.actions :class => "buttons-container" do %>
+    <%= submit_button f %>
+    <%= link_to_cancel admin_cliente_path(@cliente_infra.cliente_id) %>
+  <% end %>
 <% end %>
