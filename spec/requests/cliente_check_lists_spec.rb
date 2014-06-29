@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe "ClienteCheckLists" do
-  describe "GET /cliente_check_lists" do
+describe "ClienteCheckListItens" do
+  describe "GET /cliente_check_list_itens" do
     it "works! (now write some real specs)" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       get cliente_check_lists_path

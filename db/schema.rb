@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
   add_index "check_list_itens_solucoes", ["check_list_item_id"], :name => "index_check_list_itens_solucoes_on_check_list_item_id"
   add_index "check_list_itens_solucoes", ["solucao_id"], :name => "index_check_list_itens_solucoes_on_solucao_id"
 
-  create_table "cliente_check_lists", :force => true do |t|
+  create_table "cliente_check_list_itens", :force => true do |t|
     t.integer  "check_list_item_id", :null => false
     t.integer  "cliente_id",         :null => false
     t.boolean  "disponivel"
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
     t.datetime "updated_at",         :null => false
   end
 
-  add_index "cliente_check_lists", ["check_list_item_id"], :name => "index_cliente_check_lists_on_check_list_item_id"
-  add_index "cliente_check_lists", ["cliente_id"], :name => "index_cliente_check_lists_on_cliente_id"
+  add_index "cliente_check_list_itens", ["check_list_item_id"], :name => "index_cliente_check_list_itens_on_check_list_item_id"
+  add_index "cliente_check_list_itens", ["cliente_id"], :name => "index_cliente_check_list_itens_on_cliente_id"
 
   create_table "cliente_contatos", :force => true do |t|
     t.integer  "cliente_id",                 :null => false
@@ -599,8 +599,8 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
   add_foreign_key "atendimentos", "usuarios", :name => "fk_atendimentos_usuario_cadastrante", :column => "usuario_cadastrante_id"
   add_foreign_key "atendimentos", "usuarios", :name => "fk_atendimentos_usuario_solicitante", :column => "usuario_solicitante_id"
 
-  add_foreign_key "cliente_check_lists", "check_list_itens", :name => "cliente_check_lists_check_list_itens"
-  add_foreign_key "cliente_check_lists", "clientes", :name => "cliente_check_lists_clientes"
+  add_foreign_key "cliente_check_list_itens", "check_list_itens", :name => "cliente_check_lists_check_list_itens"
+  add_foreign_key "cliente_check_list_itens", "clientes", :name => "cliente_check_lists_clientes"
 
   add_foreign_key "cliente_contatos", "clientes", :name => "fk_cliente_contatos_clientes"
 

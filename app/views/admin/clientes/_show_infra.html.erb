@@ -2,6 +2,7 @@
 	<%= render partial:"shared/cliente_infras/show", 
 						locals: {cliente_infra:@cliente.infra}%>
 
-	<%= render partial:"shared/cliente_check_lists/index", 
-						locals: {cliente_check_lists:@cliente.check_list_items}%>						
+	<%= render partial:"shared/cliente_check_list_itens/index", 
+						locals: {cliente_check_list_itens:@cliente.check_list_items, 
+										 cliente_id:@cliente.id}%>						
 </div>

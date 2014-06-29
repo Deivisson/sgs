@@ -52,8 +52,8 @@ class Projeto < ActiveRecord::Base.extend Search
 
   before_validation :attribui_minutos_duracao_visita
   before_save :limpa_campos_atrelados_a_etapa_treinamento 
-  after_save :atualiza_ordem_etapas,:save_solucao_sub_modulos
-
+  after_save :atualiza_ordem_etapas,:save_solucao_sub_modulos, :atualiza_itens_check_list_cliente
+  
   def peso_total
     @peso_total ||= (solicitacoes.sum(:peso) || 0)
   end
@@ -205,6 +205,16 @@ private
     solucoes_com_programacoes.each do |s|
       unless self.solucao_ids.include?(s.id)
         errors.add(:solucao_ids, "#{s.descricao} possui treinamento e não poderá ser removido do projeto.") 
+      end
+    end
+  end
+
+  def atualiza_itens_check_list_cliente
+    if possui_infra_estrutura?
+      self.solucoes.each do |s| 
+        s.check_list_itens.each do |c|
+          ClienteCheckListItem.where({check_list_item_id:c.id,cliente_id:self.cliente_id}).first_or_create!
+        end
       end
     end
   end

@@ -1,4 +1,3 @@
-
 # -*- encoding : utf-8 -*-
 include ActionView::Helpers::NumberHelper 
 class Cliente < ActiveRecord::Base
@@ -35,7 +34,7 @@ class Cliente < ActiveRecord::Base
   has_many :ordem_servicos
   has_many :projetos
   has_one :infra, class_name:'ClienteInfra'
-  has_many :check_list_items, class_name:"ClienteCheckList"
+  has_many :check_list_items, class_name:"ClienteCheckListItem"
 
   attr_accessor :horas_bonus
 

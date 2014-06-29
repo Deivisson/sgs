@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "cliente_check_lists/index.html.erb" do
+describe "cliente_check_list_itens/index.html.erb" do
   before(:each) do
-    assign(:cliente_check_lists, [
-      stub_model(ClienteCheckList,
+    assign(:cliente_check_list_itens, [
+      stub_model(ClienteCheckListItem,
         :check_list_item => nil,
         :cliente => nil,
         :disponivel => false,
@@ -11,7 +11,7 @@ describe "cliente_check_lists/index.html.erb" do
         :responsavel => 1,
         :nome_responsavel => "Nome_responsavel"
       ),
-      stub_model(ClienteCheckList,
+      stub_model(ClienteCheckListItem,
         :check_list_item => nil,
         :cliente => nil,
         :disponivel => false,
@@ -22,7 +22,7 @@ describe "cliente_check_lists/index.html.erb" do
     ])
   end
 
-  it "renders a list of cliente_check_lists" do
+  it "renders a list of cliente_check_list_itens" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => nil.to_s, :count => 2

@@ -1,3 +1,4 @@
 <%= section_tag id:"aba-infra-estrutura-checklist", class:"section-tag-whiteBg" do %>
-	ACHEs
+	<% @cliente_check_list_itens = @projeto.cliente.check_list_items %>
+	<%= render partial:"shared/cliente_check_list_itens/form" %>
 <% end %>

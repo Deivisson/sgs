@@ -1,0 +1,26 @@
+<br>
+<br>
+<br>
+<table>
+  <caption>Itens de ChekList </caption>
+  <thead>
+    <tr>
+      <th>Descrição Item</th>
+      <th>Disponivel</th>
+      <th>Data prevista</th>
+      <th>Motivo</th>
+      <th>Responsavel</th>
+      <th>Nome responsavel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cliente_check_list_itens.each do |cliente_check_list_item| %>
+      <%= render partial:"shared/cliente_check_list_itens/cliente_check_list_item", 
+                locals: {cliente_check_list_item:cliente_check_list_item} %>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Editar CheckList",
+          edit_shared_cliente_check_list_item_path(0,cliente_id:cliente_id),
+          id:"edit-cliente-check-list-itens" if cliente_check_list_itens.any? %>
+

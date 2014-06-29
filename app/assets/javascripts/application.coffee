@@ -22,3 +22,4 @@
 //= require solucao_modulos.js
 //= require solucao_sub_modulos.js
 //= require compromissos.js
+//= require cliente_check_list_itens.js

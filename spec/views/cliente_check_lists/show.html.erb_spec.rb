@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "cliente_check_lists/show.html.erb" do
+describe "cliente_check_list_itens/show.html.erb" do
   before(:each) do
-    @cliente_check_list = assign(:cliente_check_list, stub_model(ClienteCheckList,
+    @cliente_check_list_item = assign(:cliente_check_list_item, stub_model(ClienteCheckListItem,
       :check_list_item => nil,
       :cliente => nil,
       :disponivel => false,

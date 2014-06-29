@@ -82,10 +82,3 @@ unless ClienteInfra.all.any?
     cliente.infra = ClienteInfra.new()
   end 
 end
-
-p = Projeto.find(1)
-p.solucoes.each do |s| 
-  s.check_list_itens.each do |c|
-    ClienteCheckList.where({check_list_item_id:c.id,cliente_id:p.cliente_id}).first_or_create!
-  end
-end
