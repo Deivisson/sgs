@@ -35,7 +35,8 @@ class Cliente < ActiveRecord::Base
   has_many :ordem_servicos
   has_many :projetos
   has_one :infra, class_name:'ClienteInfra'
-  
+  has_many :check_list_items, class_name:"ClienteCheckList"
+
   attr_accessor :horas_bonus
 
   scope :to_select, :select => 'nome,id', :order => :nome

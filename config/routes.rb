@@ -97,6 +97,7 @@ Sgsoft::Application.routes.draw do
 
   namespace :shared do
     resources :cliente_infras, except:[:index,:new,:create,:destroy]
+    resources :cliente_check_lists
   end
 
   # scope '/usuario' do

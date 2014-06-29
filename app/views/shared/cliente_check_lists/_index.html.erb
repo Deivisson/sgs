@@ -1,0 +1,23 @@
+<br>
+<br>
+<br>
+<table>
+  <caption>Itens de ChekList </caption>
+  <thead>
+    <tr>
+      <th>Descrição Item</th>
+      <th>Disponivel</th>
+      <th>Data prevista</th>
+      <th>Motivo</th>
+      <th>Responsavel</th>
+      <th>Nome responsavel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cliente_check_lists.each do |cliente_check_list| %>
+      <%= render partial:"shared/cliente_check_lists/cliente_check_list", 
+                locals: {cliente_check_list:cliente_check_list} %>
+    <% end %>
+  </tbody>
+</table>
+

@@ -1,4 +1,7 @@
 <div id="aba-cliente-infra">
 	<%= render partial:"shared/cliente_infras/show", 
 						locals: {cliente_infra:@cliente.infra}%>
+
+	<%= render partial:"shared/cliente_check_lists/index", 
+						locals: {cliente_check_lists:@cliente.check_list_items}%>						
 </div>

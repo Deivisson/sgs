@@ -1,0 +1,29 @@
+<%= form_tag shared_cliente_check_lists_path, html: {:method => :put} do %>
+  <table>
+    <thead>
+      <tr>
+        <th width="100">Descrição Item</th>
+        <th width="100">Disponivel</th>
+        <th width="100">Data prevista</th>
+        <th width="100">Motivo</th>
+        <th width="100">Responsavel</th>
+        <th width="100">Nome responsavel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cliente_check_lists.each do |cliente_check_list| %>
+       <tr>
+        <td width="100"><%= cliente_check_list.check_list_item.descricao %></td>
+        <td width="100"><%= text_field_tag "check_lists[][disponivel]" %></td>
+        <td width="100"><%= text_field_tag "check_lists[][data_prevista]" %></td>
+        <td width="100"><%= text_field_tag "check_lists[][motivo]" %></td>
+        <td width="100"><%= text_field_tag "check_lists[][responsavel]" %></td>
+        <td width="100"><%= text_field_tag "check_lists[][nome_responsavel]" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>
