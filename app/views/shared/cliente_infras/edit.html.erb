@@ -1,2 +1,2 @@
 <% title "Editando Informações de Infra. Cliente: #{@cliente_infra.cliente.nome}" %>
-<%= render 'form' %>
+<%= render partial:'form',locals: {remote:false} %>

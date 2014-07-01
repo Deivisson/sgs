@@ -1,4 +1,4 @@
 <%= section_tag id:"aba-infra-estrutura-basico", class:"section-tag-whiteBg" do %>
 	<% @cliente_infra = @projeto.cliente.infra %>
-	<%= render partial:"shared/cliente_infras/form"%>
+	<%= render partial:"shared/cliente_infras/form", locals: {remote:true}%>
 <% end %>

@@ -1,0 +1,5 @@
+$("#cliente-infra-form-container").html("<%= escape_javascript(render partial:'shared/cliente_infras/form', locals: {remote:true}) %>");
+<% unless @cliente_infra.errors.any? %>
+	alert("Informações Atualizadas com sucesso!");
+<% end %>
+

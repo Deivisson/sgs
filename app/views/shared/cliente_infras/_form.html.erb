@@ -1,39 +1,41 @@
-<%= semantic_form_for [:shared,@cliente_infra] do |f| %>
-  <%= f.inputs do %>
-    <%= section_tag do %>
-      <%= f.input :tipo_servidor,
-                  :label      => "Tipo Servidor", 
-                  :as         => :select,
-                  :collection => options_for_tipo_servidor %>
+<div id="cliente-infra-form-container">
+  <%= semantic_form_for [:shared,@cliente_infra], remote:remote do |f| %>
+    <%= f.inputs do %>
+      <%= section_tag do %>
+        <%= f.input :tipo_servidor,
+                    :label      => "Tipo Servidor", 
+                    :as         => :select,
+                    :collection => options_for_tipo_servidor %>
 
-      <%= f.input :categoria_servidor,
-                  :label      =>  "Categoria Servidor",
-                  :as         => :select,
-                  :collection => options_for_categoria_servidor %>
+        <%= f.input :categoria_servidor,
+                    :label      =>  "Categoria Servidor",
+                    :as         => :select,
+                    :collection => options_for_categoria_servidor %>
 
-      <%= f.input :sistema_operacional %>
-      <%= f.input :banco_dados %>
-      <%= f.input :numero_estacoes,
-                  :label      =>  "Número de Estações" %>
-      <%= f.input :solucao_backup %>
-      <%= f.input :servidor_com_ride %>
+        <%= f.input :sistema_operacional %>
+        <%= f.input :banco_dados %>
+        <%= f.input :numero_estacoes,
+                    :label      =>  "Número de Estações" %>
+        <%= f.input :solucao_backup %>
+        <%= f.input :servidor_com_ride %>
+      <% end %>
+
+      <%= section_tag(legend:"Informações da área de TI") do %>  
+        <%= f.input :nome_empresa_ti,
+                    :label =>  "Nome Empresa" %>
+
+        <%= f.input :responsavel_ti,
+                    :label =>  "Nome Responsável"  %>
+
+        <%= f.input :telefone %>
+        <%= f.input :email %>
+        <%= f.input :observacao,
+                    :label => "Observação" %>
+      <% end %>
     <% end %>
-
-    <%= section_tag(legend:"Informações da área de TI") do %>  
-      <%= f.input :nome_empresa_ti,
-                  :label =>  "Nome Empresa" %>
-
-      <%= f.input :responsavel_ti,
-                  :label =>  "Nome Responsável"  %>
-
-      <%= f.input :telefone %>
-      <%= f.input :email %>
-      <%= f.input :observacao,
-                  :label => "Observação" %>
+    <%= f.actions :class => "buttons-container" do %>
+      <%= submit_button f %>
+      <%= link_to_cancel admin_cliente_path(@cliente_infra.cliente_id) unless remote %>
     <% end %>
   <% end %>
-  <%= f.actions :class => "buttons-container" do %>
-    <%= submit_button f %>
-    <%= link_to_cancel admin_cliente_path(@cliente_infra.cliente_id) %>
-  <% end %>
-<% end %>
+</div>

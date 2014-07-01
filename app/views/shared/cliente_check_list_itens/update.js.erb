@@ -1,0 +1,11 @@
+$("#cliente-checklist-itens-container").html("<%= escape_javascript(render partial:'shared/cliente_check_list_itens/form') %>");
+setMaskFields();
+<% @errors = [] %>
+<% @cliente_check_list_itens.each do |i| %>
+	<% @errors << i.errors if i.errors.any? %>
+<% end %>
+<% if @errors.any? %>
+	alert("Existem erros. Favor verificar!");
+<% else %>
+	alert("CheckList atualizado com sucesso!");
+<% end %>
