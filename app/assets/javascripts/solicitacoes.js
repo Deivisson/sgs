@@ -64,13 +64,13 @@ function atualizaLinkPlanejamento(){
 
 //MODAL FORM
 function solicitacaoModalForm(){
-  $("a#solicitacao-link, a.solicitacao-link").click(function(){
+  $("a#solicitacao-link, a.solicitacao-link").click(function(e){
     var url = $(this).attr('href');
-    callSolicitacaoModalFormToNew(url);
+    callSolicitacaoModalFormToNew(url,e);
   });
 }
 
-function callSolicitacaoModalFormToNew(url){
+function callSolicitacaoModalFormToNew(url,e){
   var dialog_form = $(getModalContainer()).dialog({
       autoOpen: false,
       width: 830,

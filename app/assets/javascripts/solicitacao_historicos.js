@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#edit-solicitaco-hist").click(function(){
+	$("#edit-solicitaco-hist").click(function(e){
 		var url = $(this).attr('href');
     var dialog_form = $(getModalContainer()).dialog({
         autoOpen: false,
@@ -24,7 +24,7 @@ $(document).ready(function() {
 	});
 
 
-$(".show-solicitaco-hist").click(function(){
+$(".show-solicitaco-hist").click(function(e){
 		var url = $(this).attr('href');
     var dialog_form = $(getModalContainer()).dialog({
         autoOpen: false,

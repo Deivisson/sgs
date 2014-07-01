@@ -20,13 +20,13 @@
                       :action       => 'show',
                       :id           => solicitacao_historico.id, 
                       :local        => "show_solicitacao"},
-                      :class        => "show-solicitaco-hist",
-                      :remote       => true %>
+                      :class        => "show-solicitaco-hist" %>
+                      
             <% if @is_first && @solicitacao_historicos.length > 1 && solicitacao_historico.usuario_id == current_usuario.id %>
                 <%= link_to "Editar", 
                             [:edit, :usuario,solicitacao_historico], 
-                            id:'edit-solicitaco-hist',
-                            remote:true %>
+                            id:'edit-solicitaco-hist'%>
+
                 <%= link_to "Deletar", 
                             [:usuario, solicitacao_historico], 
                             :confirm => 'Confirma exclusão ?',

@@ -1,6 +1,6 @@
 $(document).ready(function(){
   //callProgramacaoLink();
- 	$("a#projeto-link").click(function(){
+ 	$("a#projeto-link").click(function(e){
     var url = $(this).attr('href');
     var dialog_form = $(getModalContainer()).dialog({
         autoOpen: false,

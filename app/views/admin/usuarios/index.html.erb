@@ -11,10 +11,10 @@
     </tr>
   </thead>
   <tbody>
-    <% for usuario in @usuarios %>
+    <% @usuarios.each do |usuario| %>
       <tr>
         <td width="100" >
-          <%= link_to usuario.usuario_cargo.descricao,[:admin, usuario],class:'inline-link' %>
+          <%= link_to usuario.usuario_cargo.descricao,[:admin, usuario],class:'inline-link' unless usuario.usuario_cargo.nil? %>
         </td>
         <td><%=h usuario.nome %></td>
         <td width ="300" ><%=h usuario.email %></td>

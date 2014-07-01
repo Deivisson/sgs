@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $("a#ordernar-solucao-modulos").click(function(){
+  $("a#ordernar-solucao-modulos").click(function(e){
     var url = $(this).attr('href');
     var dialog_form = $(getModalContainer("modal-container")).dialog({
         autoOpen: false,

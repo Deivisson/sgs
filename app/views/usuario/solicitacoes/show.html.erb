@@ -39,15 +39,6 @@
           <%= link_to "Log de Alterações", "#solicitacao-tab-alteracoes" %>
         <% end %>
       <% end %>
-      <!--
-      <div class="show-content-menu">
-        <%= link_to "Editar",  
-            [:edit, :usuario, @solicitacao], remote:true, id:'solicitacao-link',class:'first' %> 
-        <%= link_to 'Nova Solicitação', new_usuario_solicitacao_path, remote:true, id:'solicitacao-link' %>        
-        <%= link_to 'Registrar Status', "#" %>   
-        <%= link_to "Voltar", usuario_solicitacoes_path %>
-      </div>
-      -->
       <%= render 'show_detalhes' %>
       <%= render 'show_historicos' %>
       <%= render 'show_alteracoes' %>

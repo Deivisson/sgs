@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $("a#ordernar-solucoes").click(function(){
+  $("a#ordernar-solucoes").click(function(e){
     var url = $(this).attr('href');
     var dialog_form = $(getModalContainer("modal-container")).dialog({
         autoOpen: false,
@@ -12,10 +12,8 @@ $(document).ready(function(){
         }
     });
     dialog_form.load(url + ' #modal-container', function(){
-      //to change the title, see hidden-title-label on new, edit or show page
       $(this).dialog('option',"title","Ordenação das Soluções");
   		$("#sortable-solucoes").sortable();
-
     });
     dialog_form.dialog('open');
     e.preventDefault();
