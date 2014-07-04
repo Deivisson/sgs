@@ -1,51 +1,52 @@
 <div id="modal-container">
-  <%= semantic_form_for [:usuario,@solicitacao] , 
-        remote:true, html: {multipart:true} do |form| %>
-    <div id="tabs" class="menutab-content">
-      <%= content_tag :ul do %>
-        <li id = "solicitacao-tab1">
-          <%= link_to "#fragment-1" do  %>
-            <span>Dados Principais</span>
+  <div style="height: 580px; overflow-y:auto; overflow-x:hidden">
+    <%= semantic_form_for [:usuario,@solicitacao] , 
+          remote:true, html: {multipart:true} do |form| %>
+      <div id="tabs" class="menutab-content">
+        <%= content_tag :ul do %>
+          <li id = "solicitacao-tab1">
+            <%= link_to "#fragment-1" do  %>
+              <span>Dados Principais</span>
+            <% end %>
+          </li>
+          <li id = "solicitacao-tab2" >
+            <%= link_to "#fragment-2" do  %>
+              <span>Detalhes</span>
+            <% end %>
+          </li>
+          <li >
+            <%= link_to "#fragment-3" do  %>
+              <span>Anexos/Outros</span>
+            <% end %>
+          </li>
+          
+          <% if @solicitacao.projeto_id.present? %>
+            <%= content_tag :li do %>
+              <%= link_to "#fragment-4" do  %>
+                <span>Estimativas</span>
+              <% end  %>
+            <% end if permite_estimar(@solicitacao) %>        
           <% end %>
-        </li>
-        <li id = "solicitacao-tab2" >
-          <%= link_to "#fragment-2" do  %>
-            <span>Detalhes</span>
-          <% end %>
-        </li>
-        <li >
-          <%= link_to "#fragment-3" do  %>
-            <span>Anexos/Outros</span>
-          <% end %>
-        </li>
-        
-        <% if @solicitacao.projeto_id.present? %>
-          <%= content_tag :li do %>
-            <%= link_to "#fragment-4" do  %>
-              <span>Estimativas</span>
-            <% end  %>
-          <% end if permite_estimar(@solicitacao) %>        
+
         <% end %>
 
+        <%= render partial:"campos_principais", locals: {form:form} %>
+        <%= render partial:"campos_detalhes", locals: {form:form}  %>
+        <%= render partial:"campos_outros", locals: {form:form}  %>
+        <% if @solicitacao.projeto_id.present? %>
+          <%= render partial:"campos_estimativas", locals: {form:form} if permite_estimar(@solicitacao) %>
+        <% end %>
+      </div>
+      <%= form.inputs do %>
+        <%= form.input :projeto_id, :as => :hidden %>
+        <%= form.input :status_id, :as => :hidden %>
+        <%= form.input :etapa_id, :as => :hidden %>
       <% end %>
 
-      <%= render partial:"campos_principais", locals: {form:form} %>
-      <%= render partial:"campos_detalhes", locals: {form:form}  %>
-      <%= render partial:"campos_outros", locals: {form:form}  %>
-      <% if @solicitacao.projeto_id.present? %>
-        <%= render partial:"campos_estimativas", locals: {form:form} if permite_estimar(@solicitacao) %>
-      <% end %>
-    </div>
-    <%= form.inputs do %>
-      <%= form.input :projeto_id, :as => :hidden %>
-      <%= form.input :status_id, :as => :hidden %>
-      <%= form.input :etapa_id, :as => :hidden %>
+      <%= form.actions :class => "buttons-container modal-form-button" do %>
+        <%= submit_button form %>
+        <%= link_to_cancel "#", id:'solicitacao-cancel-link' %>
+      <% end -%>
     <% end %>
-
-    <%= form.actions :class => "buttons-container modal-form-button" do %>
-      <%= submit_button form %>
-      <%= link_to_cancel "#", id:'solicitacao-cancel-link' %>
-    <% end -%>
-  <% end %>
-
+  </div>
 </div>

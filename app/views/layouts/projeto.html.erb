@@ -14,11 +14,7 @@
   </div>
   
   <div class="show-container" id="show-container-id">
-    <div id="container" >
-      <%- flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <%- end %>
-    </div>
+    <div id="container" >   </div>
     <%= yield :menu %>
     <%= yield %>
   </div>

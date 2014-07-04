@@ -518,9 +518,9 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
     t.integer  "usuario_id"
     t.integer  "solicitacao_id"
     t.datetime "data_hora_inicio"
-    t.datetime "data_hora_fim"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.datetime "data_hora_fim"
   end
 
   add_index "tarefas", ["solicitacao_id"], :name => "tarefas_solicitacoes"
@@ -638,7 +638,6 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
   add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "solucao_sub_modulos", :name => "programacao_treinamentos_solucao_sub_modulos"
 
   add_foreign_key "projetos", "clientes", :name => "fk_projetos_clientes"
-  add_foreign_key "projetos", "usuarios", :name => "fk_projetos_usuarios"
 
   add_foreign_key "projetos_solucoes", "projetos", :name => "projetos_solucoes_projetos"
   add_foreign_key "projetos_solucoes", "solucoes", :name => "projetos_solucoes_solucoes"

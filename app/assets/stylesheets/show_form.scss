@@ -38,12 +38,13 @@
 }
 .detalhes-container {
   background-color: #FFF;
+  border: 1px solid #eee;
   float: left;
   margin-left: 10px;
-  /*
-  margin-left: 180px;
-  margin-top: -34px;*/
+  min-height: 100px;
+  padding: 5px;
   float: left;
+  width: 98%;
 }
 
 .show-left-container {

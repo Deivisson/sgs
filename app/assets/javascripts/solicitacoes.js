@@ -64,6 +64,7 @@ function atualizaLinkPlanejamento(){
 
 //MODAL FORM
 function solicitacaoModalForm(){
+  $("a#solicitacao-link,a.solicitacao-link").unbind("click");
   $("a#solicitacao-link, a.solicitacao-link").click(function(e){
     var url = $(this).attr('href');
     callSolicitacaoModalFormToNew(url,e);
@@ -74,18 +75,14 @@ function callSolicitacaoModalFormToNew(url,e){
   var dialog_form = $(getModalContainer()).dialog({
       autoOpen: false,
       width: 830,
-      height: 540,
+      height: 640,
       modal: true,
       closeText: "Fechar",
       close: function() {
         $('#dialog-form').remove();
       }
-
   });
-
   dialog_form.load(url + ' #modal-container', function(){
-
-    //to change the title, see hidden-title-label on new, edit or show page
     $(this).dialog('option',"title","Nova Solicitação");
     $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange);
     $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos);

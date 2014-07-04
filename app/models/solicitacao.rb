@@ -46,8 +46,12 @@ class Solicitacao < ActiveRecord::Base.extend Search
               s.gera_cobranca == true && s.projeto_id.present?
             } 
 
-  validates :peso, :numericality => {only_integer:true},
-            :if => Proc.new{|s| s.projeto_id.present?}
+  validates :peso, 
+            :numericality => {only_integer:true},
+            :if           => Proc.new {|s|
+              ([Status::AG_DESENV, Status::EM_DESENV].include? s.status_id) && 
+              s.projeto_id.present?
+            } 
 
   belongs_to :cliente
   belongs_to :projeto
