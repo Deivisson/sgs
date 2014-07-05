@@ -1,4 +1,5 @@
 <%- if @projeto.errors.any? %>
+  alert(@projeto.errors.full_messages);
   $('#dialog-form').html('<%= escape_javascript(render('form')) %>');
   //var qtd_errors = <%= @projeto.errors.count %>;
   //var tam = (650 + (qtd_errors * 12) );

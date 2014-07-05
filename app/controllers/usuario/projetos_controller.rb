@@ -42,6 +42,7 @@ class Usuario::ProjetosController < Usuario::BaseController
     else
       load_dados
     end
+    puts @projeto.errors.full_messages
     respond_with(@projeto)
   end
 

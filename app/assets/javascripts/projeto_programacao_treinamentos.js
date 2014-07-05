@@ -122,5 +122,6 @@ function bindSelecionaDataParaProgramacaoTreinamento(){
     $("#projeto_programacao_treinamento_data_programacao").val($.datepicker.formatDate('dd/mm/yy', new Date(date)));
     $('#dialog-form-professional-agenda').dialog('close');
     $('#dialog-form-professional-agenda').remove();
+    $('#projeto_programacao_treinamento_hora_programacao').focus();
   });
 }

@@ -19,6 +19,7 @@
     //$("#projeto-progresso").html('<%= escape_javascript(render partial:'usuario/projetos/projeto_resumo_progresso', locals: {projeto:@solicitacao.projeto})%>');
     //$("#projeto-participantes").html('<%= escape_javascript(render partial:'usuario/projetos/projeto_resumo_participantes', locals: {projeto:@solicitacao.projeto})%>');
     alert("Solicitação cadastrada com sucesso !!");
+    solicitacaoModalForm();
   <% else %>
     $(window.location.replace("/usuario/solicitacoes/<%= @solicitacao.id %>"));
   <% end %>

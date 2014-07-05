@@ -1,58 +1,73 @@
 <div id="cliente-checklist-itens-container">
-  <%= form_for @cliente_check_list_itens.first,
-             :url => shared_cliente_check_list_item_path, 
-             html: {:method => :put},
-             remote:true do %>
+  <% if @cliente_check_list_itens.empty? %>
+      <%= content_tag :div, 
+        "ATENÇÃO:: Itens de checklist não encontrados. Este itens são configurados e associados às soluções em que o cliente possui contratado. Verifique com o administrado do sistema para realizar esta configuração prévia. Após a configuração realizada, editar e gravar o projeto para que os itens sejam associados.",
+        class:'notification-alert' %>
+  <% else %>
+    <%= form_for @cliente_check_list_itens.first,
+               :url => shared_cliente_check_list_item_path, 
+               html: {:method => :put},
+               remote:true do %>
 
-    <table class="cliente-checklist-itens">
-      <thead>
-        <tr>
-          <th style="min-width:180px">Descrição Item</th>
-          <th>Disponível</th>
-          <th>Data Prevista</th>
-          <th>Motivo</th>
-          <th>Responsável</th>
-          <th>Nome Responsável</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @cliente_check_list_itens.each do |cliente_check_list_item| %>
-         <tr>
-          <td>
-            <%= cliente_check_list_item.check_list_item.descricao %>
-          </td>
-          <td>
-            <%= select_tag "check_lists[][#{cliente_check_list_item.id}][disponivel]", 
-                  options_for_select(options_for_disponivel,cliente_check_list_item.disponivel? ? 1 : 0 ),
-                  style:"max-width:100px;min-width:100px" %>
-          </td>
-          <td>
-            <%= text_field_tag "check_lists[][#{cliente_check_list_item.id}][data_prevista]", 
-                  formata_data(cliente_check_list_item.data_prevista),
-                  style:"max-width:90px;min-width:90px" %>
-          </td>
-          <td>
-            <%= text_field_tag "check_lists[][#{cliente_check_list_item.id}][motivo]",
-                  cliente_check_list_item.motivo,
-                  style:"max-width:300px;min-width:300px" %>
-          </td>
-          <td>
-            <%= select_tag "check_lists[][#{cliente_check_list_item.id}][responsavel]",
-                  options_for_select(options_for_responsavel,cliente_check_list_item.responsavel),
-                  include_blank: true,
-                  style:"max-width:100px;min-width:100px" %>
-          </td>
-          <td>
-            <%= text_field_tag "check_lists[][#{cliente_check_list_item.id}][nome_responsavel]",
-                  cliente_check_list_item.nome_responsavel,
-                  style:"max-width:180px;min-width:180px" %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div class="actions">
-      <%= submit_tag "Salvar", class:'update' %>
-    </div>
+      <table class="cliente-checklist-itens">
+        <thead>
+          <tr>
+            <th style="min-width:180px">Descrição Item</th>
+            <th>Disponível</th>
+            <th>Data Prevista</th>
+            <th>Motivo</th>
+            <th>Responsável</th>
+            <th>Nome Responsável</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cliente_check_list_itens.each do |cliente_check_list_item| %>
+           <tr>
+            <td>
+              <%= cliente_check_list_item.check_list_item.descricao %>
+            </td>
+            <td>
+              <%= select_tag "check_lists[][#{cliente_check_list_item.id}][disponivel]", 
+                    options_for_select(options_for_disponivel,cliente_check_list_item.disponivel? ? "1" : "0"),
+                    style:"max-width:100px;min-width:100px" %>
+            </td>
+            <td>
+              <%= text_field_tag "check_lists[][#{cliente_check_list_item.id}][data_prevista]", 
+                                  formata_data(cliente_check_list_item.data_prevista),
+                                  style:"max-width:90px;min-width:90px" %>
+                <% if cliente_check_list_item.errors[:data_prevista].present? %>
+                  <%= content_tag :label, 
+                      cliente_check_list_item.errors[:data_prevista].to_sentence,class:'error-label' %>
+                <% end %>
+            </td>
+            <td>
+              <%= text_field_tag "check_lists[][#{cliente_check_list_item.id}][motivo]",
+                    cliente_check_list_item.motivo,
+                    style:"max-width:300px;min-width:300px" %>
+
+                <% if cliente_check_list_item.errors[:motivo].present? %>
+                  <%= content_tag :label, 
+                      cliente_check_list_item.errors[:motivo].to_sentence,class:'error-label'  %>
+                <% end %>
+            </td>
+            <td>
+              <%= select_tag "check_lists[][#{cliente_check_list_item.id}][responsavel]",
+                    options_for_select(options_for_responsavel,cliente_check_list_item.responsavel),
+                    include_blank: true,
+                    style:"max-width:100px;min-width:100px" %>
+            </td>
+            <td>
+              <%= text_field_tag "check_lists[][#{cliente_check_list_item.id}][nome_responsavel]",
+                    cliente_check_list_item.nome_responsavel,
+                    style:"max-width:180px;min-width:180px" %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="actions">
+        <%= submit_tag "Salvar", class:'update' %>
+      </div>
+    <% end %>
   <% end %>
 </div>

@@ -28,11 +28,12 @@
                   <li class="choice">
                     <%= check_box_tag "solucao[check_list_item_ids][]",
                                     check_list_item.id ,
-                                    @solucao.check_list_item_ids.include?(check_list_item.id) %>
+                                    @solucao.check_list_item_ids.include?(check_list_item.id),
+                                    id:"check-list-item-ids-#{check_list_item.id}" %>
                     <%= content_tag :label,
                         check_list_item.descricao,
                         style:'min-width:400px',
-                        for:"solucao_ids_#{check_list_item.id}"  %>
+                        for:"check-list-item-ids-#{check_list_item.id}"  %>
                   </li>
                 <% end %>
             </o>

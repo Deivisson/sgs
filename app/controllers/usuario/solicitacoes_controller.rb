@@ -110,7 +110,8 @@ class Usuario::SolicitacoesController < Usuario::BaseController
         flash[:notice] = "Solicitação excluída com sucesso."
       end
     end
-    redirect_to usuario_solicitacoes_path
+    respond_with(@solicitacao,location:usuario_solicitacoes_path)
+    #redirect_to usuario_solicitacoes_path
   end
 
   #Valida quem esta tentando editar ou excluir uma solicitacao.

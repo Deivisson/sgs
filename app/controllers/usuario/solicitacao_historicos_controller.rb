@@ -22,8 +22,11 @@ class Usuario::SolicitacaoHistoricosController < Usuario::BaseController
   def destroy
     begin
       @solicitacao_historico = SolicitacaoHistorico.find(params[:id])
-      @solicitacao_historico.destroy
-      flash[:notice] = "Histórico excluído com sucesso."
+      if @solicitacao_historico.destroy
+        flash[:notice] = "Histórico excluído com sucesso."
+      else
+        flash[:warning] = @solicitacao_historico.errors.full_messages.to_sentence
+      end  
     rescue
       flash[:notice] = "Exclusão não permitida para este histórico."
     ensure

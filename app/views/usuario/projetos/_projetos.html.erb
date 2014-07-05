@@ -12,5 +12,8 @@
 	  </tbody>
 	</table>
 <% else %>
-	"Nada foi encontrado"
+  <%= content_tag :div, 
+	"Não há projetos a serem listados",
+  class:'notification-alert' %>
+
 <% end %>

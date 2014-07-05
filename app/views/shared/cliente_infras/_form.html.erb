@@ -16,8 +16,8 @@
         <%= f.input :banco_dados %>
         <%= f.input :numero_estacoes,
                     :label      =>  "Número de Estações" %>
-        <%= f.input :solucao_backup %>
-        <%= f.input :servidor_com_ride %>
+        <%= f.input :solucao_backup, label:"Possui Solução de Backup?" %>
+        <%= f.input :servidor_com_ride , label:"Servidor possui Ride ?"%>
       <% end %>
 
       <%= section_tag(legend:"Informações da área de TI") do %>  

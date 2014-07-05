@@ -2,7 +2,7 @@ $("#cliente-checklist-itens-container").html("<%= escape_javascript(render parti
 setMaskFields();
 <% @errors = [] %>
 <% @cliente_check_list_itens.each do |i| %>
-	<% @errors << i.errors if i.errors.any? %>
+	<% @errors << i.errors.full_messages if i.errors.any? %>
 <% end %>
 <% if @errors.any? %>
 	alert("Existem erros. Favor verificar!");

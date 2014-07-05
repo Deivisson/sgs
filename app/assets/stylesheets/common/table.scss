@@ -40,6 +40,10 @@ table tbody tr {
   background-color: #FFF;
   vertical-align: center;
   font-size:bold;
+  td label.error-label {
+    color: red;
+    font-size: 10px;
+  }
   &:hover {background-color:#d6e2e5;};
   &.unread {
     td {

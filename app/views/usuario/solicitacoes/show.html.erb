@@ -6,7 +6,8 @@
         <%= link_voltar("Voltar",true) %>
         <%= link_to 'Registrar Status', "#", id:'registrar-status-submit-link' %>   
         <%= link_to "Editar",  
-            [:edit, :usuario, @solicitacao], remote:true, id:'solicitacao-link',class:'first' %>         
+            [:edit, :usuario, @solicitacao], 
+            id:'solicitacao-link',class:'first' %>         
       </div>    
     <% end %>
     <%= content_tag :div, class:"detalhes" do %>

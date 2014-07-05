@@ -24,7 +24,8 @@ class Usuario::TarefasController < Usuario::BaseController
   def new
   	attributes = {
   		solicitacao_id:params[:solicitacao_id],
-  		usuario_id:params[:usuario_id]
+  		usuario_id:params[:usuario_id],
+      data_inicio:params[:date]
   	}
 		@tarefa = Tarefa.new(attributes)
   end

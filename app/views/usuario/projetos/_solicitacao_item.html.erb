@@ -1,4 +1,4 @@
-<%= content_tag :tr do %>
+<%= content_tag :tr,id:"solicitacao-#{solicitacao.id}" do %>
   <td width = "50">
     <%= link_to solicitacao.id.to_s.rjust(5,'0'), 
         [:usuario,solicitacao], class:'inline-link',style:"width:65%" %>
@@ -15,12 +15,13 @@
     <div class="container-oculto">
       <%= link_to image_tag(image_link[:edit]), 
         [:edit, :usuario, solicitacao], 
-        remote:true, 
         class:'solicitacao-link' %>
 
       <%= link_to image_tag(image_link[:del]), 
         [:usuario, solicitacao], 
-        :confirm => 'Confirma exclusão ?',:method => :delete %>
+        remote:true,
+        :confirm => 'Confirma exclusão ?',
+        :method => :delete %>
     </div>
   </td>
 <% end %>

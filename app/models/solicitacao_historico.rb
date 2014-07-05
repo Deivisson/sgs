@@ -13,10 +13,18 @@ class SolicitacaoHistorico < ActiveRecord::Base
 
   #callbacks 
   after_create :controla_status_da_solicitacao,:assinala_como_nao_lido
+  before_destroy :verifica_se_pode_voltar_status
   after_destroy :voltar_status
   
   
 private 
+
+  def verifica_se_pode_voltar_status
+    if self.solicitacao.tarefa.present? && self.status_id == Status::AG_DESENV
+      errors[:base] << "Solicitação já está no cronograma de desenvolvimento! Caso necessário excluá-o do cronograma."
+      return false
+    end
+  end
 
   def voltar_status
     controla_status_da_solicitacao(true)

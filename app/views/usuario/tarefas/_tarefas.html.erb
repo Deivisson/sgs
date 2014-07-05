@@ -5,7 +5,9 @@
 		<% else %>
 			PROGRAMADORES x SOLICITAÇÕES
 		<% end %>
-		<%= link_voltar %>
+		<%= content_tag :div, style:'float:right' do %>
+			<%= link_voltar %>
+		<% end %>
 	<% end %>
 	<div class='grid'>
 		<table>
@@ -25,11 +27,10 @@
 						<td width="140" class="first-col">
 							<%=content_tag :label, usuario.nome,class:'username'  %>
 						</td>
-
 						<% (@d_ini..@d_fim).each do |d| %>
-							<td width="80">
+							<td width="80" >
 								<ul id=<%="planejamento-usuarios-container-#{usuario.id}" %>
-									class="connectedSortable" controle=<%= usuario.id %> >
+									class="connectedSortable" controle=<%= usuario.id %>  date=<%= d %>>
 									<% usuario.tarefas_nao_finalizadas.each do |tarefa| %>
 										<% if tarefa.solicitacao.data_inicio == d %>
 											<%= content_tag :li, 
@@ -38,7 +39,7 @@
 													saved:true,
 													href:usuario_tarefa_path(tarefa),
 													edit_href:edit_usuario_tarefa_path(tarefa)  do %>
-												<%= tarefa.solicitacao.controle %>
+												<%= "#{tarefa.solicitacao.controle} - #{tarefa.previsao_duracao_horas} hrs" %>
 												<%= duracao_tarefa(tarefa) %>
 											<% end %>
 										<% end %>

@@ -41,7 +41,7 @@ class Projeto < ActiveRecord::Base.extend Search
   has_many :etapas_projetos
   has_many :etapas, through: :etapas_projetos
   has_and_belongs_to_many :solucoes
-
+{"cliente_id"=>"16", "nome"=>"Projeto de Reimplantação", "data_inicio"=>"10/07/2014", "data_prevista_termino"=>"10/08/2014", "solucao_ids"=>["1", "2"], "etapa_ids"=>["1", "4", "2"], "frequencia_visita"=>"1", "duracao_visita_horas"=>"04:00", "descricao"=>""}
   has_many :projetos_sub_modulos
   has_many :solucao_sub_modulos, :through => :projetos_sub_modulos
 
@@ -50,7 +50,7 @@ class Projeto < ActiveRecord::Base.extend Search
   attr_reader :peso_total
   attr_accessor :ordem, :duracao_visita_horas
 
-  before_validation :attribui_minutos_duracao_visita
+  before_validation :attribui_minutos_duracao_visita #, :set_status
   before_save :limpa_campos_atrelados_a_etapa_treinamento 
   after_save :atualiza_ordem_etapas,:save_solucao_sub_modulos, :atualiza_itens_check_list_cliente
   
@@ -194,6 +194,10 @@ private
     puts self.duracao_visita_minutos
   end
 
+  # def setar_status
+  #   self.status = A
+  # end
+
   def data_inicio_menor_que_data_atual
     return if data_inicio.nil? || !self.new_record?
     if data_inicio < Date.today 
@@ -210,7 +214,7 @@ private
   end
 
   def atualiza_itens_check_list_cliente
-    if possui_infra_estrutura?
+    if self.possui_infra_estrutura?
       self.solucoes.each do |s| 
         s.check_list_itens.each do |c|
           ClienteCheckListItem.where({check_list_item_id:c.id,cliente_id:self.cliente_id}).first_or_create!

@@ -16,8 +16,11 @@ function sortEvents() {
     href = ui.item.attr("edit_href");
     if (href == undefined) { 
       //Add a new Tarefa
+      var date = $(this).attr("date");
+      date = date.replace("-","/").replace("-","/");
       href = ui.item.attr("href");
       href += "&usuario_id="+$(this).attr("controle");
+      href += "&date="+ $.datepicker.formatDate('dd/mm/yy', new Date(date));
       ui.item.attr("saved",false);
       ui.item.text(ui.item.attr("controle"));
     }

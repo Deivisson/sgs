@@ -1,0 +1,8 @@
+<% if @solicitacao.errors.empty? %>
+	if($("tr#solicitacao-<%= @solicitacao.id %>").length > 0 )
+		$("tr#solicitacao-<%= @solicitacao.id %>").remove();
+
+		alert("Solicitação excluída com sucesso.");
+<% else %>
+	alert("Solicitação não pode ser excluída.");
+<% end %>
