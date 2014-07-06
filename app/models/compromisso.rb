@@ -27,6 +27,7 @@ class Compromisso < ActiveRecord::Base
 
 	before_validation on: :create  do
 		self.status = ATIVO
+		self.data_fim = self.data_inicio
 	end
 
 	def has_treinamento?
@@ -34,7 +35,7 @@ class Compromisso < ActiveRecord::Base
 	end
 
 	def to_text
-		"#{self.hora_inicio.to_s(:time)} - #{self.usuario.nome}"
+		"#{self.hora_inicio.to_s(:time)} às #{self.hora_fim.to_s(:time)} - #{self.usuario.nome}"
 	end
 
 	def status_descricao

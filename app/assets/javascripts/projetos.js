@@ -166,6 +166,11 @@ function callProgramacaoLink() {
     dialog_form.load(url + ' #modal-container-index-prog', function(){
       $(this).dialog('option',"title",$("#hidden-title-label-index-prog").text());
       bindShowProgramacaoTreinamentoLink();
+      $("table").tablesorter({
+        headers:{
+          0:{sorter:false}
+        }
+      });
     });
     dialog_form.dialog('open');
     e.preventDefault(e);

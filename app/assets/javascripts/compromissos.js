@@ -2,6 +2,7 @@ $(document).ready(function(){
   bindCallCompromissoShow();
   bindLinkNavegacaoMes();
   bindNewCompromissoForm();
+  bindCallAddNewCompromisso();
 });
 
 function  bindCallCompromissoShow(){
@@ -79,3 +80,13 @@ function bindLinkNavegacaoMes(){
   });
 }
 
+function bindCallAddNewCompromisso(){
+  if ($("a#new-compromisso-link").length > 0){
+    $('a.calendar-day-link').click(function(e){
+      var date = $(this).attr("date");
+      //date = date.replace("-","/").replace("-","/");
+      $(this).attr("href",$("a#new-compromisso-link").attr("href") + "?date="+date);
+      callCompromissoForm($(this),e);
+    });
+  }
+}

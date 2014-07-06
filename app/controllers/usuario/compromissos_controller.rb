@@ -24,7 +24,9 @@ class Usuario::CompromissosController < Usuario::BaseController
   end
 
   def new
-    @compromisso = Compromisso.new({usuario_id:current_usuario.id})
+    attributes = {usuario_id:current_usuario.id}
+    attributes.merge!(:data_inicio => params[:date]) if params[:date].present?
+    @compromisso = Compromisso.new(attributes)
     respond_with(@compromisso)
   end
 
