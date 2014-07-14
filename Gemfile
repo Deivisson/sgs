@@ -9,7 +9,8 @@ gem "formtastic"
 gem "paperclip"
 gem 'warden'
 gem 'devise', '2.0.4'
-gem 'prawn', git: 'https://github.com/prawnpdf/prawn.git'
+#gem 'prawn', git: 'https://github.com/prawnpdf/prawn.git'
+gem "prawn","~> 0.12.0"
 #gem "nokogiri", "~> 1.5.6"
 gem 'will_paginate'
 gem "brazilian-rails"

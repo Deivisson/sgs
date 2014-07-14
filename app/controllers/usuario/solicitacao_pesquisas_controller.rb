@@ -70,7 +70,7 @@ class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
 private
 
   def carrega_dados
-    @clientes = Cliente.all #.order(:nome)
+    @clientes = Cliente.order(:nome)
     @usuarios = Usuario.where("id > 1").order(:nome)
     @solucoes = Solucao.all #.order(:description)
     @modulos = SolucaoModulo.all

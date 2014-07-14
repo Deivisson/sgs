@@ -77,6 +77,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     @solicitacao = Solicitacao.new(params[:solicitacao])
     if @solicitacao.save
       flash[:notice] = "Solicitação cadastrada com sucesso."
+      respond_with(@solicitacao,location:usuario_solicitacao_path(@solicitacao))
     else
       carrega_dados
     end

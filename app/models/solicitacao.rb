@@ -11,7 +11,8 @@ class Solicitacao < ActiveRecord::Base.extend Search
                     :style => {:medium => "250x250>",:thumb => "100x100>"},
           					:path => ":rails_root/public/anexos/:class/:attachment/:id/:style/:basename.:extension",
           					:url => "/anexos/:class/:attachment/:id/:style/:basename.:extension"
-
+  do_not_validate_attachment_file_type :anexo
+  
   validates :cliente_id, presence:true
   validates :usuario_cadastrante_id, presence:true
   validates_presence_of :status_id,:prioridade_id, :solucao_sub_modulo_id
