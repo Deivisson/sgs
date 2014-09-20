@@ -25,7 +25,7 @@ group :development do
   gem 'rspec','~> 2.5.0'
   gem 'rspec-rails','~> 2.5.0'
   gem 'rspec-core', '~> 2.5.1'
- gem 'debugger'
+ 	#gem 'debugger'
 end
 
 

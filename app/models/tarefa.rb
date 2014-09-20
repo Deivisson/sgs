@@ -1,8 +1,10 @@
 # -*- encoding : utf-8 -*-
 include DataHoraHelper
 include ApplicationHelper
+
 class Tarefa < ActiveRecord::Base
-  
+  include ActionView::Helpers::NumberHelper 
+
 	validates :usuario_id, :presence => true
 	validates :solicitacao_id, :presence => true
   validates :data_hora_inicio,:presence => true
@@ -51,7 +53,7 @@ class Tarefa < ActiveRecord::Base
   end
 
   def valor_cobranca
-  	@valor_cobranca || (self.solicitacao.nil? ? nil : self.solicitacao.valor_cobranca)
+  	@valor_cobranca || (self.solicitacao.nil? ? nil : number_to_currency(self.solicitacao.valor_cobranca))
   end
 
   def data_inicio

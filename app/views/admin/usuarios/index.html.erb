@@ -13,7 +13,7 @@
   <tbody>
     <% @usuarios.each do |usuario| %>
       <tr>
-        <td width="100" >
+        <td>
           <%= link_to usuario.usuario_cargo.descricao,[:admin, usuario],class:'inline-link' unless usuario.usuario_cargo.nil? %>
         </td>
         <td><%=h usuario.nome %></td>

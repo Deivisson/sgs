@@ -36,8 +36,10 @@
 		  				 :input_html  => {:style => "margin-left: -10px;",
 		  				 :id    			=> "gera-cobranca-solicitacao" } %>
 
+		  
 		  <%= form.input :valor_cobranca,
 		  				 :label				=> "Valor Cobrança",
+		  				 :as          => :string,
 		  				 :input_html  => {:style 	  => "min-width: 210px;max-width: 210px;",
 							 :id 	  			=> "valor-cobranca-solicitacao"} %>
 		<% end %>
