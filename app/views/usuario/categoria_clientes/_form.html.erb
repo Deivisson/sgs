@@ -1,0 +1,14 @@
+<%= semantic_form_for [:usuario, @categoria_cliente] do |form| %>
+  <%= form.inputs do %>
+    <%= section_tag(:legend => "Informações da Categoria") do %>
+      <%= form.input :descricao, 
+                     :label => "Descrição",
+                     :input_html => {autofocus:true} %>
+    <% end %>
+  <% end %>
+
+  <%= form.actions :class => "buttons-container" do %>
+    <%= submit_button form  %>
+    <%= link_to_cancel usuario_categoria_clientes_path  %>
+  <% end %>
+ <% end %>

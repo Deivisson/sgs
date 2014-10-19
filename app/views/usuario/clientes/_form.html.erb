@@ -1,4 +1,4 @@
-<%= semantic_form_for [:admin,@cliente] do |form| %>
+<%= semantic_form_for [:usuario,@cliente] do |form| %>
     <div id="cliente-tabs" class="menutab-content">
       <%= content_tag :ul do %>
         <li>
@@ -31,7 +31,7 @@
 
   <%= form.actions :class => "buttons-container" do %>
      <%= submit_button form %>
-     <%= link_to_cancel admin_clientes_path %>
+     <%= link_to_cancel usuario_clientes_path %>
   <% end %>
 
 <% end %>

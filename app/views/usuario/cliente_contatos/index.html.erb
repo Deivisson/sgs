@@ -22,19 +22,13 @@
         <td><%=h cliente_contato.departamento %></td>
         <td><%=h cliente_contato.telefone %></td>
         <td><%=h cliente_contato.celular %></td>
-        <td><%= link_to image_tag(image_link[:show]), [:admin, cliente_contato] %></td>
+        <td><%= link_to image_tag(image_link[:show]), [:usuario, cliente_contato] %></td>
         <td><%= link_to image_tag(image_link[:edit]), 
-                    edit_admin_cliente_contato_path(cliente_contato) %></td>
+                    edit_usuario_cliente_contato_path(cliente_contato) %></td>
         <td><%= link_to image_tag(image_link[:del]), 
-              [:admin,cliente_contato], :confirm => 'Confirma Exclusão ?',
+              [:usuario,cliente_contato], :confirm => 'Confirma Exclusão ?',
                                       :method => :delete %></td>
       </tr>
     <% end %>
    </tbody> 
 </table>
-
-<p>
-  <li class ="links">
-    <%= link_to 'Novo Contato',new_admin_cliente_contato_path,:class => 'new' %>
-  </li>
-</p>

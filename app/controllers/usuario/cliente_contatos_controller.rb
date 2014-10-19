@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Admin::ClienteContatosController < Admin::BaseController
+class Usuario::ClienteContatosController < Usuario::CadastrosBasicosController
 
   before_filter :carrega_cliente_contato, :except => [:index,:new, :create]
 
@@ -22,7 +22,7 @@ class Admin::ClienteContatosController < Admin::BaseController
     @cliente_contato = ClienteContato.new(params[:cliente_contato])
     if @cliente_contato.save
       flash[:notice] = "Contato cadastrado com sucesso."
-        redirect_to [:admin, @cliente_contato.cliente]
+        redirect_to [:usuario, @cliente_contato.cliente]
     else
       render :action => 'new'
     end
@@ -35,7 +35,7 @@ class Admin::ClienteContatosController < Admin::BaseController
   def update
     if @cliente_contato.update_attributes(params[:cliente_contato])
       flash[:notice] = "Contato atualizado com sucesso."
-      redirect_to [:admin, @cliente_contato.cliente]
+      redirect_to [:usuario, @cliente_contato.cliente]
     else
       render :action => 'edit'
     end
@@ -48,7 +48,7 @@ class Admin::ClienteContatosController < Admin::BaseController
     rescue
       flash[:warning] = "Exclusao nao permitida para este contato."
     ensure
-      redirect_to [:admin, @cliente_contato.cliente]
+      redirect_to [:usuario, @cliente_contato.cliente]
     end
    end
 

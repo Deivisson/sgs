@@ -14,6 +14,7 @@ gem "prawn","~> 0.12.0"
 #gem "nokogiri", "~> 1.5.6"
 gem 'will_paginate'
 gem "brazilian-rails"
+gem 'validates_as_cnpj'
 gem 'responders'
 gem 'foreigner'
 gem 'delocalize', '~>0.2.3'
@@ -25,7 +26,7 @@ group :development do
   gem 'rspec','~> 2.5.0'
   gem 'rspec-rails','~> 2.5.0'
   gem 'rspec-core', '~> 2.5.1'
- gem 'debugger'
+ 	#gem 'debugger'
 end
 
 

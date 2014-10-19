@@ -27,8 +27,6 @@ Sgsoft::Application.routes.draw do
         post :atualiza_ordem
       end
     end
-    resources :clientes
-    resources :cliente_contatos
     resources :usuarios
     resources :usuario_cargos
     resources :tipo_pendencias
@@ -49,7 +47,8 @@ Sgsoft::Application.routes.draw do
   end
 
   namespace :usuario do
-
+    resources :clientes
+    resources :cliente_contatos
     resources :compromissos
     resources :versao_sistemas
     resources :usuario_configs
@@ -93,6 +92,8 @@ Sgsoft::Application.routes.draw do
     get '/resources/:modulo_id/solucao_sub_modulos', :to => 'resources#solucao_sub_modulos'
     get '/resources/:status_id/usuarios_responsaveis', :to => 'resources#usuarios_responsaveis'
 
+    resources :cadastros_basicos, only: :index
+    resources :categoria_clientes
   end
 
   namespace :shared do

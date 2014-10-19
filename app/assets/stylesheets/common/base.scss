@@ -49,13 +49,14 @@ body, p, ol, ul, td {
 }
 
 
-#flash_warning {
+
+#flash_warning , #flash_alert {
   padding: 5px 8px;
   margin: 0px 0px 5px 0px;
 
 }
 
-#flash_warning {
+#flash_warning, #flash_alert {
   background-color: #ffc3c6 ;
   border: solid 1px #e08a8e;
 }

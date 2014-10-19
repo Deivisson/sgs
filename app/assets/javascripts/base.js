@@ -59,7 +59,7 @@ $(document).ready(function(){
     
     //REMOVE Flash_notice ou Flash_warning
   $(function(){
-    if ($("#flash_notice").length > 0 || $("#flash_warning").length > 0)  {
+    if ($("#flash_notice").length > 0 || $("#flash_warning").length > 0 || $("#flash_alert").length > 0)  {
       setTimeout(removeFlashMenssage,10000);
     }
   });
@@ -70,6 +70,7 @@ $(document).ready(function(){
 function removeFlashMenssage() {
   $("#flash_notice").remove();
   $("#flash_warning").remove();
+  $("#flash_alert").remove();  
 }
 
 

@@ -3,7 +3,19 @@
     <p>
       <strong>Nome:</strong>
         <%=h @cliente.nome %>
-      </p>
+    </p>
+    <p>
+      <strong>Apelido:</strong>
+      <%= @cliente.apelido %>
+    </p>
+    <p>
+      <strong>Cnpj:</strong>
+      <%=h @cliente.cnpj_formatado %>
+    </p>
+    <p>
+      <strong>Categoria:</strong>
+      <%=h @cliente.categoria.descricao unless @cliente.categoria.nil? %>
+    </p>            
     <p>
       <strong>Endereço:</strong>
       <%=h @cliente.endereco %>

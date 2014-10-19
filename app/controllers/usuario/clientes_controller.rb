@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
-class Admin::ClientesController < Admin::BaseController
+class Usuario::ClientesController < Usuario::CadastrosBasicosController
   before_filter :carrega_cliente,   :except => [:index,:new, :create]
   before_filter :carrega_solucoes,  :except => [:index]
+  before_filter :carrega_dados,     :except => [:index,:destroy,:show]  
 
   def index
     @clientes = Cliente.order(:nome).paginate :page => params['page'], :per_page =>25
@@ -20,7 +21,7 @@ class Admin::ClientesController < Admin::BaseController
     @cliente = Cliente.new(params[:cliente])
     if @cliente.save
       flash[:notice] = "Cliente cadastrado com sucesso."
-      redirect_to [:admin,@cliente]
+      redirect_to [:usuario,@cliente]
     else
       render :action => 'new'
     end
@@ -31,7 +32,7 @@ class Admin::ClientesController < Admin::BaseController
   def update
     if @cliente.update_attributes(params[:cliente])
       flash[:notice] = "Cliente atualizado com sucesso."
-      redirect_to [:admin,@cliente]
+      redirect_to [:usuario,@cliente]
     else
       render :action => 'edit'
     end
@@ -44,7 +45,7 @@ class Admin::ClientesController < Admin::BaseController
     rescue
       flash[:warning] = "Exclusão não permitida para este cliente."
     ensure
-      redirect_to admin_clientes_url
+      redirect_to usuario_clientes_url
     end
   end
 
@@ -62,4 +63,7 @@ private
     end
   end
 
+  def carrega_dados
+    @categoria_clientes = CategoriaCliente.order(:descricao)
+  end
 end

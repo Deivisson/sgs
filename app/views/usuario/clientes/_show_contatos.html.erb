@@ -17,17 +17,17 @@
         <tr>
           <td>
             <%=link_to cliente_contato.nome,
-                admin_cliente_contato_path(:id => cliente_contato.id, :local => :cliente_show),
+                usuario_cliente_contato_path(:id => cliente_contato.id, :local => :cliente_show),
                 class:"inline-link" %>
           </td>
           <td><%=h cliente_contato.email %></td>
           <td><%=h cliente_contato.telefone %></td>
           <td><%=h cliente_contato.celular %></td>
           <td><%= link_to image_tag(image_link[:edit]), 
-                  edit_admin_cliente_contato_path(cliente_contato,:local => :cliente_show) %></td>
+                  edit_usuario_cliente_contato_path(cliente_contato,:local => :cliente_show) %></td>
           
           <td><%= link_to image_tag(image_link[:del]),  
-                      [:admin,cliente_contato], 
+                      [:usuario,cliente_contato], 
                       :confirm => 'Confirma Exclusão ?',
                       :method => :delete %></td>
         </tr>
@@ -38,7 +38,7 @@
   <p>
     <li class ="links">
       <%= link_to 'Novo Contato',
-        new_admin_cliente_contato_path(:cliente => @cliente,:local => :cliente_show) %>
+        new_usuario_cliente_contato_path(:cliente => @cliente,:local => :cliente_show) %>
     </li>
   </p>
 </div>

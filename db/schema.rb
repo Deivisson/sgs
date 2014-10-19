@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140629131322) do
+ActiveRecord::Schema.define(:version => 20141019184006) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -45,6 +45,12 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
   add_index "atendimentos", ["cliente_id"], :name => "index_atendimentos_on_cliente_id"
   add_index "atendimentos", ["usuario_cadastrante_id"], :name => "index_atendimentos_on_usuario_cadastrante_id"
   add_index "atendimentos", ["usuario_solicitante_id"], :name => "index_atendimentos_on_usuario_solicitante_id"
+
+  create_table "categoria_clientes", :force => true do |t|
+    t.string   "descricao",  :limit => 100, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
 
   create_table "check_list_itens", :force => true do |t|
     t.string   "descricao",  :limit => 50, :null => false
@@ -111,21 +117,26 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
   add_index "cliente_infras", ["cliente_id"], :name => "cliente_infras_clientes"
 
   create_table "clientes", :force => true do |t|
-    t.string   "nome",               :limit => 50,                                                 :null => false
-    t.string   "endereco",           :limit => 50
-    t.string   "complemento",        :limit => 30
-    t.string   "bairro",             :limit => 30
-    t.string   "cidade",             :limit => 50
-    t.string   "uf",                 :limit => 2
-    t.string   "cep",                :limit => 8
-    t.string   "telefone",           :limit => 11
-    t.string   "fax",                :limit => 11
+    t.string   "nome",                 :limit => 50,                                                  :null => false
+    t.string   "endereco",             :limit => 50
+    t.string   "complemento",          :limit => 30
+    t.string   "bairro",               :limit => 30
+    t.string   "cidade",               :limit => 50
+    t.string   "uf",                   :limit => 2
+    t.string   "cep",                  :limit => 8
+    t.string   "telefone",             :limit => 11
+    t.string   "fax",                  :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "minutos_bonus",                                                   :default => 0,   :null => false
-    t.decimal  "valor_hora_visita",                :precision => 10, :scale => 6, :default => 0.0, :null => false
-    t.decimal  "valor_deslocamento",               :precision => 5,  :scale => 2, :default => 0.0, :null => false
+    t.integer  "minutos_bonus",                                                      :default => 0,   :null => false
+    t.decimal  "valor_hora_visita",                   :precision => 10, :scale => 6, :default => 0.0, :null => false
+    t.decimal  "valor_deslocamento",                  :precision => 5,  :scale => 2, :default => 0.0, :null => false
+    t.string   "apelido",              :limit => 100,                                                 :null => false
+    t.string   "cnpj",                 :limit => 14,                                                  :null => false
+    t.integer  "categoria_cliente_id"
   end
+
+  add_index "clientes", ["categoria_cliente_id"], :name => "clientes_categorias_clientes"
 
   create_table "clientes_solucao_sub_modulos", :id => false, :force => true do |t|
     t.integer  "cliente_id",            :null => false
@@ -518,9 +529,9 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
     t.integer  "usuario_id"
     t.integer  "solicitacao_id"
     t.datetime "data_hora_inicio"
-    t.datetime "data_hora_fim"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.datetime "data_hora_fim"
   end
 
   add_index "tarefas", ["solicitacao_id"], :name => "tarefas_solicitacoes"
@@ -606,6 +617,8 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
 
   add_foreign_key "cliente_infras", "clientes", name: "cliente_infras_clientes"
 
+  add_foreign_key "clientes", "categoria_clientes", name: "clientes_categorias_clientes"
+
   add_foreign_key "clientes_solucao_sub_modulos", "clientes", name: "clientes_solucao_sub_modulos_clientes"
   add_foreign_key "clientes_solucao_sub_modulos", "solucao_sub_modulos", name: "clientes_solucao_sub_modulos_solucao_sub_modulos"
 
@@ -638,7 +651,6 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
   add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "solucao_sub_modulos", name: "programacao_treinamentos_solucao_sub_modulos"
 
   add_foreign_key "projetos", "clientes", name: "fk_projetos_clientes"
-  add_foreign_key "projetos", "usuarios", name: "fk_projetos_usuarios"
 
   add_foreign_key "projetos_solucoes", "projetos", name: "projetos_solucoes_projetos"
   add_foreign_key "projetos_solucoes", "solucoes", name: "projetos_solucoes_solucoes"

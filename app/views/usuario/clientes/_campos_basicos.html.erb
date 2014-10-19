@@ -1,0 +1,13 @@
+<div id="aba-cliente-basicos">
+	<%= form.inputs do %>
+	  <%= section_tag  do %>
+      <%= form.input :nome, :required => true, :input_html => {:autofocus => true} %>
+      <%= form.input :apelido %>
+      <%= form.input :cnpj %>
+      <%= form.input :categoria_cliente_id,
+      							 :as 				 => :select,
+      							 :required   => true,
+      							 :collection => @categoria_clientes.collect{|c|[c.descricao,c.id]} %>
+	  <% end %>
+	<% end %>
+</div>

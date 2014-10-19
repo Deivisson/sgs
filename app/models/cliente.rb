@@ -22,6 +22,9 @@ class Cliente < ActiveRecord::Base
             :numericality => {:greater_than => 0}  
 
   validates :minutos_bonus, :presence => true #minutos de bonus do cliente
+  validates :apelido, length: {maximum:100},presence:true, uniqueness:true
+  validates :cnpj, presence:true, length: {maximum:14}, uniqueness:true, cnpj:true
+  validates :categoria_cliente_id, presence:true
 
   has_many :cliente_contatos
   has_many :pendencias
@@ -35,8 +38,12 @@ class Cliente < ActiveRecord::Base
   has_many :projetos
   has_one :infra, class_name:'ClienteInfra'
   has_many :check_list_items, class_name:"ClienteCheckListItem"
+  belongs_to :categoria, 
+             class_name: "CategoriaCliente",
+             foreign_key: "categoria_cliente_id"
 
   attr_accessor :horas_bonus
+  #usar_como_cnpj :cnpj
 
   scope :to_select, :select => 'nome,id', :order => :nome
   
@@ -46,6 +53,9 @@ class Cliente < ActiveRecord::Base
     :conditions => ['usuarios.id = ?',usuario_id]
   }}
 
+  before_validation do
+    self.cnpj = self.cnpj.gsub(/[.-\/-]/,'') #Remove mascara do cnpj
+  end
   before_save :calcula_minutos_de_bonus
   after_create do 
     self.infra = ClienteInfra.new
@@ -78,6 +88,14 @@ class Cliente < ActiveRecord::Base
                 )
               SQL
     SolucaoModulo.where(inner_sql).collect{|m| m.id}
+  end
+
+  def cnpj_formatado
+    return unless self.cnpj.present?
+    numero = self.cnpj
+    numero =~ /(\d{2})\.?(\d{3})\.?(\d{3})\/?(\d{4})-?(\d{2})/
+    numero = "#{$1}.#{$2}.#{$3}/#{$4}-#{$5}"
+    return numero
   end
   # def valor_hora_visita
   #   return 0 unless valor_minuto_visita > 0 

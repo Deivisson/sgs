@@ -1,4 +1,4 @@
-<%= semantic_form_for [:admin, @cliente_contato] do |form| %>
+<%= semantic_form_for [:usuario, @cliente_contato] do |form| %>
 
   <%= form.inputs do %>
     <%= section_tag(:legend => "Informações do Contato") do %>
@@ -29,6 +29,6 @@
 
   <%= form.actions :class => "buttons-container" do %>
     <%= submit_button form  %>
-    <%= link_to_cancel [:admin, @cliente_contato.cliente]  %>
+    <%= link_to_cancel [:usuario, @cliente_contato.cliente]  %>
   <% end %>
  <% end %>

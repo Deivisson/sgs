@@ -28,11 +28,11 @@
 <p>
    <% if @local == 'cliente_show' %> 
       <li class ="links">
-        <%= link_to 'Voltar',[:admin, @cliente_contato.cliente],:class => 'back' %>
+        <%= link_to 'Voltar',[:usuario, @cliente_contato.cliente],:class => 'back' %>
       </li>
    <% else %>
       <li class ="links">
-        <%= link_to 'Voltar',admin_cliente_contatos_path,:class => 'back' %>
+        <%= link_to 'Voltar',usuario_cliente_contatos_path,:class => 'back' %>
       </li>
    <% end %>
 </p>

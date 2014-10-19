@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application', :media => "all" %>
+  <%= javascript_include_tag  "//tinymce.cachefly.net/4.0/tinymce.min.js" %>
+  <%= yield(:tiny_mce) %>  
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <%= render "/shared/header" %>
+  <div class = "left">
+    <%= render "/shared/main_lateral_menu_bar" %>
+    <ul class="left-col-container">
+      <ul class="menu-cadastros-basicos">
+        <li>
+          <h1 class="clientes">Clientes</h1>
+          <ul>
+            <li><%= link_to 'Listagem',usuario_clientes_path %></li>
+            <li><%= link_to 'Categorias Cliente',usuario_categoria_clientes_path %></li>
+          </ul>
+        </li>
+      </ul>
+    </ul>
+  </div>
+
+  <div id="toolbar" >
+    <%- if show_title? -%>
+      <h1 class="title" id="content-title" ><%=h yield(:title) %></h1>
+    <%- end -%>
+    <%= yield :bar %>
+  </div>
+
+  <div class="content">
+    <div id="container" >
+
+    </div>
+    <%= yield %>
+  </div>
+
+ </body>
+</html>
