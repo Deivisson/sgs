@@ -80,7 +80,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
       respond_with(@solicitacao,location:usuario_solicitacao_path(@solicitacao))
     else
       carrega_dados
-    end
+    end 
   end
 
   def edit

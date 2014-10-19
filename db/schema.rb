@@ -518,9 +518,9 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
     t.integer  "usuario_id"
     t.integer  "solicitacao_id"
     t.datetime "data_hora_inicio"
+    t.datetime "data_hora_fim"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.datetime "data_hora_fim"
   end
 
   add_index "tarefas", ["solicitacao_id"], :name => "tarefas_solicitacoes"
@@ -595,97 +595,98 @@ ActiveRecord::Schema.define(:version => 20140629131322) do
     t.datetime "updated_at"
   end
 
-  add_foreign_key "atendimentos", "clientes", :name => "fk_atendimentos_clientes"
-  add_foreign_key "atendimentos", "usuarios", :name => "fk_atendimentos_usuario_cadastrante", :column => "usuario_cadastrante_id"
-  add_foreign_key "atendimentos", "usuarios", :name => "fk_atendimentos_usuario_solicitante", :column => "usuario_solicitante_id"
+  add_foreign_key "atendimentos", "clientes", name: "fk_atendimentos_clientes"
+  add_foreign_key "atendimentos", "usuarios", name: "fk_atendimentos_usuario_cadastrante", column: "usuario_cadastrante_id"
+  add_foreign_key "atendimentos", "usuarios", name: "fk_atendimentos_usuario_solicitante", column: "usuario_solicitante_id"
 
-  add_foreign_key "cliente_check_list_itens", "check_list_itens", :name => "cliente_check_lists_check_list_itens"
-  add_foreign_key "cliente_check_list_itens", "clientes", :name => "cliente_check_lists_clientes"
+  add_foreign_key "cliente_check_list_itens", "check_list_itens", name: "cliente_check_lists_check_list_itens"
+  add_foreign_key "cliente_check_list_itens", "clientes", name: "cliente_check_lists_clientes"
 
-  add_foreign_key "cliente_contatos", "clientes", :name => "fk_cliente_contatos_clientes"
+  add_foreign_key "cliente_contatos", "clientes", name: "fk_cliente_contatos_clientes"
 
-  add_foreign_key "cliente_infras", "clientes", :name => "cliente_infras_clientes"
+  add_foreign_key "cliente_infras", "clientes", name: "cliente_infras_clientes"
 
-  add_foreign_key "clientes_solucao_sub_modulos", "clientes", :name => "clientes_solucao_sub_modulos_clientes"
-  add_foreign_key "clientes_solucao_sub_modulos", "solucao_sub_modulos", :name => "clientes_solucao_sub_modulos_solucao_sub_modulos"
+  add_foreign_key "clientes_solucao_sub_modulos", "clientes", name: "clientes_solucao_sub_modulos_clientes"
+  add_foreign_key "clientes_solucao_sub_modulos", "solucao_sub_modulos", name: "clientes_solucao_sub_modulos_solucao_sub_modulos"
 
-  add_foreign_key "clientes_solucoes", "clientes", :name => "clientes_projetos_cliente_id_fk", :dependent => :delete
-  add_foreign_key "clientes_solucoes", "solucoes", :name => "fk_solucoes_clientes"
+  add_foreign_key "clientes_solucoes", "clientes", name: "clientes_projetos_cliente_id_fk", dependent: :delete
+  add_foreign_key "clientes_solucoes", "solucoes", name: "fk_solucoes_clientes"
 
-  add_foreign_key "compromissos", "projeto_programacao_treinamentos", :name => "compromissos_projeto_programacao_treinamentos"
-  add_foreign_key "compromissos", "usuarios", :name => "compromissos_usuario_cadastrante", :column => "usuario_cadastrante_id"
-  add_foreign_key "compromissos", "usuarios", :name => "compromissos_usuarios"
+  add_foreign_key "compromissos", "projeto_programacao_treinamentos", name: "compromissos_projeto_programacao_treinamentos"
+  add_foreign_key "compromissos", "usuarios", name: "compromissos_usuario_cadastrante", column: "usuario_cadastrante_id"
+  add_foreign_key "compromissos", "usuarios", name: "compromissos_usuarios"
 
-  add_foreign_key "consulta_campos", "consultas", :name => "fk_consulta_campos_consultas"
+  add_foreign_key "consulta_campos", "consultas", name: "fk_consulta_campos_consultas"
 
-  add_foreign_key "etapas_projetos", "etapas", :name => "fk_etapas_projetos_etapas"
-  add_foreign_key "etapas_projetos", "projetos", :name => "fk_etapas_projetos_projetos"
+  add_foreign_key "etapas_projetos", "etapas", name: "fk_etapas_projetos_etapas"
+  add_foreign_key "etapas_projetos", "projetos", name: "fk_etapas_projetos_projetos"
 
-  add_foreign_key "ordem_servico_itens", "ordem_servicos", :name => "fk_ordem_servico_itens_ordem_servico"
-  add_foreign_key "ordem_servico_itens", "situacoes", :name => "fk_ordem_servico_itens_situacoes"
-  add_foreign_key "ordem_servico_itens", "solucao_sub_modulos", :name => "fk_solucao_sub_modulos_ordem_servico_itens"
-  add_foreign_key "ordem_servico_itens", "tipo_avaliacoes", :name => "fk_ordem_servico_itens_tipo_avaliacoes"
+  add_foreign_key "ordem_servico_itens", "ordem_servicos", name: "fk_ordem_servico_itens_ordem_servico"
+  add_foreign_key "ordem_servico_itens", "situacoes", name: "fk_ordem_servico_itens_situacoes"
+  add_foreign_key "ordem_servico_itens", "solucao_sub_modulos", name: "fk_solucao_sub_modulos_ordem_servico_itens"
+  add_foreign_key "ordem_servico_itens", "tipo_avaliacoes", name: "fk_ordem_servico_itens_tipo_avaliacoes"
 
-  add_foreign_key "ordem_servicos", "cliente_contatos", :name => "fk_ordem_servicos_cliente_contato"
-  add_foreign_key "ordem_servicos", "clientes", :name => "fk_ordem_servicos_cliente"
-  add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_cadastrantes", :column => "usuario_cadastrante_id"
-  add_foreign_key "ordem_servicos", "usuarios", :name => "fk_ordem_servicos_usuarios_responsaveis", :column => "usuario_responsavel_id"
+  add_foreign_key "ordem_servicos", "cliente_contatos", name: "fk_ordem_servicos_cliente_contato"
+  add_foreign_key "ordem_servicos", "clientes", name: "fk_ordem_servicos_cliente"
+  add_foreign_key "ordem_servicos", "usuarios", name: "fk_ordem_servicos_usuarios_cadastrantes", column: "usuario_cadastrante_id"
+  add_foreign_key "ordem_servicos", "usuarios", name: "fk_ordem_servicos_usuarios_responsaveis", column: "usuario_responsavel_id"
 
-  add_foreign_key "projeto_programacao_treinamentos", "projetos", :name => "projeto_programacao_treinamentos_projetos"
-  add_foreign_key "projeto_programacao_treinamentos", "usuarios", :name => "projeto_programacao_treinamentos_usuarios"
+  add_foreign_key "projeto_programacao_treinamentos", "projetos", name: "projeto_programacao_treinamentos_projetos"
+  add_foreign_key "projeto_programacao_treinamentos", "usuarios", name: "projeto_programacao_treinamentos_usuarios"
 
-  add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "projeto_programacao_treinamentos", :name => "projeto_programacao_treinamentos"
-  add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "solucao_sub_modulos", :name => "programacao_treinamentos_solucao_sub_modulos"
+  add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "projeto_programacao_treinamentos", name: "projeto_programacao_treinamentos"
+  add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "solucao_sub_modulos", name: "programacao_treinamentos_solucao_sub_modulos"
 
-  add_foreign_key "projetos", "clientes", :name => "fk_projetos_clientes"
+  add_foreign_key "projetos", "clientes", name: "fk_projetos_clientes"
+  add_foreign_key "projetos", "usuarios", name: "fk_projetos_usuarios"
 
-  add_foreign_key "projetos_solucoes", "projetos", :name => "projetos_solucoes_projetos"
-  add_foreign_key "projetos_solucoes", "solucoes", :name => "projetos_solucoes_solucoes"
+  add_foreign_key "projetos_solucoes", "projetos", name: "projetos_solucoes_projetos"
+  add_foreign_key "projetos_solucoes", "solucoes", name: "projetos_solucoes_solucoes"
 
-  add_foreign_key "projetos_sub_modulos", "projetos", :name => "projetos_sub_modulos_projetos"
-  add_foreign_key "projetos_sub_modulos", "solucao_sub_modulos", :name => "projetos_sub_modulos_solucao_sub_modulo"
+  add_foreign_key "projetos_sub_modulos", "projetos", name: "projetos_sub_modulos_projetos"
+  add_foreign_key "projetos_sub_modulos", "solucao_sub_modulos", name: "projetos_sub_modulos_solucao_sub_modulo"
 
-  add_foreign_key "solicitacao_historicos", "solicitacoes", :name => "fk_solicitacao_historico_solicitacoes", :dependent => :delete
-  add_foreign_key "solicitacao_historicos", "status", :name => "fk_solicitacao_historico_status"
-  add_foreign_key "solicitacao_historicos", "usuarios", :name => "fk_solicitacao_historico_usuario_responsavel", :column => "usuario_responsavel_id"
-  add_foreign_key "solicitacao_historicos", "usuarios", :name => "fk_solicitacao_historico_usuarios"
+  add_foreign_key "solicitacao_historicos", "solicitacoes", name: "fk_solicitacao_historico_solicitacoes", dependent: :delete
+  add_foreign_key "solicitacao_historicos", "status", name: "fk_solicitacao_historico_status"
+  add_foreign_key "solicitacao_historicos", "usuarios", name: "fk_solicitacao_historico_usuario_responsavel", column: "usuario_responsavel_id"
+  add_foreign_key "solicitacao_historicos", "usuarios", name: "fk_solicitacao_historico_usuarios"
 
-  add_foreign_key "solicitacao_log_alteracao_itens", "solicitacao_log_alteracoes", :name => "solicitacao_log_alteracao_itens_log_alteracao"
+  add_foreign_key "solicitacao_log_alteracao_itens", "solicitacao_log_alteracoes", name: "solicitacao_log_alteracao_itens_log_alteracao"
 
-  add_foreign_key "solicitacao_log_alteracoes", "solicitacoes", :name => "solicitacao_log_alteracoes_solicitacoes"
-  add_foreign_key "solicitacao_log_alteracoes", "usuarios", :name => "solicitacao_log_alteracoes_usuarios"
+  add_foreign_key "solicitacao_log_alteracoes", "solicitacoes", name: "solicitacao_log_alteracoes_solicitacoes"
+  add_foreign_key "solicitacao_log_alteracoes", "usuarios", name: "solicitacao_log_alteracoes_usuarios"
 
-  add_foreign_key "solicitacoes", "cliente_contatos", :name => "fk_solicitacoes_cliente_contatos_id"
-  add_foreign_key "solicitacoes", "clientes", :name => "fk_solicitacoes_clientes"
-  add_foreign_key "solicitacoes", "etapas", :name => "fk_solicitacoes_etapas"
-  add_foreign_key "solicitacoes", "ordem_servicos", :name => "fk_solicitacoes_ordem_servicos"
-  add_foreign_key "solicitacoes", "prioridades", :name => "fk_solicitacoes_prioridades"
-  add_foreign_key "solicitacoes", "projetos", :name => "fk_solicitacoes_projetos"
-  add_foreign_key "solicitacoes", "solucao_sub_modulos", :name => "fk_solucao_sub_modulos_solicitacoes"
-  add_foreign_key "solicitacoes", "status", :name => "fk_solicitacoes_status"
-  add_foreign_key "solicitacoes", "tipo_pendencias", :name => "fk_solicitacoes_tipo_pendencias"
-  add_foreign_key "solicitacoes", "usuarios", :name => "fk_pendencias_itens_usuario_responsavel", :column => "usuario_responsavel_id"
-  add_foreign_key "solicitacoes", "usuarios", :name => "fk_solicitacaoes_usuario_cadastrante", :column => "usuario_cadastrante_id"
+  add_foreign_key "solicitacoes", "cliente_contatos", name: "fk_solicitacoes_cliente_contatos_id"
+  add_foreign_key "solicitacoes", "clientes", name: "fk_solicitacoes_clientes"
+  add_foreign_key "solicitacoes", "etapas", name: "fk_solicitacoes_etapas"
+  add_foreign_key "solicitacoes", "ordem_servicos", name: "fk_solicitacoes_ordem_servicos"
+  add_foreign_key "solicitacoes", "prioridades", name: "fk_solicitacoes_prioridades"
+  add_foreign_key "solicitacoes", "projetos", name: "fk_solicitacoes_projetos"
+  add_foreign_key "solicitacoes", "solucao_sub_modulos", name: "fk_solucao_sub_modulos_solicitacoes"
+  add_foreign_key "solicitacoes", "status", name: "fk_solicitacoes_status"
+  add_foreign_key "solicitacoes", "tipo_pendencias", name: "fk_solicitacoes_tipo_pendencias"
+  add_foreign_key "solicitacoes", "usuarios", name: "fk_pendencias_itens_usuario_responsavel", column: "usuario_responsavel_id"
+  add_foreign_key "solicitacoes", "usuarios", name: "fk_solicitacaoes_usuario_cadastrante", column: "usuario_cadastrante_id"
 
-  add_foreign_key "solucao_modulos", "solucoes", :name => "fk_modulos_solucoes"
+  add_foreign_key "solucao_modulos", "solucoes", name: "fk_modulos_solucoes"
 
-  add_foreign_key "solucao_sub_modulos", "solucao_modulos", :name => "fk_solucao_sub_modulos_projeto_modulos"
+  add_foreign_key "solucao_sub_modulos", "solucao_modulos", name: "fk_solucao_sub_modulos_projeto_modulos"
 
-  add_foreign_key "solucoes_usuarios", "solucoes", :name => "fk_solucoes_solucoes_usuarios"
-  add_foreign_key "solucoes_usuarios", "usuarios", :name => "projetos_usuarios_usuario_id_fk", :dependent => :delete
+  add_foreign_key "solucoes_usuarios", "solucoes", name: "fk_solucoes_solucoes_usuarios"
+  add_foreign_key "solucoes_usuarios", "usuarios", name: "projetos_usuarios_usuario_id_fk", dependent: :delete
 
-  add_foreign_key "status_tempo_evolucoes", "prioridades", :name => "status_tempo_evolucoes_prioridades"
-  add_foreign_key "status_tempo_evolucoes", "status", :name => "status_tempo_evolucoes_status"
-  add_foreign_key "status_tempo_evolucoes", "tipo_pendencias", :name => "status_tempo_evolucoes_tipo_pendencias"
+  add_foreign_key "status_tempo_evolucoes", "prioridades", name: "status_tempo_evolucoes_prioridades"
+  add_foreign_key "status_tempo_evolucoes", "status", name: "status_tempo_evolucoes_status"
+  add_foreign_key "status_tempo_evolucoes", "tipo_pendencias", name: "status_tempo_evolucoes_tipo_pendencias"
 
-  add_foreign_key "status_usuario_cargos", "status", :name => "fk_status_usuario_cargos_status"
-  add_foreign_key "status_usuario_cargos", "usuario_cargos", :name => "fk_status_usuario_cargos_cargos"
+  add_foreign_key "status_usuario_cargos", "status", name: "fk_status_usuario_cargos_status"
+  add_foreign_key "status_usuario_cargos", "usuario_cargos", name: "fk_status_usuario_cargos_cargos"
 
-  add_foreign_key "tarefas", "solicitacoes", :name => "tarefas_solicitacoes"
-  add_foreign_key "tarefas", "usuarios", :name => "tarefas_usuarios"
+  add_foreign_key "tarefas", "solicitacoes", name: "tarefas_solicitacoes"
+  add_foreign_key "tarefas", "usuarios", name: "tarefas_usuarios"
 
-  add_foreign_key "usuario_configs", "usuarios", :name => "usuario_configs_usuario_id_fk", :dependent => :delete
+  add_foreign_key "usuario_configs", "usuarios", name: "usuario_configs_usuario_id_fk", dependent: :delete
 
-  add_foreign_key "usuarios", "usuario_cargos", :name => "fk_usuarios_usuarios_cargos"
+  add_foreign_key "usuarios", "usuario_cargos", name: "fk_usuarios_usuarios_cargos"
 
 end

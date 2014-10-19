@@ -1,12 +1,12 @@
 <%= content_tag :tr,id:"solicitacao-#{solicitacao.id}" do %>
   <td width = "50">
     <%= link_to solicitacao.id.to_s.rjust(5,'0'), 
-        [:usuario,solicitacao], class:'inline-link',style:"width:65%" %>
+        [:usuario,solicitacao], class:'inline-link',style:"width:65%;position:relative" %>
   </td>
-  <td><%=h solicitacao.cliente.nome %></td>
-  <td><%=h solicitacao.titulo %></td>
-  <td><%=h solicitacao.solucao_sub_modulo.descricao %></td>
-  <td><%=h solicitacao.usuario_responsavel.nome %></td>
+  <td><%=h link_to solicitacao.cliente.nome,[:usuario,solicitacao], class:'inline-link' ,style:"width:65%;position:relative" %></td>
+  <td><%=h link_to solicitacao.titulo,[:usuario,solicitacao], class:'inline-link',style:"width:65%;position:relative"  %></td>
+  <td><%=h link_to solicitacao.solucao_sub_modulo.descricao, [:usuario,solicitacao], class:'inline-link',style:"width:65%;position:relative"  %></td>
+  <td><%=h link_to solicitacao.usuario_responsavel.nome,[:usuario,solicitacao],class:'inline-link' ,style:"width:65%;position:relative" %></td>
   <td><%=h solicitacao.prioridade.descricao %></td>
   <td><%=h solicitacao.tipo_pendencia.descricao %></td>
   <td><%= content_tag :span, solicitacao.status.descricao, class:'labels label-info'%></td>

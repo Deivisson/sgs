@@ -6,6 +6,10 @@ module DataHoraHelper
 
 	def total_segundos(horas)
 		return 0 if horas.nil? || horas.to_s.empty?
+		#horas =  Time.parse(horas) if horas.is_a? String
+		#intervalo_segundos =  horas.strftime("%H").to_i * 60 * 60
+		#intervalo_segundos += horas.strftime("%M").to_i * 60
+		#intervalo_segundos
 		horas =  horas.strftime("%H:%M") unless horas.is_a? String
 		hora, minuto = horas.to_s.split(":").map(&:to_i)
 		intervalo_segundos =  hora * 60 * 60
