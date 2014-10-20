@@ -13,7 +13,7 @@ development:
  encoding: utf8
  reconnect: false
  database: siematec
- #database: sgs_development
+ #database: siematec_production
  pool: 5
  username: root
  password: master1
@@ -23,7 +23,7 @@ test:
  adapter: mysql2
  encoding: utf8
  reconnect: false
- database: siematec_production
+ database: siematec
  #database: sgs_development
  pool: 5
  username: root
@@ -34,9 +34,9 @@ production:
  adapter: mysql2
  encoding: utf8
  reconnect: false
- database: siematec #siematec_production
+ database: siematec
  #database: sgs_development
  pool: 5
  username: root
- password: master1
+ password: Sie35040605
  host: localhost

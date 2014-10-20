@@ -1,0 +1,13 @@
+<% content_for :search_field_container do  %>
+  <%= form_tag usuario_clientes_path,
+                  :method => :get, :remote => true do %>
+
+    <%= text_field_tag "conteudo_busca_cliente",@conteudo_busca_cliente || "",
+        {:class => "header-search-field",
+         :placeholder => "Pesquisar Clientes",
+         :autofocus   => true } %>
+
+    <%= submit_tag "", :class => "search-buttom" %>
+    <label>Digite o Nome, Apelido ou CNPJ(apenas números) </label>
+  <% end %>
+<% end %>
