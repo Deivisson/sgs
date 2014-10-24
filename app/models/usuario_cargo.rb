@@ -7,6 +7,8 @@ class UsuarioCargo < ActiveRecord::Base
   has_many :usuarios
   has_and_belongs_to_many :status
 
+  has_and_belongs_to_many :permissoes
+
 
   def self.carrega_status_permitidos(cargo_id,status_id)
     status_usuario_cargos = StatusUsuarioCargo.all(:conditions => {:usuario_cargo_id => cargo_id, :status_id => status_id}).first

@@ -47,6 +47,16 @@ class Usuario < ActiveRecord::Base
                       :url => "/images/uploads/:class/:attachment/:id/:style/:basename.:extension",
                       :default_url => "/assets/foto/foto.png"
 
+  Permissao.all.each do |permissao|
+    define_method("permission_#{permissao.chave}?".to_sym) do
+      self.minhas_permissoes.include?(permissao.id)
+    end 
+  end
+
+  def minhas_permissoes
+    @minhas_permissoes ||= self.usuario_cargo.permissao_ids
+  end
+
   def estima_desenvolvimento?
     self.usuario_cargo.estima_desenvolvimento
   end

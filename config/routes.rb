@@ -94,6 +94,7 @@ Sgsoft::Application.routes.draw do
 
     resources :cadastros_basicos, only: :index
     resources :categoria_clientes
+    resources :permission, only: :index
   end
 
   namespace :shared do

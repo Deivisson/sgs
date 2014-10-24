@@ -1,0 +1,53 @@
+permissao_menu:
+  descricao: Menus
+  chave: menus
+  itens:
+    item1:
+      descricao: Solicitações
+      chave: menu_solicitacoes
+    item2:
+      descricao: Projetos
+      chave: menu_projetos
+    item3:
+      descricao: Cronograma Desenvolvimento
+      chave: menu_cronograma_desenvolvimento
+    item4:
+      descricao: Agenda Compromisso
+      chave: menu_agenda
+    item5:
+      descricao: Cadastros
+      chave: menu_cadastro
+
+permissao_cliente:
+  descricao: Listagem de Cliente
+  chave: index_cliente
+  itens:
+    item1:
+      descricao: Incluir cliente
+      chave: new_cliente
+    item2:
+      descricao: Editar cadastro do cliente
+      chave: edit_cliente
+    item3:
+      descricao: Excluir cliente
+      chave: destroy_cliente
+    item4:
+      descricao: Visualiza Cliente
+      chave: show_cliente
+
+permissao_categoria_cliente:
+  descricao: Cadastro de Categorias dos Clientes
+  chave: index_categoria_cliente
+  itens:
+    item1:
+      descricao: Incluir categoria do cliente
+      chave: new_categoria_cliente
+    item2:
+      descricao: Editar cadastro da categoria do cliente
+      chave: edit_categoria_cliente
+    item3:
+      descricao: Excluir categoria do cliente
+      chave: destroy_categoria_cliente
+    item4:
+      descricao: Visualiza categoria do cliente
+      chave: show_categoria_cliente

@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Usuario::ClientesController < Usuario::CadastrosBasicosController
+  before_filter { |c| c.permissao_usuario!(("#{action_name}_cliente").to_sym) }
   before_filter :filtro_cliente,    :only =>  [:index]
   before_filter :carrega_cliente,   :except => [:index,:new, :create]
   before_filter :carrega_solucoes,  :except => [:index]
@@ -81,4 +82,5 @@ private
   def carrega_dados
     @categoria_clientes = CategoriaCliente.order(:descricao)
   end
+
 end

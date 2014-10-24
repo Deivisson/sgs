@@ -82,3 +82,15 @@ unless ClienteInfra.all.any?
     cliente.infra = ClienteInfra.new()
   end 
 end
+
+#Create access permissions
+permissoes = YAML.load_file("#{Rails.root}/db/permissoes.yml")
+permissoes.each do |k,v|
+  sub_permissoes = v.extract!("itens")
+  permissao = Permissao.salvar_permissao(v)
+  
+  sub_permissoes["itens"].each do |k,v|
+    v.merge!("parent_id" => permissao.id)
+    Permissao.salvar_permissao(v)
+  end if sub_permissoes.any?
+end

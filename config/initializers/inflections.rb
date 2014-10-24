@@ -15,4 +15,5 @@
    inflect.irregular 'solucao','solucoes'
    inflect.irregular 'alteracao','alteracoes'
    inflect.irregular 'evolucao','evolucoes'
+   inflect.irregular 'permissao','permissoes'   
  end

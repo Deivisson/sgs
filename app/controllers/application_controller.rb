@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+include ApplicationHelper
 require "application_responder"
 
 class ApplicationController < ActionController::Base
@@ -26,7 +27,7 @@ class ApplicationController < ActionController::Base
       when "Usuario"
         usuario_solicitacoes_path
       when "Admin"
-        admin_clientes_path
+        admin_usuario_cargos_path
     end
   end
 

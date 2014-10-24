@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141019184006) do
+ActiveRecord::Schema.define(:version => 20141023222915) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -286,6 +286,24 @@ ActiveRecord::Schema.define(:version => 20141019184006) do
   add_index "ordem_servicos", ["cliente_id"], :name => "index_ordem_servicos_on_cliente_id"
   add_index "ordem_servicos", ["usuario_cadastrante_id"], :name => "index_ordem_servicos_on_usuario_cadastrante_id"
   add_index "ordem_servicos", ["usuario_responsavel_id"], :name => "index_ordem_servicos_on_usuario_responsavel_id"
+
+  create_table "permissoes", :force => true do |t|
+    t.string   "descricao",  :limit => 250, :null => false
+    t.string   "chave",      :limit => 30,  :null => false
+    t.integer  "parent_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  create_table "permissoes_usuario_cargos", :id => false, :force => true do |t|
+    t.integer  "usuario_cargo_id"
+    t.integer  "permissao_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "permissoes_usuario_cargos", ["permissao_id"], :name => "index_permissoes_usuario_cargos_on_permissao_id"
+  add_index "permissoes_usuario_cargos", ["usuario_cargo_id"], :name => "index_permissoes_usuario_cargos_on_usuario_cargo_id"
 
   create_table "prioridades", :force => true do |t|
     t.string   "descricao",        :limit => 20,                        :null => false
