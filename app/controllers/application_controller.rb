@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
-include ApplicationHelper
+include PermissoesHelper
 require "application_responder"
-
 class ApplicationController < ActionController::Base
 
   #before_filter :set_charset ,:verifica_nova_versao

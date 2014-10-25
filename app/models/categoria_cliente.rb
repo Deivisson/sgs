@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CategoriaCliente < ActiveRecord::Base
 	validates :descricao, presence:true, length: {maximum:100}, uniqueness:true
   attr_accessible :descricao

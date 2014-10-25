@@ -50,20 +50,20 @@ end
 
 
 #Atualiza novo campo na tabela de ConsultaCampos
-ConsultaCampo.all(:conditions => {:consulta_id => 1}).each do |campo|
-  campo.update_attributes(:padrao => true)
-end
+  # ConsultaCampo.all(:conditions => {:consulta_id => 1}).each do |campo|
+  #   campo.update_attributes(:padrao => true)
+  # end
 
 #Devido permitir cadastrar novos Status, set flag para alguns serem padrao do sistema
 #que não permitira excluir e nem editar
-Status.all(:conditions => ['id <= ? ',Status::PUBLICADO]).each do |status|
-  status.update_attributes(:padrao => true)
-end
+  # Status.all(:conditions => ['id <= ? ',Status::PUBLICADO]).each do |status|
+  #   status.update_attributes(:padrao => true)
+  # end
 
 #Marca
-Status.all(:conditions => ['id IN (11,3)']).each do |status|
-  status.update_attributes(:encerramento => true)
-end
+  # Status.all(:conditions => ['id IN (11,3)']).each do |status|
+  #   status.update_attributes(:encerramento => true)
+  # end
 
 #Versao do sistema 1.1
 open("#{Rails.root}/db/versoes/1.1.txt") do |versao|
