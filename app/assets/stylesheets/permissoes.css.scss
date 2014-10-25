@@ -1,0 +1,68 @@
+.permission-container {
+	width: 1024px;
+	height: 600px;
+  margin: 0 auto;
+	img.img-permission-denied {
+		float: left;
+		height: 600px;
+		width: auto;
+		margin-left: -50px;
+	};
+	p {
+		float: left;
+		font-size: 60px;
+		line-height: 60px;
+		width: 400px;
+		text-align: left;
+	}
+
+}
+
+ul.permissao-list {
+	float: left;
+	border: 2px solid #C3C7D0;
+	height: 500px;
+	width: 60%;
+	margin: -25px 0 0 -40px !important;
+	padding: 10px 0 0 0 !important;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	li {
+		float: left;
+		width: 100%;
+		margin-left: 40px;
+		h1 {
+			float: left;
+			font-size: 14px;
+			font-weight: bold;
+			margin: -7px 0 0 15px;
+			width: 90%;
+		};
+		input {
+					float: left;
+		};
+		ul {
+			margin-left: 20px;
+			width: 100%;
+			li {
+				cursor: pointer;
+				height: 10px;
+				margin-left: 20px;
+				padding: 5px 5px 5px 5px;
+				width: 90%;
+				label {
+					float: left;
+					font-weight: normal !important;
+					width: 80% !important;
+					margin-left: 10px;
+				}
+				input {
+					float: left;
+				}
+				&:hover {
+					background-color: #F5F5F5;
+				};
+			}
+		}
+	}
+}

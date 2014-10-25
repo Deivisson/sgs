@@ -11,6 +11,7 @@ class Admin::UsuarioCargosController <  Admin::BaseController
 
   def new
     @usuario_cargo = UsuarioCargo.new
+    render :layout => "full_layout"
   end
 
   def create
@@ -27,6 +28,7 @@ class Admin::UsuarioCargosController <  Admin::BaseController
 
   def edit
     @usuario_cargo = UsuarioCargo.find(params[:id])
+    render :layout => "full_layout"
   end
 
   def update

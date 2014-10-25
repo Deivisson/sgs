@@ -8,7 +8,12 @@
     <% end %>
     <br>
     <br>
-    <%= section_tag(:legend => "Status Permitidos para este Cargo ?") do %>
+    <%= section_tag(:legend => "Permissões de Acesso",class:'section-tag section-left') do %>
+      <%= montar_permissoes(@usuario_cargo) %>
+    <% end %>
+    <br>
+    <br>
+    <%= section_tag(legend:"Status Permitidos para este Cargo ?",class:'section-tag section-left') do %>
       <% @status_local  = Status.all %>
       <div>
         <table border = "0" cellpadding = "0"  cellspacing = "1"  >
