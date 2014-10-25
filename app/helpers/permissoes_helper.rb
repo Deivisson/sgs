@@ -11,7 +11,7 @@ module PermissoesHelper
 							html1 = []
 							html1 << check_box_tag('usuario_cargo[permissao_ids][]',
 														permissao.id, @permissao_ids.include?(permissao.id),
-														id:"permissao-#{permissao.id}")
+														id:"permissao-group-#{permissao.id}")
 							html1 << content_tag(:h1,permissao.descricao) 
 							html1 << permissoes_itens(permissao.id)
 							html1.join.html_safe
@@ -41,4 +41,12 @@ module PermissoesHelper
 		end
 		html.join.html_safe
 	end
+
+  def possui_permissao?(chave)
+    current_usuario.send("permission_#{chave.to_s}?")
+  end
+
+  def permissao_usuario!(chave)
+    redirect_to usuario_permission_index_path unless possui_permissao?(chave)
+  end
 end

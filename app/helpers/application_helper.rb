@@ -112,11 +112,4 @@ module ApplicationHelper
     html.join.html_safe
   end
 
-  def possui_permissao?(chave)
-    current_usuario.send("permission_#{chave.to_s}?")
-  end
-
-  def permissao_usuario!(chave)
-    redirect_to usuario_permission_index_path unless possui_permissao?(chave)
-  end
 end

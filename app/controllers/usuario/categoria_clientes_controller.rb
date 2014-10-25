@@ -1,8 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Usuario::CategoriaClientesController < Usuario::CadastrosBasicosController
-  before_filter { |c| c.permissao_usuario!(("#{action_name}_categoria_cliente").to_sym) }
-  before_filter :set_categoria_cliente, only: [:show, :edit, :update, :destroy]
+  before_filter except:[:update,:create] do |c| 
+    c.instance_eval { c.permissao_usuario!(("#{action_name}_categoria_cliente").to_sym)}
+  end
 
+  before_filter :set_categoria_cliente, only: [:show, :edit, :update, :destroy]
   def index
     @categoria_clientes = CategoriaCliente.order(:descricao)
     respond_with(@categoria_clientes)

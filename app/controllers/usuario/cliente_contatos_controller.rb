@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Usuario::ClienteContatosController < Usuario::CadastrosBasicosController
-
+  before_filter except:[:update,:create] do |c| 
+    c.instance_eval { c.permissao_usuario!(("#{action_name}_contato_cliente").to_sym)}
+  end
   before_filter :carrega_cliente_contato, :except => [:index,:new, :create]
 
   def index

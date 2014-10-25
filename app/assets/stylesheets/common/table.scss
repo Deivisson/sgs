@@ -26,6 +26,14 @@ table thead tr th, table tfoot tr th {
   font-weight: bold;
   padding: 4px;
   cursor:pointer;
+  .dg270 {
+    margin-top: 34px;
+    -webkit-transform: rotate(270deg); /* Safari and Chrome */
+    -moz-transform: rotate(270deg);   /* Firefox */
+    -ms-transform: rotate(270deg);   /* IE 9 */
+    -o-transform: rotate(270deg);   /* Opera */
+    transform: rotate(270deg);
+  }
 }
 
 table thead tr  {

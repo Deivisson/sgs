@@ -2,52 +2,75 @@ permissao_menu:
   descricao: Menus
   chave: menus
   itens:
-    item1:
-      descricao: Solicitações
-      chave: menu_solicitacoes
-    item2:
-      descricao: Projetos
-      chave: menu_projetos
-    item3:
-      descricao: Cronograma Desenvolvimento
-      chave: menu_cronograma_desenvolvimento
-    item4:
-      descricao: Agenda Compromisso
-      chave: menu_agenda
+    # item1:
+    #   descricao: Solicitações
+    #   chave: menu_solicitacoes
+    # item2:
+    #   descricao: Projetos
+    #   chave: menu_projetos
+    # item3:
+    #   descricao: Cronograma Desenvolvimento
+    #   chave: menu_cronograma_desenvolvimento
+    # item4:
+    #   descricao: Agenda Compromisso
+    #   chave: menu_agenda
     item5:
-      descricao: Cadastros
+      descricao: Cadastros Básicos
       chave: menu_cadastro
 
 permissao_cliente:
-  descricao: Listagem de Cliente
-  chave: index_cliente
+  descricao: Cadastro de Cliente
+  chave: cadastro_cliente
   itens:
     item1:
-      descricao: Incluir cliente
+      descricao: Incluir Novo
       chave: new_cliente
     item2:
-      descricao: Editar cadastro do cliente
+      descricao: Editar Cliente
       chave: edit_cliente
     item3:
-      descricao: Excluir cliente
+      descricao: Excluir Cliente
       chave: destroy_cliente
     item4:
-      descricao: Visualiza Cliente
+      descricao: Visualizar Cliente
       chave: show_cliente
+    item5:
+      descricao: Listagem de Clientes
+      chave: index_cliente
 
 permissao_categoria_cliente:
-  descricao: Cadastro de Categorias dos Clientes
-  chave: index_categoria_cliente
+  descricao: Cadastro de Categorias de Clientes
+  chave: cadastro_categoria_cliente
   itens:
     item1:
-      descricao: Incluir categoria do cliente
+      descricao: Incluir Nova Categoria
       chave: new_categoria_cliente
     item2:
-      descricao: Editar cadastro da categoria do cliente
+      descricao: Editar Categoria
       chave: edit_categoria_cliente
     item3:
-      descricao: Excluir categoria do cliente
+      descricao: Excluir Categoria
       chave: destroy_categoria_cliente
     item4:
-      descricao: Visualiza categoria do cliente
+      descricao: Visualizar Categoria
       chave: show_categoria_cliente
+    item5:
+      descricao: Listagem das Categoria
+      chave: index_categoria_cliente      
+
+permissao_contatos_cliente:
+  descricao: Cadastro de Contatos do Cliente
+  chave: cadastro_contato_cliente
+  itens:
+    item1:
+      descricao: Incluir Novo Contato
+      chave: new_contato_cliente
+    item2:
+      descricao: Editar Contato
+      chave: edit_contato_cliente
+    item3:
+      descricao: Excluir Contato
+      chave: destroy_contato_cliente
+    item4:
+      descricao: Visualizar o Contato
+      chave: show_contato_cliente
