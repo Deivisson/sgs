@@ -8,7 +8,7 @@ class ClienteContato < ActiveRecord::Base
   validates_length_of :nome, :maximum => 50
   validates_length_of :departamento, :maximum => 30, :allow_blank => true
   validates_length_of :email, :maximum => 50, :allow_blank => true
-  validates_length_of :telefone, :maximum => 11, :allow_blank => true
+  validates_length_of :telefone, :maximum => 30, :allow_blank => true
   validates_length_of :celular, :maximum => 11, :allow_blank => true
 
   belongs_to :cliente

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application', :media => "all" %>
+  <%= yield(:tiny_mce) %>  
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <%= render "/shared/header" %>
+  <div id="toolbar" style="left:0px" >
+    <%- if show_title? -%>
+      <h1 class="title" id="content-title" ><%=h yield(:title) %></h1>
+    <%- end -%>
+    <%= yield :bar %>
+  </div>
+
+  <div class="content" style="left:0px">
+    <div id="container" >
+
+    </div>
+    <%= yield %>
+  </div>
+
+ </body>
+</html>

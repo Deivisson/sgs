@@ -10,7 +10,7 @@
   <tbody>
     <% @check_list_itens.each do |check_list_item| %>
       <tr>
-        <td><%=link_to check_list_item.descricao,
+        <td><%=link_to check_list_item.descricao.truncate(150),
                        admin_check_list_item_path(check_list_item), 
                        class:'inline-link'%></td>
         <td><%= link_to image_tag(image_link[:edit]), edit_admin_check_list_item_path(check_list_item)  %></td>

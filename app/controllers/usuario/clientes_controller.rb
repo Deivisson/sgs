@@ -14,7 +14,7 @@ class Usuario::ClientesController < Usuario::CadastrosBasicosController
     if @conteudo_busca_cliente.present?
       @clientes = @clientes.where("(nome like :a or apelido like :a or cnpj like :a)",a:"%#{@conteudo_busca_cliente}%")
     end
-    @clientes = @clientes.order(:nome).paginate :page => params['page'], :per_page =>25
+    @clientes = @clientes.order(:nome).paginate :page => @page, :per_page =>25
     respond_with(@clientes)
   end
 
@@ -61,13 +61,23 @@ class Usuario::ClientesController < Usuario::CadastrosBasicosController
 private
 
   def filtro_cliente
+    @page = nil
+    if params[:page].nil?
+      @page = session[:page_cliente] || nil
+    elsif params[:page].present?
+      @page = params[:page]
+    end
+
     @conteudo_busca_cliente = ""
     if params[:conteudo_busca_cliente].nil?
       @conteudo_busca_cliente = session[:conteudo_busca_cliente] || ""
     elsif params[:conteudo_busca_cliente].present?
       @conteudo_busca_cliente = params[:conteudo_busca_cliente]
-    end  
+      params.delete(:conteudo_busca_cliente)
+      @page = nil
+    end
     session[:conteudo_busca_cliente] = @conteudo_busca_cliente
+    session[:page_cliente] = @page
   end
 
   def carrega_cliente

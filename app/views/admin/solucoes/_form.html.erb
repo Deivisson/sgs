@@ -25,14 +25,14 @@
             <label style="margin-left: 26px;position:absolute">Itens CheckList</label>
             <ol class="choices-group">
                 <%- @check_list_items.each do |check_list_item| %>
-                  <li class="choice">
+                  <li class="choice" style='float:left;height: auto;'>
                     <%= check_box_tag "solucao[check_list_item_ids][]",
                                     check_list_item.id ,
                                     @solucao.check_list_item_ids.include?(check_list_item.id),
                                     id:"check-list-item-ids-#{check_list_item.id}" %>
                     <%= content_tag :label,
                         check_list_item.descricao,
-                        style:'min-width:400px',
+                        style:'min-width:500px;float:left',
                         for:"check-list-item-ids-#{check_list_item.id}"  %>
                   </li>
                 <% end %>

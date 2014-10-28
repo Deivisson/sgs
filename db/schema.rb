@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141023222915) do
+ActiveRecord::Schema.define(:version => 20141028232448) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(:version => 20141023222915) do
   end
 
   create_table "check_list_itens", :force => true do |t|
-    t.string   "descricao",  :limit => 50, :null => false
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.string   "descricao",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "check_list_itens_solucoes", :id => false, :force => true do |t|
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20141023222915) do
     t.string   "nome",         :limit => 50, :null => false
     t.string   "departamento", :limit => 30
     t.string   "email",        :limit => 50
-    t.string   "telefone",     :limit => 11
+    t.string   "telefone",     :limit => 30
     t.string   "celular",      :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
