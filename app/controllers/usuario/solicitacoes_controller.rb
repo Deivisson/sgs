@@ -2,6 +2,7 @@
 class Usuario::SolicitacoesController < Usuario::BaseController
   before_filter :set_current_menu
   before_filter :carrega_solicitacao, :only => [:show, :edit, :update, :destroy,:programar]
+  before_filter :verifica_permissao_para_excluir, only: :destroy
   before_filter :carrega_dados, :only => [:new,:edit,:index]
   after_filter :carrega_contatos_e_projetos_cliente, :only => [:new,:edit]
   before_filter :atualizacao_multipla_permitida, :only => :update_multiple
@@ -102,29 +103,14 @@ class Usuario::SolicitacoesController < Usuario::BaseController
   end
 
   def destroy
-    if permite_alterar_excluir(2)
-      @solicitacao.destroy
-      #Existem validacoes no callback "before_destroy" que podem cancelar a operacao
-      if @solicitacao.errors.count > 0 
-        flash[:warning] = @solicitacao.errors.on_base
-      else
-        flash[:notice] = "Solicitação excluída com sucesso."
-      end
+    @solicitacao.destroy
+    #Existem validacoes no callback "before_destroy" que podem cancelar a operacao
+    if @solicitacao.errors.count > 0 
+      flash[:warning] = @solicitacao.errors.on_base
+    else
+      flash[:notice] = "Solicitação excluída com sucesso."
     end
     respond_with(@solicitacao,location:usuario_solicitacoes_path)
-    #redirect_to usuario_solicitacoes_path
-  end
-
-  #Valida quem esta tentando editar ou excluir uma solicitacao.
-  #Operacao permitida apenas para usuario que cadastrou
-  def permite_alterar_excluir(tipo = 1)
-    if @solicitacao.usuario_cadastrante.id == current_usuario.id
-      return true
-    else
-      flash[:warning] = "#{tipo == 1 ? 'Edição' : 'Exclusão'} 
-                          Edição permitida apenas para o usuário que cadastrou."
-      return false
-    end
   end
 
   #Permite a edicao de varios registros ao mesmo tempo, desde que
@@ -184,6 +170,15 @@ class Usuario::SolicitacoesController < Usuario::BaseController
 
 private 
   
+  def verifica_permissao_para_excluir
+    return if possui_permissao?(:destroy_qualquer_solicitacao)
+    if @solicitacao.usuario_cadastrante.id == current_usuario.id
+      permissao_usuario!(:destroy_restrita_solicitacao)
+    else
+      sem_permissao
+    end    
+  end
+
   #Carrega dados para Combos Fixos
   def carrega_dados
     @clientes = Cliente.to_select_by_usuario(current_usuario.id).order(:nome)

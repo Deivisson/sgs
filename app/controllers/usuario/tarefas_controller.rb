@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Usuario::TarefasController < Usuario::BaseController
 	layout "tarefas"
+  before_filter :verifica_permissoes_index, only: :index
   before_filter :carrega_tarefa, :only => [:show, :edit,:update, :destroy]
   before_filter :carrega_dados, :only => [:index,:create,:update]
 
@@ -64,5 +65,13 @@ private
       @d_fim = (Tarefa.maximum(:data_hora_fim) + 20.days).to_date
     end
     @usuarios = Usuario.to_select_by_status(Status::AG_DESENV) 
+  end
+
+  def verifica_permissoes_index
+    if params[:solicitacao_ids].present?
+      permissao_usuario!(:gerar_cronograma_desenvolvimento)
+    else
+      permissao_usuario!(:visualizar_tarefas)
+    end
   end
 end

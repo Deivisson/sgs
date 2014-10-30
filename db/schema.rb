@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141028232448) do
+ActiveRecord::Schema.define(:version => 20141030002648) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -289,7 +289,7 @@ ActiveRecord::Schema.define(:version => 20141028232448) do
 
   create_table "permissoes", :force => true do |t|
     t.string   "descricao",  :limit => 250, :null => false
-    t.string   "chave",      :limit => 30,  :null => false
+    t.string   "chave",      :limit => 100, :null => false
     t.integer  "parent_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false

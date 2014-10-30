@@ -47,6 +47,10 @@ module PermissoesHelper
   end
 
   def permissao_usuario!(chave)
-    redirect_to usuario_permission_index_path unless possui_permissao?(chave)
+    sem_permissao unless possui_permissao?(chave)
+  end
+
+  def sem_permissao
+		redirect_to usuario_permission_index_path
   end
 end

@@ -11,7 +11,7 @@
     <%= main_menu(usuario_tarefas_path(from:'list'), 
                   icon_name:"planning",
                   target:'tarefas',
-                  title:'Cronograma do Desenvolvimento') %>
+                  title:'Cronograma do Desenvolvimento') if possui_permissao?(:menu_tarefas) %>
 
     <!--
     <%= main_menu(usuario_ordem_servicos_path, 

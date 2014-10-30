@@ -8,9 +8,9 @@ permissao_menu:
     # item2:
     #   descricao: Projetos
     #   chave: menu_projetos
-    # item3:
-    #   descricao: Cronograma Desenvolvimento
-    #   chave: menu_cronograma_desenvolvimento
+    item3:
+      descricao: Cronograma Desenvolvimento
+      chave: menu_tarefas
     # item4:
     #   descricao: Agenda Compromisso
     #   chave: menu_agenda
@@ -74,3 +74,25 @@ permissao_contatos_cliente:
     item4:
       descricao: Visualizar o Contato
       chave: show_contato_cliente
+
+permissao_solicitacao:
+  descricao: Cadastro de Solicitações
+  chave: cadastro_solicitacao
+  itens:
+    item1:
+      descricao: Excluir somente Solicitações que o próprio usuário cadastrou
+      chave: destroy_restrita_solicitacao
+    item2:
+      descricao: Excluir Solicitações cadastradas por qualquer usuário
+      chave: destroy_qualquer_solicitacao
+
+permissao_tarefas:
+  descricao: Cronograma de Desenvolvimento
+  chave: gerenciamento_tarefas
+  itens:
+    item1:
+      descricao: Visualizar do Cronograma
+      chave: visualizar_tarefas
+    item2:
+      descricao: Gerar Cronograma
+      chave: gerar_cronograma_desenvolvimento
