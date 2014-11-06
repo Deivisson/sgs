@@ -1,0 +1,18 @@
+<div id="pre-replace-usuario-container">
+	<%= form_tag admin_usuario_replace_path, method: :post do %>
+		<%= content_tag :label, "Usuário a ser excluído",style:"font-weight:bold" %>
+		<%= text_field_tag "", @usuario.nome,disabled:true %>
+		<%= hidden_field_tag "usuarios[replace_from]", @usuario.id %>
+		<br>
+		<br>
+		<%= content_tag :label, "Selecione o Usuário que irá substituir",style:"font-weight:bold" %>
+		<%= select_tag "usuarios[replace_to]",
+										options_from_collection_for_select(@usuarios, "id", "nome") %>
+		
+		<br>
+		<br>
+		<%= submit_tag "Confirmar", 
+							confirm:'Confirma operação? Caso confirme, esta será uma operação irreversível.',
+							class:"submit-button" %>
+	<% end %>
+</div>

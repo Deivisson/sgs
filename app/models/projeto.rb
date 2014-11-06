@@ -36,16 +36,18 @@ class Projeto < ActiveRecord::Base.extend Search
 
   belongs_to :cliente
   belongs_to :usuario
-  has_many :solicitacoes
+  has_many :solicitacoes, dependent: :nullify
   #has_and_belongs_to_many :etapas
   has_many :etapas_projetos
-  has_many :etapas, through: :etapas_projetos
+  has_many :etapas, through: :etapas_projetos, dependent: :destroy
   has_and_belongs_to_many :solucoes
-{"cliente_id"=>"16", "nome"=>"Projeto de Reimplantação", "data_inicio"=>"10/07/2014", "data_prevista_termino"=>"10/08/2014", "solucao_ids"=>["1", "2"], "etapa_ids"=>["1", "4", "2"], "frequencia_visita"=>"1", "duracao_visita_horas"=>"04:00", "descricao"=>""}
-  has_many :projetos_sub_modulos
-  has_many :solucao_sub_modulos, :through => :projetos_sub_modulos
 
-  has_many  :programacao_treinamentos, class_name: 'ProjetoProgramacaoTreinamento'
+  #{"cliente_id"=>"16", "nome"=>"Projeto de Reimplantação", "data_inicio"=>"10/07/2014", "data_prevista_termino"=>"10/08/2014", "solucao_ids"=>["1", "2"], "etapa_ids"=>["1", "4", "2"], "frequencia_visita"=>"1", "duracao_visita_horas"=>"04:00", "descricao"=>""}
+  has_many :projetos_sub_modulos
+  has_many :solucao_sub_modulos, through: :projetos_sub_modulos, dependent: :destroy
+
+  has_many  :programacao_treinamentos, 
+              class_name: 'ProjetoProgramacaoTreinamento', dependent: :destroy
 
   attr_reader :peso_total
   attr_accessor :ordem, :duracao_visita_horas

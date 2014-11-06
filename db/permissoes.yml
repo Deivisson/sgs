@@ -5,9 +5,9 @@ permissao_menu:
     # item1:
     #   descricao: Solicitações
     #   chave: menu_solicitacoes
-    # item2:
-    #   descricao: Projetos
-    #   chave: menu_projetos
+    item2:
+      descricao: Projetos
+      chave: menu_projetos
     item3:
       descricao: Cronograma Desenvolvimento
       chave: menu_tarefas
@@ -96,3 +96,23 @@ permissao_tarefas:
     item2:
       descricao: Gerar Cronograma
       chave: gerar_cronograma_desenvolvimento
+
+permissao_projetos:
+  descricao: Gerenciamento de Projetos
+  chave: gerenciamento_projeto
+  itens:
+    item1:
+      descricao: Incluir Novo
+      chave: new_projeto
+    item2:
+      descricao: Editar Projeto
+      chave: edit_projeto
+    item3:
+      descricao: Excluir Projeto
+      chave: destroy_projeto
+    item4:
+      descricao: Visualizar Projeto
+      chave: show_projeto
+    item5:
+      descricao: Listagem de Projetos
+      chave: index_projeto

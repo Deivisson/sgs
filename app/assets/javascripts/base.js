@@ -94,9 +94,7 @@ $(document).ready(function(){
 $(document).ready(function()
   {
   $("table").tablesorter({
-      headers:{
-        0:{sorter:false}
-   }
+      // headers:{0:{sorter:false}}
  });
 
 });

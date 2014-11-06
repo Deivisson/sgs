@@ -43,6 +43,7 @@ module PermissoesHelper
 	end
 
   def possui_permissao?(chave)
+  	return false unless current_usuario.respond_to?("permission_#{chave.to_s}?")
     current_usuario.send("permission_#{chave.to_s}?")
   end
 

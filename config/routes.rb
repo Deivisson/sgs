@@ -27,7 +27,10 @@ Sgsoft::Application.routes.draw do
         post :atualiza_ordem
       end
     end
-    resources :usuarios
+    resources :usuarios do 
+      get :pre_replace
+      post :replace
+    end
     resources :usuario_cargos
     resources :tipo_pendencias
     resources :prioridades

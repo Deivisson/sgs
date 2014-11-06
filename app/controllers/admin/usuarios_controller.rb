@@ -45,9 +45,28 @@ class Admin::UsuariosController < Admin::BaseController
       @usuario.delete
       flash[:notice] = "Usuário excluído com sucesso."
     rescue
-      flash[:warning] = "Exclusão não permitida para este usuário."
+      flash[:warning] = "Exclusão não permitida para este usuário. Caso necessário pode ser realizado a substituição do mesmo."
     ensure
       redirect_to admin_usuarios_url
+    end
+  end
+
+  def pre_replace
+    @usuario = Usuario.find(params[:usuario_id])
+    @usuarios = Usuario.where("id <> ? and  id > 1",@usuario.id)
+    @usuarios = @usuarios.order(:nome)
+  end
+
+  def replace
+    begin
+      @usuario = Usuario.find(params[:usuarios][:replace_from])
+      @usuario.usuario_substituto = Usuario.find(params[:usuarios][:replace_to])
+      @usuario.destroy
+      flash[:notice] = "Usuário excluído/substiuído com sucesso."
+      redirect_to admin_usuarios_url  
+    rescue Exception => e
+      flash[:warning] = "Exclusão/Substituição não realizada.: #{e}"      
+      redirect_to [:admin, @usuario]
     end
   end
 

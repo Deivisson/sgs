@@ -2,6 +2,7 @@
 <table border="0"  cellspacing="1" cellpadding="0" >
   <thead>
     <tr>
+      <th style="width:0px"></th>
       <th>Cargo</th>
       <th>Nome</th>
       <th>Email</th>
@@ -13,8 +14,12 @@
   <tbody>
     <% @usuarios.each do |usuario| %>
       <tr>
-        <td width="100" >
-          <%= link_to usuario.usuario_cargo.descricao,[:admin, usuario],class:'inline-link' unless usuario.usuario_cargo.nil? %>
+        <td>
+          <%= link_to "i", 
+          [:admin, usuario],class:'inline-link hidden-link' unless usuario.usuario_cargo.nil? %>        
+        </td>
+        <td>
+          <%= usuario.usuario_cargo.descricao %>
         </td>
         <td><%=h usuario.nome %></td>
         <td width ="300" ><%=h usuario.email %></td>

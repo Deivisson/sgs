@@ -52,7 +52,12 @@ table tbody tr {
     color: red;
     font-size: 10px;
   }
-  &:hover {background-color:#d6e2e5;};
+  &:hover {
+    background-color:#d6e2e5;
+    a.hidden-link {
+      color: #d6e2e5;
+    };
+  };
   &.unread {
     td {
       font-weight: bold;
@@ -88,6 +93,9 @@ table tbody td {
     position: absolute;
     width: 80%;
   }
+  a.hidden-link {
+    color: #fff;
+  };
   &.clickableRow {
     cursor:pointer;
   }

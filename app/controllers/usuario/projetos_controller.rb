@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Usuario::ProjetosController < Usuario::BaseController
+  before_filter except:[:update,:create, :gerenciar_sub_modulos] do |c| 
+    c.instance_eval { c.permissao_usuario!(("#{action_name}_projeto").to_sym)}
+  end
   before_filter :set_current_menu
   before_filter :carrega_projeto, :except => [:index,:new, :create]
   before_filter :load_clientes, except:[:show,:destroy]
@@ -56,7 +59,7 @@ class Usuario::ProjetosController < Usuario::BaseController
 
   def destroy
     @projeto.destroy
-    respond_with(@projeto)
+    respond_with(@projeto,:location => usuario_projetos_path)
   end
 
   def gerenciar_sub_modulos

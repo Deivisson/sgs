@@ -6,7 +6,7 @@
     <%= main_menu(usuario_projetos_path, 
                   icon_name:"project",
                   target:'projeto',
-                  title:'Projetos') %>
+                  title:'Projetos') if possui_permissao?(:menu_projetos) %>
 
     <%= main_menu(usuario_tarefas_path(from:'list'), 
                   icon_name:"planning",

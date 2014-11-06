@@ -38,7 +38,9 @@ class Usuario < ActiveRecord::Base
       :order => :nome
   }}
 
-  before_destroy :validate_destroy
+  attr_accessor :usuario_substituto
+
+  before_destroy :update_referencias_usuario
   after_create :adiciona_usuario_config
   
   has_attached_file :photo,
@@ -71,6 +73,37 @@ class Usuario < ActiveRecord::Base
   end
   
 private
+  def update_referencias_usuario
+    #ATENÇÂO. Foi aconselhado ao Cléber não realizar esta operação, pois este método
+    #irá substitui toda a movimentação de um usuário para um outro e em seguida excluirá o mesmo.
+    # Observação da Análise feita: Excluir um usuário do sistema pode ter um
+    # impacto negativo gerando inconsistência históricas e de integridade da
+    # ferramenta. Para exclusão do usuário, terei que percorrer todas as
+    # tabelas citadas ao lado atualizando os campos de usuários para o usuário
+    # que foi escolhido para subistituir o que esta sendo excluído. Quando
+    # falo de inconsistência, digo no sentido de que em algumas situações vai
+    # constar que quem cadastrou um determinado registro foi o usuário "X"
+    # porque ele substituiu o usuário "Y", porém não foi. E outro fator
+    # impactante é que todos os agendamentos de um usuário que futuramente
+    # poderá esta ligada a uma OS, passará a estar ligado a um outro usuário
+    # que não tem nada haver.
+    return if self.usuario_substituto.nil?
+    u_id = self.usuario_substituto.id
+    Compromisso.where(usuario_cadastrante_id:self.id).update_all(usuario_cadastrante_id:u_id)
+    OrdemServico.where(usuario_cadastrante_id:self.id).update_all(usuario_cadastrante_id:u_id)
+    OrdemServico.where(usuario_responsavel_id:self.id).update_all(usuario_responsavel_id:u_id)
+    ProjetoProgramacaoTreinamento.where(usuario_id:self.id).update_all(usuario_id:u_id)
+    Projeto.where(usuario_id:self.id).update_all(usuario_id:u_id)
+    SolicitacaoHistorico.where(usuario_id:self.id).update_all(usuario_id:u_id)
+    SolicitacaoHistorico.where(usuario_responsavel_id:self.id).update_all(usuario_responsavel_id:u_id)
+    Solicitacao.where(usuario_cadastrante_id:self.id).update_all(usuario_cadastrante_id:u_id)
+    Solicitacao.where(usuario_responsavel_id:self.id).update_all(usuario_responsavel_id:u_id)    
+    self.solucoes.destroy_all
+    Tarefa.where(usuario_id:self.id).update_all(usuario_id:u_id)
+    Atendimento.where(usuario_cadastrante_id:self.id).update_all(usuario_cadastrante_id:u_id)
+    Atendimento.where(usuario_solicitante_id:self.id).update_all(usuario_solicitante_id:u_id)    
+  end
+
   def password_required?
     !persisted? || password.present? || password_confirmation.present?
   end

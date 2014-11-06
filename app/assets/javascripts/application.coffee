@@ -24,3 +24,4 @@
 //= require compromissos.js
 //= require cliente_check_list_itens.js
 //= require permissoes.js
+//= require usuarios.js

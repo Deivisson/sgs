@@ -1,4 +1,10 @@
-<% title "Lista de Usuários" %>
+<% title "Usuário" %>
+<% content_for :bar do %>
+  <%= link_to 'Excluir e Substituir Usuário', 
+                admin_usuario_pre_replace_path(@usuario),
+                id:'destoy-replace-usuario',
+                class:'delete-user-button dd-on-index-top-with-header'  %>
+<% end %>
 <div id="div_show">
   <p>
     <strong>Cargo:</strong>
@@ -20,5 +26,6 @@
 <p>
   <li class ="links">
     <%= link_to 'Voltar Lista',admin_usuarios_path,:class => 'back' %>
+
   </li>
 </p>

@@ -1,15 +1,18 @@
 <%= content_tag :div, class:"show-resumo" do %>
-
   <%= content_tag :div, class:"titulo-container" do %>
     <%= image_tag("icons/32/project.png", class:"projeto-imagem") %>
     <p><%= @projeto.nome %></p>
     <div class="show-links">
       <%= link_to "Voltar", usuario_projetos_path %>
+      <%= link_to "Excluir", usuario_projeto_path(@projeto),
+                          method: :delete,
+                          confirm:'Confirma Exclusão do Projeto ?' %>      
+      
       <%= link_to "Editar", edit_usuario_projeto_path(@projeto),
                             id:'projeto-link', 
-                            class:'first' %>
+                            class:'first' if possui_permissao?(:edit_projeto) %>
+
     </div>
-    
   <% end %>
 
   <%= content_tag :div, class:"detalhes" do %>

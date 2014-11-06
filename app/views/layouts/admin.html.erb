@@ -58,13 +58,17 @@
     <%= yield :bar %>
   </div>
 
-  <div class="content">
+  <div class="flash-container">
     <div id="container" >
-      <%- flash.each do |name, msg| -%>
+      <%- flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <%- end -%>
+      <%- end %>
     </div>
+  </div>
+
+  <div class="content">
     <%= yield %>
   </div>
+
  </body>
 </html>

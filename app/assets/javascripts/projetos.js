@@ -69,7 +69,6 @@ $(document).ready(function(){
       $("#submit-sub-modulos-projeto").hide();
     }
   );
-
   //Controla tela para permitir adição de sub-modulos
   $("#adicionar-sub-modulos-projeto").toggle(
     function (){
