@@ -44,9 +44,19 @@ $(document).ready(function(){
 
   //Controla altura do container
   if ($("#solicitacao-tab-alteracoes").length > 0) {
-    $("#solicitacao-tab-alteracoes").css("height",$("#show-container-id").height() - 40);
+    var height = $("#show-container-id").height() - 40;
+    $("#solicitacao-tab-alteracoes").css("height",height);
     $("#solicitacao-tab-alteracoes").css("overflow","auto");
+    $("#solicitacao-tab-detalhes").css("height",height);
+    $("#solicitacao-tab-detalhes").css("overflow","auto");
   }
+
+  if ($("#solicitacao-tab-detalhes").length > 0) {
+
+  }
+
+  
+
 });
 
 
