@@ -19,7 +19,7 @@
           [:admin, usuario],class:'inline-link hidden-link' unless usuario.usuario_cargo.nil? %>        
         </td>
         <td>
-          <%= usuario.usuario_cargo.descricao %>
+          <%= usuario.usuario_cargo.descricao unless usuario.usuario_cargo.nil? %>
         </td>
         <td><%=h usuario.nome %></td>
         <td width ="300" ><%=h usuario.email %></td>
