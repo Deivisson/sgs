@@ -77,6 +77,7 @@ table tbody tr {
     background-color: #E9E9E9;
     &:hover {background-color: #E9E9E9;};
   }
+
 }
 
 
@@ -99,6 +100,19 @@ table tbody td {
   &.clickableRow {
     cursor:pointer;
   }
+  &.status-prazo-indefinido,
+  &.status-dentro-prazo,
+  &.status-prazo-estourado,
+  &.status-prazo-comprometido,
+  &.status-prazo-estourando { 
+    color: #333333;
+  }
+
+  &.status-prazo-indefinido {  background-color: #FFF; }
+  &.status-dentro-prazo {  background-color: #2EC92E; }
+  &.status-prazo-comprometido { background-color: #F0F473; }
+  &.status-prazo-estourando {  background-color: #FCC867; }
+  &.status-prazo-estourado { background-color: #FF3232; }
 }
 table tbody td span {
   color: #AAAAAA;

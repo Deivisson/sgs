@@ -29,7 +29,7 @@
         <th>Sub Módulo</th>
         <th width = "70">Prioridade</th>
         <th width ="120">Tipo</th>
-        <th width ="30">Dias</th>
+        <th>Evolução</th>
         <th width ="10">Edit</th>
         <th width ="10">Del</th>
       </tr>
@@ -53,9 +53,12 @@
             <%=h solicitacao.prioridade_descricao %>
           </td>
           <td><%=h solicitacao.tipo_descricao %></td>
-          <td><%=h (hoje - Date.parse(solicitacao.created_at.strftime("%Y-%m-%d"))).to_i %></td>
+          <td class="<%= evolucao_status_class(solicitacao) %>">
+            <%= tempo_evolucao_status(solicitacao) %>
+          </td>
           <td><%= link_to image_tag(image_link[:edit]), [:edit, :usuario, solicitacao], remote:true, class:'solicitacao-link' %></td>
           <td><%= link_to image_tag(image_link[:del]), [:usuario, solicitacao], :confirm => 'Confirma exclusão ?',:method => :delete %></td>
+
         <% end %>
       <% end %>
     </tbody>

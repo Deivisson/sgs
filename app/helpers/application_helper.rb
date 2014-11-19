@@ -112,4 +112,45 @@ module ApplicationHelper
     html.join.html_safe
   end
 
+  def evolucao_status_class(solicitacao)
+    case solicitacao.percentual_evolucao_status
+    when nil
+      'status-prazo-indefinido'
+    when 1..29
+      'status-dentro-prazo'
+    when 30..69 
+      'status-prazo-comprometido'
+    when 70..100
+      'status-prazo-estourando'
+    else 
+      'status-prazo-estourado'
+    end
+  end
+
+  def tempo_evolucao_status(solicitacao)
+    minutos = solicitacao.minutos_estacionado_no_status
+    return "" if minutos.nil?
+    if minutos > 0
+      "#{descricao_evolucao_status(minutos)} Restante"
+    else
+      "#{descricao_evolucao_status(minutos)} Em Atraso"
+    end
+  end
+
+private
+  def descricao_evolucao_status(minutos)
+    minutos = minutos.abs
+    if minutos < 60
+      "#{pluralize(minutos, 'minuto', 'minutos')}"
+    elsif minutos >= 1440 #1440 = 24 horas em minutos
+      dias = minutos/1440
+      "#{pluralize(dias, 'dia', 'dias')}"
+    else
+      if minutos.to_f/60 <= 1
+        "#{minutos_em_horas(minutos)} hora"
+      else
+        "#{minutos_em_horas(minutos)} horas"
+      end
+    end
+  end
 end

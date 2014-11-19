@@ -77,7 +77,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
   has_one :tarefa
 
   attr_writer :solucao_id,:modulo_id
-  attr_accessor :previsao_duracao_horas,:usuario_editor
+  attr_accessor :previsao_duracao_horas,:usuario_editor, :status_tempo_evolucao
 
 
   Status::ITENS.each do |s|
@@ -138,6 +138,36 @@ class Solicitacao < ActiveRecord::Base.extend Search
   def complexidade
     options_for_nivel_complexidade.each{|k,v| return k if v==self.nivel_complexidade}
   end
+
+  def status_tempo_evolucao
+    @status_tempo_evolucao ||= StatusTempoEvolucao.by_solicitacao(self)
+  end
+
+  #retorna o percentual do tempo em que a solicitação esta estacionada em um determinado
+  #status. o Percentual é calculado sobre o tempo que foi configurado no status
+  #Ex.: Tempo Configurado em minutos            ........ 120
+  #     Tempo que esta parado no status minutos ........  60
+  #     Percentual de tempo                     ........  50% (60/120 * 100)
+  def percentual_evolucao_status
+    percentual = nil
+    if !status_tempo_evolucao.nil? && !self.data_status.nil?
+      minutos_limite   = status_tempo_evolucao.tempo_minutos
+      minutos_passados = (Time.now - self.data_status).to_i / 60 #obtém o tempo em que a solicitação está estacionada no status corrente
+      percentual = (minutos_passados.to_f / minutos_limite) * 100 
+    end
+    percentual
+  end
+
+  def minutos_estacionado_no_status
+    tempo = nil
+    if !status_tempo_evolucao.nil? && !self.data_status.nil?
+      minutos_limite   = status_tempo_evolucao.tempo_minutos
+      minutos_passados = (Time.now - self.data_status).to_i / 60 #obtém o tempo em que a solicitação está estacionada no status corrente
+      tempo = minutos_limite - minutos_passados
+    end
+    tempo
+  end
+
   #callbacks
   before_validation :attribui_minutos_previsao_duracao
   after_create :inserir_historico_padrao

@@ -20,6 +20,12 @@ class StatusTempoEvolucao < ActiveRecord::Base
     minutos_em_horas(self.tempo_minutos)
   end
 
+  def self.by_solicitacao(solicitacao)
+    StatusTempoEvolucao.where(
+        "status_id = ? and tipo_pendencia_id = ? and prioridade_id = ?",
+        solicitacao.status_id, solicitacao.tipo_pendencia_id,solicitacao.prioridade_id).first
+  end
+
 private
 	
   def attribui_minutos_tempo

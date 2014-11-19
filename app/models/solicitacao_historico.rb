@@ -48,6 +48,7 @@ private
       @solicitacao.status = status
       @solicitacao.usuario_responsavel = usuario_responsavel
     end
+    @solicitacao.data_status = Time.now
     @solicitacao.save
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141030002648) do
+ActiveRecord::Schema.define(:version => 20141118211000) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -455,6 +455,7 @@ ActiveRecord::Schema.define(:version => 20141030002648) do
     t.integer  "usuario_cadastrante_id"
     t.date     "data_inicio"
     t.time     "hora_inicio"
+    t.datetime "data_status"
   end
 
   add_index "solicitacoes", ["cliente_contato_id"], :name => "index_solicitacoes_on_cliente_contato_id"
@@ -547,9 +548,9 @@ ActiveRecord::Schema.define(:version => 20141030002648) do
     t.integer  "usuario_id"
     t.integer  "solicitacao_id"
     t.datetime "data_hora_inicio"
+    t.datetime "data_hora_fim"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.datetime "data_hora_fim"
   end
 
   add_index "tarefas", ["solicitacao_id"], :name => "tarefas_solicitacoes"
@@ -669,6 +670,7 @@ ActiveRecord::Schema.define(:version => 20141030002648) do
   add_foreign_key "projeto_programacao_treinamentos_solucao_sub_modulos", "solucao_sub_modulos", name: "programacao_treinamentos_solucao_sub_modulos"
 
   add_foreign_key "projetos", "clientes", name: "fk_projetos_clientes"
+  add_foreign_key "projetos", "usuarios", name: "fk_projetos_usuarios"
 
   add_foreign_key "projetos_solucoes", "projetos", name: "projetos_solucoes_projetos"
   add_foreign_key "projetos_solucoes", "solucoes", name: "projetos_solucoes_solucoes"
