@@ -112,6 +112,31 @@ $(document).ready(function(){
       $("#programacao-treinamento-link").hide();
     }
   );
+
+
+  //Chama tela de associação de solicitações à um projeto
+  $("a#associar-solicitacao").click(function(e){
+    var url = $(this).attr('href');
+    var dialog_form = $(getModalContainer("associar-solicitacao-projeto-modal-dialog")).dialog({
+        autoOpen: false,
+        width: 600,
+        height: 250,
+        modal: true,
+        closeText: "Fechar",
+        close: function() {
+          $('#associar-solicitacao-projeto-modal-dialog').remove();
+        }
+    });
+    dialog_form.load(url + ' #modal-container', function(){
+
+      $(this).dialog('option',"title","Associar Solicitação ao Projetos");
+      $("#solicitacao").focus();
+    });
+    dialog_form.dialog('open');
+    e.preventDefault();
+  });
+
+
 }); 
 $("#teste-treinamento").click(function(){
   ids = "";

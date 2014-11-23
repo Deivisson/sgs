@@ -15,12 +15,15 @@ class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
     carrega_dados
   end
 
+  #need refactory
   def find
 
     #Monta Filtro
     @filtro =  " solicitacoes.id > 0"
     @filtro += " AND clientes.id IN (#{params[:cliente_ids]})" if not params[:cliente_ids].empty? #Filtra Cliente
-    @filtro += " AND cliente_contato_id IN (#{params[:solicitante_ids]})"  if not params[:solicitante_ids].empty? #Filtra Solicitante -- Contato do Cliente
+    if !params[:solicitante_ids].nil? && !params[:solicitante_ids].empty? #Filtra Solicitante -- Contato do Cliente
+      @filtro += " AND cliente_contato_id IN (#{params[:solicitante_ids]})"  
+    end
     @filtro += " AND usuario_cadastrante_id IN (#{params[:cadastrante_ids]})" if not params[:cadastrante_ids].empty?  #Filtra Usuario cadastrante
     @filtro += " AND usuario_responsavel_id IN (#{params[:usuario_ids]})" if not params[:usuario_ids].empty? #Filtra Usuario
     @filtro += " AND solucoes.id IN (#{params[:solucao_ids]})" if not params[:solucao_ids].empty?  #Filtra Solucoes
@@ -50,7 +53,9 @@ class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
       :order => :ordem )
 
     #Monta sql
-    @sql = "solicitacoes.id,"
+    @sql = "solicitacoes.id,solicitacoes.status_id,solicitacoes.data_status,solicitacoes.tipo_pendencia_id,
+            solicitacoes.prioridade_id,"
+
     for campo in consulta_campos do
       @sql = "#{@sql}#{campo.campo.gsub("$","#{campo.tabela}." )} as #{campo.alias},"
       @campos << [campo.descricao,campo.alias,campo.tipo]

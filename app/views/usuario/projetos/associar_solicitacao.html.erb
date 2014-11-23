@@ -1,0 +1,12 @@
+<div id="modal-container">
+	<br>
+	<%= form_tag usuario_projeto_criar_vinculo_solicitacao_path, remote:true, method: :put do |f| %>
+		<%= "Informe o número da solicitação"%>
+		<%= text_field_tag "solicitacao",""%>
+		<%= hidden_field_tag "etapa_id", @etapa_id %>
+		<p id="errors-vinculo-solicitacao" style="color:#cc0000"></p>
+		<br>
+		<br>
+		<%= submit_tag "Confirmar",class:'submit-button' %>
+	<% end %>
+</div>

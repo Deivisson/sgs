@@ -1,4 +1,3 @@
-
 Sgsoft::Application.routes.draw do
 
   resources :ordem_servico_itens
@@ -67,6 +66,9 @@ Sgsoft::Application.routes.draw do
       collection do
         put :gerenciar_sub_modulos
       end
+      get :associar_solicitacao
+      get :desfazer_vinculo_solicitacao
+      put :criar_vinculo_solicitacao
       resources :solicitacoes
     end
 

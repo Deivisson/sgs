@@ -57,8 +57,8 @@ module ApplicationHelper
      :schedule => '/assets/icons/16/schedule.png',
      :printer24 => '/assets/icons/24/printer.png',
      :add24 => '/assets/icons/24/add.png',
-     :remove24 => '/assets/icons/24/remove.png'
-
+     :remove24 => '/assets/icons/24/remove.png',
+     :remove => '/assets/icons/16/remove.png'
     }
   end
 
@@ -116,7 +116,7 @@ module ApplicationHelper
     case solicitacao.percentual_evolucao_status
     when nil
       'status-prazo-indefinido'
-    when 1..29
+    when 0..29
       'status-dentro-prazo'
     when 30..69 
       'status-prazo-comprometido'

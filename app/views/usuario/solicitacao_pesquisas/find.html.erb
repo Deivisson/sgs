@@ -7,35 +7,46 @@
                     usuario_solicitacao_pesquisas_path(:filtro => @filtro, :format => 'pdf') %></li>
     </ul>
   </div> 
+  <%= link_to "Gerar Cronograma", 
+      usuario_tarefas_path(solicitacao_ids:'') ,
+      default_url:usuario_tarefas_path(solicitacao_ids:''),
+      id:'planejamento-link',
+      class:'button-planing add-on-index-top-with-header' %>  
 <% end %>
 
-  <table border="0"  cellspacing="1" cellpadding="0">
-    <thead>	
+<table border="0"  cellspacing="1" cellpadding="0" id="solicitacoes-table">
+  <thead>	
+    <tr>
+     <th width="10" ></th>
+     <% for campo in @campos do %>
+        <th><%= campo[0] %></th>
+      <% end %>
+      <th>Evolução</th>
+      <th width="10" >Det</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for solicitacao in @solicitacoes %>
       <tr>
-       <% for campo in @campos do %>
-          <th><%= campo[0] %></th>
-        <% end %>
-        <th width="10" >Det</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for solicitacao in @solicitacoes %>
-        <tr>
-          <% for campo in @campos do %>
-            <% if campo[2] == "D" %>
-              <% date = solicitacao.read_attribute(campo[1]).to_date %>
-              <td><%= format_date(date) %> </td>
-            <% else %>
-              <td><%=solicitacao.read_attribute(campo[1]) %> </td>
-            <% end %>
+        <td><%= check_box_tag "solicitacao_ids[]",solicitacao.id %> </td>
+        <% for campo in @campos do %>
+          <% if campo[2] == "D" %>
+            <% date = solicitacao.read_attribute(campo[1]).to_date %>
+            <td><%= format_date(date) %> </td>
+          <% else %>
+            <td><%=solicitacao.read_attribute(campo[1]) %> </td>
           <% end %>
-          <td>
-            <%= link_to image_tag(image_link[:show]), 
-                  usuario_solicitacao_path(:id => solicitacao.id,:local => 'find') %>
-          </td>
-        </tr>
-      <% end -%>
-    </tbody>
-  </table>
-  <%= "Total Solicitações #{@solicitacoes.size}" %>
-  <%= link_voltar %>
+        <% end %>
+        <td class="<%= evolucao_status_class(solicitacao) %>">
+          <%= tempo_evolucao_status(solicitacao) %>
+        </td>
+        <td>
+          <%= link_to image_tag(image_link[:show]), 
+                usuario_solicitacao_path(:id => solicitacao.id,:local => 'find') %>
+        </td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+<%= "Total Solicitações #{@solicitacoes.size}" %>
+<%= link_voltar %>

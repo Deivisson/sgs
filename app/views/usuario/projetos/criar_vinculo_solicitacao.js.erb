@@ -1,0 +1,14 @@
+<% if @falha_solicitacao ||  @solicitacao.errors.any?  %>
+	<% if @falha_solicitacao %>
+		$("#errors-vinculo-solicitacao").html("Solicitação não informada ou inexistente.");
+	<% else %>
+		$("#errors-vinculo-solicitacao").html("<%= @solicitacao.errors.full_messages.join("<br>").html_safe %>");
+	<% end %>
+<% else %>
+  var etapa = "<%= @solicitacao.etapa.descricao.remover_acentos.downcase %>";
+  $("#projeto-solicitacoes-" + etapa).append('<%= escape_javascript(render partial:'usuario/projetos/solicitacao_item', locals: {solicitacao:@solicitacao}) %>');
+  alert("Solicitação cadastrada com sucesso !!");
+  solicitacaoModalForm();
+  $('#associar-solicitacao-projeto-modal-dialog').dialog('close');
+  $('#associar-solicitacao-projeto-modal-dialog').remove();
+<% end %>

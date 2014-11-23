@@ -3,16 +3,34 @@
     <%= link_to solicitacao.id.to_s.rjust(5,'0'), 
         [:usuario,solicitacao], class:'inline-link',style:"width:65%;position:relative" %>
   </td>
-  <td><%=h link_to solicitacao.cliente.nome,[:usuario,solicitacao], class:'inline-link' ,style:"width:65%;position:relative" %></td>
-  <td><%=h link_to solicitacao.titulo,[:usuario,solicitacao], class:'inline-link',style:"width:65%;position:relative"  %></td>
-  <td><%=h link_to solicitacao.solucao_sub_modulo.descricao, [:usuario,solicitacao], class:'inline-link',style:"width:65%;position:relative"  %></td>
-  <td><%=h link_to solicitacao.usuario_responsavel.nome,[:usuario,solicitacao],class:'inline-link' ,style:"width:65%;position:relative" %></td>
+  <td>
+    <%=h link_to solicitacao.cliente.nome,
+                [:usuario,solicitacao],class:'inline-link' ,
+                style:"width:65%;position:relative" %>
+  </td>
+  <td>
+    <%=h link_to solicitacao.titulo,
+                [:usuario,solicitacao], class:'inline-link',
+                style:"width:65%;position:relative"  %>
+  </td>
+  <td>
+    <%=h link_to solicitacao.solucao_sub_modulo.descricao, 
+    [:usuario,solicitacao], class:'inline-link',style:"width:65%;position:relative"  %>
+  </td>
+  <td>
+    <%=h link_to solicitacao.usuario_responsavel.nome,
+                  [:usuario,solicitacao],class:'inline-link' ,
+                  style:"width:65%;position:relative" %>
+  </td>
   <td><%=h solicitacao.prioridade.descricao %></td>
   <td><%=h solicitacao.tipo_pendencia.descricao %></td>
-  <td><%= content_tag :span, solicitacao.status.descricao, class:'labels label-info'%></td>
+  <td><%= solicitacao.status.descricao%></td>
+  <%# content_tag :span, solicitacao.status.descricao, class:'labels label-info'%>
+  <td class="<%= evolucao_status_class(solicitacao) %>">
+    <%= tempo_evolucao_status(solicitacao) %>
+  </td>
   <td>
-    
-    <div class="container-oculto">
+    <div class="container">
       <%= link_to image_tag(image_link[:edit]), 
         [:edit, :usuario, solicitacao], 
         class:'solicitacao-link' %>
@@ -20,8 +38,13 @@
       <%= link_to image_tag(image_link[:del]), 
         [:usuario, solicitacao], 
         remote:true,
-        :confirm => 'Confirma exclusão ?',
+        :confirm => 'Confirma exclusão da Solicitação ?',
         :method => :delete %>
+
+      <%= link_to image_tag(image_link[:remove]), 
+        usuario_projeto_desfazer_vinculo_solicitacao_path(@projeto,solicitacao_id:solicitacao.id), 
+        remote:true,
+        :confirm => 'Remover esta solicitação do Projeto? ATENÇÃO, a mesma não será excluída.'%>
     </div>
   </td>
 <% end %>

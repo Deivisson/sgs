@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Usuario::ProjetosController < Usuario::BaseController
-  before_filter except:[:update,:create, :gerenciar_sub_modulos] do |c| 
+  before_filter except:[:update,:create, :gerenciar_sub_modulos,:associar_solicitacao,
+                        :criar_vinculo_solicitacao,:desfazer_vinculo_solicitacao] do |c| 
     c.instance_eval { c.permissao_usuario!(("#{action_name}_projeto").to_sym)}
   end
   before_filter :set_current_menu
@@ -79,10 +80,34 @@ class Usuario::ProjetosController < Usuario::BaseController
     respond_with(@projeto,:location => usuario_projeto_path(@projeto))
   end
 
+  def associar_solicitacao
+    @etapa_id = params[:etapa_id]
+  end
+
+  def criar_vinculo_solicitacao
+    @falha_solicitacao = false
+    if params[:solicitacao].present? && params[:etapa_id].present?
+      @solicitacao = Solicitacao.find(params[:solicitacao])
+      if @solicitacao.nil?
+        @falha_solicitacao = true
+      else
+        @solicitacao.usuario_editor = current_usuario.id
+        @solicitacao.vincular_projeto(@projeto,params[:etapa_id])
+      end
+    else
+      @falha_solicitacao = true
+    end
+  end
+
+  def desfazer_vinculo_solicitacao
+    @solicitacao = Solicitacao.find(params[:solicitacao_id])
+    @solicitacao.update_attribute(:projeto_id, nil)
+  end
+
 private
   
   def carrega_projeto
-    @projeto = Projeto.find(params[:id])
+    @projeto = Projeto.find(params[:id] || params[:projeto_id] ) 
   end
   def get_etapas_ids
     @etapas_ordem = params[:projeto][:etapa_ids] || []

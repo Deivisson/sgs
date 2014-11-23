@@ -194,18 +194,6 @@ class Solicitacao < ActiveRecord::Base.extend Search
 
   #named_scopes
   def self.tarefas_do_usuario_por_status(filtro, page, per_page)
-     #  Solicitacao.all(
-     #          :select => "solicitacoes.*,clientes.nome as cliente_nome,
-     #                      solucao_sub_modulos.descricao as sub_modulo,
-     #                      prioridades.descricao as prioridade_descricao,
-     #                      tipo_pendencias.descricao as tipo_descricao,status.encerramento",
-     #          :joins => [{:cliente_contato => [:cliente]},
-     #                    {:solucao_sub_modulo => [:solucao_modulo => [:solucao]]},
-     #                    :status,:prioridade,:tipo_pendencia],
-     #          :conditions => filtro,
-     #          :order => 'solicitacoes.created_at desc'
-     #          #{:status_id => status_id,:usuario_responsavel_id => usuario_id}
-     # )  
      Solicitacao.where(filtro)
      .joins(
         [{:cliente_contato => [:cliente]},
@@ -223,16 +211,31 @@ class Solicitacao < ActiveRecord::Base.extend Search
         ) 
   end
 
-  # scope :solicitacoes_por_atendimento, lambda {|atendimento_id|{
-  #             :select => "solicitacoes.id,solicitacoes.titulo,solucao_sub_modulos.descricao as sub_modulo,
-  #                         tipo_pendencias.descricao as tipo_descricao,status.descricao as status_descricao,
-  #                         cliente_contatos.nome as nome_contato,solicitacoes.data_previsao_liberacao",
-  #             :joins => [:atendimento,:cliente_contato,:solucao_sub_modulo,:status,:tipo_pendencia],
-  #             :conditions => {:atendimento_id => atendimento_id}
-
-  # }}
+  def vincular_projeto(projeto, etapa_id)
+    if permitido_vincular_projeto?(projeto,etapa_id)
+      return self.update_attributes!({projeto_id:projeto.id, etapa_id:etapa_id})
+    else
+      return false
+    end
+  end
 
 private
+
+  def permitido_vincular_projeto?(projeto,etapa_id)
+    unless self.projeto_id.nil?
+      errors.add(:base,"Solicitação já associada ao projeto nº: #{self.projeto_id.to_s.rjust(6,'0')}") 
+    end
+    if projeto.cliente_id != self.cliente_id
+      errors.add(:base,"Solicitação e Projeto possuem clientes diferentes.") 
+    end
+    if self.status.encerramento?
+      errors.add(:base,"Solicitação já finalizada, vínculo não permitido.") 
+    end
+    if ![Etapa::DESENVOLVIMENTO,Etapa::INSTALACAO].include?(etapa_id.to_i)
+      errors.add(:base,"Só será permitido adicionar solicitação para Desenvolvimento e/ou Instalação.") 
+    end
+    return self.errors.empty?
+  end
 
   #After_Create
   #Insercao de historico padrao para a solicitacao, no qual iniciara com status de Aberto.
@@ -279,7 +282,7 @@ private
     return unless self.changed?
     log = self.alteracoes.build(usuario_id:self.usuario_editor)
     self.changes.each do |k,v|
-      unless ['created_at','updated_at','usuario_responsavel_id'].include?(k.to_s)
+      unless ['created_at','updated_at','usuario_responsavel_id','projeto_id','etapa_id'].include?(k.to_s)
         valor_de, valor_para = recupera_alteracoes(k,v.first.to_s,v.second.to_s)
         _attributes = {campo:Solicitacao.human_attribute_name(k), 
                        velho_conteudo:valor_de,

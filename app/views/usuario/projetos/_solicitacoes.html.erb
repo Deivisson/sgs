@@ -1,9 +1,13 @@
 <h1 class="filtro-solicitacoes-titulo">
   Status: <%= @current_status.nil? ? "Todos" : @current_status.descricao %>
 </h1>
-<%= link_to "Adicionar Tarefa",
+<%= link_to "Cadastrar Tarefa",
         new_usuario_projeto_solicitacao_path(projeto_id:@projeto.id,etapa_id:etapa_id), 
         id:'solicitacao-link',
+        class:'button-add-new add-on-index-top' %>
+<%= link_to "Adicionar Tarefa",
+        usuario_projeto_associar_solicitacao_path(projeto_id:@projeto.id,etapa_id:etapa_id), 
+        id:'associar-solicitacao',
         class:'button-add-new add-on-index-top' %>
 <br>
 <table>
@@ -16,8 +20,9 @@
       <th>Responsável</th>
       <th width = "70">Prioridade</th>
       <th width ="120">Tipo</th>
-      <th>Status</th>
-      <th span='2' width = "40" style="border-left:0px;"></th>
+      <th width = "70">Status</th>
+      <th>Evolução</th>
+      <th span='3' width = "70" style="border-left:0px;">Operações</th>
     </tr>
   </thead>
   <tbody id=<%= "projeto-solicitacoes-#{etapa}" %>>

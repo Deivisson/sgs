@@ -132,6 +132,7 @@ class Projeto < ActiveRecord::Base.extend Search
       where projeto_id = ?
     )",self.id).group("solucoes.id")
   end
+
 private 
   
   def save_solucao_sub_modulos
