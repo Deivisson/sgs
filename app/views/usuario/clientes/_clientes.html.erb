@@ -1,6 +1,7 @@
 <table  border="0" cellpadding="0" cellspacing="1">
   <thead>
     <tr>
+      <th width="300">Categoria</th>
       <th>Nome</th>
       <th width="100">Telefone</th>
       <th width="100">Fax</th>
@@ -9,11 +10,12 @@
     </tr>
   </thead>
     <tbody>
-      <% for cliente in @clientes %>
+      <% @clientes.each do |cliente| %>
         <tr>
+          <td><%= cliente.categoria.descricao unless cliente.categoria.nil? %></td>
           <td><%=link_to cliente.nome,[:usuario, cliente],class:'inline-link' %></td>
-          <td><%=h cliente.telefone %></td>
-          <td><%=h cliente.fax %></td>
+          <td><%= cliente.telefone %></td>
+          <td><%= cliente.fax %></td>
           <td><%= link_to image_tag(image_link[:edit]), 
                           edit_usuario_cliente_path(cliente) %></td>
           <td><%= link_to image_tag(image_link[:del]), 

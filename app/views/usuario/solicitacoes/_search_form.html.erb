@@ -2,13 +2,15 @@
   <%= form_tag search_usuario_solicitacoes_path,
                   :method => :get, :remote => remote_form do %>
 
-    <%= text_field_tag "search_key",@search_key || "",
-        {:class => "header-search-field",
-         :placeholder => "Pesquisar solicitações",
-         :autofocus   => true } %>
+    <div style="float:right;width:450px">
+      <%= text_field_tag "search_key",@search_key || "",
+          {:class => "header-search-field",
+           :placeholder => "Pesquisar solicitações",
+           :autofocus   => true } %>
 
-    <%= submit_tag "", :class => "search-buttom" %>
-    <label>Digite o nº da solicitação ou parte da descrição</label>
-    <%= link_to "Pesquisa avançada", new_usuario_solicitacao_pesquisa_path%>
+      <%= submit_tag "", :class => "search-buttom" %>
+      <label>Digite o nº da solicitação ou parte da descrição</label>
+      <%= link_to "Pesquisa avançada", new_usuario_solicitacao_pesquisa_path%>
+    </div>
   <% end %>
 <% end %>

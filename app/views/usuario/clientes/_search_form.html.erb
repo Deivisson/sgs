@@ -1,13 +1,22 @@
-<% content_for :search_field_container do  %>
+<% content_for :search_field_container, class:'teste' do  %>
   <%= form_tag usuario_clientes_path,
-                  :method => :get, :remote => true do %>
+                  :method => :get, :remote => true, class:'multiple-fields' do %>
 
-    <%= text_field_tag "conteudo_busca_cliente",@conteudo_busca_cliente || "",
-        {:class => "header-search-field",
-         :placeholder => "Pesquisar Clientes",
-         :autofocus   => true } %>
+    <%= select_tag "categoria_cliente", 
+    			options_for_select(@categoria_clientes.collect{|c|[c.descricao,c.id]},@categoria_cliente.to_i),
+    			prompt:"Selecione a Categoria", data: {remote:true} %>
 
-    <%= submit_tag "", :class => "search-buttom" %>
-    <label>Digite o Nome, Apelido ou CNPJ(apenas números) </label>
+    <div style="width: 310px; float:left">
+	    <%= text_field_tag "conteudo_busca_cliente",@conteudo_busca_cliente || "",
+	        {:class => "header-search-field",
+	         :placeholder => "Pesquisar Clientes",
+	         :autofocus   => true } %>
+
+	    <%= submit_tag "", :class => "search-buttom" %>
+	    <label style="margin-left:2px;">
+	    	Digite o Nome, Apelido ou CNPJ(apenas números) 
+	    </label>
+    </div>
+    
   <% end %>
 <% end %>
