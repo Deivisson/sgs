@@ -1,14 +1,31 @@
 $(document).ready(function(){
 
   //carrega contatos e modulos dos solucoes
-  $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange);
+  if ($("#cliente-select-id").length > 0) {
+    $("#cliente-select-id").bind("change",bindEventoComboClienteOnChange);
+  }
 
-  $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos);
+  if ($("#solucao-modulos-select-id").length > 0) {
+    $("#solucao-modulos-select-id").bind("change",bindEventoComboModulos);
+  }
+
+  if ($("#modulos-select-id").length > 0) {
+    $("#modulos-select-id").bind("change",bindEventoComboModulos);
+  }
 
   //carrega usuários responsaveis
-  $("#solicitacao-select-status-id").change(function(){
-    carrega_usuarios_responsaveis($(this).val());
-  });
+  if ($("#solicitacao-select-status-id").length > 0) {
+    $("#solicitacao-select-status-id").change(function(){
+      carrega_usuarios_responsaveis($(this).val());
+    });
+  }
+  if ($("#categoria-cliente-select-id").length > 0) {
+    $("#categoria-cliente-select-id").bind("change",bindCarregaClientesPorCategoria);
+  }
+  if ($("#solucoes-select-id").length > 0) {
+    $("#solucoes-select-id").bind("change",bindCarregaModulosSolucao);
+  }
+  
 
   function carrega_usuarios_responsaveis(status_id){
     $("#select-usuarios-responsaveis").empty();
@@ -77,12 +94,30 @@ function carregaModulos(){
       }
     });
   }
-
 }
 
-function carregaSubModulos(){
+function bindCarregaModulosSolucao(){
+  solucao_id = $("#solucoes-select-id").val();
+  $("#modulos-select-id").empty();
   $("#solucao-sub-modulos-select-id").empty();
-  modulo_id = $("#solucao-modulos-select-id").val();
+  $.getJSON("/usuario/resources/" + solucao_id + '/modulos_por_solucao.json',function(data){
+    $("#modulos-select-id").append('<option></option>');
+    $.each(data,function(i,item){
+      option = '<option value="' + item.solucao_modulo.id + '">' + item.solucao_modulo.descricao + '</option>'
+      $("#modulos-select-id").append(option);
+    });
+  });
+}
+
+
+
+function carregaSubModulos(){
+  if ($("#solucao-modulos-select-id").length > 0) {
+    modulo_id = $("#solucao-modulos-select-id").val();
+  }else if($("#modulos-select-id").length > 0){
+    modulo_id = $("#modulos-select-id").val();
+  }
+  $("#solucao-sub-modulos-select-id").empty();
   if (modulo_id > 0) {
     $.getJSON("/usuario/resources/" + modulo_id + '/solucao_sub_modulos.json',function(data){
       $("#solucao-sub-modulos-select-id").append('<option></option>');
@@ -109,4 +144,18 @@ function carregaSolucoesCliente(){
       });
     });
   }  
+}
+
+function bindCarregaClientesPorCategoria(){
+  categoria_cliente_id = $("#categoria-cliente-select-id").val();
+  if (categoria_cliente_id=="") categoria_cliente_id = 0;
+  $("#cliente-select-id").empty();
+  $("#cliente-contato-select-id").empty();
+  $.getJSON("/usuario/resources/" + categoria_cliente_id + '/clientes_por_categoria.json',function(data){
+    $("#cliente-select-id").append('<option></option>');
+    $.each(data,function(i,item){
+      option = '<option value="' + item.cliente.id + '">' + item.cliente.nome + '</option>'
+      $("#cliente-select-id").append(option);
+    });
+  });
 }

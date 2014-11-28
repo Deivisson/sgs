@@ -2,6 +2,13 @@
 
   <%= section_tag(:legend => "Opções de Filtros", :class => "section-tag-sized") do %>
       <div class="div-field">
+        <label>Categoria Cliente:</label>
+        <%= select_tag :categoria_cliente_id,
+                       options_for_select(@categoria_clientes.collect{|e|[e.descricao,e.id]}),
+                       :include_blank => true,
+                       :id => "categoria-cliente-select-id" %>
+      </div>  
+      <div class="div-field">
         <label>Cliente:</label>
         <%= select_tag :cliente_ids,
                        options_for_select(@clientes.collect{|e|[e.nome,e.id]}),
@@ -29,21 +36,24 @@
      </div>
 
       <div class="div-field">
-        <label>Solucao:</label>
+        <label>Soluções:</label>
         <%= select_tag :solucao_ids,
                        options_for_select(@solucoes.collect{|e|[e.descricao,e.id]}),
+                       :id => "solucoes-select-id",
                        :include_blank => true %>
       </div>
       <div class="div-field">
         <label>Módulo:</label>
         <%= select_tag :modulo_ids,
                        options_for_select(@modulos.collect{|e|[e.descricao,e.id]}),
+                       :id => "modulos-select-id",
                        :include_blank => true %>
       </div>
       <div class="div-field">
         <label>Sub Módulo:</label>
         <%= select_tag :sub_modulo_ids,
                        options_for_select(@sub_modulos.collect{|e|[e.descricao,e.id]}),
+                       :id => "solucao-sub-modulos-select-id",
                        :include_blank => true %>
       </div>
 

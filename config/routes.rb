@@ -96,7 +96,8 @@ Sgsoft::Application.routes.draw do
     get '/resources/:cliente_id/solucoes_cliente', :to => 'resources#solucoes_cliente'
     get '/resources/:modulo_id/solucao_sub_modulos', :to => 'resources#solucao_sub_modulos'
     get '/resources/:status_id/usuarios_responsaveis', :to => 'resources#usuarios_responsaveis'
-
+    get '/resources/:categoria_cliente_id/clientes_por_categoria', :to => 'resources#clientes_por_categoria'
+    get '/resources/:solucao_id/modulos_por_solucao', :to => 'resources#modulos_por_solucao'
     resources :cadastros_basicos, only: :index
     resources :categoria_clientes
     resources :permission, only: :index

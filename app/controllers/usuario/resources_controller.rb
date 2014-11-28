@@ -34,7 +34,24 @@ class Usuario::ResourcesController < Usuario::BaseController
      @usuarios = Usuario.to_select_by_status(params[:status_id])
      respond_with(@usuarios)
   end
+
+  def clientes_por_categoria
+    if params[:categoria_cliente_id].to_i > 0
+      @clientes = Cliente.where(categoria_cliente_id:params[:categoria_cliente_id])
+    else
+      @clientes = Cliente.order(:nome)
+    end
+    respond_with(@clientes)
+  end
   
+  def modulos_por_solucao
+    if params[:solucao_id].to_i > 0
+      @modulos = SolucaoModulo.where(solucao_id:params[:solucao_id]).order(:descricao)
+    else
+      @modulos = SolucaoModulo.order(:descricao)
+    end
+    respond_with(@modulos)    
+  end
 private
 
   def set_root_json

@@ -21,14 +21,21 @@ class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
     #Monta Filtro
     @filtro =  " solicitacoes.id > 0"
     @filtro += " AND clientes.id IN (#{params[:cliente_ids]})" if not params[:cliente_ids].empty? #Filtra Cliente
+    @filtro += " AND clientes.categoria_cliente_id = #{params[:categoria_cliente_id]}" if not params[:categoria_cliente_id].empty?
     if !params[:solicitante_ids].nil? && !params[:solicitante_ids].empty? #Filtra Solicitante -- Contato do Cliente
       @filtro += " AND cliente_contato_id IN (#{params[:solicitante_ids]})"  
     end
     @filtro += " AND usuario_cadastrante_id IN (#{params[:cadastrante_ids]})" if not params[:cadastrante_ids].empty?  #Filtra Usuario cadastrante
     @filtro += " AND usuario_responsavel_id IN (#{params[:usuario_ids]})" if not params[:usuario_ids].empty? #Filtra Usuario
-    @filtro += " AND solucoes.id IN (#{params[:solucao_ids]})" if not params[:solucao_ids].empty?  #Filtra Solucoes
-    @filtro += " AND solucao_modulos.id IN (#{params[:modulo_ids]})" if not params[:modulo_ids].empty? #Filtra Módulos
-    @filtro += " AND solucao_sub_modulos.id IN (#{params[:sub_modulo_ids]})" if not params[:sub_modulo_ids].empty? #Filtra sub modulo
+    if !params[:solucao_ids].nil? && !params[:solucao_ids].empty?  #Filtra Solucoes    
+      @filtro += " AND solucoes.id IN (#{params[:solucao_ids]})" 
+    end
+    if !params[:modulo_ids].nil? && !params[:modulo_ids].empty? #Filtra Módulos    
+      @filtro += " AND solucao_modulos.id IN (#{params[:modulo_ids]})" 
+    end
+    if !params[:sub_modulo_ids].nil? && !params[:sub_modulo_ids].empty? #Filtra sub modulo    
+      @filtro += " AND solucao_sub_modulos.id IN (#{params[:sub_modulo_ids]})" 
+    end
     @filtro += " AND status.id IN (#{params[:status_ids]})"  if not params[:status_ids].empty? #Filtra Status
     @filtro += " AND prioridade_id IN (#{params[:prioridade_ids]})" if not params[:prioridade_ids].empty?  #Filtra Prioridade
     @filtro += " AND tipo_pendencia_id IN (#{params[:tipo_ids]})" if not params[:tipo_ids].empty?    #Filtra Tipo de Pendencias
@@ -78,10 +85,11 @@ private
     @clientes = Cliente.order(:nome)
     @usuarios = Usuario.where("id > 1").order(:nome)
     @solucoes = Solucao.all #.order(:description)
-    @modulos = SolucaoModulo.all
-    @sub_modulos = SolucaoSubModulo.all
+    @modulos = []#SolucaoModulo.order(:descricao)
+    @sub_modulos = []#SolucaoSubModulo.all
     @status = Status.all
     @prioridades = Prioridade.all
     @tipo_pendencias = TipoPendencia.find(:all)
+    @categoria_clientes = CategoriaCliente.order(:descricao)
   end
 end
