@@ -32,7 +32,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
 
     end
     if @status != nil or params[:status_id]
-      @solicitacoes = Solicitacao.search(params[:conditions]).tarefas_do_usuario_por_status(
+      @solicitacoes = Solicitacao.search(params[:conditions]).listagem(
                       monta_filtro,params['page'],9990) 
     end
     respond_with @solicitacoes
@@ -118,21 +118,26 @@ class Usuario::SolicitacoesController < Usuario::BaseController
   #de cada registro. Esta opção é utilizada para a mudanca de status
   #das solicitacoes.
   def edit_multiple
-    @status_id = params[:status_id]
+    @status     = Status.find(params[:status_id])
+    @status_id  = @status.id
+    @local      = params[:local]
     if params[:solicitacao_ids]
       @solicitacoes = Solicitacao.find(params[:solicitacao_ids])
       render :layout => "full_layout"
     else
       flash[:warning] = 'É necessário selecionar as solicitações.'
-      redirect_to :controller => 'solicitacoes',
-                  :action => 'index',
-                  :status_id => @status_id
+      if params[:local] && params[:local]== "resultado_pesquisa"
+        redirect_to usuario_solicitacao_pesquisas_path
+      else
+        redirect_to controller:'solicitacoes', action:'index', status_id:@status.id
+      end
     end
   end
 
   #Atualiza Todos os registros selecionado. Utilizado para atualizar
   #os status dos mesmos
   def update_multiple
+    @local = params[:local]
     @solicitacoes.each do |solicitacao|
       if solicitacao.update_attributes!(params[:solicitacao].reject { |k,v| v.blank?})
         SolicitacaoHistorico.create(
@@ -148,9 +153,11 @@ class Usuario::SolicitacoesController < Usuario::BaseController
     end
     if not @has_error
       flash[:notice]  = "Solicitações processadas com sucesso."
-      redirect_to :controller => 'solicitacoes',
-                  :action     => 'index', 
-                  :status_id  => params[:status_id]
+      if params[:local] && params[:local]== "resultado_pesquisa"
+        redirect_to usuario_solicitacao_pesquisas_path
+      else
+        redirect_to controller:'solicitacoes', action:'index', status_id:params[:status_id]
+      end      
     end
   end
 

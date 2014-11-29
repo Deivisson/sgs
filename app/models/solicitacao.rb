@@ -193,7 +193,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
 
 
   #named_scopes
-  def self.tarefas_do_usuario_por_status(filtro, page, per_page)
+  def self.listagem(filtro="", page=nil, per_page=nil)
      Solicitacao.where(filtro)
      .joins(
         [{:cliente_contato => [:cliente]},

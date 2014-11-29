@@ -72,9 +72,10 @@ Sgsoft::Application.routes.draw do
       resources :solicitacoes
     end
 
-    resources :solicitacao_pesquisas do
-       post :find,  :on =>  :collection
-    end
+    resources :solicitacao_pesquisas
+    #  do
+    #    post :find,  :on =>  :collection
+    # end
 
     resources :solicitacoes do
     	 collection do

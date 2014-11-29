@@ -79,6 +79,7 @@
       <% end %>
     </ul>
     <%= hidden_field_tag "status_id",@solicitacoes[0].status_id %>
+    <%= hidden_field_tag "local",@local %>
   <% end %>
 
   <%= form.actions :class => "buttons-container" do %>

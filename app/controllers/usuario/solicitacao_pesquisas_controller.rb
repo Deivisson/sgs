@@ -2,12 +2,14 @@
 class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
 
   layout "full_layout"
-
   def index
-    @filtro = params[:filtro]
-    carrega_solicitacoes
+    @params = params
+    @params = session[:params_pesquisa] unless params["local"].present? && params[:local] == "pesquisa_form"
+    @solicitacoes = [] 
+    carrega_solicitacoes if @params.present?
     respond_to do |format|
-      format.pdf {render :layout => false}
+      format.html
+      format.pdf {render :layout => true}
     end
   end
 
@@ -15,69 +17,25 @@ class Usuario::SolicitacaoPesquisasController < Usuario::BaseController
     carrega_dados
   end
 
-  #need refactory
-  def find
-
-    #Monta Filtro
-    @filtro =  " solicitacoes.id > 0"
-    @filtro += " AND clientes.id IN (#{params[:cliente_ids]})" if not params[:cliente_ids].empty? #Filtra Cliente
-    @filtro += " AND clientes.categoria_cliente_id = #{params[:categoria_cliente_id]}" if not params[:categoria_cliente_id].empty?
-    if !params[:solicitante_ids].nil? && !params[:solicitante_ids].empty? #Filtra Solicitante -- Contato do Cliente
-      @filtro += " AND cliente_contato_id IN (#{params[:solicitante_ids]})"  
-    end
-    @filtro += " AND usuario_cadastrante_id IN (#{params[:cadastrante_ids]})" if not params[:cadastrante_ids].empty?  #Filtra Usuario cadastrante
-    @filtro += " AND usuario_responsavel_id IN (#{params[:usuario_ids]})" if not params[:usuario_ids].empty? #Filtra Usuario
-    if !params[:solucao_ids].nil? && !params[:solucao_ids].empty?  #Filtra Solucoes    
-      @filtro += " AND solucoes.id IN (#{params[:solucao_ids]})" 
-    end
-    if !params[:modulo_ids].nil? && !params[:modulo_ids].empty? #Filtra Módulos    
-      @filtro += " AND solucao_modulos.id IN (#{params[:modulo_ids]})" 
-    end
-    if !params[:sub_modulo_ids].nil? && !params[:sub_modulo_ids].empty? #Filtra sub modulo    
-      @filtro += " AND solucao_sub_modulos.id IN (#{params[:sub_modulo_ids]})" 
-    end
-    @filtro += " AND status.id IN (#{params[:status_ids]})"  if not params[:status_ids].empty? #Filtra Status
-    @filtro += " AND prioridade_id IN (#{params[:prioridade_ids]})" if not params[:prioridade_ids].empty?  #Filtra Prioridade
-    @filtro += " AND tipo_pendencia_id IN (#{params[:tipo_ids]})" if not params[:tipo_ids].empty?    #Filtra Tipo de Pendencias
-
-    carrega_solicitacoes
-
-    respond_to do |format|
-      format.html
-      format.pdf {render :layout => true}
-    end
-  end
-
-
   def carrega_solicitacoes
-    @campos = Array.new
-
-    #Recupera campos a serem exibidos
-    consulta_campos = ConsultaCampo.all(
-      :select => "consultas.*,consulta_campos.*",
-      :joins => [:consulta],
-      :conditions => {:selecionado => true},
-      :order => :ordem )
-
-    #Monta sql
-    @sql = "solicitacoes.id,solicitacoes.status_id,solicitacoes.data_status,solicitacoes.tipo_pendencia_id,
-            solicitacoes.prioridade_id,"
-
-    for campo in consulta_campos do
-      @sql = "#{@sql}#{campo.campo.gsub("$","#{campo.tabela}." )} as #{campo.alias},"
-      @campos << [campo.descricao,campo.alias,campo.tipo]
+    @solicitacoes = Solicitacao.listagem("").includes(:usuario_responsavel)
+    @solicitacoes = @solicitacoes.where("solicitacoes.cliente_id in(?)",@params[:cliente_ids]) if @params[:cliente_ids].present? 
+    @solicitacoes = @solicitacoes.where("categoria_cliente_id in(?)",@params[:categoria_cliente_id]) if @params[:categoria_cliente_id].present? 
+    @solicitacoes = @solicitacoes.where("cliente_contato_id in(?)",@params[:solicitante_ids]) if @params[:solicitante_ids].present?
+    @solicitacoes = @solicitacoes.where("usuario_cadastrante_id in(?)",@params[:cadastrante_ids]) if @params[:cadastrante_ids].present? 
+    @solicitacoes = @solicitacoes.where("usuario_responsavel_id in(?)",@params[:usuario_ids]) if @params[:usuario_ids].present? 
+    @solicitacoes = @solicitacoes.where("solucoes.id in(?)",@params[:solucao_ids]) if @params[:solucao_ids].present? 
+    @solicitacoes = @solicitacoes.where("solucao_modulos.id in(?)",@params[:modulo_ids]) if @params[:modulo_ids].present?
+    @solicitacoes = @solicitacoes.where("solucao_sub_modulos.id in(?)",@params[:sub_modulo_ids]) if @params[:sub_modulo_ids].present?
+    @status = nil
+    if @params[:status_ids].present?
+      @status = Status.find(@params[:status_ids])
+      @solicitacoes = @solicitacoes.where("status_id in(?)",@params[:status_ids])
     end
-    @sql = @sql.slice(0,@sql.size-1)
-
-
-    @solicitacoes = Solicitacao.all(:select => @sql,
-      :joins => [{:cliente_contato => [:cliente]},
-                 {:solucao_sub_modulo => [:solucao_modulo => [:solucao]]},
-                 :status,:prioridade,:tipo_pendencia],
-      :conditions => @filtro )
-
+    @solicitacoes = @solicitacoes.where("prioridade_id in(?)",@params[:prioridade_ids]) if @params[:prioridade_ids].present?
+    @solicitacoes = @solicitacoes.where("tipo_pendencia_id in(?)",@params[:tipo_ids]) if @params[:tipo_ids].present?
+    session[:params_pesquisa] = @params
   end
-
 
 private
 

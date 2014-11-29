@@ -1,0 +1,83 @@
+<% title 'Resultado da Pesquisa' %>
+<% content_for :bar do %>
+  <div id="toolbar_itens">
+    <ul>
+      <li>
+        <%= link_to image_tag(image_link[:pdf],:border => 0),
+                    usuario_solicitacao_pesquisas_path(:filtro => @filtro, :format => 'pdf') %></li>
+    </ul>
+  </div> 
+  <%= link_to "Gerar Cronograma", 
+      usuario_tarefas_path(solicitacao_ids:'') ,
+      default_url:usuario_tarefas_path(solicitacao_ids:''),
+      id:'planejamento-link',
+      class:'button-planing add-on-index-top-with-header' %>  
+
+  <% if !@status.nil? && !@status.encerramento? %>
+    <%= link_to "Registrar Status", "#",
+        id:'registrar-status-submit-link',
+        class:'register-status add-on-index-top-with-header'  %>
+  <% else %>
+    <%= link_to "Registrar Status", "#",
+        id:'registrar-no-event',
+        class:'register-status disabled add-on-index-top-with-header'  %>
+  <% end %>
+<% end %>
+
+<%= form_tag [:edit_multiple, :usuario, :solicitacoes],id:'edit-multiple-solicitacoes' do %>
+   <table border="0"  cellspacing="1" cellpadding="0" class="tablesorter" id="solicitacoes-table" >
+    <thead>
+      <tr>
+        <th width ="10"></th>
+        <th width = "70">Nº Solic.</th>
+        <th>Cliente</th>
+        <th>Título</th>
+        <th>Responsável</th>
+        <th>Sub Módulo</th>
+        <th width = "70">Prioridade</th>
+        <th width ="120">Tipo</th>
+        <th>Evolução</th>
+        <th width ="10">Edit</th>
+        <th width ="10">Del</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% hoje = Date.parse(Time.now.strftime("%Y-%m-%d")) %>
+      <% for solicitacao in @solicitacoes %>
+        <%= content_tag :tr do %>
+          <td><%= check_box_tag "solicitacao_ids[]",solicitacao.id %> </td>
+          <td>
+            <%= link_to solicitacao.id.to_s.rjust(5,'0'), [:usuario,solicitacao], class:'inline-link',style:"width:85%" %>
+          </td>
+          <td><%=h solicitacao.cliente_nome %></td>
+          <td><%=h solicitacao.titulo %></td>
+          <td><%=h solicitacao.usuario_responsavel.nome %></td>
+          <td><%=h solicitacao.sub_modulo %></td>
+          <td style="<%=prioridade_style(nil,false,
+                  {:bg_color   => solicitacao.prioridade_bg_color,
+                   :border_color => solicitacao.prioridade_border_color,
+                   :font_color => solicitacao.prioridade_font_color
+                  })%>">
+            <%=h solicitacao.prioridade_descricao %>
+          </td>
+          <td><%=h solicitacao.tipo_descricao %></td>
+          <td class="<%= evolucao_status_class(solicitacao) %>">
+            <%= tempo_evolucao_status(solicitacao) %>
+          </td>
+          <td><%= link_to image_tag(image_link[:edit]), [:edit, :usuario, solicitacao], remote:true, class:'solicitacao-link' %></td>
+          <td><%= link_to image_tag(image_link[:del]), [:usuario, solicitacao], :confirm => 'Confirma exclusão ?',:method => :delete %></td>
+
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- Utlizado para retornar lista de solicitacoes do status atual. Ex: se estiver
+      Selecionando registros com status Aberto, deverá retornar para a lista de status
+      Aberto após realizar a movimentacao -->
+  <%= hidden_field_tag "status_id",@status.id unless @status.nil? %>
+  <%= hidden_field_tag "local","resultado_pesquisa" %>
+<% end %>
+
+<%= "Total Solicitações #{@solicitacoes.size}" %>
+<%= link_voltar %>

@@ -139,7 +139,13 @@
     background: url('/assets/icons/16/add-button.png') no-repeat 0  2px; ;
   }
 }
-
+.disabled {
+  background-color: #eee;
+  background-image: none;
+  pointer-events: none;
+   cursor: default;
+  color: #D1D1D1;
+};
 .delete-user-button {
   &:before {
     content: 'icon';
