@@ -50,11 +50,16 @@
     </div>
 
     <% if @solicitacao.id.nil? %>
-        <%= form.input :usuario_responsavel,
-                       :collection => @usuarios,
-                       :label => "Responsável",
-                       :member_label => :nome,
-                       :required     => true %>
+      <%= form.input :usuario_responsavel,
+                     :collection => @usuarios,
+                     :label => "Responsável",
+                     :member_label => :nome,
+                     :required     => true %>
+    <% else %>
+      <div class="div-field">
+        <label>Responsável</label>
+        <%= text_field_tag "Responsavel",@solicitacao.usuario_responsavel.nome,disabled:true %>
+      </div>
     <% end %>
 
     <%= form.input :prioridade,

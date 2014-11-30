@@ -147,7 +147,7 @@ class Usuario::SolicitacoesController < Usuario::BaseController
           :status_id              => solicitacao.status_id,
           :usuario_responsavel_id => solicitacao.usuario_responsavel_id)
       else
-        render :action => 'edit_multiple'
+        render :action => 'edit_multiple',:layout => "full_layout"
         @has_error = true
       end
     end
@@ -211,8 +211,8 @@ private
   end
 
   def atualizacao_multipla_permitida
+    @local = params[:local]
     c1 = %w(status_id usuario_responsavel_id)
-
     #Campo que serão validados apenas quando movendo Status para 
     #aguardando desenvolvimento ou em desenvolvimento
     c2 = %w(gera_cobranca previsao_duracao_horas 
@@ -229,9 +229,7 @@ private
         if ((c2.include? campo) && 
             ([Status::AG_DESENV, Status::EM_DESENV].include?  @solicitacao.status_id) && 
             @solicitacoes[0].pendente_previsao?) || (c1.include? campo)
-          
-          puts "CAMPO É ---> #{campo}"
-          render :action => 'edit_multiple' 
+          render :action => 'edit_multiple' , :layout => "full_layout"
           break
         end
       end
