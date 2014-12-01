@@ -38,22 +38,18 @@
             @status_id == Status::DESENV_INTER  ||
             @status_id == Status::HOMOLOG_REPROV %>
             <%= form.input :data_previsao_liberacao,
-                       :label       => "Previsão liberação",
-                       :as          => :date,
-                       :start_date  => Date.today,
-                       :end_date    => Date.today,
-                       :order       => [:day,:month,:year] %>
+                           :label       => "Previsão liberação",
+                           :as          => :string,
+                           :input_html  => {:style => "width:150px"} %>
 
       <% elsif @status_id == Status::LIB_PUBLICACAO %>
             <%= form.input :data_hora_real_liberacao,
-                           :label       => "Liberado em",
-                           :as          => :datetime,
-                           :start_date  => Date.today,
-                           :end_date    => Date.today,
-                           :order       => [:day,:month,:year] %>
+                           :label       => "Data Liberação",
+                           :as          => :string,
+                           :input_html  => {:style => "width:150px"} %>
 
             <%= form.input :versao_liberacao,
-                           :label       => "Versão",
+                           :label       => "Versão Liberação",
                            :input_html  => {:style => "width:150px"} %>
       <% end %>
 

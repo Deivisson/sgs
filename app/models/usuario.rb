@@ -101,7 +101,8 @@ private
     self.solucoes.destroy_all
     Tarefa.where(usuario_id:self.id).update_all(usuario_id:u_id)
     Atendimento.where(usuario_cadastrante_id:self.id).update_all(usuario_cadastrante_id:u_id)
-    Atendimento.where(usuario_solicitante_id:self.id).update_all(usuario_solicitante_id:u_id)    
+    Atendimento.where(usuario_solicitante_id:self.id).update_all(usuario_solicitante_id:u_id) 
+    SolicitacaoLogAlteracao.where(usuario_id:self.id).update_all(usuario_id:u_id)
   end
 
   def password_required?
