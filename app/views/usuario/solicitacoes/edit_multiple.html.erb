@@ -63,7 +63,7 @@
   <%= content_tag :div, :id => "desenvolvimento-section" do %>
     <%= render :partial => "campos_estimativas", 
                :locals  => {:form => form} if @solicitacoes[0].pendente_previsao? %>
- <% end %>
+ <% end if current_usuario.estima_desenvolvimento?  %>
  
   <%= section_tag(:legend => "Solicitações a serem afetadas") do %>
     <ul>

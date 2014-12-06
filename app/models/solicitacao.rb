@@ -279,7 +279,7 @@ private
   end
 
   def registrar_log_alteracao
-    return unless self.changed?
+    return if !self.changed? || self.usuario_editor.nil?
     log = self.alteracoes.build(usuario_id:self.usuario_editor)
     self.changes.each do |k,v|
       unless ['created_at','updated_at','usuario_responsavel_id','projeto_id','etapa_id'].include?(k.to_s)
@@ -290,24 +290,29 @@ private
         log.itens << SolicitacaoLogAlteracaoItem.new(_attributes)
       end
     end
-    log.save
+    log.save!
   end
 
 
   def recupera_alteracoes(campo, valor_atual, valor_alterado)
-    if campo =~ /(.+)_id$/
-        model_origem  = $1.classify.constantize.find(valor_atual)
-        model_destino = $1.classify.constantize.find(valor_alterado)
- 
-         unless (model_origem.nil? && model_destino.nil?)
-          if model_origem.respond_to?(:descricao)
-            valor_atual     = model_origem.descricao
-            valor_alterado  = model_destino.descricao
-          elsif model_origem.respond_to?(:nome)
-            valor_atual     = model_origem.nome
-            valor_alterado  = model_destino.nome
+    begin
+      if campo =~ /(.+)_id$/
+          campo = campo.gsub(/_id$/,'').pluralize
+          model_origem  = campo.classify.constantize.find(valor_atual)
+          model_destino = campo.classify.constantize.find(valor_alterado)
+   
+           unless (model_origem.nil? && model_destino.nil?)
+            if model_origem.respond_to?(:descricao)
+              valor_atual     = model_origem.descricao
+              valor_alterado  = model_destino.descricao
+            elsif model_origem.respond_to?(:nome)
+              valor_atual     = model_origem.nome
+              valor_alterado  = model_destino.nome
+            end
           end
-        end
+      end
+    rescue
+      valor_alterado = ""      
     end
     return [valor_atual, valor_alterado]
   end
