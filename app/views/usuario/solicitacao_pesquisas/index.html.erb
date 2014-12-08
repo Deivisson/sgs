@@ -36,6 +36,8 @@
         <th>Sub Módulo</th>
         <th width = "70">Prioridade</th>
         <th width ="120">Tipo</th>
+        <th width ="120">Status</th>
+        <th width ="30">Dias</th>
         <th>Evolução</th>
         <th width ="10">Edit</th>
         <th width ="10">Del</th>
@@ -61,6 +63,8 @@
             <%=h solicitacao.prioridade_descricao %>
           </td>
           <td><%=h solicitacao.tipo_descricao %></td>
+          <td><%=h solicitacao.status_descricao %></td>          
+          <td><%=h (hoje - Date.parse(solicitacao.created_at.strftime("%Y-%m-%d"))).to_i %></td>
           <td class="<%= evolucao_status_class(solicitacao) %>">
             <%= tempo_evolucao_status(solicitacao) %>
           </td>

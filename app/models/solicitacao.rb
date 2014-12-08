@@ -204,7 +204,7 @@ class Solicitacao < ActiveRecord::Base.extend Search
             solucao_sub_modulos.descricao as sub_modulo,
             prioridades.descricao as prioridade_descricao,
             tipo_pendencias.descricao as tipo_descricao,
-            status.encerramento,
+            status.encerramento, status.descricao as status_descricao,
             prioridades.background_color as prioridade_bg_color,
             prioridades.border_color as prioridade_border_color,
             prioridades.font_color as prioridade_font_color"

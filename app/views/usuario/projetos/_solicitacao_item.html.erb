@@ -1,3 +1,4 @@
+<% hoje = Date.parse(Time.now.strftime("%Y-%m-%d")) %>
 <%= content_tag :tr,id:"solicitacao-#{solicitacao.id}" do %>
   <td width = "50">
     <%= link_to solicitacao.id.to_s.rjust(5,'0'), 
@@ -25,6 +26,7 @@
   <td><%=h solicitacao.prioridade.descricao %></td>
   <td><%=h solicitacao.tipo_pendencia.descricao %></td>
   <td><%= solicitacao.status.descricao%></td>
+  <td><%=h (hoje - Date.parse(solicitacao.created_at.strftime("%Y-%m-%d"))).to_i %></td>
   <%# content_tag :span, solicitacao.status.descricao, class:'labels label-info'%>
   <td class="<%= evolucao_status_class(solicitacao) %>">
     <%= tempo_evolucao_status(solicitacao) %>
